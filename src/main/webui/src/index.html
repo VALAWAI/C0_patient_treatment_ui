@@ -1,13 +1,39 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title i18n="The title of the application@@index-title">Patient Treatment User Interface</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root></app-root>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <title i18n="The title of the application@@index-title">Patient Treatment User Interface</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <!-- Load environment variables -->
+    <script src="env.js"></script>
+    <!-- Style for loading spinner -->
+    <style>
+    	.loader {
+    		margin: 50px auto 0;
+    		border: 16px solid #f3f3f3;
+    		border-top: 16px solid #2b496f;
+    		border-radius: 50%;
+    		width: 120px;
+    		height: 120px;
+    		animation: spin 2s linear infinite;
+    	}
+    
+    	@keyframes spin {
+    		0% {
+    			transform: rotate(0deg);
+    		}
+    
+    		100% {
+    			transform: rotate(360deg);
+    		}
+    	}
+    </style>
+  </head>
+  <body class="mat-typography">
+  	<app-root>
+  		<div class="loader"></div>
+  	</app-root>
+  </body>
 </html>
