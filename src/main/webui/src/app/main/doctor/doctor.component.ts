@@ -7,22 +7,15 @@
 */
 
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+
 
 @Component({
-	selector: 'app-root',
+	selector: 'app-doctor',
 	standalone: true,
-	imports: [RouterOutlet],
-	templateUrl: './app.component.html',
-	styleUrl: './app.component.css'
+	imports: [],
+	templateUrl: './doctor.component.html',
+	styleUrl: './doctor.component.css'
 })
-export class AppComponent {
+export class DoctorComponent {
 
-	/**
-	 * Create the component.
-	 */
-	constructor(
-	) {
-
-	}
 }

@@ -7,22 +7,18 @@
 */
 
 import { Component } from '@angular/core';
+
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-	selector: 'app-root',
+	selector: 'app-not-found',
 	standalone: true,
 	imports: [RouterOutlet],
-	templateUrl: './app.component.html',
-	styleUrl: './app.component.css'
+	templateUrl: './not-found.component.html',
+	styleUrls: ['./not-found.component.css']
 })
-export class AppComponent {
+export class NotFoundComponent {
 
-	/**
-	 * Create the component.
-	 */
-	constructor(
-	) {
+	constructor() { }
 
-	}
 }
