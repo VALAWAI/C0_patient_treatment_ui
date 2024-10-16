@@ -17,7 +17,6 @@
 		<quarkus.platform.version>3.15.1</quarkus.platform.version>
 		<skipITs>true</skipITs>
 		<surefire-plugin.version>3.3.1</surefire-plugin.version>
-		<jacoco.version>0.8.12</jacoco.version>
 		<resources-plugin.version>3.3.1</resources-plugin.version>
 	</properties>
 
@@ -57,10 +56,6 @@
 		<dependency>
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-rest-jackson</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.quarkus</groupId>
-			<artifactId>quarkus-jacoco</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>io.quarkus</groupId>
@@ -186,36 +181,6 @@
 						<maven.home>${maven.home}</maven.home>
 					</systemPropertyVariables>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>${jacoco.version}</version>
-				<executions>
-					<execution>
-						<id>default-prepare-agent-integration</id>
-						<goals>
-							<goal>prepare-agent-integration</goal>
-							<goal>prepare-agent</goal>
-						</goals>
-						<configuration>
-							<exclClassLoaders>*QuarkusClassLoader</exclClassLoaders>
-							<destFile>${project.build.directory}/jacoco-quarkus.exec</destFile>
-							<append>true</append>
-						</configuration>
-					</execution>
-					<execution>
-						<id>report</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-						<configuration>
-							<dataFile>${project.build.directory}/jacoco-quarkus.exec</dataFile>
-							<outputDirectory>${project.build.directory}/jacoco-report</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
