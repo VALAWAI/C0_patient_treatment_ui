@@ -13,9 +13,19 @@ export const APP_ROUTES: Routes = [
 		path: '',
 		loadComponent: () => import('./app.component').then(c => c.AppComponent),
 		children: [
-			{ path: 'main', loadChildren: () => import('./main/main.routes').then(m => m.MAIN_ROUTES) },
-			{ path: '', redirectTo: 'main', pathMatch: 'full' },
-			{ path: '**', loadComponent: () => import('./shared/not-found').then(m => m.NotFoundComponent) }
+			{
+				path: 'main',
+				loadComponent: () => import('./main/main.component').then(m => m.MainComponent)
+			},
+			{
+				path: '',
+				redirectTo: 'main',
+				pathMatch: 'full'
+			},
+			{
+				path: '**',
+				loadComponent: () => import('./shared/not-found').then(m => m.NotFoundComponent)
+			}
 		]
 	}
 ];

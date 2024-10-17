@@ -184,13 +184,13 @@ a [mocked e-mail server](https://github.com/dbck/docker-mailtrap). You can use t
 command to start this component with the MOV and the mail server.
 
 ```
-COMPOSE_PROFILES=mov,mail docker compose up -d
+COMPOSE_PROFILES=mov docker compose up -d
 ```
 
 After that, if you open a browser and go to [http://localhost:8080](http://localhost:8080)
+to view the user interface of the component. At [http://localhost:8081](http://localhost:8081)
 you can view the MOV user interface. Also, you can access the RabbitMQ user interface
-at [http://localhost:8081](http://localhost:8081) with the credentials **mov:password**.
-Finally, you can access the mail catcher user interface at [http://localhost:8082](http://localhost:8082).
+at [http://localhost:8082](http://localhost:8082) with the credentials **mov:password**.
 
 The docker compose defines some variables that can be modified by creating a file named
 [**.env**](https://docs.docker.com/compose/environment-variables/env-file/) where 
@@ -266,7 +266,7 @@ the **docker compose**.
 You can stop all the started containers with the command:
 
 ```
-COMPOSE_PROFILES=mov,mail docker compose down
+COMPOSE_PROFILES=mov docker compose down
 ```
   
 ## Development
