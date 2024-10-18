@@ -276,3 +276,4 @@ nb-configuration.xml
 .env
 .lastUpdateDate
 var/
+.patientsDB

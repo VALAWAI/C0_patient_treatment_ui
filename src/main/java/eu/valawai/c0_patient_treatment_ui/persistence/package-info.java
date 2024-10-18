@@ -7,8 +7,8 @@
 */
 
 /**
- * The first version of the application API.
+ * The components to manage the application information stored in a data base.
  *
  * @author UDT-IA, IIIA-CSIC
  */
-package eu.valawai.c0_patient_treatment_ui.api.v1;
+package eu.valawai.c0_patient_treatment_ui.persistence;

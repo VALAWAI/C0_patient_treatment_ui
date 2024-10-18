@@ -10,6 +10,7 @@ services:
       mov:
         condition: service_healthy
         restart: true
+        required: false
     environment:
       RABBITMQ_HOST: ${MQ_HOST:-mq}
       RABBITMQ_PORT: ${MQ_PORT:-5672}

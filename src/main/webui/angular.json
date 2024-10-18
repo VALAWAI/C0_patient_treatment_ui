@@ -21,7 +21,11 @@
 							"@angular/localize/init"
 						],
 						"tsConfig": "tsconfig.app.json",
-						"localize": ["en","es","ca"],
+						"localize": [
+							"en",
+							"es",
+							"ca"
+						],
 						"assets": [
 							{
 								"glob": "**/*",
@@ -29,6 +33,7 @@
 							}
 						],
 						"styles": [
+							"@angular/material/prebuilt-themes/azure-blue.css",
 							"src/styles.css"
 						],
 						"scripts": []
@@ -91,6 +96,7 @@
 							}
 						],
 						"styles": [
+							"@angular/material/prebuilt-themes/azure-blue.css",
 							"src/styles.css"
 						],
 						"scripts": []

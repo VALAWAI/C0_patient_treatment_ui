@@ -47,7 +47,9 @@ services:
     container_name: mov_db_ui_dev
     restart: unless-stopped
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
+        restart: true
     ports:
       - ${MONGO_ADMIN_PORT:-8082}:8081
     networks:  
@@ -60,21 +62,43 @@ services:
       ME_CONFIG_MONGODB_PORT: ${MONGO_PORT:-27017}
       ME_CONFIG_MONGODB_SERVER: mongo
 
-  mail:
-    image: dbck/mailtrap:${MAILTRAP_TAG:-latest}
-    container_name: email_dev
+  pg:
+    image: postgres:${POSTGRES_TAG:-17}
+    container_name: pg_dev
     ports:
-      - "${MAIL_SMTP:-1025}:25"
-      - "${MAIL_SMTPS:-1465}:465"
-      - "${MAIL_IMAP:-1587}:587"
-      - "${MAIL_IMAP:-1143}:143"
-      - "${MAIL_IMAPS:-1993}:993"
-      - "${MAIL_WEB:-8083}:80"
+      - ${PG_PORT:-5432}:5432
     networks:
       - c0_patient_treatment_ui_dev
     environment:
-      MAILTRAP_USER: ${MAIL_USER_NAME:-user}
-      MAILTRAP_PASSWORD: ${MAIL_USER_PASSWORD:-password}
+      POSTGRES_USER: ${PG_USER_NAME:-c0_patient_treatment_ui}
+      POSTGRES_PASSWORD: ${PG_USER_PASSWORD:-password}
+      POSTGRES_DB: ${PG_DB_NAME:-c0_patient_treatment_ui_db}
+    volumes:
+      - ${PG_LOCAL_DATA:-~/pg_data/c0_patient_treatment_ui_db}:/var/lib/postgresql/data 
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 1m
+      timeout: 10s
+      retries: 5
+      start_period: 1m
+      start_interval: 5s  
+
+  pg_admin:
+    image: dpage/pgadmin4:${MONGO_EXPRESS_TAG:-latest}
+    container_name: pg_db_ui_dev
+    restart: unless-stopped
+    depends_on:
+      pg:
+        condition: service_healthy
+        restart: true
+    ports:
+      - ${PG_ADMIN_PORT:-8083}:80
+    networks:  
+      - c0_patient_treatment_ui_dev
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PG_ADMIN_USER:-pg_admin@valawai.eu}
+      PGADMIN_DEFAULT_PASSWORD: ${PG_ADMIN_PASSWORD:-password}
+
 
   mov:
     image: valawai/mov:${MOV_TAG:-latest}
@@ -100,7 +124,7 @@ services:
       QUARKUS_MONGODB_CREDENTIALS_USERNAME: ${DB_USER_NAME:-mov}
       QUARKUS_MONGODB_CREDENTIALS_PASSWORD: ${DB_USER_PASSWORD:-password}
       QUARKUS_MONGODB_HOSTS: mongo:${MONGO_PORT:-27017}
-      MOV_URL: http://localhost:${MOV_UI_PORT:-8083}
+      MOV_URL: http://localhost:${MOV_UI_PORT:-8084}
     healthcheck:
       test: ["CMD-SHELL", "curl -s http://localhost:8080/q/health | grep -m 1 -P \"^[\\s|\\{|\\\"]+status[\\s|\\:|\\\"]+.+\\\"\" |grep -q \"\\\"UP\\\"\""]
       interval: 1m

@@ -15,7 +15,7 @@ export const APP_ROUTES: Routes = [
 		children: [
 			{
 				path: 'main',
-				loadComponent: () => import('./main/main.component').then(m => m.MainComponent)
+				loadChildren: () => import('./main/main.routes').then(m => m.MAIN_ROUTES)
 			},
 			{
 				path: '',
