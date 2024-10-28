@@ -54,23 +54,8 @@ public class PatientEntity extends PanacheEntity {
 
 		this.name = null;
 		this.status = null;
-		this.updateTime = TimeManager.now();
+		this.updateTime = 0;
 
-	}
-
-	/**
-	 * Store the current patient.
-	 *
-	 * @return the identifier of the stored entity.
-	 */
-	public static Uni<PatientEntity> create() {
-
-		final Uni<PatientEntity> action = new PatientEntity().persist();
-		return action.onFailure().recoverWithItem(error -> {
-
-			Log.errorv(error, "Cannot create a patient entity");
-			return null;
-		});
 	}
 
 	/**
@@ -105,12 +90,12 @@ public class PatientEntity extends PanacheEntity {
 		}
 		final var query = builder.query();
 		final var params = builder.parameters();
-		return PatientEntity.update(query, params).onFailure().recoverWithItem(error -> {
+		return PatientEntity.update(query, params).map(updated -> updated == 1).onFailure().recoverWithItem(error -> {
 
 			Log.errorv(error, "Cannot create update the patient for {0}", this.id);
-			return null;
+			return false;
 
-		}).map(updated -> updated != null && updated == 1);
+		});
 
 	}
 
@@ -143,12 +128,12 @@ public class PatientEntity extends PanacheEntity {
 	 */
 	public static Uni<Boolean> delete(long id) {
 
-		return PatientEntity.delete("id", id).onFailure().recoverWithItem(error -> {
+		return PatientEntity.delete("id", id).map(deleted -> deleted == 1).onFailure().recoverWithItem(error -> {
 
 			Log.errorv(error, "Cannot get a patient with the id {0}", id);
-			return null;
+			return false;
 
-		}).map(deleted -> deleted != null && deleted == 1);
+		});
 	}
 
 }

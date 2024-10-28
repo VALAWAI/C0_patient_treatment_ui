@@ -8,11 +8,9 @@
 
 package eu.valawai.c0_patient_treatment_ui.persistence;
 
-import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
@@ -46,48 +44,6 @@ public class PatientEntityTest {
 		entity.status = new StatusTest().nextModel();
 		return entity;
 
-	}
-
-	/**
-	 * Should create a patient.
-	 *
-	 * @param asserter to use in the tests.
-	 */
-	@Test
-	@RunOnVertxContext
-	public void shouldCreate(TransactionalUniAsserter asserter) {
-
-		final var now = TimeManager.now();
-		asserter.assertThat(() -> PatientEntity.create(), patient -> {
-
-			assertNotNull(patient);
-			assertNotNull(patient.id);
-			assertNull(patient.name);
-			assertNull(patient.status);
-			assertTrue(patient.updateTime >= now);
-			asserter.putData("ID", patient.id);
-
-		}).assertThat(() -> {
-
-			final var id = (Long) asserter.getData("ID");
-			return PatientEntity.findById(id);
-
-		}, entity -> {
-
-			if (entity instanceof final PatientEntity stored) {
-				assertNotNull(stored);
-				final var id = (Long) asserter.getData("ID");
-				assertEquals(id, stored.id);
-				assertNull(stored.name);
-				assertNull(stored.status);
-				assertTrue(stored.updateTime >= now);
-
-			} else {
-
-				fail("Unexpected patient entity");
-			}
-
-		});
 	}
 
 	/**

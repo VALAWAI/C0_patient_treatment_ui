@@ -13,7 +13,6 @@ import org.hibernate.validator.constraints.Length;
 
 import eu.valawai.c0_patient_treatment_ui.ReflectionModel;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntity;
-import jakarta.validation.constraints.NotEmpty;
 
 /**
  * The information of a patient.
@@ -39,7 +38,6 @@ public class Patient extends ReflectionModel {
 	 * The name of the patient.
 	 */
 	@Schema(title = "The name of the patient.")
-	@NotEmpty
 	@Length(max = 1024)
 	public String name;
 
@@ -67,11 +65,6 @@ public class Patient extends ReflectionModel {
 	public PatientEntity toPatientEntity() {
 
 		final var entity = new PatientEntity();
-		entity.id = this.id;
-		if (this.updateTime != null) {
-
-			entity.updateTime = this.updateTime;
-		}
 		entity.name = this.name;
 		return entity;
 

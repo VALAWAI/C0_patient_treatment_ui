@@ -11,14 +11,19 @@ package eu.valawai.c0_patient_treatment_ui.api.v1.patients;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
+import eu.valawai.c0_patient_treatment_ui.TimeManager;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntity;
+import io.quarkus.logging.Log;
 import io.smallrye.mutiny.Uni;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -90,6 +95,37 @@ public class PatientsResource {
 
 				return Response.noContent().build();
 			}
+		});
+
+	}
+
+	/**
+	 * Create a patient.
+	 *
+	 * @param model patient to create.
+	 *
+	 * @return the information of the created patient.
+	 */
+	@POST
+	@Operation(description = "Create a patient.")
+	@APIResponse(responseCode = "201", description = "The created participant.", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = Patient.class)))
+	public Uni<Response> createPatient(
+			@RequestBody(description = "The patient to create", required = true, content = @Content(schema = @Schema(implementation = Patient.class))) @Valid final Patient model) {
+
+		final var entity = model.toPatientEntity();
+		entity.updateTime = TimeManager.now();
+		final Uni<PatientEntity> action = entity.persistAndFlush();
+		return action.map(stored -> {
+
+			model.id = stored.id;
+			model.updateTime = stored.updateTime;
+			return Response.status(Status.CREATED).entity(model).build();
+
+		}).onFailure().recoverWithItem(error -> {
+
+			Log.errorv(error, "Cannot create a patient entity.");
+			return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Cannot create a patient").build();
+
 		});
 
 	}

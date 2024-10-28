@@ -9,6 +9,8 @@
 package eu.valawai.c0_patient_treatment_ui.api.patients;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.Test;
 
@@ -60,7 +62,12 @@ public class PatientTest extends ReflectionModelTestCase<Patient> {
 		final var entity = PatientEntityTest.nextRandom();
 		final var model = Patient.from(entity);
 		final var entity2 = model.toPatientEntity();
+		assertNull(entity2.id);
+		assertEquals(0l, entity2.updateTime);
 		final var model2 = Patient.from(entity2);
+		assertNotEquals(model, model2);
+		model.id = null;
+		model.updateTime = 0l;
 		assertEquals(model, model2);
 
 	}
@@ -76,6 +83,9 @@ public class PatientTest extends ReflectionModelTestCase<Patient> {
 		final var model = this.nextModel();
 		final var entity = model.toPatientEntity();
 		final var model2 = Patient.from(entity);
+		assertNotEquals(model, model2);
+		model.id = null;
+		model.updateTime = 0l;
 		assertEquals(model, model2);
 
 	}
