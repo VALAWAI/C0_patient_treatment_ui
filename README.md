@@ -301,9 +301,17 @@ Also, this starts the tools:
  * **Mongo express**  the web interface to interact with the MongoDB. The web interface
   can be opened at [http://localhost:8082](http://localhost:8082) with the credential
  **mov**:**password**.
- * **Mail catcher**  the component that capture the sent mails.
+ * **PG admin**  the web interface to interact with the PostgreSQL.
   The web interface can be opened at [http://localhost:8083](http://localhost:8083).
- * **Master of VALAWAI**  the component that mantains the topology connections between components.
+  The login credentials are **pg_admin@valawai.eu:password**, and for the server use the next parameters.
+
+    - **database name**: c0_patient_treatment_ui_db
+    - **database host**: host.docker.interbal
+    - **database port**: 5432
+    - **user name**: c0_patient_treatment_ui
+    - **user password**: password
+    
+  * **Master of VALAWAI**  the component that mantains the topology connections between components.
   The web interface can be opened at [http://localhost:8084](http://localhost:8084).
 
 
