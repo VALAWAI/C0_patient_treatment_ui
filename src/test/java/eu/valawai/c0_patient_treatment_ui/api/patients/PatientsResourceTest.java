@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import eu.valawai.c0_patient_treatment_ui.TimeManager;
+import eu.valawai.c0_patient_treatment_ui.ValueGenerator;
 import eu.valawai.c0_patient_treatment_ui.api.v1.patients.Patient;
 import eu.valawai.c0_patient_treatment_ui.api.v1.patients.PatientsResource;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntities;
@@ -172,6 +173,43 @@ public class PatientsResourceTest {
 			assertNotNull(found);
 			final var after = Patient.from(found);
 			assertEquals(newModel, after);
+
+		});
+
+	}
+
+	/**
+	 * Test update only patient name.
+	 *
+	 * @param asserter to use in the tests.
+	 */
+	@Test
+	@RunOnVertxContext
+	public void shouldUpdateOnlyPatientName(TransactionalUniAsserter asserter) {
+
+		final var newModel = new Patient();
+		newModel.name = ValueGenerator.nextPattern("Patient name {0}");
+		asserter.assertThat(() -> PatientEntities.nextAndPersist(), patient -> {
+
+			final var before = Patient.from(patient);
+			final var now = TimeManager.now();
+			final var updated = given().contentType("application/json").body(newModel).pathParam("id", patient.id)
+					.when().patch("/v1/patients/{id}").then().statusCode(Status.OK.getStatusCode()).extract()
+					.as(Patient.class);
+			assertNotEquals(patient.name, updated.name);
+			newModel.id = patient.id;
+			newModel.updateTime = updated.updateTime;
+			assertEquals(newModel.name, updated.name);
+			assertTrue(now <= updated.updateTime);
+			before.name = newModel.name;
+			before.updateTime = updated.updateTime;
+			assertEquals(before, updated);
+
+		}).assertThat(() -> PatientEntities.byId(newModel.id), found -> {
+
+			assertNotNull(found);
+			assertEquals(newModel.name, found.name);
+			assertEquals(newModel.updateTime, found.updateTime);
 
 		});
 
