@@ -1,0 +1,96 @@
+/*
+  Copyright 2024 UDT-IA, IIIA-CSIC
+
+  Use of this source code is governed by an MIT-style
+  license that can be found in the LICENSE file or at
+  https://opensource.org/licenses/MIT.
+*/
+
+package eu.valawai.c0_patient_treatment_ui.api;
+
+import io.quarkus.panache.common.Sort;
+import io.quarkus.panache.common.Sort.Direction;
+
+/**
+ * Provides some comon utilities taht can be used when interact with an API
+ * method.
+ *
+ * @author UDT-IA, IIIA-CSIC
+ */
+public interface QueryParameters {
+
+	/**
+	 * Return the sort from a query parameter.
+	 *
+	 * @param query to generate the sort operation.
+	 *
+	 * @return the sort specified.
+	 */
+	public static Sort toSort(String query) {
+
+		var sort = Sort.empty();
+		var id = false;
+		if (query != null) {
+
+			final var params = query.trim().split(",");
+			for (var param : params) {
+
+				param = param.trim();
+				var direction = Direction.Ascending;
+				if (param.startsWith("-")) {
+
+					direction = Direction.Descending;
+					param = param.substring(1).trim();
+
+				} else if (param.startsWith("+")) {
+
+					param = param.substring(1).trim();
+				}
+
+				if (!param.isEmpty()) {
+
+					sort = sort.and(param, direction);
+					if ("id".equals(param)) {
+
+						id = true;
+					}
+				}
+			}
+		}
+
+		if (!id) {
+
+			sort = sort.and("id", Direction.Descending);
+		}
+
+		return sort;
+
+	}
+
+	/**
+	 * Obtain form a query parameter the pattern that can be used into a find.
+	 *
+	 * @param query to convert to a pattern.
+	 *
+	 * @return the pattern from the query.
+	 */
+	public static String toPattern(String query) {
+
+		if (query == null) {
+
+			return "%";
+
+		}
+		query = query.trim();
+		if (query.isEmpty()) {
+
+			return "%";
+		}
+		var pattern = query.replaceAll("\\*", "%");
+		pattern = pattern.replaceAll("\\%+", "%");
+		pattern = pattern.replaceAll("\\?", "_");
+
+		return pattern;
+	}
+
+}
