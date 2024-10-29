@@ -20,6 +20,7 @@ import eu.valawai.c0_patient_treatment_ui.ValueGenerator;
 import eu.valawai.c0_patient_treatment_ui.api.v1.patients.Patient;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntities;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntity;
+import eu.valawai.c0_patient_treatment_ui.persistence.PatientStatusCriteriaTest;
 
 /**
  * Test the {@link Patient}.
@@ -48,6 +49,7 @@ public class PatientTest extends ReflectionModelTestCase<Patient> {
 		model.id = ValueGenerator.rnd().nextLong();
 		model.updateTime = ValueGenerator.rnd().nextLong(0, TimeManager.now() - 360000);
 		model.name = ValueGenerator.nextPattern("Patient name {0}");
+		model.status = new PatientStatusCriteriaTest().nextModel();
 
 	}
 
