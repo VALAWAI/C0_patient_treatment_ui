@@ -12,10 +12,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.UUID;
+
 import org.junit.jupiter.api.Test;
 
 import eu.valawai.c0_patient_treatment_ui.TimeManager;
 import eu.valawai.c0_patient_treatment_ui.ValueGenerator;
+import eu.valawai.c0_patient_treatment_ui.api.v1.patients.MinPatientPage;
+import io.quarkus.panache.common.Sort;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.hibernate.reactive.panache.TransactionalUniAsserter;
 import io.quarkus.test.junit.QuarkusTest;
@@ -191,7 +195,8 @@ public class PatientEntityTest {
 	}
 
 	/**
-	 * Should update the {@link PatientStatusCriteria#ccd} from the {@link PatientEntity#status} .
+	 * Should update the {@link PatientStatusCriteria#ccd} from the
+	 * {@link PatientEntity#status} .
 	 *
 	 * @param asserter to use in the tests.
 	 */
@@ -545,8 +550,8 @@ public class PatientEntityTest {
 	}
 
 	/**
-	 * Should update the {@link PatientStatusCriteria#hasCognitiveImpairment} from the
-	 * {@link PatientEntity#status} .
+	 * Should update the {@link PatientStatusCriteria#hasCognitiveImpairment} from
+	 * the {@link PatientEntity#status} .
 	 *
 	 * @param asserter to use in the tests.
 	 */
@@ -698,8 +703,8 @@ public class PatientEntityTest {
 	}
 
 	/**
-	 * Should update the {@link PatientStatusCriteria#independenceAtAdmission} from the
-	 * {@link PatientEntity#status} .
+	 * Should update the {@link PatientStatusCriteria#independenceAtAdmission} from
+	 * the {@link PatientEntity#status} .
 	 *
 	 * @param asserter to use in the tests.
 	 */
@@ -749,7 +754,8 @@ public class PatientEntityTest {
 	}
 
 	/**
-	 * Should update the {@link PatientStatusCriteria#independenceInstrumentalActivities} from the
+	 * Should update the
+	 * {@link PatientStatusCriteria#independenceInstrumentalActivities} from the
 	 * {@link PatientEntity#status} .
 	 *
 	 * @param asserter to use in the tests.
@@ -901,7 +907,8 @@ public class PatientEntityTest {
 	}
 
 	/**
-	 * Should update the {@link PatientStatusCriteria#maca} from the {@link PatientEntity#status} .
+	 * Should update the {@link PatientStatusCriteria#maca} from the
+	 * {@link PatientEntity#status} .
 	 *
 	 * @param asserter to use in the tests.
 	 */
@@ -948,6 +955,109 @@ public class PatientEntityTest {
 			assertEquals(patient.status.isCompotent, found.status.isCompotent);
 
 		});
+	}
+
+	/**
+	 * Should return an empty min patient page when no pattern.
+	 *
+	 * @param asserter to use in the tests.
+	 */
+	@Test
+	@RunOnVertxContext
+	public void shouldGetEmptyMinPatientPageForWhenBadIndex(TransactionalUniAsserter asserter) {
+
+		final var expected = new MinPatientPage();
+		asserter.assertThat(() -> PatientEntity.getMinPatientPageFor("%", Sort.descending("id"), -1, 10),
+				found -> assertEquals(expected, found));
+
+	}
+
+	/**
+	 * Should return an empty min patient page if the index is too high.
+	 *
+	 * @param asserter to use in the tests.
+	 */
+	@Test
+	@RunOnVertxContext
+	public void shouldGetEmptyMinPatientPageForWhenIndexIsTooHigh(TransactionalUniAsserter asserter) {
+
+		final var expected = new MinPatientPage();
+		asserter.assertThat(() -> PatientEntity.count(), total -> expected.total = Math.toIntExact(total)).assertThat(
+				() -> PatientEntity.getMinPatientPageFor("%", Sort.descending("id"), expected.total + 1, 10),
+				found -> assertEquals(expected, found));
+
+	}
+
+	/**
+	 * Should return an empty min patient page because any patient match the query.
+	 *
+	 * @param asserter to use in the tests.
+	 */
+	@Test
+	@RunOnVertxContext
+	public void shouldGetEmptyMinPatientPageForWhenAnyMatch(TransactionalUniAsserter asserter) {
+
+		final var expected = new MinPatientPage();
+		asserter.assertThat(
+				() -> PatientEntity.getMinPatientPageFor(UUID.randomUUID().toString(), Sort.descending("id"), 0, 10),
+				found -> assertEquals(expected, found));
+
+	}
+
+	/**
+	 * Should get some patients.
+	 *
+	 * @param asserter to use in the tests.
+	 */
+	@Test
+	@RunOnVertxContext
+	public void shouldGetMinPatientPageForSome(TransactionalUniAsserter asserter) {
+
+		final var expected = new MinPatientPage();
+		final var limit = 20;
+		asserter.execute(() -> PatientEntities.populateWith(100))
+				.assertThat(() -> PatientEntity.count(), total -> expected.total = Math.toIntExact(total))
+				.assertThat(() -> PatientEntity.getMinPatientPageFor("%", Sort.ascending("id"), 10, limit), found -> {
+
+					assertEquals(expected.total, found.total);
+					assertNotNull(found.patients);
+					assertEquals(limit, found.patients.size());
+					var lastId = 0l;
+					for (final var patient : found.patients) {
+
+						assertTrue(lastId < patient.id);
+						lastId = patient.id;
+					}
+				});
+
+	}
+
+	/**
+	 * Should get some patients.
+	 *
+	 * @param asserter to use in the tests.
+	 */
+	@Test
+	@RunOnVertxContext
+	public void shouldGetMinPatientPageForMatchingPattern(TransactionalUniAsserter asserter) {
+
+		final var expected = new MinPatientPage();
+		asserter.execute(() -> PatientEntities.populateWith(100))
+				.assertThat(() -> PatientEntity.count("name LIKE '% 1%'"),
+						total -> expected.total = Math.toIntExact(total))
+				.assertThat(() -> PatientEntity.getMinPatientPageFor("% 1%", Sort.descending("name"), 0, 10), found -> {
+
+					assertEquals(expected.total, found.total);
+					assertNotNull(found.patients);
+					assertTrue(found.patients.size() <= 10);
+					var lastName = "ZZZZZZZZZZZZZZZZZZZZZZZZZZ";
+					for (final var patient : found.patients) {
+
+						assertTrue(patient.name.compareTo(lastName) <= 0);
+						lastName = patient.name;
+					}
+				});
+
 	}
 
 }

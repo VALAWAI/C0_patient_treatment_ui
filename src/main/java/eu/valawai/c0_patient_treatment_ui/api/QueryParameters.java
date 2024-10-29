@@ -76,21 +76,41 @@ public interface QueryParameters {
 	 */
 	public static String toPattern(String query) {
 
-		if (query == null) {
+		final var pattern = new StringBuilder();
+		if (query != null) {
+
+			final var input = query.trim();
+			final var max = input.length();
+			var multi = false;
+			for (var i = 0; i < max; i++) {
+
+				final var c = input.charAt(i);
+				switch (c) {
+				case '*' -> {
+					if (!multi) {
+
+						multi = true;
+						pattern.append('%');
+					}
+					continue;
+				}
+				case '?' -> pattern.append('_');
+				case '%' -> pattern.append("\\%");
+				case '_' -> pattern.append("\\_");
+				default -> pattern.append(c);
+				}
+				multi = false;
+			}
+		}
+
+		if (pattern.isEmpty()) {
 
 			return "%";
 
-		}
-		query = query.trim();
-		if (query.isEmpty()) {
+		} else {
 
-			return "%";
+			return pattern.toString();
 		}
-		var pattern = query.replaceAll("\\*", "%");
-		pattern = pattern.replaceAll("\\%+", "%");
-		pattern = pattern.replaceAll("\\?", "_");
-
-		return pattern;
 	}
 
 }

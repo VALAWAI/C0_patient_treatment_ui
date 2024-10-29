@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.Test;
 
-import eu.valawai.c0_patient_treatment_ui.ReflectionModelTestCase;
 import eu.valawai.c0_patient_treatment_ui.TimeManager;
 import eu.valawai.c0_patient_treatment_ui.ValueGenerator;
 import eu.valawai.c0_patient_treatment_ui.api.v1.patients.Patient;
@@ -29,7 +28,7 @@ import eu.valawai.c0_patient_treatment_ui.persistence.PatientStatusCriteriaTest;
  *
  * @author UDT-IA, IIIA-CSIC
  */
-public class PatientTest extends ReflectionModelTestCase<Patient> {
+public class PatientTest extends MinPatientTestCase<Patient> {
 
 	/**
 	 * {@inheritDoc}
@@ -46,9 +45,8 @@ public class PatientTest extends ReflectionModelTestCase<Patient> {
 	@Override
 	public void fillIn(Patient model) {
 
-		model.id = ValueGenerator.rnd().nextLong();
+		super.fillIn(model);
 		model.updateTime = ValueGenerator.rnd().nextLong(0, TimeManager.now() - 360000);
-		model.name = ValueGenerator.nextPattern("Patient name {0}");
 		model.status = new PatientStatusCriteriaTest().nextModel();
 
 	}

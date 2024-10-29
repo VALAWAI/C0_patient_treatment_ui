@@ -128,8 +128,11 @@ public class QueryParametersTest {
 	 */
 	@ParameterizedTest(name = "Should create the pattern {1} for {0}")
 	@CsvSource(textBlock = """
-			, %
-			*   ,%
+			,%
+			*,%
+			?,_
+			%,\\%
+			_,\\_
 			*   *   ,%   %
 			*******   ,%
 			*a  ,%a
@@ -137,6 +140,11 @@ public class QueryParametersTest {
 			*a?,%a_
 			?a?b?c,_a_b_c
 			*a*b*c,%a%b%c
+			?a,_a
+			_a,\\_a
+			?a*,_a%
+			_a?,\\_a_
+			?a*_?b*%,_a%\\__b%\\%
 			""")
 	public void shouldGeneratePatternForEmptyQuery(String query, String expected) {
 

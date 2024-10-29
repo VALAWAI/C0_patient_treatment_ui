@@ -9,9 +9,7 @@
 package eu.valawai.c0_patient_treatment_ui.api.v1.patients;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
-import org.hibernate.validator.constraints.Length;
 
-import eu.valawai.c0_patient_treatment_ui.ReflectionModel;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntity;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientStatusCriteria;
 
@@ -21,26 +19,13 @@ import eu.valawai.c0_patient_treatment_ui.persistence.PatientStatusCriteria;
  * @author UDT-IA, IIIA-CSIC
  */
 @Schema(title = "Contains the information of a patient.")
-public class Patient extends ReflectionModel {
-
-	/**
-	 * The identifier of the patient or {@code null} if it is not stored.
-	 */
-	@Schema(title = "The identifier of the patient.", readOnly = true)
-	public Long id;
+public class Patient extends MinPatient {
 
 	/**
 	 * The epoch time, in seconds, when the patient information has been updated.
 	 */
 	@Schema(title = "The epoch time, in seconds, when the patient information has been updated.", readOnly = true)
 	public Long updateTime;
-
-	/**
-	 * The name of the patient.
-	 */
-	@Schema(title = "The name of the patient.")
-	@Length(max = 1024)
-	public String name;
 
 	/**
 	 * The current status of the patient.

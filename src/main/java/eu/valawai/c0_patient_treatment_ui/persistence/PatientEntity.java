@@ -8,14 +8,22 @@
 
 package eu.valawai.c0_patient_treatment_ui.persistence;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.validator.constraints.Length;
 
 import eu.valawai.c0_patient_treatment_ui.TimeManager;
+import eu.valawai.c0_patient_treatment_ui.api.v1.patients.MinPatient;
+import eu.valawai.c0_patient_treatment_ui.api.v1.patients.MinPatientPage;
 import io.quarkus.hibernate.reactive.panache.PanacheEntity;
 import io.quarkus.logging.Log;
+import io.quarkus.panache.common.Sort;
 import io.smallrye.mutiny.Uni;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 
 /**
  * An entity that stores the information of a patient.
@@ -23,6 +31,8 @@ import jakarta.persistence.Entity;
  * @author UDT-IA, IIIA-CSIC
  */
 @Entity(name = PatientEntity.TABLE_NAME)
+@NamedQueries({
+		@NamedQuery(name = "PatientEntity.MinPatientTotal", query = "select count(*) from PATIENTS p where p.name ILIKE ?1") })
 public class PatientEntity extends PanacheEntity {
 
 	/**
@@ -136,4 +146,56 @@ public class PatientEntity extends PanacheEntity {
 		});
 	}
 
+	/**
+	 * Return the {@link MinPatientPage} that satisfy the query.
+	 *
+	 * @param pattern to match the name of the patients.
+	 * @param sort    how to order the patients to return.
+	 * @param from    index of the first patient to return.
+	 * @param limit   maximum number of patients to return.
+	 *
+	 * @return the page that satisfy the query.
+	 */
+	public static Uni<MinPatientPage> getMinPatientPageFor(String pattern, Sort sort, int from, int limit) {
+
+		return count("#PatientEntity.MinPatientTotal", pattern).chain(total -> {
+
+			final var page = new MinPatientPage();
+			page.total = Math.toIntExact(total);
+			if (from >= total) {
+
+				return Uni.createFrom().item(page);
+
+			} else {
+
+				final var to = Math.toIntExact(Math.min(from + limit, total)) - 1;
+				final Uni<List<PatientEntity>> find = PatientEntity.find("name ILIKE ?1", sort, pattern).range(from, to)
+						.list();
+				return find.map(patients -> {
+
+					if (patients != null) {
+
+						final var size = patients.size();
+						if (size > 0) {
+
+							page.patients = new ArrayList<>(size);
+							for (final var patient : patients) {
+
+								final var minPatient = MinPatient.from(patient);
+								page.patients.add(minPatient);
+							}
+						}
+					}
+					return page;
+				});
+
+			}
+
+		}).onFailure().recoverWithItem(error -> {
+
+			Log.errorv(error, "Cannot find for the patients.");
+			return new MinPatientPage();
+		});
+
+	}
 }

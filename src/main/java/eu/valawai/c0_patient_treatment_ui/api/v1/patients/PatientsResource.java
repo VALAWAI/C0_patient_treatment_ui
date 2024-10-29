@@ -22,14 +22,17 @@ import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntity;
 import io.quarkus.logging.Log;
 import io.smallrye.mutiny.Uni;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
@@ -169,6 +172,27 @@ public class PatientsResource {
 			}
 
 		});
+
+	}
+
+	/**
+	 * Return the information of some patients.
+	 *
+	 * @param name   of the patients to return.
+	 * @param offset the index of the first patient to retrieve.
+	 * @param limit  the number maximum of patients to retrieve.
+	 *
+	 * @return the page with the patients.
+	 */
+	@GET
+	@Operation(description = "Get a patient information.")
+	@APIResponse(responseCode = "200", description = "The patients that satisfy the query.", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = MinPatientPage.class)))
+	public Uni<Response> retrievePatientPage(
+			@QueryParam("name") @DefaultValue("*") @Parameter(in = ParameterIn.QUERY, description = "The pattern to match  of the patient to retrieve") String name,
+			@QueryParam("offset") @DefaultValue("9") @Parameter(in = ParameterIn.QUERY, description = "The index of the first patient to retrieve") @Min(0) int offset,
+			@QueryParam("limit") @DefaultValue("10") @Parameter(in = ParameterIn.QUERY, description = "The number maximum of patients to retrieve") @Min(1) int limit) {
+
+		return null;
 
 	}
 

@@ -13,11 +13,14 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
 /**
  * A model that implements the basic operation by reflection.
  *
  * @author VALAWAI
  */
+@RegisterForReflection
 public class ReflectionModel {
 
 	/**
