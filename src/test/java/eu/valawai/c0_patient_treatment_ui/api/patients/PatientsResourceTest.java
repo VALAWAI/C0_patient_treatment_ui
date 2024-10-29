@@ -19,14 +19,13 @@ import org.junit.jupiter.api.Test;
 import eu.valawai.c0_patient_treatment_ui.TimeManager;
 import eu.valawai.c0_patient_treatment_ui.api.v1.patients.Patient;
 import eu.valawai.c0_patient_treatment_ui.api.v1.patients.PatientsResource;
+import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntities;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntity;
-import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntityTest;
 import eu.valawai.c0_patient_treatment_ui.persistence.PostgreSQLTestResource;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.hibernate.reactive.panache.TransactionalUniAsserter;
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.vertx.RunOnVertxContext;
-import io.smallrye.mutiny.Uni;
 import jakarta.ws.rs.core.Response.Status;
 
 /**
@@ -59,8 +58,7 @@ public class PatientsResourceTest {
 	@RunOnVertxContext
 	public void shouldRetrievePatient(TransactionalUniAsserter asserter) {
 
-		final var entity = PatientEntityTest.nextRandom();
-		asserter.assertThat(() -> entity.persist(), patient -> {
+		asserter.assertThat(() -> PatientEntities.nextAndPersist(), entity -> {
 
 			final var expected = Patient.from(entity);
 			final var retrieved = given().pathParam("id", entity.id).when().get("/v1/patients/{id}").then()
@@ -92,8 +90,8 @@ public class PatientsResourceTest {
 	@RunOnVertxContext
 	public void shouldDeletePatient(TransactionalUniAsserter asserter) {
 
-		final var entity = PatientEntityTest.nextRandom();
-		asserter.assertThat(() -> entity.persist(), patient -> {
+		final var entity = PatientEntities.nextRandom();
+		asserter.assertThat(() -> entity.persist(), ignored -> {
 
 			given().pathParam("id", entity.id).when().delete("/v1/patients/{id}").then()
 					.statusCode(Status.NO_CONTENT.getStatusCode());
@@ -124,15 +122,56 @@ public class PatientsResourceTest {
 		model.updateTime = patient.updateTime;
 		assertEquals(model, patient);
 
-		asserter.assertThat(() -> {
-
-			final Uni<PatientEntity> action = PatientEntity.findById(model.id);
-			return action;
-
-		}, entity -> {
+		asserter.assertThat(() -> PatientEntities.byId(patient.id), entity -> {
 
 			assertNotNull(entity, "Not found created entity.");
 			assertEquals(patient, Patient.from(entity));
+
+		});
+
+	}
+
+	/**
+	 * Test not update an undefined patient.
+	 */
+	@Test
+	public void shouldNotUpdateUndefinedPatient() {
+
+		final var model = new PatientTest().nextModel();
+		given().contentType("application/json").body(model).pathParam("id", 0).when().patch("/v1/patients/{id}").then()
+				.statusCode(Status.NOT_FOUND.getStatusCode());
+
+	}
+
+	/**
+	 * Test update a patient.
+	 *
+	 * @param asserter to use in the tests.
+	 */
+	@Test
+	@RunOnVertxContext
+	public void shouldUpdatePatient(TransactionalUniAsserter asserter) {
+
+		final var newModel = new PatientTest().nextModel();
+		asserter.assertThat(() -> PatientEntities.nextAndPersist(), patient -> {
+
+			final var before = Patient.from(patient);
+			final var now = TimeManager.now();
+			final var updated = given().contentType("application/json").body(newModel).pathParam("id", patient.id)
+					.when().patch("/v1/patients/{id}").then().statusCode(Status.OK.getStatusCode()).extract()
+					.as(Patient.class);
+			assertNotEquals(before, updated);
+			assertNotEquals(newModel, updated);
+			newModel.id = patient.id;
+			newModel.updateTime = updated.updateTime;
+			assertEquals(newModel, updated);
+			assertTrue(now <= updated.updateTime);
+
+		}).assertThat(() -> PatientEntities.byId(newModel.id), found -> {
+
+			assertNotNull(found);
+			final var after = Patient.from(found);
+			assertEquals(newModel, after);
 
 		});
 

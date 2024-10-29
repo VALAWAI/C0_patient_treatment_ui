@@ -20,7 +20,6 @@ import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.hibernate.reactive.panache.TransactionalUniAsserter;
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.vertx.RunOnVertxContext;
-import io.smallrye.mutiny.Uni;
 
 /**
  * Test the {@link PatientEntity}.
@@ -32,21 +31,6 @@ import io.smallrye.mutiny.Uni;
 public class PatientEntityTest {
 
 	/**
-	 * Create a random patient status.
-	 *
-	 * @return the random status.
-	 */
-	public static PatientEntity nextRandom() {
-
-		final var entity = new PatientEntity();
-		entity.updateTime = ValueGenerator.rnd().nextLong(0, TimeManager.now() - 360000);
-		entity.name = ValueGenerator.nextPattern("Patient name {0}");
-		entity.status = new StatusTest().nextModel();
-		return entity;
-
-	}
-
-	/**
 	 * Should update a patient.
 	 *
 	 * @param asserter to use in the tests.
@@ -55,20 +39,15 @@ public class PatientEntityTest {
 	@RunOnVertxContext
 	public void shouldUpdate(TransactionalUniAsserter asserter) {
 
-		final var patient = nextRandom();
-		final var newPatient = nextRandom();
+		final var patient = PatientEntities.nextRandom();
+		final var newPatient = PatientEntities.nextRandom();
 		final var now = TimeManager.now();
 		asserter.execute(() -> patient.persist()).assertTrue(() -> {
 
 			newPatient.id = patient.id;
 			return newPatient.update();
 
-		}).assertThat(() -> {
-
-			final Uni<PatientEntity> action = PatientEntity.findById(patient.id);
-			return action;
-
-		}, found -> {
+		}).assertThat(() -> PatientEntities.byId(patient.id), found -> {
 
 			assertEquals(newPatient.name, found.name);
 			assertEquals(newPatient.status, found.status);
@@ -86,7 +65,7 @@ public class PatientEntityTest {
 	@RunOnVertxContext
 	public void shouldRetrieve(TransactionalUniAsserter asserter) {
 
-		final var patient = nextRandom();
+		final var patient = PatientEntities.nextRandom();
 		asserter.execute(() -> patient.persist()).assertThat(() -> PatientEntity.retrieve(patient.id), retrieved -> {
 
 			assertNotNull(retrieved);
@@ -106,7 +85,7 @@ public class PatientEntityTest {
 	@RunOnVertxContext
 	public void shouldDelete(TransactionalUniAsserter asserter) {
 
-		final var patient = nextRandom();
+		final var patient = PatientEntities.nextRandom();
 		asserter.execute(() -> patient.persist()).assertEquals(() -> PatientEntity.delete(patient.id), true)
 				.assertNull(() -> PatientEntity.findById(patient.id));
 	}
@@ -121,7 +100,7 @@ public class PatientEntityTest {
 	@RunOnVertxContext
 	public void shouldUpdateAgeRange(TransactionalUniAsserter asserter) {
 
-		final var patient = nextRandom();
+		final var patient = PatientEntities.nextRandom();
 		final var newAgeRange = ValueGenerator.next(AgeRangeOption.values());
 		final var now = TimeManager.now();
 		while (patient.status.ageRange.equals(newAgeRange)) {
@@ -136,12 +115,7 @@ public class PatientEntityTest {
 			newPatient.status.ageRange = newAgeRange;
 			return newPatient.update();
 
-		}).assertThat(() -> {
-
-			final Uni<PatientEntity> action = PatientEntity.findById(patient.id);
-			return action;
-
-		}, found -> {
+		}).assertThat(() -> PatientEntities.byId(patient.id), found -> {
 
 			assertEquals(patient.name, found.name);
 			assertTrue(found.updateTime >= now);
@@ -176,7 +150,7 @@ public class PatientEntityTest {
 	@RunOnVertxContext
 	public void shouldUpdateName(TransactionalUniAsserter asserter) {
 
-		final var patient = nextRandom();
+		final var patient = PatientEntities.nextRandom();
 		final var newName = ValueGenerator.nextPattern("Patient name {0}");
 		final var now = TimeManager.now();
 		while (patient.name.equals(newName)) {
@@ -190,12 +164,7 @@ public class PatientEntityTest {
 			newPatient.name = newName;
 			return newPatient.update();
 
-		}).assertThat(() -> {
-
-			final Uni<PatientEntity> action = PatientEntity.findById(patient.id);
-			return action;
-
-		}, found -> {
+		}).assertThat(() -> PatientEntities.byId(patient.id), found -> {
 
 			assertEquals(newName, found.name);
 			assertTrue(found.updateTime >= now);
@@ -230,7 +199,7 @@ public class PatientEntityTest {
 	@RunOnVertxContext
 	public void shouldUpdateCcd(TransactionalUniAsserter asserter) {
 
-		final var patient = nextRandom();
+		final var patient = PatientEntities.nextRandom();
 		final var newCcd = ValueGenerator.next(YesNoUnknownOption.values());
 		final var now = TimeManager.now();
 		while (patient.status.ccd.equals(newCcd)) {
@@ -245,12 +214,7 @@ public class PatientEntityTest {
 			newPatient.status.ccd = newCcd;
 			return newPatient.update();
 
-		}).assertThat(() -> {
-
-			final Uni<PatientEntity> action = PatientEntity.findById(patient.id);
-			return action;
-
-		}, found -> {
+		}).assertThat(() -> PatientEntities.byId(patient.id), found -> {
 
 			assertEquals(patient.name, found.name);
 			assertTrue(found.updateTime >= now);
@@ -288,7 +252,7 @@ public class PatientEntityTest {
 	@RunOnVertxContext
 	public void shouldUpdateClinicalRiskGroup(TransactionalUniAsserter asserter) {
 
-		final var patient = nextRandom();
+		final var patient = PatientEntities.nextRandom();
 		final var newClinicalRiskGroup = ValueGenerator.next(ClinicalRiskGroupOption.values());
 		final var now = TimeManager.now();
 		while (patient.status.clinicalRiskGroup.equals(newClinicalRiskGroup)) {
@@ -303,12 +267,7 @@ public class PatientEntityTest {
 			newPatient.status.clinicalRiskGroup = newClinicalRiskGroup;
 			return newPatient.update();
 
-		}).assertThat(() -> {
-
-			final Uni<PatientEntity> action = PatientEntity.findById(patient.id);
-			return action;
-
-		}, found -> {
+		}).assertThat(() -> PatientEntities.byId(patient.id), found -> {
 
 			assertEquals(patient.name, found.name);
 			assertTrue(found.updateTime >= now);
@@ -344,7 +303,7 @@ public class PatientEntityTest {
 	@RunOnVertxContext
 	public void shouldUpdateDiscomfortDegree(TransactionalUniAsserter asserter) {
 
-		final var patient = nextRandom();
+		final var patient = PatientEntities.nextRandom();
 		final var newDiscomfortDegree = ValueGenerator.next(DiscomfortDegree.values());
 		while (patient.status.discomfortDegree.equals(newDiscomfortDegree)) {
 
@@ -358,12 +317,7 @@ public class PatientEntityTest {
 			newPatient.status.discomfortDegree = newDiscomfortDegree;
 			return newPatient.update();
 
-		}).assertThat(() -> {
-
-			final Uni<PatientEntity> action = PatientEntity.findById(patient.id);
-			return action;
-
-		}, found -> {
+		}).assertThat(() -> PatientEntities.byId(patient.id), found -> {
 
 			assertEquals(newDiscomfortDegree, found.status.discomfortDegree);
 			assertEquals(patient.status.ageRange, found.status.ageRange);
@@ -396,7 +350,7 @@ public class PatientEntityTest {
 	@RunOnVertxContext
 	public void shouldUpdateExpectedSurvival(TransactionalUniAsserter asserter) {
 
-		final var patient = nextRandom();
+		final var patient = PatientEntities.nextRandom();
 		final var newExpectedSurvival = ValueGenerator.next(SurvivalOptions.values());
 		final var now = TimeManager.now();
 		while (patient.status.expectedSurvival.equals(newExpectedSurvival)) {
@@ -411,12 +365,7 @@ public class PatientEntityTest {
 			newPatient.status.expectedSurvival = newExpectedSurvival;
 			return newPatient.update();
 
-		}).assertThat(() -> {
-
-			final Uni<PatientEntity> action = PatientEntity.findById(patient.id);
-			return action;
-
-		}, found -> {
+		}).assertThat(() -> PatientEntities.byId(patient.id), found -> {
 
 			assertEquals(patient.name, found.name);
 			assertTrue(found.updateTime >= now);
@@ -452,7 +401,7 @@ public class PatientEntityTest {
 	@RunOnVertxContext
 	public void shouldUpdateFrailVIG(TransactionalUniAsserter asserter) {
 
-		final var patient = nextRandom();
+		final var patient = PatientEntities.nextRandom();
 		final var newFrailVIG = ValueGenerator.next(SPICT_Scale.values());
 		final var now = TimeManager.now();
 		while (patient.status.frailVIG.equals(newFrailVIG)) {
@@ -467,12 +416,7 @@ public class PatientEntityTest {
 			newPatient.status.frailVIG = newFrailVIG;
 			return newPatient.update();
 
-		}).assertThat(() -> {
-
-			final Uni<PatientEntity> action = PatientEntity.findById(patient.id);
-			return action;
-
-		}, found -> {
+		}).assertThat(() -> PatientEntities.byId(patient.id), found -> {
 
 			assertEquals(patient.name, found.name);
 			assertTrue(found.updateTime >= now);
@@ -508,7 +452,7 @@ public class PatientEntityTest {
 	@RunOnVertxContext
 	public void shouldUpdateHasAdvanceDirectives(TransactionalUniAsserter asserter) {
 
-		final var patient = nextRandom();
+		final var patient = PatientEntities.nextRandom();
 		final var newhasAdvanceDirectives = ValueGenerator.next(YesNoUnknownOption.values());
 		final var now = TimeManager.now();
 		while (patient.status.hasAdvanceDirectives.equals(newhasAdvanceDirectives)) {
@@ -523,12 +467,7 @@ public class PatientEntityTest {
 			newPatient.status.hasAdvanceDirectives = newhasAdvanceDirectives;
 			return newPatient.update();
 
-		}).assertThat(() -> {
-
-			final Uni<PatientEntity> action = PatientEntity.findById(patient.id);
-			return action;
-
-		}, found -> {
+		}).assertThat(() -> PatientEntities.byId(patient.id), found -> {
 
 			assertEquals(patient.name, found.name);
 			assertTrue(found.updateTime >= now);
@@ -564,7 +503,7 @@ public class PatientEntityTest {
 	@RunOnVertxContext
 	public void shouldUpdateHasBeenInformed(TransactionalUniAsserter asserter) {
 
-		final var patient = nextRandom();
+		final var patient = PatientEntities.nextRandom();
 		final var newHasBeenInformed = ValueGenerator.next(YesNoUnknownOption.values());
 		final var now = TimeManager.now();
 		while (patient.status.hasBeenInformed.equals(newHasBeenInformed)) {
@@ -579,12 +518,7 @@ public class PatientEntityTest {
 			newPatient.status.hasBeenInformed = newHasBeenInformed;
 			return newPatient.update();
 
-		}).assertThat(() -> {
-
-			final Uni<PatientEntity> action = PatientEntity.findById(patient.id);
-			return action;
-
-		}, found -> {
+		}).assertThat(() -> PatientEntities.byId(patient.id), found -> {
 
 			assertEquals(patient.name, found.name);
 			assertTrue(found.updateTime >= now);
@@ -620,7 +554,7 @@ public class PatientEntityTest {
 	@RunOnVertxContext
 	public void shouldUpdateHasCognitiveImpairment(TransactionalUniAsserter asserter) {
 
-		final var patient = nextRandom();
+		final var patient = PatientEntities.nextRandom();
 		final var newHasCognitiveImpairment = ValueGenerator.next(CognitiveImpairmentLevel.values());
 		while (patient.status.hasCognitiveImpairment.equals(newHasCognitiveImpairment)) {
 
@@ -635,12 +569,7 @@ public class PatientEntityTest {
 			newPatient.status.hasCognitiveImpairment = newHasCognitiveImpairment;
 			return newPatient.update();
 
-		}).assertThat(() -> {
-
-			final Uni<PatientEntity> action = PatientEntity.findById(patient.id);
-			return action;
-
-		}, found -> {
+		}).assertThat(() -> PatientEntities.byId(patient.id), found -> {
 
 			assertEquals(patient.name, found.name);
 			assertTrue(found.updateTime >= now);
@@ -676,7 +605,7 @@ public class PatientEntityTest {
 	@RunOnVertxContext
 	public void shouldUpdateHasEmocionalPain(TransactionalUniAsserter asserter) {
 
-		final var patient = nextRandom();
+		final var patient = PatientEntities.nextRandom();
 		final var newHasEmocionalPain = ValueGenerator.next(YesNoUnknownOption.values());
 		while (patient.status.hasEmocionalPain.equals(newHasEmocionalPain)) {
 
@@ -691,12 +620,7 @@ public class PatientEntityTest {
 			newPatient.status.hasEmocionalPain = newHasEmocionalPain;
 			return newPatient.update();
 
-		}).assertThat(() -> {
-
-			final Uni<PatientEntity> action = PatientEntity.findById(patient.id);
-			return action;
-
-		}, found -> {
+		}).assertThat(() -> PatientEntities.byId(patient.id), found -> {
 
 			assertEquals(patient.name, found.name);
 			assertTrue(found.updateTime >= now);
@@ -732,7 +656,7 @@ public class PatientEntityTest {
 	@RunOnVertxContext
 	public void shouldUpdateHasSocialSupport(TransactionalUniAsserter asserter) {
 
-		final var patient = nextRandom();
+		final var patient = PatientEntities.nextRandom();
 		final var newHasSocialSupport = ValueGenerator.next(YesNoUnknownOption.values());
 		while (patient.status.hasSocialSupport.equals(newHasSocialSupport)) {
 
@@ -747,12 +671,7 @@ public class PatientEntityTest {
 			newPatient.status.hasSocialSupport = newHasSocialSupport;
 			return newPatient.update();
 
-		}).assertThat(() -> {
-
-			final Uni<PatientEntity> action = PatientEntity.findById(patient.id);
-			return action;
-
-		}, found -> {
+		}).assertThat(() -> PatientEntities.byId(patient.id), found -> {
 
 			assertEquals(patient.name, found.name);
 			assertTrue(found.updateTime >= now);
@@ -788,7 +707,7 @@ public class PatientEntityTest {
 	@RunOnVertxContext
 	public void shouldUpdateIndependenceAtAdmission(TransactionalUniAsserter asserter) {
 
-		final var patient = nextRandom();
+		final var patient = PatientEntities.nextRandom();
 		final var newIndependenceAtAdmission = ValueGenerator.next(BarthelIndex.values());
 		while (patient.status.independenceAtAdmission.equals(newIndependenceAtAdmission)) {
 
@@ -803,12 +722,7 @@ public class PatientEntityTest {
 			newPatient.status.independenceAtAdmission = newIndependenceAtAdmission;
 			return newPatient.update();
 
-		}).assertThat(() -> {
-
-			final Uni<PatientEntity> action = PatientEntity.findById(patient.id);
-			return action;
-
-		}, found -> {
+		}).assertThat(() -> PatientEntities.byId(patient.id), found -> {
 
 			assertEquals(patient.name, found.name);
 			assertTrue(found.updateTime >= now);
@@ -844,7 +758,7 @@ public class PatientEntityTest {
 	@RunOnVertxContext
 	public void shouldUpdateIndependenceInstrumentalActivities(TransactionalUniAsserter asserter) {
 
-		final var patient = nextRandom();
+		final var patient = PatientEntities.nextRandom();
 		final var newIndependenceInstrumentalActivities = ValueGenerator.next(LawtonIndex.values());
 		while (patient.status.independenceInstrumentalActivities.equals(newIndependenceInstrumentalActivities)) {
 
@@ -859,12 +773,7 @@ public class PatientEntityTest {
 			newPatient.status.independenceInstrumentalActivities = newIndependenceInstrumentalActivities;
 			return newPatient.update();
 
-		}).assertThat(() -> {
-
-			final Uni<PatientEntity> action = PatientEntity.findById(patient.id);
-			return action;
-
-		}, found -> {
+		}).assertThat(() -> PatientEntities.byId(patient.id), found -> {
 
 			assertEquals(patient.name, found.name);
 			assertTrue(found.updateTime >= now);
@@ -899,7 +808,7 @@ public class PatientEntityTest {
 	@RunOnVertxContext
 	public void shouldUpdateIsCoerced(TransactionalUniAsserter asserter) {
 
-		final var patient = nextRandom();
+		final var patient = PatientEntities.nextRandom();
 		final var newIsCoerced = ValueGenerator.next(YesNoUnknownOption.values());
 		while (patient.status.isCoerced.equals(newIsCoerced)) {
 
@@ -914,12 +823,7 @@ public class PatientEntityTest {
 			newPatient.status.isCoerced = newIsCoerced;
 			return newPatient.update();
 
-		}).assertThat(() -> {
-
-			final Uni<PatientEntity> action = PatientEntity.findById(patient.id);
-			return action;
-
-		}, found -> {
+		}).assertThat(() -> PatientEntities.byId(patient.id), found -> {
 
 			assertEquals(patient.name, found.name);
 			assertTrue(found.updateTime >= now);
@@ -955,7 +859,7 @@ public class PatientEntityTest {
 	@RunOnVertxContext
 	public void shouldUpdateIsCompotent(TransactionalUniAsserter asserter) {
 
-		final var patient = nextRandom();
+		final var patient = PatientEntities.nextRandom();
 		final var newIsCompotent = ValueGenerator.next(YesNoUnknownOption.values());
 		while (patient.status.isCompotent.equals(newIsCompotent)) {
 
@@ -970,12 +874,7 @@ public class PatientEntityTest {
 			newPatient.status.isCompotent = newIsCompotent;
 			return newPatient.update();
 
-		}).assertThat(() -> {
-
-			final Uni<PatientEntity> action = PatientEntity.findById(patient.id);
-			return action;
-
-		}, found -> {
+		}).assertThat(() -> PatientEntities.byId(patient.id), found -> {
 
 			assertEquals(patient.name, found.name);
 			assertTrue(found.updateTime >= now);
@@ -1010,7 +909,7 @@ public class PatientEntityTest {
 	@RunOnVertxContext
 	public void shouldUpdateMaca(TransactionalUniAsserter asserter) {
 
-		final var patient = nextRandom();
+		final var patient = PatientEntities.nextRandom();
 		final var newMaca = ValueGenerator.next(YesNoUnknownOption.values());
 		while (patient.status.maca.equals(newMaca)) {
 
@@ -1025,12 +924,7 @@ public class PatientEntityTest {
 			newPatient.status.maca = newMaca;
 			return newPatient.update();
 
-		}).assertThat(() -> {
-
-			final Uni<PatientEntity> action = PatientEntity.findById(patient.id);
-			return action;
-
-		}, found -> {
+		}).assertThat(() -> PatientEntities.byId(patient.id), found -> {
 
 			assertEquals(patient.name, found.name);
 			assertTrue(found.updateTime >= now);

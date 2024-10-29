@@ -18,8 +18,8 @@ import eu.valawai.c0_patient_treatment_ui.ReflectionModelTestCase;
 import eu.valawai.c0_patient_treatment_ui.TimeManager;
 import eu.valawai.c0_patient_treatment_ui.ValueGenerator;
 import eu.valawai.c0_patient_treatment_ui.api.v1.patients.Patient;
+import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntities;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntity;
-import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntityTest;
 
 /**
  * Test the {@link Patient}.
@@ -59,7 +59,7 @@ public class PatientTest extends ReflectionModelTestCase<Patient> {
 	@Test
 	public void shouldFromToPatientEntity() {
 
-		final var entity = PatientEntityTest.nextRandom();
+		final var entity = PatientEntities.nextRandom();
 		final var model = Patient.from(entity);
 		final var entity2 = model.toPatientEntity();
 		assertNull(entity2.id);
