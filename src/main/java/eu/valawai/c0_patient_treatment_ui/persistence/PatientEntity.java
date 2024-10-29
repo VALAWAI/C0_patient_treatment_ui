@@ -40,7 +40,7 @@ public class PatientEntity extends PanacheEntity {
 	 * The current status of the patient.
 	 */
 	@Embedded
-	public Status status;
+	public PatientStatusCriteria status;
 
 	/**
 	 * The time when the patient has been updated.

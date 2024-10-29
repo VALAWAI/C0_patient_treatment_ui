@@ -13,6 +13,7 @@ import org.hibernate.validator.constraints.Length;
 
 import eu.valawai.c0_patient_treatment_ui.ReflectionModel;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntity;
+import eu.valawai.c0_patient_treatment_ui.persistence.PatientStatusCriteria;
 
 /**
  * The information of a patient.
@@ -42,6 +43,12 @@ public class Patient extends ReflectionModel {
 	public String name;
 
 	/**
+	 * The current status of the patient.
+	 */
+	@Schema(title = "The current status of the patient.")
+	public PatientStatusCriteria status;
+
+	/**
 	 * Retrieve a {@link Patient} with the data of a {@link PatientEntity}.
 	 *
 	 * @param entity to get the patient information.
@@ -54,6 +61,7 @@ public class Patient extends ReflectionModel {
 		model.id = entity.id;
 		model.updateTime = entity.updateTime;
 		model.name = entity.name;
+		model.status = entity.status;
 		return model;
 	}
 
@@ -66,6 +74,7 @@ public class Patient extends ReflectionModel {
 
 		final var entity = new PatientEntity();
 		entity.name = this.name;
+		entity.status = this.status;
 		return entity;
 
 	}

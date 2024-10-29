@@ -29,7 +29,7 @@ public class PatientEntities {
 		final var entity = new PatientEntity();
 		entity.updateTime = ValueGenerator.rnd().nextLong(0, TimeManager.now() - 360000);
 		entity.name = ValueGenerator.nextPattern("Patient name {0}");
-		entity.status = new StatusTest().nextModel();
+		entity.status = new PatientStatusCriteriaTest().nextModel();
 		return entity;
 
 	}

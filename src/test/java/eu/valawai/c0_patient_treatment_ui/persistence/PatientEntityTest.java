@@ -91,7 +91,7 @@ public class PatientEntityTest {
 	}
 
 	/**
-	 * Should update the {@link Status#ageRange} from the
+	 * Should update the {@link PatientStatusCriteria#ageRange} from the
 	 * {@link PatientEntity#status} .
 	 *
 	 * @param asserter to use in the tests.
@@ -111,7 +111,7 @@ public class PatientEntityTest {
 
 			final var newPatient = new PatientEntity();
 			newPatient.id = patient.id;
-			newPatient.status = new Status();
+			newPatient.status = new PatientStatusCriteria();
 			newPatient.status.ageRange = newAgeRange;
 			return newPatient.update();
 
@@ -191,7 +191,7 @@ public class PatientEntityTest {
 	}
 
 	/**
-	 * Should update the {@link Status#ccd} from the {@link PatientEntity#status} .
+	 * Should update the {@link PatientStatusCriteria#ccd} from the {@link PatientEntity#status} .
 	 *
 	 * @param asserter to use in the tests.
 	 */
@@ -210,7 +210,7 @@ public class PatientEntityTest {
 
 			final var newPatient = new PatientEntity();
 			newPatient.id = patient.id;
-			newPatient.status = new Status();
+			newPatient.status = new PatientStatusCriteria();
 			newPatient.status.ccd = newCcd;
 			return newPatient.update();
 
@@ -243,7 +243,7 @@ public class PatientEntityTest {
 	}
 
 	/**
-	 * Should update the {@link Status#clinicalRiskGroup} from the
+	 * Should update the {@link PatientStatusCriteria#clinicalRiskGroup} from the
 	 * {@link PatientEntity#status} .
 	 *
 	 * @param asserter to use in the tests.
@@ -263,7 +263,7 @@ public class PatientEntityTest {
 
 			final var newPatient = new PatientEntity();
 			newPatient.id = patient.id;
-			newPatient.status = new Status();
+			newPatient.status = new PatientStatusCriteria();
 			newPatient.status.clinicalRiskGroup = newClinicalRiskGroup;
 			return newPatient.update();
 
@@ -294,7 +294,7 @@ public class PatientEntityTest {
 	}
 
 	/**
-	 * Should update the {@link Status#discomfortDegree} from the
+	 * Should update the {@link PatientStatusCriteria#discomfortDegree} from the
 	 * {@link PatientEntity#status} .
 	 *
 	 * @param asserter to use in the tests.
@@ -313,7 +313,7 @@ public class PatientEntityTest {
 
 			final var newPatient = new PatientEntity();
 			newPatient.id = patient.id;
-			newPatient.status = new Status();
+			newPatient.status = new PatientStatusCriteria();
 			newPatient.status.discomfortDegree = newDiscomfortDegree;
 			return newPatient.update();
 
@@ -341,7 +341,7 @@ public class PatientEntityTest {
 	}
 
 	/**
-	 * Should update the {@link Status#expectedSurvival} from the
+	 * Should update the {@link PatientStatusCriteria#expectedSurvival} from the
 	 * {@link PatientEntity#status} .
 	 *
 	 * @param asserter to use in the tests.
@@ -361,7 +361,7 @@ public class PatientEntityTest {
 
 			final var newPatient = new PatientEntity();
 			newPatient.id = patient.id;
-			newPatient.status = new Status();
+			newPatient.status = new PatientStatusCriteria();
 			newPatient.status.expectedSurvival = newExpectedSurvival;
 			return newPatient.update();
 
@@ -392,7 +392,7 @@ public class PatientEntityTest {
 	}
 
 	/**
-	 * Should update the {@link Status#frailVIG} from the
+	 * Should update the {@link PatientStatusCriteria#frailVIG} from the
 	 * {@link PatientEntity#status} .
 	 *
 	 * @param asserter to use in the tests.
@@ -412,7 +412,7 @@ public class PatientEntityTest {
 
 			final var newPatient = new PatientEntity();
 			newPatient.id = patient.id;
-			newPatient.status = new Status();
+			newPatient.status = new PatientStatusCriteria();
 			newPatient.status.frailVIG = newFrailVIG;
 			return newPatient.update();
 
@@ -443,7 +443,7 @@ public class PatientEntityTest {
 	}
 
 	/**
-	 * Should update the {@link Status#hasAdvanceDirectives} from the
+	 * Should update the {@link PatientStatusCriteria#hasAdvanceDirectives} from the
 	 * {@link PatientEntity#status} .
 	 *
 	 * @param asserter to use in the tests.
@@ -463,7 +463,7 @@ public class PatientEntityTest {
 
 			final var newPatient = new PatientEntity();
 			newPatient.id = patient.id;
-			newPatient.status = new Status();
+			newPatient.status = new PatientStatusCriteria();
 			newPatient.status.hasAdvanceDirectives = newhasAdvanceDirectives;
 			return newPatient.update();
 
@@ -494,7 +494,7 @@ public class PatientEntityTest {
 	}
 
 	/**
-	 * Should update the {@link Status#hasBeenInformed} from the
+	 * Should update the {@link PatientStatusCriteria#hasBeenInformed} from the
 	 * {@link PatientEntity#status} .
 	 *
 	 * @param asserter to use in the tests.
@@ -514,7 +514,7 @@ public class PatientEntityTest {
 
 			final var newPatient = new PatientEntity();
 			newPatient.id = patient.id;
-			newPatient.status = new Status();
+			newPatient.status = new PatientStatusCriteria();
 			newPatient.status.hasBeenInformed = newHasBeenInformed;
 			return newPatient.update();
 
@@ -545,7 +545,7 @@ public class PatientEntityTest {
 	}
 
 	/**
-	 * Should update the {@link Status#hasCognitiveImpairment} from the
+	 * Should update the {@link PatientStatusCriteria#hasCognitiveImpairment} from the
 	 * {@link PatientEntity#status} .
 	 *
 	 * @param asserter to use in the tests.
@@ -565,7 +565,7 @@ public class PatientEntityTest {
 
 			final var newPatient = new PatientEntity();
 			newPatient.id = patient.id;
-			newPatient.status = new Status();
+			newPatient.status = new PatientStatusCriteria();
 			newPatient.status.hasCognitiveImpairment = newHasCognitiveImpairment;
 			return newPatient.update();
 
@@ -596,7 +596,7 @@ public class PatientEntityTest {
 	}
 
 	/**
-	 * Should update the {@link Status#hasEmocionalPain} from the
+	 * Should update the {@link PatientStatusCriteria#hasEmocionalPain} from the
 	 * {@link PatientEntity#status} .
 	 *
 	 * @param asserter to use in the tests.
@@ -616,7 +616,7 @@ public class PatientEntityTest {
 
 			final var newPatient = new PatientEntity();
 			newPatient.id = patient.id;
-			newPatient.status = new Status();
+			newPatient.status = new PatientStatusCriteria();
 			newPatient.status.hasEmocionalPain = newHasEmocionalPain;
 			return newPatient.update();
 
@@ -647,7 +647,7 @@ public class PatientEntityTest {
 	}
 
 	/**
-	 * Should update the {@link Status#hasSocialSupport} from the
+	 * Should update the {@link PatientStatusCriteria#hasSocialSupport} from the
 	 * {@link PatientEntity#status} .
 	 *
 	 * @param asserter to use in the tests.
@@ -667,7 +667,7 @@ public class PatientEntityTest {
 
 			final var newPatient = new PatientEntity();
 			newPatient.id = patient.id;
-			newPatient.status = new Status();
+			newPatient.status = new PatientStatusCriteria();
 			newPatient.status.hasSocialSupport = newHasSocialSupport;
 			return newPatient.update();
 
@@ -698,7 +698,7 @@ public class PatientEntityTest {
 	}
 
 	/**
-	 * Should update the {@link Status#independenceAtAdmission} from the
+	 * Should update the {@link PatientStatusCriteria#independenceAtAdmission} from the
 	 * {@link PatientEntity#status} .
 	 *
 	 * @param asserter to use in the tests.
@@ -718,7 +718,7 @@ public class PatientEntityTest {
 
 			final var newPatient = new PatientEntity();
 			newPatient.id = patient.id;
-			newPatient.status = new Status();
+			newPatient.status = new PatientStatusCriteria();
 			newPatient.status.independenceAtAdmission = newIndependenceAtAdmission;
 			return newPatient.update();
 
@@ -749,7 +749,7 @@ public class PatientEntityTest {
 	}
 
 	/**
-	 * Should update the {@link Status#independenceInstrumentalActivities} from the
+	 * Should update the {@link PatientStatusCriteria#independenceInstrumentalActivities} from the
 	 * {@link PatientEntity#status} .
 	 *
 	 * @param asserter to use in the tests.
@@ -769,7 +769,7 @@ public class PatientEntityTest {
 
 			final var newPatient = new PatientEntity();
 			newPatient.id = patient.id;
-			newPatient.status = new Status();
+			newPatient.status = new PatientStatusCriteria();
 			newPatient.status.independenceInstrumentalActivities = newIndependenceInstrumentalActivities;
 			return newPatient.update();
 
@@ -799,7 +799,7 @@ public class PatientEntityTest {
 	}
 
 	/**
-	 * Should update the {@link Status#isCoerced} from the
+	 * Should update the {@link PatientStatusCriteria#isCoerced} from the
 	 * {@link PatientEntity#status} .
 	 *
 	 * @param asserter to use in the tests.
@@ -819,7 +819,7 @@ public class PatientEntityTest {
 
 			final var newPatient = new PatientEntity();
 			newPatient.id = patient.id;
-			newPatient.status = new Status();
+			newPatient.status = new PatientStatusCriteria();
 			newPatient.status.isCoerced = newIsCoerced;
 			return newPatient.update();
 
@@ -850,7 +850,7 @@ public class PatientEntityTest {
 	}
 
 	/**
-	 * Should update the {@link Status#isCompotent} from the
+	 * Should update the {@link PatientStatusCriteria#isCompotent} from the
 	 * {@link PatientEntity#status} .
 	 *
 	 * @param asserter to use in the tests.
@@ -870,7 +870,7 @@ public class PatientEntityTest {
 
 			final var newPatient = new PatientEntity();
 			newPatient.id = patient.id;
-			newPatient.status = new Status();
+			newPatient.status = new PatientStatusCriteria();
 			newPatient.status.isCompotent = newIsCompotent;
 			return newPatient.update();
 
@@ -901,7 +901,7 @@ public class PatientEntityTest {
 	}
 
 	/**
-	 * Should update the {@link Status#maca} from the {@link PatientEntity#status} .
+	 * Should update the {@link PatientStatusCriteria#maca} from the {@link PatientEntity#status} .
 	 *
 	 * @param asserter to use in the tests.
 	 */
@@ -920,7 +920,7 @@ public class PatientEntityTest {
 
 			final var newPatient = new PatientEntity();
 			newPatient.id = patient.id;
-			newPatient.status = new Status();
+			newPatient.status = new PatientStatusCriteria();
 			newPatient.status.maca = newMaca;
 			return newPatient.update();
 

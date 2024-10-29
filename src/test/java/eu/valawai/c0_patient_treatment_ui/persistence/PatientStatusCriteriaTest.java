@@ -12,28 +12,28 @@ import eu.valawai.c0_patient_treatment_ui.ReflectionModelTestCase;
 import eu.valawai.c0_patient_treatment_ui.ValueGenerator;
 
 /**
- * Test the {@link Status}.
+ * Test the {@link PatientStatusCriteria}.
  *
- * @see Status
+ * @see PatientStatusCriteria
  *
  * @author UDT-IA, IIIA-CSIC
  */
-public class StatusTest extends ReflectionModelTestCase<Status> {
+public class PatientStatusCriteriaTest extends ReflectionModelTestCase<PatientStatusCriteria> {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Status createEmptyModel() {
+	public PatientStatusCriteria createEmptyModel() {
 
-		return new Status();
+		return new PatientStatusCriteria();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void fillIn(Status model) {
+	public void fillIn(PatientStatusCriteria model) {
 
 		model.ageRange = ValueGenerator.next(AgeRangeOption.values());
 		model.ccd = ValueGenerator.next(YesNoUnknownOption.values());
