@@ -1,2 +1,3 @@
-<app-patient-selector (patientSelected)="patientSelected($event)">
-</app-patient-selector>
+<div *ngIf="patient$ | async; let patient">
+	{{patient.name}}
+</div>

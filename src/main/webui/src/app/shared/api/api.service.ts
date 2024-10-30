@@ -13,6 +13,7 @@ import { environment } from '@environments/environment';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MinPatientPage } from "./min-patient-page.model";
+import { Patient } from "./patient.model";
 
 /**
  * The service used to interact with the 
@@ -126,6 +127,15 @@ export class ApiService {
 			)
 		);
 
+	}
+
+	/**
+	 * Get the information of a patient 
+	 */
+	getPatient(patientId: number): Observable<Patient> {
+
+		var url = this.url('/v1/patients', [patientId]);
+		return this.http.get<Patient>(url);
 	}
 
 }
