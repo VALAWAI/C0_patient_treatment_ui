@@ -18,6 +18,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import eu.valawai.c0_patient_treatment_ui.TimeManager;
+import eu.valawai.c0_patient_treatment_ui.api.QueryParameters;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntity;
 import io.quarkus.logging.Log;
 import io.smallrye.mutiny.Uni;
@@ -181,6 +182,7 @@ public class PatientsResource {
 	 * @param name   of the patients to return.
 	 * @param offset the index of the first patient to retrieve.
 	 * @param limit  the number maximum of patients to retrieve.
+	 * @param order  the order to return the patients.
 	 *
 	 * @return the page with the patients.
 	 */
@@ -189,10 +191,13 @@ public class PatientsResource {
 	@APIResponse(responseCode = "200", description = "The patients that satisfy the query.", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = MinPatientPage.class)))
 	public Uni<Response> retrievePatientPage(
 			@QueryParam("name") @DefaultValue("*") @Parameter(in = ParameterIn.QUERY, description = "The pattern to match  of the patient to retrieve") String name,
-			@QueryParam("offset") @DefaultValue("9") @Parameter(in = ParameterIn.QUERY, description = "The index of the first patient to retrieve") @Min(0) int offset,
-			@QueryParam("limit") @DefaultValue("10") @Parameter(in = ParameterIn.QUERY, description = "The number maximum of patients to retrieve") @Min(1) int limit) {
+			@QueryParam("offset") @DefaultValue("0") @Parameter(in = ParameterIn.QUERY, description = "The index of the first patient to retrieve") @Min(0) int offset,
+			@QueryParam("limit") @DefaultValue("10") @Parameter(in = ParameterIn.QUERY, description = "The number maximum of patients to retrieve") @Min(1) int limit,
+			@QueryParam("order") @DefaultValue("") @Parameter(in = ParameterIn.QUERY, description = "The order to return the patients. You can define the fields name or id with the prefix + to ascending order and - to descending order.") String order) {
 
-		return null;
+		final var pattern = QueryParameters.toPattern(name);
+		final var sort = QueryParameters.toSort(order);
+		return PatientEntity.getMinPatientPageFor(pattern, sort, offset, limit).map(page -> Response.ok(page).build());
 
 	}
 
