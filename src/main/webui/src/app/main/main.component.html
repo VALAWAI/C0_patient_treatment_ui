@@ -18,7 +18,7 @@
 			i18n="The label for the option to seee the status of teh component@@main_status-menu-item-label"
 			routerLink="/main/status">Status</button>
 		</mat-menu>
-		<div class="grow text-center font-bold text-2xl">Title</div>
+		<div class="grow text-center font-bold text-2xl">{{title$|async}}</div>
 	</header>
 	<div class="p-3 grow">
 		<router-outlet></router-outlet>

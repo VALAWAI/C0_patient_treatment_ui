@@ -6,7 +6,7 @@
   https://opensource.org/license/gpl-3-0/
 */
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { RouterOutlet } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
@@ -14,6 +14,9 @@ import { MatMenu, MatMenuTrigger, MatMenuItem } from '@angular/material/menu';
 import { MatButton } from '@angular/material/button';
 import { MatDivider } from '@angular/material/divider';
 import { RouterLink } from '@angular/router';
+import { TitleService } from '@app/shared/title.service';
+import { AsyncPipe } from '@angular/common';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-main',
@@ -26,11 +29,37 @@ import { RouterLink } from '@angular/router';
 		MatMenuItem,
 		MatButton,
 		MatDivider,
-		RouterLink
+		RouterLink,
+		AsyncPipe
 	],
 	templateUrl: './main.component.html',
 	styleUrl: './main.component.css'
 })
-export class MainComponent {
+export class MainComponent implements OnInit {
+
+	/**
+	 * The title for the main page.
+	 */
+	public title$: Observable<string>|null = null;
+
+
+	/**
+	 * Create the mian component.
+	 */
+	constructor(
+		private title: TitleService
+	) {
+
+	}
+
+	/**
+	 * Initilaize the component.
+	 */
+	public ngOnInit() {
+
+
+		this.title$ = this.title.headerTitle();
+	}
+
 
 }

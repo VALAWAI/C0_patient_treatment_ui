@@ -32,7 +32,7 @@ public class EnvironmentResource {
 	/**
 	 * The URL of the application.
 	 */
-	@ConfigProperty(name = "c0.patient_treatment_ui.url", defaultValue = "http://${quarkus.http.host}:${quarkus.http.port}")
+	@ConfigProperty(name = "c0.patient_treatment_ui.url", defaultValue = "http://localhost:8080")
 	String componentUrl;
 
 	/**
