@@ -12,6 +12,7 @@ import { HealthInfo } from './health-info.model';
 import { environment } from '@environments/environment';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { MinPatientPage } from "./min-patient-page.model";
 
 /**
  * The service used to interact with the 
@@ -105,6 +106,26 @@ export class ApiService {
 
 		var url = this.url('/q/health/');
 		return this.http.get<HealthInfo>(url);
+	}
+
+	/**
+	 * Get the information for some patients 
+	 */
+	getPatientsPage(pattern: string = "*", order: string = "+name", offset: number = 0, limit: number = 10): Observable<MinPatientPage> {
+
+		var url = this.url('/v1/patients');
+		return this.http.get<MinPatientPage>(
+			url,
+			this.optionsWithParams(
+				{
+					'name': pattern,
+					'order': order,
+					'offset': offset,
+					'limit': limit
+				}
+			)
+		);
+
 	}
 
 }

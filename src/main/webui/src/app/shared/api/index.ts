@@ -10,3 +10,5 @@
 export { ApiService } from './api.service';
 export { HealthInfo, HealthStatus, HealthCheck } from './health-info.model';
 export { Info } from './info.model';
+export { MinPatientPage } from './min-patient-page.model';
+export { MinPatient } from './min-patient.model';
