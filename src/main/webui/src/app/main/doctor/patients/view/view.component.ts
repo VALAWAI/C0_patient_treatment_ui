@@ -20,11 +20,11 @@ import { ApiService, Patient } from '@app/shared/api';
 	styleUrl: './view.component.css'
 })
 export class ViewComponent implements OnInit {
-	
+
 	/**
 	 * The patient to view.
 	 */
-	public patient:Patient|null = null;
+	public patient: Patient | null = null;
 
 	/**
 	 *  Create the component.
