@@ -6,8 +6,8 @@
   https://opensource.org/license/gpl-3-0/
 */
 
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import { TitleService } from '@app/shared';
 
 @Component({
 	selector: 'app-treatments',
@@ -16,6 +16,26 @@ import { Component } from '@angular/core';
 	templateUrl: './treatments.component.html',
 	styleUrl: './treatments.component.css'
 })
-export class TreatmentsComponent {
+export class TreatmentsComponent implements OnInit {
+
+
+	/**
+	 *  Create the component.
+	 */
+	constructor(
+		private title: TitleService
+	) {
+
+	}
+
+
+	/**
+	 * Initialize the component.
+	 */
+	ngOnInit(): void {
+
+		this.title.changeHeaderTitle($localize`:The header title for the treatements@@main_doctor_treatements_code_page-title:Treatments`);
+
+	}
 
 }

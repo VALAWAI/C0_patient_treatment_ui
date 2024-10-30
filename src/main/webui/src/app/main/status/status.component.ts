@@ -5,7 +5,7 @@
   license that can be found in the LICENSE file or at
   https://opensource.org/license/gpl-3-0/
 */
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Info, HealthInfo, ApiService } from '@app/shared/api';
 import { TitleService } from '@app/shared';
 import { HealthStatusComponent } from './health-status.component';
@@ -21,7 +21,7 @@ import { NgFor } from '@angular/common';
 	templateUrl: './status.component.html',
 	styleUrl: './status.component.css'
 })
-export class StatusComponent {
+export class StatusComponent implements OnInit {
 
 	/**
 	 * The informaiton of the started MOV.

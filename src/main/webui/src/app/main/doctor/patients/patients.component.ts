@@ -7,7 +7,7 @@
 */
 
 import { Component } from '@angular/core';
-
+import { TitleService } from '@app/shared';
 
 @Component({
 	selector: 'app-patients',
@@ -18,4 +18,25 @@ import { Component } from '@angular/core';
 })
 export class PatientsComponent {
 
+
+	/**
+	 *  Create the component.
+	 */
+	constructor(
+		private title: TitleService
+	) {
+
+	}
+
+
+	/**
+	 * Initialize the component.
+	 */
+	ngOnInit(): void {
+
+		this.title.changeHeaderTitle($localize`:The header title for the treatements@@main_doctor_treatements_code_page-title:Patients`);
+
+	}
+
 }
+
