@@ -8,23 +8,18 @@
 
 import { Routes } from '@angular/router';
 
-export const MAIN_ROUTES: Routes = [
+export const TREATMENTS_ROUTES: Routes = [
 	{
 		path: '',
-		loadComponent: () => import('./main.component').then(c => c.MainComponent),
 		children: [
 			{
-				path: 'doctor',
-				loadChildren: () => import('./doctor/doctor.routes').then(m => m.DOCTOR_ROUTES)
-			},
-			{
-				path: 'status',
-				loadComponent: () => import('./status/status.component').then(m => m.StatusComponent)
+				path: 'search',
+				loadComponent: () => import('./treatments.component').then(m => m.TreatmentsComponent)
 			},
 			{
 				path: '',
 				pathMatch: 'full',
-				redirectTo: 'doctor'
+				redirectTo: 'search'
 			},
 			{
 				path: '**',

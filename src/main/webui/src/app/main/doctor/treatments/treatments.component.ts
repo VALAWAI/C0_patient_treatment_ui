@@ -10,12 +10,12 @@ import { Component } from '@angular/core';
 
 
 @Component({
-	selector: 'app-doctor',
+	selector: 'app-treatments',
 	standalone: true,
 	imports: [],
-	templateUrl: './doctor.component.html',
-	styleUrl: './doctor.component.css'
+	templateUrl: './treatments.component.html',
+	styleUrl: './treatments.component.css'
 })
-export class DoctorComponent {
+export class TreatmentsComponent {
 
 }
