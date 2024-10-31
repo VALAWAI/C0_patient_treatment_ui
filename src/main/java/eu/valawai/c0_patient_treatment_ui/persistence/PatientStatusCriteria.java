@@ -88,7 +88,7 @@ public class PatientStatusCriteria extends ReflectionModel {
 	 * the instructions of health personnel?
 	 */
 	@Schema(title = "The answers to the question: Is the patient status competent to understand the instructions of health personnel?")
-	public YesNoUnknownOption isCompotent;
+	public YesNoUnknownOption isCompetent;
 
 	/**
 	 * The answers to the question: To the patient status or his/her referent

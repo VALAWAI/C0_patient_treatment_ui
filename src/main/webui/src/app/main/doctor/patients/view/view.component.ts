@@ -12,14 +12,17 @@ import { ActivatedRoute } from '@angular/router';
 import { TitleService } from '@app/shared';
 import { ApiService, Patient } from '@app/shared/api';
 import { Observable, switchMap } from 'rxjs';
-
+import { AvvvatarsComponent } from '@ngxpert/avvvatars';
+import { PatientStatusCriteriaEditorComponent } from '@app/shared/patient-status-criteria-editor';
 
 @Component({
 	selector: 'app-doctor-patient-view',
 	standalone: true,
 	imports: [
 		AsyncPipe,
-		NgIf
+		NgIf,
+		AvvvatarsComponent,
+		PatientStatusCriteriaEditorComponent
 	],
 	templateUrl: './view.component.html',
 	styleUrl: './view.component.css'
@@ -49,7 +52,7 @@ export class ViewComponent implements OnInit {
 	 */
 	ngOnInit(): void {
 
-		this.title.changeHeaderTitle($localize`:The header title for the treatements@@main_doctor_patients_view_code_page-title:View`);
+		this.title.changeHeaderTitle($localize`:The header title for the treatements@@main_doctor_patients_view_code_page-title:View patient information`);
 		this.patient$ = this.route.paramMap.pipe(
 			switchMap(params => {
 

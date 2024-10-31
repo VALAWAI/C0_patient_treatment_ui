@@ -139,7 +139,7 @@ public class PatientEntityTest {
 			assertEquals(patient.status.independenceInstrumentalActivities,
 					found.status.independenceInstrumentalActivities);
 			assertEquals(patient.status.isCoerced, found.status.isCoerced);
-			assertEquals(patient.status.isCompotent, found.status.isCompotent);
+			assertEquals(patient.status.isCompetent, found.status.isCompetent);
 			assertEquals(patient.status.maca, found.status.maca);
 
 		});
@@ -188,7 +188,7 @@ public class PatientEntityTest {
 			assertEquals(patient.status.independenceInstrumentalActivities,
 					found.status.independenceInstrumentalActivities);
 			assertEquals(patient.status.isCoerced, found.status.isCoerced);
-			assertEquals(patient.status.isCompotent, found.status.isCompotent);
+			assertEquals(patient.status.isCompetent, found.status.isCompetent);
 			assertEquals(patient.status.maca, found.status.maca);
 
 		});
@@ -241,7 +241,7 @@ public class PatientEntityTest {
 			assertEquals(patient.status.independenceInstrumentalActivities,
 					found.status.independenceInstrumentalActivities);
 			assertEquals(patient.status.isCoerced, found.status.isCoerced);
-			assertEquals(patient.status.isCompotent, found.status.isCompotent);
+			assertEquals(patient.status.isCompetent, found.status.isCompetent);
 			assertEquals(patient.status.maca, found.status.maca);
 
 		});
@@ -292,7 +292,7 @@ public class PatientEntityTest {
 			assertEquals(patient.status.independenceInstrumentalActivities,
 					found.status.independenceInstrumentalActivities);
 			assertEquals(patient.status.isCoerced, found.status.isCoerced);
-			assertEquals(patient.status.isCompotent, found.status.isCompotent);
+			assertEquals(patient.status.isCompetent, found.status.isCompetent);
 			assertEquals(patient.status.maca, found.status.maca);
 
 		});
@@ -339,7 +339,7 @@ public class PatientEntityTest {
 			assertEquals(patient.status.independenceInstrumentalActivities,
 					found.status.independenceInstrumentalActivities);
 			assertEquals(patient.status.isCoerced, found.status.isCoerced);
-			assertEquals(patient.status.isCompotent, found.status.isCompotent);
+			assertEquals(patient.status.isCompetent, found.status.isCompetent);
 			assertEquals(patient.status.maca, found.status.maca);
 
 		});
@@ -390,7 +390,7 @@ public class PatientEntityTest {
 			assertEquals(patient.status.independenceInstrumentalActivities,
 					found.status.independenceInstrumentalActivities);
 			assertEquals(patient.status.isCoerced, found.status.isCoerced);
-			assertEquals(patient.status.isCompotent, found.status.isCompotent);
+			assertEquals(patient.status.isCompetent, found.status.isCompetent);
 			assertEquals(patient.status.maca, found.status.maca);
 
 		});
@@ -441,7 +441,7 @@ public class PatientEntityTest {
 			assertEquals(patient.status.independenceInstrumentalActivities,
 					found.status.independenceInstrumentalActivities);
 			assertEquals(patient.status.isCoerced, found.status.isCoerced);
-			assertEquals(patient.status.isCompotent, found.status.isCompotent);
+			assertEquals(patient.status.isCompetent, found.status.isCompetent);
 			assertEquals(patient.status.maca, found.status.maca);
 
 		});
@@ -492,7 +492,7 @@ public class PatientEntityTest {
 			assertEquals(patient.status.independenceInstrumentalActivities,
 					found.status.independenceInstrumentalActivities);
 			assertEquals(patient.status.isCoerced, found.status.isCoerced);
-			assertEquals(patient.status.isCompotent, found.status.isCompotent);
+			assertEquals(patient.status.isCompetent, found.status.isCompetent);
 			assertEquals(patient.status.maca, found.status.maca);
 
 		});
@@ -543,7 +543,7 @@ public class PatientEntityTest {
 			assertEquals(patient.status.independenceInstrumentalActivities,
 					found.status.independenceInstrumentalActivities);
 			assertEquals(patient.status.isCoerced, found.status.isCoerced);
-			assertEquals(patient.status.isCompotent, found.status.isCompotent);
+			assertEquals(patient.status.isCompetent, found.status.isCompetent);
 			assertEquals(patient.status.maca, found.status.maca);
 
 		});
@@ -594,7 +594,7 @@ public class PatientEntityTest {
 			assertEquals(patient.status.independenceInstrumentalActivities,
 					found.status.independenceInstrumentalActivities);
 			assertEquals(patient.status.isCoerced, found.status.isCoerced);
-			assertEquals(patient.status.isCompotent, found.status.isCompotent);
+			assertEquals(patient.status.isCompetent, found.status.isCompetent);
 			assertEquals(patient.status.maca, found.status.maca);
 
 		});
@@ -645,7 +645,7 @@ public class PatientEntityTest {
 			assertEquals(patient.status.independenceInstrumentalActivities,
 					found.status.independenceInstrumentalActivities);
 			assertEquals(patient.status.isCoerced, found.status.isCoerced);
-			assertEquals(patient.status.isCompotent, found.status.isCompotent);
+			assertEquals(patient.status.isCompetent, found.status.isCompetent);
 			assertEquals(patient.status.maca, found.status.maca);
 
 		});
@@ -696,7 +696,7 @@ public class PatientEntityTest {
 			assertEquals(patient.status.independenceInstrumentalActivities,
 					found.status.independenceInstrumentalActivities);
 			assertEquals(patient.status.isCoerced, found.status.isCoerced);
-			assertEquals(patient.status.isCompotent, found.status.isCompotent);
+			assertEquals(patient.status.isCompetent, found.status.isCompetent);
 			assertEquals(patient.status.maca, found.status.maca);
 
 		});
@@ -747,7 +747,7 @@ public class PatientEntityTest {
 			assertEquals(patient.status.independenceInstrumentalActivities,
 					found.status.independenceInstrumentalActivities);
 			assertEquals(patient.status.isCoerced, found.status.isCoerced);
-			assertEquals(patient.status.isCompotent, found.status.isCompotent);
+			assertEquals(patient.status.isCompetent, found.status.isCompetent);
 			assertEquals(patient.status.maca, found.status.maca);
 
 		});
@@ -798,7 +798,7 @@ public class PatientEntityTest {
 			assertEquals(patient.status.hasSocialSupport, found.status.hasSocialSupport);
 			assertEquals(patient.status.independenceAtAdmission, found.status.independenceAtAdmission);
 			assertEquals(patient.status.isCoerced, found.status.isCoerced);
-			assertEquals(patient.status.isCompotent, found.status.isCompotent);
+			assertEquals(patient.status.isCompetent, found.status.isCompetent);
 			assertEquals(patient.status.maca, found.status.maca);
 
 		});
@@ -849,14 +849,14 @@ public class PatientEntityTest {
 			assertEquals(patient.status.independenceAtAdmission, found.status.independenceAtAdmission);
 			assertEquals(patient.status.independenceInstrumentalActivities,
 					found.status.independenceInstrumentalActivities);
-			assertEquals(patient.status.isCompotent, found.status.isCompotent);
+			assertEquals(patient.status.isCompetent, found.status.isCompetent);
 			assertEquals(patient.status.maca, found.status.maca);
 
 		});
 	}
 
 	/**
-	 * Should update the {@link PatientStatusCriteria#isCompotent} from the
+	 * Should update the {@link PatientStatusCriteria#isCompetent} from the
 	 * {@link PatientEntity#status} .
 	 *
 	 * @param asserter to use in the tests.
@@ -867,9 +867,9 @@ public class PatientEntityTest {
 
 		final var patient = PatientEntities.nextRandom();
 		final var newIsCompotent = ValueGenerator.next(YesNoUnknownOption.values());
-		while (patient.status.isCompotent.equals(newIsCompotent)) {
+		while (patient.status.isCompetent.equals(newIsCompotent)) {
 
-			patient.status.isCompotent = ValueGenerator.next(YesNoUnknownOption.values());
+			patient.status.isCompetent = ValueGenerator.next(YesNoUnknownOption.values());
 		}
 		final var now = TimeManager.now();
 		asserter.execute(() -> patient.persist()).assertTrue(() -> {
@@ -877,7 +877,7 @@ public class PatientEntityTest {
 			final var newPatient = new PatientEntity();
 			newPatient.id = patient.id;
 			newPatient.status = new PatientStatusCriteria();
-			newPatient.status.isCompotent = newIsCompotent;
+			newPatient.status.isCompetent = newIsCompotent;
 			return newPatient.update();
 
 		}).assertThat(() -> PatientEntities.byId(patient.id), found -> {
@@ -885,7 +885,7 @@ public class PatientEntityTest {
 			assertEquals(patient.name, found.name);
 			assertTrue(found.updateTime >= now);
 			assertNotNull(found.status);
-			assertEquals(newIsCompotent, found.status.isCompotent);
+			assertEquals(newIsCompotent, found.status.isCompetent);
 			assertEquals(patient.status.ageRange, found.status.ageRange);
 			assertEquals(patient.status.ccd, found.status.ccd);
 			assertEquals(patient.status.clinicalRiskGroup, found.status.clinicalRiskGroup);
@@ -952,7 +952,7 @@ public class PatientEntityTest {
 			assertEquals(patient.status.independenceInstrumentalActivities,
 					found.status.independenceInstrumentalActivities);
 			assertEquals(patient.status.isCoerced, found.status.isCoerced);
-			assertEquals(patient.status.isCompotent, found.status.isCompotent);
+			assertEquals(patient.status.isCompetent, found.status.isCompetent);
 
 		});
 	}

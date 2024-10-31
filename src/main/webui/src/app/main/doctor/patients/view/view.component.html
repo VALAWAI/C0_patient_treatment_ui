@@ -1,3 +1,12 @@
-<div *ngIf="patient$ | async; let patient">
-	{{patient.name}}
+<div *ngIf="patient$ | async; let patient"
+	class="flex flex-col items-center max-w-4xl mx-auto gap-3">
+	<div class="flex flex-row gap-2 items-center">
+		<avvvatars [value]="patient.name||'no avatar'" [style]="'shape'"
+			[size]="64"></avvvatars>
+		<div class="text-5xl font-bold">{{patient.name}}</div>
+	</div>
+	<div class="w-full">
+		<app-patient-status-criteria-editor [data]="patient.status"
+			[disable]="true"></app-patient-status-criteria-editor>
+	</div>
 </div>

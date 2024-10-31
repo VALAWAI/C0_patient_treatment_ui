@@ -49,7 +49,7 @@ public class PatientStatusCriteriaTest extends ReflectionModelTestCase<PatientSt
 		model.independenceAtAdmission = ValueGenerator.next(BarthelIndex.values());
 		model.independenceInstrumentalActivities = ValueGenerator.next(LawtonIndex.values());
 		model.isCoerced = ValueGenerator.next(YesNoUnknownOption.values());
-		model.isCompotent = ValueGenerator.next(YesNoUnknownOption.values());
+		model.isCompetent = ValueGenerator.next(YesNoUnknownOption.values());
 		model.maca = ValueGenerator.next(YesNoUnknownOption.values());
 
 	}

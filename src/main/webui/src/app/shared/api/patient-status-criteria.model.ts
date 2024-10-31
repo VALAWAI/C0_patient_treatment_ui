@@ -36,7 +36,7 @@ export type BarthelIndex = 'TOTAL' | 'SEVERE' | 'MODERATE' | 'MILD' | 'INDEPENDE
 
 export type LawtonIndex = 'ZERO' | 'ONE' | 'TWO' | 'THREE' | 'FOUR' | 'FIVE' | 'SIX' | 'SEVEN' | 'EIGHT' | 'UNKNOWN' | null;
 
-export type CognitiveImpairmentLevel = 'LOABSENTW' | 'MILD_MODERATE' | 'SEVERE' | 'UNKNOWN' | null;
+export type CognitiveImpairmentLevel = 'ABSENT' | 'MILD_MODERATE' | 'SEVERE' | 'UNKNOWN' | null;
 
 export type DiscomfortDegree = 'LOW' | 'MEDIUM' | 'HIGH' | 'UNKNOWN' | null;
 
@@ -102,7 +102,7 @@ export class PatientStatusCriteria {
 	 * The answers to the question: Is the patient status competent to understand
 	 * the instructions of health personnel?
 	 */
-	public isCompotent: YesNoUnknownOption = null;
+	public isCompetent: YesNoUnknownOption = null;
 
 	/**
 	 * The answers to the question: To the patient status or his/her referent

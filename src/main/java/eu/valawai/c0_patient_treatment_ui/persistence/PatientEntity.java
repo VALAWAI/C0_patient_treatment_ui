@@ -95,7 +95,7 @@ public class PatientEntity extends PanacheEntity {
 					.withParam("status.independenceInstrumentalActivities",
 							this.status.independenceInstrumentalActivities)
 					.withParam("status.isCoerced", this.status.isCoerced)
-					.withParam("status.isCompotent", this.status.isCompotent)
+					.withParam("status.isCompetent", this.status.isCompetent)
 					.withParam("status.maca", this.status.maca);
 		}
 		final var query = builder.query();
