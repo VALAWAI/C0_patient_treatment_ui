@@ -8,28 +8,17 @@
 
 import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TitleService, UserNotificationService } from '@app/shared';
-import { ApiService, Patient, PatientStatusCriteria } from '@app/shared/api';
+import { ApiService, Patient } from '@app/shared/api';
 import { Observable, switchMap, tap } from 'rxjs';
-import { AvvvatarsComponent } from '@ngxpert/avvvatars';
-import { MatIcon } from '@angular/material/icon';
-import { MatButton } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
 	selector: 'app-doctor-patient-delete',
 	standalone: true,
 	imports: [
 		AsyncPipe,
-		NgIf,
-		AvvvatarsComponent,
-		MatIcon,
 		RouterLink,
-		MatButton,
-		MatInputModule,
-		ReactiveFormsModule,
 		NgIf
 	],
 	templateUrl: './delete.component.html',
@@ -43,16 +32,6 @@ export class DeleteComponent implements OnInit {
 	public patient$: Observable<Patient> | null = null;
 
 	/**
-	 * The updated status. 
-	 */
-	public updatedStatus: PatientStatusCriteria | null = null;
-
-	/**
-	 * The control to delete the patient name.
-	 */
-	public name: FormControl<string | null> = this.fb.control<string | null>(null, [Validators.required, Validators.max(1024)]);
-
-	/**
 	 * The identifier of the patient that is deleteing.
 	 */
 	private patientId: number = 0;
@@ -64,8 +43,8 @@ export class DeleteComponent implements OnInit {
 		private title: TitleService,
 		private api: ApiService,
 		private route: ActivatedRoute,
-		private fb: FormBuilder,
-		private notifier:UserNotificationService
+		private notifier: UserNotificationService,
+		private router: Router
 	) {
 
 	}
@@ -76,18 +55,12 @@ export class DeleteComponent implements OnInit {
 	 */
 	ngOnInit(): void {
 
-		this.title.changeHeaderTitle($localize`:The header title for the delete patient@@main_doctor_patients_delete_code_page-title:Delete patient information`);
+		this.title.changeHeaderTitle($localize`:The header title for the delete patient@@main_doctor_patients_delete_code_page-title:Delete patient`);
 		this.patient$ = this.route.paramMap.pipe(
 			switchMap(params => {
 
 				this.patientId = Number(params.get('patientId'));
-				return this.api.getPatient(this.patientId).pipe(
-					tap(
-						patient => {
-							this.name.setValue(patient.name);
-						}
-					)
-				);
+				return this.api.getPatient(this.patientId);
 
 			})
 		);
@@ -96,32 +69,22 @@ export class DeleteComponent implements OnInit {
 	/**
 	 * Called when udate a patient.
 	 */
-	updatePatient() {
+	deletePatient() {
 
-		if (this.name.valid) {
+		this.api.deletePatient(this.patientId).subscribe(
+			{
+				next: () => {
 
-			var patient = new Patient();
-			patient.name = this.name.value;
-			patient.status = this.updatedStatus;
-			this.api.updatePatient(this.patientId, patient).subscribe(
-				{
-					next: () => {
+					this.notifier.showSuccess($localize`:The success notification when the patient is updated@@main_doctor_patients_delete_code_update-success:Patient deleted`);
+					this.router.navigate(['/main/doctor/patients'])
+				},
+				error: err => {
 
-						this.notifier.showSuccess($localize`:The success notification when the patient is updated@@main_doctor_patients_delete_code_update-success:Updated patient`);
-
-					},
-					error: err => {
-
-						this.notifier.showError($localize`:The error notification when the patient is updated@@main_doctor_patients_delete_code_update-error:Patient not updated`);
-						console.error(err);
-					}
+					this.notifier.showError($localize`:The error notification when the patient is updated@@main_doctor_patients_delete_code_update-error:Patient cannot be deleted`);
+					console.error(err);
 				}
-			);
-
-		} else {
-
-			this.name.markAllAsTouched();
-		}
+			}
+		);
 	}
 
 }

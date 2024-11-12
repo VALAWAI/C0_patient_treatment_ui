@@ -11,8 +11,38 @@ body {
 	font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-:root {
-    .notification {
-        --mdc-snackbar-container-color: none;        
+
+/*
+ This expand the size when the error message is multiple lines
+*/
+.mat-mdc-form-field {
+  @apply w-full self-start;
+
+  .mat-mdc-form-field-subscript-wrapper {
+    @apply flex;
+
+    .mat-mdc-form-field-error-wrapper {
+      @apply static;
     }
+
+    .mat-mdc-form-field-hint-wrapper {
+      @apply static;
+    }
+  }
+}
+
+/**
+ * Disable default snackbar color
+ */
+.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+  border: none !important;
+  box-shadow: none !important;
+  background: none !important;
+}
+
+/**
+ * Fix problem with material and tailwind css
+ */
+.mdc-notched-outline__notch {
+  border-right: none;
 }

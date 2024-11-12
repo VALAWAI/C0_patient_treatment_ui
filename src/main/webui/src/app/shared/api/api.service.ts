@@ -141,7 +141,7 @@ export class ApiService {
 	/**
 	 * Update a patient.
 	 * 
-	 * @param patientId identifier of teh patient.
+	 * @param patientId identifier of the patient.
 	 * @param patient informaiton to update.
 	 */
 	updatePatient(patientId: number, patient: Patient): Observable<Patient> {
@@ -154,7 +154,7 @@ export class ApiService {
 	/**
 	 * Add a patient.
 	 * 
-	 * @param patient informaiton of teh patient to add.
+	 * @param patient informaiton of the patient to add.
 	 */
 	addPatient(patient: Patient): Observable<Patient> {
 
@@ -162,5 +162,19 @@ export class ApiService {
 		return this.http.post<Patient>(url, patient);
 
 	}
+
+
+	/**
+	 * Delete a patient.
+	 * 
+	 * @param patientId identifier of the patient.
+	 */
+	deletePatient(patientId: number): Observable<any> {
+
+		var url = this.url('/v1/patients', [patientId]);
+		return this.http.delete<any>(url);
+
+	}
+
 
 }

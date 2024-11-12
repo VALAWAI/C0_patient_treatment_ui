@@ -8,6 +8,10 @@
 			class="text-blue-500  px-3 py-1 text-xs">
 			<mat-icon>edit</mat-icon>
 		</div>
+		<div [routerLink]="['/main/doctor/patients',patient.id,'delete']"
+			class="text-red-500  px-3 py-1 text-xs">
+			<mat-icon>delete</mat-icon>
+		</div>
 	</div>
 	<div class="w-full">
 		<app-patient-status-criteria-editor [data]="patient.status"

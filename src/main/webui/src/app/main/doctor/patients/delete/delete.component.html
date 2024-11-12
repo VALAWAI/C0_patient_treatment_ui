@@ -1,23 +1,26 @@
+
 <div *ngIf="patient$ | async; let patient"
-	class="flex flex-col items-center max-w-4xl mx-auto gap-3">
-	<div class="flex flex-row gap-2 items-center w-full">
-		<avvvatars [value]="name.value||'no avatar'" [style]="'shape'"
-			[size]="64"></avvvatars>
-		<div class="grow">
-			<mat-form-field class="w-full"> <mat-label
-				i18n="The label to write the patient name@@main_doctor_patients_edit_name">Patient
-			name</mat-label> <input matInput type="text" [formControl]="name"> <mat-error
-				i18n="The error message when name is required@main_doctor_patients_edit_name-required"
-				*ngIf="name.hasError('required') && name.touched"> You
-			must define a name of the patient. </mat-error> <mat-error
-				i18n="The error message when name is required@main_doctor_patients_edit_name-required"
-				*ngIf="name.hasError('max') && name.touched"> The name
-			can not have more than 1024 characters. </mat-error> </mat-form-field>
-		</div>
+	class="max-w-4xl mx-auto gap-3 p-4 mb-4 text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 dark:border-yellow-800"
+	role="alert">
+	<div class="text-lg font-medium"
+		i18n="The title to confirm the delete patient@@main_doctor_patients_delete_msg-title">
+		Delete the patient <span class="font-bold">{{patient.name}}</span>
 	</div>
-	<div>
-		<button mat-button color="primary"
-			i18n="The label to update the patient information@@main_doctor_patients_edit_update"
-			(click)="updatePatient()">Update</button>
+	<div class="mt-2 mb-4 text-sm"
+		i18n="The message to confirm the delete patient@@main_doctor_patients_delete_msg-content">
+		Deleting a patient cannot be undone, so don't do it unless you're
+		sure. In addition, this action will cause that all the treatment
+		associated with this patient will also be removed.</div>
+	<div class="flex">
+		<button type="button"
+			class="text-white bg-yellow-800 hover:bg-yellow-900 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-yellow-300 dark:text-gray-800 dark:hover:bg-yellow-400 dark:focus:ring-yellow-800"
+			i18n="Accept to delete the patient@@main_doctor_patients_delete_ok-label"
+			(click)="deletePatient()">Delete</button>
+		<button type="button"
+			class="text-yellow-800 bg-transparent border border-yellow-800 hover:bg-yellow-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-yellow-300 dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-gray-800 dark:focus:ring-yellow-800"
+			data-dismiss-target="#alert-additional-content-4"
+			i18n="Cancel to delete the patient@@main_doctor_patients_delete_cancel-label"
+			[routerLink]="['/main/doctor/patients',patient.id,'view']">
+			Cancel</button>
 	</div>
 </div>

@@ -74,7 +74,7 @@ export class AddComponent implements OnInit, OnDestroy {
 	 */
 	ngOnInit(): void {
 
-		this.title.changeHeaderTitle($localize`:The header title for the add patient page@@main_doctor_patients_add_code_page-title:Add patient information`);
+		this.title.changeHeaderTitle($localize`:The header title for the add patient page@@main_doctor_patients_add_code_page-title:Add patient`);
 		this.querySubscription = this.route.queryParams.subscribe(
 			{
 				next: params => {
