@@ -8,3 +8,4 @@
 
 
 export { TitleService } from './title.service';
+export { UserNotificationService } from './user-notificator.service';

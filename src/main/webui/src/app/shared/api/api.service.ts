@@ -138,4 +138,17 @@ export class ApiService {
 		return this.http.get<Patient>(url);
 	}
 
+	/**
+	 * Update a patient.
+	 * 
+	 * @param patientId identifier of teh patient.
+	 * @param patient informaiton to update.
+	 */
+	updatePatient(patientId: number, patient: Patient): Observable<Patient> {
+
+		var url = this.url('/v1/patients', [patientId]);
+		return this.http.patch<Patient>(url, patient);
+
+	}
+
 }
