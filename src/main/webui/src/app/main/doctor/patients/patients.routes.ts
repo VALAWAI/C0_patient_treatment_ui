@@ -33,6 +33,10 @@ export const PATIENTS_ROUTES: Routes = [
 				loadComponent: () => import('./delete/delete.component').then(m => m.DeleteComponent)
 			},
 			{
+				path: ':patientId/treatment',
+				loadComponent: () => import('./treatment/treatment.component').then(m => m.TreatmentComponent)
+			},
+			{
 				path: '',
 				pathMatch: 'full',
 				redirectTo: 'search'

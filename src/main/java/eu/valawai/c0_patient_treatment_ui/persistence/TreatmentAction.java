@@ -13,12 +13,12 @@ package eu.valawai.c0_patient_treatment_ui.persistence;
  *
  * @author UDT-IA, IIIA-CSIC
  */
-public enum TreatmentActions {
+public enum TreatmentAction {
 
 	/**
 	 * The patient can receive a Cardiopulmonary resuscitation.
 	 */
-	RCP,
+	CPR,
 
 	/**
 	 * The patient need an organ transplant.

@@ -37,17 +37,18 @@
 					</button>
 					<mat-menu #patientMenu="matMenu">
 					<button mat-menu-item
-					i18n="Menu item to view patient information@@main_doctor_patients_view-patient-menu-item-label"
-					[routerLink]="['/main/doctor/patients', patient.id, 'view']"
-					>View</button>
+						i18n="Menu item to view patient information@@main_doctor_patients_view-patient-menu-item-label"
+						[routerLink]="['/main/doctor/patients', patient.id, 'view']">View</button>
 					<button mat-menu-item
-					i18n="Menu item to edit patient information@@main_doctor_patients_edit-patient-menu-item-label"
-					[routerLink]="['/main/doctor/patients', patient.id, 'edit']"
-					>Edit</button>
+						i18n="Menu item to edit patient information@@main_doctor_patients_edit-patient-menu-item-label"
+						[routerLink]="['/main/doctor/patients', patient.id, 'edit']">Edit</button>
 					<button mat-menu-item
-					i18n="Menu item to edit patient information@@main_doctor_patients_edit-patient-menu-item-label"
-					[routerLink]="['/main/doctor/patients', patient.id, 'delete']"
-					>Delete</button>
+						i18n="Menu item to delete a patient@@main_doctor_patients_delete-patient-menu-item-label"
+						[routerLink]="['/main/doctor/patients', patient.id, 'delete']">Delete</button>
+					<button mat-menu-item
+						i18n="Menu item to define a treatment for a patient@@main_doctor_patients_patient-treatment-menu-item-label"
+						[routerLink]="['/main/doctor/patients', patient.id, 'treatment']">Add
+						treatment</button>
 					</mat-menu>
 				</div>
 			</li>
