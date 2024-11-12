@@ -21,6 +21,10 @@ export const PATIENTS_ROUTES: Routes = [
 				loadComponent: () => import('./view/view.component').then(m => m.ViewComponent)
 			},
 			{
+				path: ':patientId/edit',
+				loadComponent: () => import('./edit/edit.component').then(m => m.EditComponent)
+			},
+			{
 				path: '',
 				pathMatch: 'full',
 				redirectTo: 'search'

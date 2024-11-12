@@ -17,7 +17,7 @@ import { PatientStatusCriteriaEditorComponent } from '@app/shared/patient-status
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
-	selector: 'app-doctor-patient-view',
+	selector: 'app-doctor-patient-edit',
 	standalone: true,
 	imports: [
 		AsyncPipe,
@@ -27,14 +27,14 @@ import { MatIcon } from '@angular/material/icon';
 		MatIcon,
 		RouterLink
 	],
-	templateUrl: './view.component.html',
-	styleUrl: './view.component.css'
+	templateUrl: './edit.component.html',
+	styleUrl: './edit.component.css'
 })
-export class ViewComponent implements OnInit {
+export class EditComponent implements OnInit {
 
 
 	/**
-	 * The patient to view.
+	 * The patient to edit.
 	 */
 	public patient$: Observable<Patient> | null = null;
 
@@ -55,7 +55,7 @@ export class ViewComponent implements OnInit {
 	 */
 	ngOnInit(): void {
 
-		this.title.changeHeaderTitle($localize`:The header title for the treatements@@main_doctor_patients_view_code_page-title:View patient information`);
+		this.title.changeHeaderTitle($localize`:The header title for the treatements@@main_doctor_patients_edit_code_page-title:Edit patient information`);
 		this.patient$ = this.route.paramMap.pipe(
 			switchMap(params => {
 

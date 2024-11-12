@@ -8,9 +8,6 @@
 
 import { Component, Output, EventEmitter, Input, OnInit, OnDestroy } from '@angular/core';
 import {
-	ApiService,
-	MinPatient,
-	MinPatientPage,
 	PatientStatusCriteria,
 	AgeRangeOption,
 	YesNoUnknownOption,
@@ -75,7 +72,6 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 	 * Create the component.
 	 */
 	constructor(
-		private api: ApiService,
 		private fb: FormBuilder
 	) { }
 
