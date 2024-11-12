@@ -17,12 +17,20 @@ export const PATIENTS_ROUTES: Routes = [
 				loadComponent: () => import('./patients.component').then(m => m.PatientsComponent)
 			},
 			{
+				path: 'add',
+				loadComponent: () => import('./add/add.component').then(m => m.AddComponent)
+			},
+			{
 				path: ':patientId/view',
 				loadComponent: () => import('./view/view.component').then(m => m.ViewComponent)
 			},
 			{
 				path: ':patientId/edit',
 				loadComponent: () => import('./edit/edit.component').then(m => m.EditComponent)
+			},
+			{
+				path: ':patientId/delete',
+				loadComponent: () => import('./delete/delete.component').then(m => m.DeleteComponent)
 			},
 			{
 				path: '',

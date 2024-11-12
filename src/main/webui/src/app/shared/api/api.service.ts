@@ -151,4 +151,16 @@ export class ApiService {
 
 	}
 
+	/**
+	 * Add a patient.
+	 * 
+	 * @param patient informaiton of teh patient to add.
+	 */
+	addPatient(patient: Patient): Observable<Patient> {
+
+		var url = this.url('/v1/patients');
+		return this.http.post<Patient>(url, patient);
+
+	}
+
 }

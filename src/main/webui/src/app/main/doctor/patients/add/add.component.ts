@@ -7,11 +7,11 @@
 */
 
 import { AsyncPipe, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TitleService, UserNotificationService } from '@app/shared';
 import { ApiService, Patient, PatientStatusCriteria } from '@app/shared/api';
-import { Observable, switchMap, tap } from 'rxjs';
+import { Observable, Subscription, switchMap, tap } from 'rxjs';
 import { AvvvatarsComponent } from '@ngxpert/avvvatars';
 import { PatientStatusCriteriaEditorComponent } from '@app/shared/patient-status-criteria-editor';
 import { MatIcon } from '@angular/material/icon';
@@ -20,7 +20,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
-	selector: 'app-doctor-patient-edit',
+	selector: 'app-doctor-patient-add',
 	standalone: true,
 	imports: [
 		AsyncPipe,
@@ -34,30 +34,25 @@ import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angu
 		ReactiveFormsModule,
 		NgIf
 	],
-	templateUrl: './edit.component.html',
-	styleUrl: './edit.component.css'
+	templateUrl: './add.component.html',
+	styleUrl: './add.component.css'
 })
-export class EditComponent implements OnInit {
+export class AddComponent implements OnInit, OnDestroy {
 
 	/**
-	 * The patient to edit.
+	 * The patient to add.
 	 */
-	public patient$: Observable<Patient> | null = null;
+	private querySubscription: Subscription | null = null;
 
 	/**
-	 * The updated status. 
+	 * The status of the patient to add. 
 	 */
-	public updatedStatus: PatientStatusCriteria | null = null;
+	public status: PatientStatusCriteria | null = null;
 
 	/**
-	 * The control to edit the patient name.
+	 * The control to add the patient name.
 	 */
 	public name: FormControl<string | null> = this.fb.control<string | null>(null, [Validators.required, Validators.max(1024)]);
-
-	/**
-	 * The identifier of the patient that is editing.
-	 */
-	private patientId: number = 0;
 
 	/**
 	 *  Create the component.
@@ -67,7 +62,8 @@ export class EditComponent implements OnInit {
 		private api: ApiService,
 		private route: ActivatedRoute,
 		private fb: FormBuilder,
-		private notifier:UserNotificationService
+		private notifier: UserNotificationService,
+		private router: Router
 	) {
 
 	}
@@ -78,43 +74,51 @@ export class EditComponent implements OnInit {
 	 */
 	ngOnInit(): void {
 
-		this.title.changeHeaderTitle($localize`:The header title for the edit patient@@main_doctor_patients_edit_code_page-title:Edit patient information`);
-		this.patient$ = this.route.paramMap.pipe(
-			switchMap(params => {
+		this.title.changeHeaderTitle($localize`:The header title for the add patient page@@main_doctor_patients_add_code_page-title:Add patient information`);
+		this.querySubscription = this.route.queryParams.subscribe(
+			{
+				next: params => {
 
-				this.patientId = Number(params.get('patientId'));
-				return this.api.getPatient(this.patientId).pipe(
-					tap(
-						patient => {
-							this.name.setValue(patient.name);
-						}
-					)
-				);
+					this.name.setValue(params["name"]);
 
-			})
+				}
+			}
 		);
+
 	}
 
 	/**
-	 * Called when udate a patient.
+	 * Destroy the component.
 	 */
-	updatePatient() {
+	ngOnDestroy(): void {
+
+		if (this.querySubscription != null) {
+
+			this.querySubscription.unsubscribe();
+			this.querySubscription = null;
+		}
+	}
+
+	/**
+	 * Called when has to add a patient.
+	 */
+	addPatient() {
 
 		if (this.name.valid) {
 
 			var patient = new Patient();
 			patient.name = this.name.value;
-			patient.status = this.updatedStatus;
-			this.api.updatePatient(this.patientId, patient).subscribe(
+			patient.status = this.status;
+			this.api.addPatient(patient).subscribe(
 				{
-					next: () => {
+					next: patient => {
 
-						this.notifier.showSuccess($localize`:The success notification when the patient is updated@@main_doctor_patients_edit_code_update-success:Updated patient`);
-
+						this.notifier.showSuccess($localize`:The success notification when the patient has been added@@main_doctor_patients_add_code_added-success:Patient has been added`);
+						this.router.navigate(['/main/doctor/patients', patient.id, 'view'])
 					},
 					error: err => {
 
-						this.notifier.showError($localize`:The error notification when the patient is updated@@main_doctor_patients_edit_code_update-error:Patient not updated`);
+						this.notifier.showError($localize`:The error notification when the patient cannot be added@@main_doctor_patients_add_code_add-error:Patient not add the patient`);
 						console.error(err);
 					}
 				}

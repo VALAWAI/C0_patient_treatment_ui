@@ -1,0 +1,26 @@
+<div class="flex flex-col items-center max-w-4xl mx-auto gap-3">
+	<div class="flex flex-row gap-2 items-center w-full">
+		<avvvatars [value]="name.value||'no avatar'" [style]="'shape'"
+			[size]="64"></avvvatars>
+		<div class="grow">
+			<mat-form-field class="w-full"> <mat-label
+				i18n="The label to write the patient name@@main_doctor_patients_edit_name">Patient
+			name</mat-label> <input matInput type="text" [formControl]="name"> <mat-error
+				i18n="The error message when name is required@main_doctor_patients_edit_name-required"
+				*ngIf="name.hasError('required') && name.touched"> You
+			must define a name of the patient. </mat-error> <mat-error
+				i18n="The error message when name is required@main_doctor_patients_edit_name-required"
+				*ngIf="name.hasError('max') && name.touched"> The name
+			can not have more than 1024 characters. </mat-error> </mat-form-field>
+		</div>
+	</div>
+	<div class="w-full">
+		<app-patient-status-criteria-editor
+			(dataChanged)="status=$event"></app-patient-status-criteria-editor>
+	</div>
+	<div>
+		<button mat-button color="primary"
+			i18n="The label to add the patient information@@main_doctor_patients_add-submit"
+			(click)="addPatient()">Add</button>
+	</div>
+</div>

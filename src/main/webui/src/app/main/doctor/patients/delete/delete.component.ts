@@ -13,20 +13,18 @@ import { TitleService, UserNotificationService } from '@app/shared';
 import { ApiService, Patient, PatientStatusCriteria } from '@app/shared/api';
 import { Observable, switchMap, tap } from 'rxjs';
 import { AvvvatarsComponent } from '@ngxpert/avvvatars';
-import { PatientStatusCriteriaEditorComponent } from '@app/shared/patient-status-criteria-editor';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
-	selector: 'app-doctor-patient-edit',
+	selector: 'app-doctor-patient-delete',
 	standalone: true,
 	imports: [
 		AsyncPipe,
 		NgIf,
 		AvvvatarsComponent,
-		PatientStatusCriteriaEditorComponent,
 		MatIcon,
 		RouterLink,
 		MatButton,
@@ -34,13 +32,13 @@ import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angu
 		ReactiveFormsModule,
 		NgIf
 	],
-	templateUrl: './edit.component.html',
-	styleUrl: './edit.component.css'
+	templateUrl: './delete.component.html',
+	styleUrl: './delete.component.css'
 })
-export class EditComponent implements OnInit {
+export class DeleteComponent implements OnInit {
 
 	/**
-	 * The patient to edit.
+	 * The patient to delete.
 	 */
 	public patient$: Observable<Patient> | null = null;
 
@@ -50,12 +48,12 @@ export class EditComponent implements OnInit {
 	public updatedStatus: PatientStatusCriteria | null = null;
 
 	/**
-	 * The control to edit the patient name.
+	 * The control to delete the patient name.
 	 */
 	public name: FormControl<string | null> = this.fb.control<string | null>(null, [Validators.required, Validators.max(1024)]);
 
 	/**
-	 * The identifier of the patient that is editing.
+	 * The identifier of the patient that is deleteing.
 	 */
 	private patientId: number = 0;
 
@@ -78,7 +76,7 @@ export class EditComponent implements OnInit {
 	 */
 	ngOnInit(): void {
 
-		this.title.changeHeaderTitle($localize`:The header title for the edit patient@@main_doctor_patients_edit_code_page-title:Edit patient information`);
+		this.title.changeHeaderTitle($localize`:The header title for the delete patient@@main_doctor_patients_delete_code_page-title:Delete patient information`);
 		this.patient$ = this.route.paramMap.pipe(
 			switchMap(params => {
 
@@ -109,12 +107,12 @@ export class EditComponent implements OnInit {
 				{
 					next: () => {
 
-						this.notifier.showSuccess($localize`:The success notification when the patient is updated@@main_doctor_patients_edit_code_update-success:Updated patient`);
+						this.notifier.showSuccess($localize`:The success notification when the patient is updated@@main_doctor_patients_delete_code_update-success:Updated patient`);
 
 					},
 					error: err => {
 
-						this.notifier.showError($localize`:The error notification when the patient is updated@@main_doctor_patients_edit_code_update-error:Patient not updated`);
+						this.notifier.showError($localize`:The error notification when the patient is updated@@main_doctor_patients_delete_code_update-error:Patient not updated`);
 						console.error(err);
 					}
 				}

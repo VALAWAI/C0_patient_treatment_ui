@@ -1,2 +1,69 @@
-<app-patient-selector (patientSelected)="patientSelected($event)">
-</app-patient-selector>
+
+<div class="max-w-md mx-auto flex flex-col gap-3">
+	<div>
+		<div for="default-search"
+			class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</div>
+		<div class="relative">
+			<div
+				class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+				<mat-icon>search</mat-icon>
+			</div>
+			<input type="search"
+				class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+				placeholder="Write a patient name"
+				i18n-placeholder="Help to show when search for a patienth@@main_doctor_patients_search-placeholder"
+				[formControl]="name" required />
+			<button type="submit"
+				class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+				i18n="Label of the button to add a new patienth@@main_doctor_patients_add-label"
+				routerLink="/main/doctor/patients/add"
+				[queryParams]="{name: name.value||''}">Add</button>
+		</div>
+	</div>
+	<div *ngIf="!updating; else showLpdating">
+		<ul
+			class="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+			<li *ngFor="let patient of page?.patients"
+				class="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+				<div class="flex items-center gap-4">
+					<avvvatars [value]="patient.name||'no avatar'" [style]="'shape'"></avvvatars>
+					<div class="grow font-medium dark:text-white"
+						[routerLink]="['/main/doctor/patients', patient.id, 'view']">
+						<div>{{patient.name}}</div>
+					</div>
+					<button mat-icon-button class="grow-0"
+						[matMenuTriggerFor]="patientMenu">
+						<mat-icon>more_vert</mat-icon>
+					</button>
+					<mat-menu #patientMenu="matMenu">
+					<button mat-menu-item
+					i18n="Menu item to view patient information@@main_doctor_patients_view-patient-menu-item-label"
+					[routerLink]="['/main/doctor/patients', patient.id, 'view']"
+					>View</button>
+					<button mat-menu-item
+					i18n="Menu item to edit patient information@@main_doctor_patients_edit-patient-menu-item-label"
+					[routerLink]="['/main/doctor/patients', patient.id, 'edit']"
+					>Edit</button>
+					<button mat-menu-item
+					i18n="Menu item to edit patient information@@main_doctor_patients_edit-patient-menu-item-label"
+					[routerLink]="['/main/doctor/patients', patient.id, 'delete']"
+					>Delete</button>
+					</mat-menu>
+				</div>
+			</li>
+			<li
+				class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+				<div *ngIf="pageIndex>0 ||  (page?.total||0) > pageSize">
+					<mat-paginator [length]="page?.total||0" [pageSize]="pageSize"
+						[pageIndex]="pageIndex" [pageSizeOptions]="[5, 10, 25, 100]"
+						(page)="handlePageEvent($event)"></mat-paginator>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<ng-template #showLpdating>
+	<div class="max-w-md mx-auto h-4 w-full">
+		<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+	</div>
+	</ng-template>
+</div>
