@@ -1,9 +1,9 @@
 <div *ngIf="patient$ | async; let patient"
 	class="flex flex-col items-center max-w-4xl mx-auto gap-3">
-	<mat-stepper orientation="vertical" [linear]="true" #treatementSteps>
+	<mat-stepper orientation="vertical" [linear]="true" #treatmentSteps>
 	<mat-step [stepControl]="beforeStatus"> <ng-template
 		matStepLabel
-		i18n="The label for the first step to define a treatement@@main_doctor_patients_treatment_step1-label">Check
+		i18n="The label for the first step to define a treatment@@main_doctor_patients_treatment_step1-label">Check
 	the status of the patient <span class="font-bold">{{patient.name}}</span></ng-template>
 	<app-patient-status-criteria-editor [data]="patient.status"
 		(dataChanged)="beforeStatus.setValue($event)"></app-patient-status-criteria-editor>
@@ -15,7 +15,7 @@
 		i18n-errorMessage="The error message when rewuire to select at leat one action@@main_doctor_patients_treatment_action-required"
 		errorMessage="You must select at least one action to do.">
 	<ng-template matStepLabel
-		i18n="The label for the second step to define a treatement@@main_doctor_patients_treatment_step2-label">Select
+		i18n="The label for the second step to define a treatment@@main_doctor_patients_treatment_step2-label">Select
 	treatment actions to do over the patient</ng-template>
 	<div class="my-2 flex flex-col gap-3">
 		<div *ngFor="let action of TREATMENT_ACTIONS">
@@ -36,7 +36,7 @@
 	</div>
 	</mat-step> <mat-step [stepControl]="afterStatus"> <ng-template
 		matStepLabel
-		i18n="The label for the third step to define a treatement@@main_doctor_patients_treatment_step3-label">Select
+		i18n="The label for the third step to define a treatment@@main_doctor_patients_treatment_step3-label">Select
 	the expected state after the treatment</ng-template> <app-patient-status-criteria-editor
 		[data]="patient.status" (dataChanged)="afterStatus.setValue($event)"></app-patient-status-criteria-editor>
 	<div class="flex flex-row gap-3">
@@ -46,7 +46,7 @@
 			i18n="The label for the go to next step@@common_stepper_next">Next</button>
 	</div>
 	</mat-step> <mat-step> <ng-template matStepLabel
-		i18n="The label for the fourst step to define a treatement@@main_doctor_patients_treatment_step4-label">Add
+		i18n="The label for the fourst step to define a treatment@@main_doctor_patients_treatment_step4-label">Add
 	treatment to the patient</ng-template>
 	<div class="flex flex-row gap-3">
 		<button mat-button matStepperPrevious

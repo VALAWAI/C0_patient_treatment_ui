@@ -201,4 +201,35 @@ public class PatientsResource {
 
 	}
 
+	/**
+	 * Create a patient.
+	 *
+	 * @param model patient to create.
+	 *
+	 * @return the information of the created patient.
+	 */
+	@POST
+	@Path("/{id:\\d+}/treatments")
+	@Operation(description = "Create a patient.")
+	@APIResponse(responseCode = "201", description = "The created patient.", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = Patient.class)))
+	public Uni<Response> createPatientTreatment(
+			@RequestBody(description = "The patient to create", required = true, content = @Content(schema = @Schema(implementation = Patient.class))) @Valid final Patient model) {
+
+		final var entity = model.toPatientEntity();
+		entity.updateTime = TimeManager.now();
+		final Uni<PatientEntity> action = entity.persistAndFlush();
+		return action.map(stored -> {
+
+			model.id = stored.id;
+			model.updateTime = stored.updateTime;
+			return Response.status(Status.CREATED).entity(model).build();
+
+		}).onFailure().recoverWithItem(error -> {
+
+			Log.errorv(error, "Cannot create a patient entity.");
+			return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Cannot create a patient").build();
+
+		});
+
+	}
 }

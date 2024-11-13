@@ -100,7 +100,7 @@ export class PatientsComponent implements OnInit, OnDestroy {
 	 */
 	ngOnInit(): void {
 
-		this.title.changeHeaderTitle($localize`:The header title for the treatements@@main_doctor_patients_code_page-title:Patients`);
+		this.title.changeHeaderTitle($localize`:The header title for the treatments@@main_doctor_patients_code_page-title:Patients`);
 		this.updatePatients();
 		this.nameChanged = this.name.valueChanges.subscribe(
 			{

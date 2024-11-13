@@ -66,7 +66,7 @@ export const AtLeastOneActionValidator: ValidatorFn = (control: AbstractControl)
 export class TreatmentComponent implements OnInit {
 
 	/**
-	 * The names for the treatement actions.
+	 * The names for the treatment actions.
 	 */
 	public TREATMENT_ACTIONS = TREATMENT_ACTION_NAMES;
 

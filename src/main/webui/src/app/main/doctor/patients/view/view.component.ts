@@ -55,7 +55,7 @@ export class ViewComponent implements OnInit {
 	 */
 	ngOnInit(): void {
 
-		this.title.changeHeaderTitle($localize`:The header title for the treatements@@main_doctor_patients_view_code_page-title:View patient information`);
+		this.title.changeHeaderTitle($localize`:The header title for the treatments@@main_doctor_patients_view_code_page-title:View patient information`);
 		this.patient$ = this.route.paramMap.pipe(
 			switchMap(params => {
 

@@ -34,7 +34,7 @@ export class TreatmentsComponent implements OnInit {
 	 */
 	ngOnInit(): void {
 
-		this.title.changeHeaderTitle($localize`:The header title for the treatements@@main_doctor_treatements_code_page-title:Treatments`);
+		this.title.changeHeaderTitle($localize`:The header title for the treatments@@main_doctor_treatments_code_page-title:Treatments`);
 
 	}
 
