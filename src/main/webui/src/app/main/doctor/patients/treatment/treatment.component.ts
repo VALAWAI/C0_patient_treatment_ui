@@ -13,10 +13,30 @@ import { TitleService, UserNotificationService } from '@app/shared';
 import { ApiService, Patient, PatientStatusCriteria, TREATMENT_ACTION_NAMES, TreatmentActionNamePipe } from '@app/shared/api';
 import { Observable, switchMap, tap } from 'rxjs';
 import { PatientStatusCriteriaEditorComponent } from '@app/shared/patient-status-criteria-editor';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButton } from '@angular/material/button';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+
+/**
+ * Validator to check that at least one action is selected.
+ */
+export const AtLeastOneActionValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+
+	const values = control.value;
+	for (const key in values) {
+
+		const value = values[key];
+		if (value === true) {
+			// go to next
+			return null;
+		}
+	}
+	return {
+		required: true
+	};
+}
 
 @Component({
 	selector: 'app-doctor-patient-edit',
@@ -35,10 +55,16 @@ import { MatSlideToggle } from '@angular/material/slide-toggle';
 		NgClass
 	],
 	templateUrl: './treatment.component.html',
-	styleUrl: './treatment.component.css'
+	styleUrl: './treatment.component.css',
+	providers: [
+		{
+			provide: STEPPER_GLOBAL_OPTIONS,
+			useValue: { showError: true },
+		},
+	]
 })
 export class TreatmentComponent implements OnInit {
-	
+
 	/**
 	 * The names for the treatement actions.
 	 */
@@ -50,16 +76,6 @@ export class TreatmentComponent implements OnInit {
 	public patient$: Observable<Patient> | null = null;
 
 	/**
-	 * The updated status. 
-	 */
-	public beforeStatus: PatientStatusCriteria | null = null;
-
-	/**
-	 * The updated status. 
-	 */
-	public afterStatus: PatientStatusCriteria | null = null;
-
-	/**
 	 * The identifier of the patient that is editing.
 	 */
 	private patientId: number = 0;
@@ -67,7 +83,12 @@ export class TreatmentComponent implements OnInit {
 	/**
 	 * The actions to apply in the treatment.
 	 */
-	public actions: FormGroup = this.fb.group({});
+	public form: FormGroup =
+		this.fb.group({
+			beforeStatus: this.fb.control<PatientStatusCriteria | null>(null, Validators.required),
+			actions: this.fb.group({}, { validators: AtLeastOneActionValidator }),
+			afterStatus: this.fb.control<PatientStatusCriteria | null>(null, Validators.required),
+		});
 
 	/**
 	 *  Create the component.
@@ -87,6 +108,35 @@ export class TreatmentComponent implements OnInit {
 
 	}
 
+	/**
+	 * Get the before status form.
+	 */
+	public get beforeStatus(): FormControl<PatientStatusCriteria | null> {
+
+
+		return this.form.controls['beforeStatus'] as FormControl<PatientStatusCriteria | null>;
+
+	}
+
+	/**
+	 * Get the actions form.
+	 */
+	public get actions(): FormGroup {
+
+
+		return this.form.controls['actions'] as FormGroup;
+
+	}
+
+	/**
+	 * Get the after status form.
+	 */
+	public get afterStatus(): FormControl<PatientStatusCriteria | null> {
+
+
+		return this.form.controls['afterStatus'] as FormControl<PatientStatusCriteria | null>;
+
+	}
 
 	/**
 	 * Initialize the component.
@@ -101,7 +151,12 @@ export class TreatmentComponent implements OnInit {
 				return this.api.getPatient(this.patientId).pipe(
 					tap(
 						patient => {
-							this.beforeStatus = patient.status;
+							this.form.patchValue(
+								{
+									beforeStatus: patient.status,
+									afterStatus: patient.status
+								}
+							);
 						}
 					)
 				);
@@ -111,12 +166,27 @@ export class TreatmentComponent implements OnInit {
 	}
 
 	/**
+	 * Return teh contorl for an action name.
+	 */
+	getControl(name: string): FormControl<boolean> {
+
+		return this.actions.get(name) as FormControl<boolean>;
+
+	}
+
+
+	/**
 	 * Add a treatment for a patient.
 	 */
 	addTreatment() {
 
-	}
+		if (this.form.valid) {
 
+		} else {
+
+			this.form.markAllAsTouched();
+		}
+	}
 
 }
 
