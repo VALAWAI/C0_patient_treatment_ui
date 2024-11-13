@@ -16,12 +16,14 @@ import org.hibernate.validator.constraints.Length;
 import eu.valawai.c0_patient_treatment_ui.TimeManager;
 import eu.valawai.c0_patient_treatment_ui.api.v1.patients.MinPatient;
 import eu.valawai.c0_patient_treatment_ui.api.v1.patients.MinPatientPage;
+import eu.valawai.c0_patient_treatment_ui.api.v1.patients.Patient;
 import io.quarkus.hibernate.reactive.panache.PanacheEntity;
 import io.quarkus.logging.Log;
 import io.quarkus.panache.common.Sort;
 import io.smallrye.mutiny.Uni;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 
@@ -49,8 +51,8 @@ public class PatientEntity extends PanacheEntity {
 	/**
 	 * The current status of the patient.
 	 */
-	@Embedded
-	public PatientStatusCriteria status;
+	@ManyToOne(targetEntity = PatientStatusCriteriaEntity.class, fetch = FetchType.LAZY)
+	public PatientStatusCriteriaEntity status;
 
 	/**
 	 * The time when the patient has been updated.
@@ -71,39 +73,27 @@ public class PatientEntity extends PanacheEntity {
 	/**
 	 * Update the current patient.
 	 *
-	 * @return if it has been updated return {@code true}, otherwise return
-	 *         {@code false}.
+	 * @return nothing if the patient has been updated or an exception that explain
+	 *         why can not be updated.
 	 */
-	public Uni<Boolean> update() {
+	public Uni<Void> update() {
 
-		var builder = UpdateQueryBuilder.withEntity(this).withParam("name", this.name).withParam("updateTime",
-				TimeManager.now());
-		if (this.status != null) {
-
-			builder = builder.withParam("status.ageRange", this.status.ageRange)
-					.withParam("status.ccd", this.status.ccd)
-					.withParam("status.clinicalRiskGroup", this.status.clinicalRiskGroup)
-					.withParam("status.discomfortDegree", this.status.discomfortDegree)
-					.withParam("status.expectedSurvival", this.status.expectedSurvival)
-					.withParam("status.frailVIG", this.status.frailVIG)
-					.withParam("status.hasAdvanceDirectives", this.status.hasAdvanceDirectives)
-					.withParam("status.hasBeenInformed", this.status.hasBeenInformed)
-					.withParam("status.hasCognitiveImpairment", this.status.hasCognitiveImpairment)
-					.withParam("status.hasEmocionalPain", this.status.hasEmocionalPain)
-					.withParam("status.hasSocialSupport", this.status.hasSocialSupport)
-					.withParam("status.independenceAtAdmission", this.status.independenceAtAdmission)
-					.withParam("status.independenceInstrumentalActivities",
-							this.status.independenceInstrumentalActivities)
-					.withParam("status.isCoerced", this.status.isCoerced)
-					.withParam("status.isCompetent", this.status.isCompetent)
-					.withParam("status.maca", this.status.maca);
-		}
+		this.updateTime = TimeManager.now();
+		final var builder = UpdateQueryBuilder.withEntity(this).withParam("name", this.name)
+				.withParam("updateTime", this.updateTime).withParam("status", this.status);
 		final var query = builder.query();
 		final var params = builder.parameters();
-		return PatientEntity.update(query, params).map(updated -> updated == 1).onFailure().recoverWithItem(error -> {
+		return PatientEntity.update(query, params).onItem().transformToUni(updated -> {
 
-			Log.errorv(error, "Cannot create update the patient for {0}", this.id);
-			return false;
+			if (Integer.valueOf(1).equals(updated)) {
+
+				return Uni.createFrom().nullItem();
+
+			} else {
+
+				return Uni.createFrom()
+						.failure(() -> new IllegalArgumentException("Not found a patient with the id " + this.id));
+			}
 
 		});
 
@@ -114,18 +104,12 @@ public class PatientEntity extends PanacheEntity {
 	 *
 	 * @param id identifier of the patient to retrieve.
 	 *
-	 * @return the patient associated to the identifier, or {@code null} if cannot
-	 *         retrieve it.
+	 * @return the patient associated to the identifier, or fail if not found.
 	 */
 	public static Uni<PatientEntity> retrieve(long id) {
 
 		final Uni<PatientEntity> action = PatientEntity.find("id", id).firstResult();
-		return action.onFailure().recoverWithItem(error -> {
-
-			Log.errorv(error, "Cannot get a patient with the id {0}", id);
-			return null;
-
-		});
+		return action.onItem().ifNull().failWith(new IllegalArgumentException("Not found a patient with the id " + id));
 	}
 
 	/**
@@ -133,15 +117,22 @@ public class PatientEntity extends PanacheEntity {
 	 *
 	 * @param id identifier of the patient to delete.
 	 *
-	 * @return the patient associated to the identifier, or {@code null} if cannot
-	 *         delete it.
+	 * @return nothing if the patient is deleted or an exception that explains why
+	 *         cannot be deleted.
 	 */
-	public static Uni<Boolean> delete(long id) {
+	public static Uni<Void> delete(long id) {
 
-		return PatientEntity.delete("id", id).map(deleted -> deleted == 1).onFailure().recoverWithItem(error -> {
+		return PatientEntity.delete("id", id).onItem().transformToUni(updated -> {
 
-			Log.errorv(error, "Cannot get a patient with the id {0}", id);
-			return false;
+			if (Long.valueOf(1l).equals(updated)) {
+
+				return Uni.createFrom().nullItem();
+
+			} else {
+
+				return Uni.createFrom()
+						.failure(() -> new IllegalArgumentException("Not found a patient with the id " + id));
+			}
 
 		});
 	}
@@ -181,7 +172,9 @@ public class PatientEntity extends PanacheEntity {
 							page.patients = new ArrayList<>(size);
 							for (final var patient : patients) {
 
-								final var minPatient = MinPatient.from(patient);
+								final var minPatient = new MinPatient();
+								minPatient.id = patient.id;
+								minPatient.name = patient.name;
 								page.patients.add(minPatient);
 							}
 						}
@@ -197,5 +190,27 @@ public class PatientEntity extends PanacheEntity {
 			return new MinPatientPage();
 		});
 
+	}
+
+	/**
+	 * Return the information of a {@link Patient}.
+	 *
+	 * @param id of the patient to get.
+	 *
+	 * @return the patient associated to the identifier or an exception that
+	 *         explains why can not obtain it.
+	 */
+	public static Uni<Patient> retrievePatient(long id) {
+
+		return retrieve(id).map(patientEntity -> {
+
+			final var patient = new Patient();
+			patient.id = patientEntity.id;
+			patient.name = patientEntity.name;
+			patient.status = patientEntity.status.status;
+			patient.updateTime = patientEntity.updateTime;
+			return patient;
+
+		});
 	}
 }

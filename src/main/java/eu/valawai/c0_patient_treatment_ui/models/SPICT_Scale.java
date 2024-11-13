@@ -6,7 +6,7 @@
   https://opensource.org/license/gpl-3-0/
 */
 
-package eu.valawai.c0_patient_treatment_ui.persistence;
+package eu.valawai.c0_patient_treatment_ui.models;
 
 /**
  * It helps identify the most fragile people who have one or more health

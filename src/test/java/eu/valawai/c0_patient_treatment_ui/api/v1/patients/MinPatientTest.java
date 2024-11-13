@@ -6,10 +6,7 @@
   https://opensource.org/license/gpl-3-0/
 */
 
-package eu.valawai.c0_patient_treatment_ui.api.patients;
-
-import eu.valawai.c0_patient_treatment_ui.api.v1.patients.MinPatient;
-import eu.valawai.c0_patient_treatment_ui.api.v1.patients.Patient;
+package eu.valawai.c0_patient_treatment_ui.api.v1.patients;
 
 /**
  * Test the {@link Patient}.

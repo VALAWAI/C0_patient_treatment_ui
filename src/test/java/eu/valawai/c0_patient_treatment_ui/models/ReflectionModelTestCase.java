@@ -6,7 +6,7 @@
   https://opensource.org/license/gpl-3-0/
 */
 
-package eu.valawai.c0_patient_treatment_ui;
+package eu.valawai.c0_patient_treatment_ui.models;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;

@@ -10,8 +10,7 @@ package eu.valawai.c0_patient_treatment_ui.api.v1.patients;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
-import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntity;
-import eu.valawai.c0_patient_treatment_ui.persistence.PatientStatusCriteria;
+import eu.valawai.c0_patient_treatment_ui.models.PatientStatusCriteria;
 
 /**
  * The information of a patient.
@@ -32,36 +31,5 @@ public class Patient extends MinPatient {
 	 */
 	@Schema(title = "The current status of the patient.")
 	public PatientStatusCriteria status;
-
-	/**
-	 * Retrieve a {@link Patient} with the data of a {@link PatientEntity}.
-	 *
-	 * @param entity to get the patient information.
-	 *
-	 * @return the patient with the data of the entity.
-	 */
-	public static Patient from(PatientEntity entity) {
-
-		final var model = new Patient();
-		model.id = entity.id;
-		model.updateTime = entity.updateTime;
-		model.name = entity.name;
-		model.status = entity.status;
-		return model;
-	}
-
-	/**
-	 * Create an entity with the data of a model.
-	 *
-	 * @return entity with the information of this model.
-	 */
-	public PatientEntity toPatientEntity() {
-
-		final var entity = new PatientEntity();
-		entity.name = this.name;
-		entity.status = this.status;
-		return entity;
-
-	}
 
 }

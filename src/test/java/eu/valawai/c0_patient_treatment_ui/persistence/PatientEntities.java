@@ -1,9 +1,9 @@
 /*
-  Copyright 2024 UDT-IA, IIIA-CSIC
+  Copyright 2022-2026 VALAWAI
 
-  Use of this source code is governed by an MIT-style
+  Use of this source code is governed by GNU General Public License version 3
   license that can be found in the LICENSE file or at
-  https://opensource.org/licenses/MIT.
+  https://opensource.org/license/gpl-3-0/
 */
 
 package eu.valawai.c0_patient_treatment_ui.persistence;
@@ -13,6 +13,7 @@ import java.util.List;
 
 import eu.valawai.c0_patient_treatment_ui.TimeManager;
 import eu.valawai.c0_patient_treatment_ui.ValueGenerator;
+import io.quarkus.panache.common.Sort;
 import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
 
@@ -24,45 +25,21 @@ import io.smallrye.mutiny.Uni;
 public class PatientEntities {
 
 	/**
-	 * Create a random patient status.
+	 * Create a random patient.
 	 *
 	 * @return the random status.
 	 */
-	public static PatientEntity nextRandom() {
+	public static Uni<PatientEntity> nextRandom() {
 
-		final var entity = new PatientEntity();
-		entity.updateTime = ValueGenerator.rnd().nextLong(0, TimeManager.now() - 360000);
-		entity.name = ValueGenerator.nextPattern("Patient name {0}");
-		entity.status = new PatientStatusCriteriaTest().nextModel();
-		return entity;
+		return PatientStatusCriteriaEntities.nextRandom().chain(status -> {
 
-	}
+			final var entity = new PatientEntity();
+			entity.updateTime = ValueGenerator.rnd().nextLong(0, TimeManager.now() - 360000);
+			entity.name = ValueGenerator.nextPattern("Patient name {0}");
+			entity.status = status;
+			return entity.persistAndFlush();
+		});
 
-	/**
-	 * Create a new {@link PatientEntity} and store it.
-	 *
-	 * @return the created patient.
-	 */
-	public static Uni<PatientEntity> nextAndPersist() {
-
-		final var entity = nextRandom();
-		entity.id = null;
-		return entity.persist();
-
-	}
-
-	/**
-	 * Return the {@link PatientEntity}] associated to an identifier.
-	 *
-	 * @param id of the patient entity.
-	 *
-	 * @return the patient entity associated to the id or an error if it is not
-	 *         found.
-	 */
-	public static Uni<PatientEntity> byId(long id) {
-
-		final Uni<PatientEntity> find = PatientEntity.findById(id);
-		return find.onItem().ifNull().failWith(new IllegalArgumentException("Not found a patient with the id " + id));
 	}
 
 	/**
@@ -81,7 +58,7 @@ public class PatientEntities {
 
 				return Multi.createFrom().range(0, max).onItem().transformToUniAndMerge(index -> {
 
-					return nextAndPersist();
+					return nextRandom();
 
 				}).collect().asList();
 
@@ -91,6 +68,31 @@ public class PatientEntities {
 			}
 
 		});
+	}
+
+	/**
+	 * Obtain the last patient or create one if not exist.
+	 *
+	 * @return the last patient.
+	 */
+	public static Uni<PatientEntity> last() {
+
+		final Uni<PatientEntity> find = PatientEntity.findAll(Sort.descending("id")).firstResult();
+		return find.onItem().ifNull().switchTo(() -> nextRandom());
+
+	}
+
+	/**
+	 * Return the identifier of a non defined patient.
+	 *
+	 * @return the identifier of a non defined patient.
+	 */
+	public static Uni<Long> undefined() {
+
+		final var id = ValueGenerator.rnd().nextLong();
+		return PatientEntity.find("id", id).firstResult().onItem().ifNotNull()
+				.transformToUni(any -> PatientEntities.undefined()).onItem().ifNull().continueWith(id);
+
 	}
 
 }

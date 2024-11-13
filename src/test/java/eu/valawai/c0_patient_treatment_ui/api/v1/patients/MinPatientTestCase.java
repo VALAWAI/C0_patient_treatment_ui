@@ -6,11 +6,10 @@
   https://opensource.org/license/gpl-3-0/
 */
 
-package eu.valawai.c0_patient_treatment_ui.api.patients;
+package eu.valawai.c0_patient_treatment_ui.api.v1.patients;
 
-import eu.valawai.c0_patient_treatment_ui.ReflectionModelTestCase;
 import eu.valawai.c0_patient_treatment_ui.ValueGenerator;
-import eu.valawai.c0_patient_treatment_ui.api.v1.patients.MinPatient;
+import eu.valawai.c0_patient_treatment_ui.models.ReflectionModelTestCase;
 
 /**
  * Test the classes that extends the {@link MinPatient}.

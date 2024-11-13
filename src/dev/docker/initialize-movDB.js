@@ -1,8 +1,8 @@
 db.createUser({
-	user: process.env.QUARKUS_MONGODB_CREDENTIALS_USERNAME,
-	pwd: process.env.QUARKUS_MONGODB_CREDENTIALS_PASSWORD,
+	user: process.env.MOV_DB_USER_NAME,
+	pwd: process.env.MOV_DB_USER_PASSWORD,
 	roles: [{
 		role: 'readWrite',
-		db: process.env.QUARKUS_MONGODB_DATABASE
+		db: process.env.MOV_DB_NAME
 	}]
 })

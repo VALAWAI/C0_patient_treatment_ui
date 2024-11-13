@@ -6,33 +6,34 @@
   https://opensource.org/license/gpl-3-0/
 */
 
-package eu.valawai.c0_patient_treatment_ui.persistence;
+package eu.valawai.c0_patient_treatment_ui.models;
 
 /**
- * The degree of discomfort.
+ * Define the posible cognitive impairment levels.
  *
  * @author UDT-IA, IIIA-CSIC
  */
-public enum DiscomfortDegree {
+public enum CognitiveImpairmentLevel {
 
 	/**
-	 * The discomfort degree is Low or no discomfort.
+	 * The cognitive impairment is absent.
 	 */
-	LOW,
+	ABSENT,
 
 	/**
-	 * The discomfort degree is medium.
+	 * The cognitive impairment is mild-moderate.
 	 */
-	MEDIUM,
+	MILD_MODERATE,
 
 	/**
-	 * The discomfort degree is medium.
+	 * cognitive impairment is severe.
 	 */
-	HIGH,
-
+	SEVERE,
+	
 	/**
 	 * The cognitive level is unknown.
 	 */
 	UNKNOWN;
 
+	
 }

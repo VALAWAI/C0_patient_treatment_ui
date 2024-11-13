@@ -11,7 +11,7 @@ package eu.valawai.c0_patient_treatment_ui.api;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-import eu.valawai.c0_patient_treatment_ui.ReflectionModel;
+import eu.valawai.c0_patient_treatment_ui.models.ReflectionModel;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
 /**

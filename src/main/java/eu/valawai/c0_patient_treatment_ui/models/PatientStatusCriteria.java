@@ -6,11 +6,10 @@
   https://opensource.org/license/gpl-3-0/
 */
 
-package eu.valawai.c0_patient_treatment_ui.persistence;
+package eu.valawai.c0_patient_treatment_ui.models;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
-import eu.valawai.c0_patient_treatment_ui.ReflectionModel;
 import jakarta.persistence.Embeddable;
 
 /**

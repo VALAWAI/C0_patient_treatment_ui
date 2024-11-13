@@ -231,5 +231,16 @@
 				<quarkus.native.enabled>true</quarkus.native.enabled>
 			</properties>
 		</profile>
+		<profile>
+			<id>ide</id>
+			<activation>
+				<property>
+					<name>m2e.version</name>
+				</property>
+			</activation>
+			<build>
+				<directory>target-ide</directory>
+			</build>
+		</profile>
 	</profiles>
 </project>

@@ -20,6 +20,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import eu.valawai.c0_patient_treatment_ui.TimeManager;
 import eu.valawai.c0_patient_treatment_ui.api.QueryParameters;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntity;
+import eu.valawai.c0_patient_treatment_ui.persistence.PatientStatusCriteriaEntity;
 import io.quarkus.logging.Log;
 import io.smallrye.mutiny.Uni;
 import jakarta.validation.Valid;
@@ -64,17 +65,17 @@ public class PatientsResource {
 	public Uni<Response> retrievePatient(
 			@PathParam("id") @Parameter(in = ParameterIn.PATH, description = "The identifier of the patient to retrieve") long id) {
 
-		return PatientEntity.retrieve(id).map(entity -> {
+		return PatientEntity.retrievePatient(id).onFailure().recoverWithItem(error -> {
 
-			if (entity == null) {
+			Log.errorv(error, "Cannot retrieve a patient with the id {0}.", id);
+			return null;
 
-				return Response.status(Status.NOT_FOUND)
-						.entity("Not found a patient with the identifier %d".formatted(id)).build();
-			} else {
+		}).map(patient -> Response.ok(patient).build()).onFailure().recoverWithItem(error -> {
 
-				final var model = Patient.from(entity);
-				return Response.ok(model).build();
-			}
+			Log.errorv(error, "Cannot found a patient with the id {0}.", id);
+			return Response.status(Status.NOT_FOUND).entity("Not found a patient with the identifier %d".formatted(id))
+					.build();
+
 		});
 
 	}
@@ -94,17 +95,13 @@ public class PatientsResource {
 	public Uni<Response> deletePatient(
 			@PathParam("id") @Parameter(in = ParameterIn.PATH, description = "The identifier of the patient to delete") long id) {
 
-		return PatientEntity.delete(id).map(deleted -> {
+		return PatientEntity.delete(id).map(deleted -> Response.noContent().build()).onFailure()
+				.recoverWithItem(error -> {
 
-			if (!deleted) {
-
-				return Response.status(Status.NOT_FOUND)
-						.entity("Not found a patient with the identifier %d".formatted(id)).build();
-			} else {
-
-				return Response.noContent().build();
-			}
-		});
+					Log.errorv(error, "Cannot delete the patient {0}.", id);
+					return Response.status(Status.NOT_FOUND)
+							.entity("Not found a patient with the identifier %d".formatted(id)).build();
+				});
 
 	}
 
@@ -121,10 +118,16 @@ public class PatientsResource {
 	public Uni<Response> createPatient(
 			@RequestBody(description = "The patient to create", required = true, content = @Content(schema = @Schema(implementation = Patient.class))) @Valid final Patient model) {
 
-		final var entity = model.toPatientEntity();
-		entity.updateTime = TimeManager.now();
-		final Uni<PatientEntity> action = entity.persistAndFlush();
-		return action.map(stored -> {
+		final Uni<PatientEntity> store = PatientStatusCriteriaEntity.retrieveOrPersist(model.status).chain(status -> {
+
+			final var entity = new PatientEntity();
+			entity.updateTime = TimeManager.now();
+			entity.name = model.name;
+			entity.status = status;
+			return entity.persistAndFlush();
+
+		});
+		return store.map(stored -> {
 
 			model.id = stored.id;
 			model.updateTime = stored.updateTime;
@@ -156,21 +159,23 @@ public class PatientsResource {
 			@PathParam("id") @Parameter(in = ParameterIn.PATH, description = "The identifier of the patient to update") long id,
 			@RequestBody(description = "The patient to update", required = true, content = @Content(schema = @Schema(implementation = Patient.class))) @Valid final Patient model) {
 
-		final var entity = model.toPatientEntity();
-		entity.id = id;
-		entity.updateTime = TimeManager.now();
-		return entity.update().chain(updated -> {
+		return PatientStatusCriteriaEntity.retrieveOrPersist(model.status).chain(status -> {
 
-			if (updated) {
+			final var entity = new PatientEntity();
+			entity.name = model.name;
+			entity.status = status;
+			return entity.update().map(empty -> {
 
-				return this.retrievePatient(id);
+				model.updateTime = entity.updateTime;
+				return Response.ok(model).build();
 
-			} else {
+			});
 
-				final var response = Response.status(Status.NOT_FOUND)
-						.entity("Not found a patient with the identifier %d".formatted(id)).build();
-				return Uni.createFrom().item(response);
-			}
+		}).onFailure().recoverWithItem(error -> {
+
+			Log.errorv(error, "Cannot update the patient {0}.", id);
+			return Response.status(Status.NOT_FOUND).entity("Not found a patient with the identifier %d".formatted(id))
+					.build();
 
 		});
 
@@ -201,35 +206,76 @@ public class PatientsResource {
 
 	}
 
-	/**
-	 * Create a patient.
-	 *
-	 * @param model patient to create.
-	 *
-	 * @return the information of the created patient.
-	 */
-	@POST
-	@Path("/{id:\\d+}/treatments")
-	@Operation(description = "Create a patient.")
-	@APIResponse(responseCode = "201", description = "The created patient.", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = Patient.class)))
-	public Uni<Response> createPatientTreatment(
-			@RequestBody(description = "The patient to create", required = true, content = @Content(schema = @Schema(implementation = Patient.class))) @Valid final Patient model) {
+//	/**
+//	 * Create a patient treatment.
+//	 *
+//	 * @param patientId identifier of the patient to update.
+//	 * @param model     treatment for the patient.
+//	 *
+//	 * @return the information of the created patient treatment.
+//	 */
+//	@POST
+//	@Path("/{patientId:\\d+}/treatments")
+//	@Operation(description = "Create a patient treatment.")
+//	@APIResponse(responseCode = "201", description = "The created patient treatment.", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = PatientTreatment.class)))
+//	public Uni<Response> createPatientTreatment(
+//			@PathParam("patientId") @Parameter(in = ParameterIn.PATH, description = "The identifier of the patient to add the treatment") long patientId,
+//			@RequestBody(description = "The treatment to apply to the patient", required = true, content = @Content(schema = @Schema(implementation = PatientTreatment.class))) @Valid final PatientTreatment model) {
+//
+//		return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Not implemented yet").build();
+//
+////		final var entity = model.toPatientEntity();
+////		entity.updateTime = TimeManager.now();
+////		final Uni<PatientEntity> action = entity.persistAndFlush();
+////		return action.map(stored -> {
+////
+////			model.id = stored.id;
+////			model.updateTime = stored.updateTime;
+////			return Response.status(Status.CREATED).entity(model).build();
+////
+////		}).onFailure().recoverWithItem(error -> {
+////
+////			Log.errorv(error, "Cannot create a patient entity.");
+////			return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Cannot create a patient").build();
+////
+////		});
+//
+//	}
+//
+//	/**
+//	 * Get a patient treatment.
+//	 *
+//	 * @param patientId   identifier of the patient to get the treatment.
+//	 * @param treatmentId identifier of the patient treatment to get.
+//	 *
+//	 * @return the information of the patient treatment.
+//	 */
+//	@GET
+//	@Path("/{patientId:\\d+}/treatments/{treatmentId:\\d+}")
+//	@Operation(description = "Get a patient treatment.")
+//	@APIResponse(responseCode = "200", description = "The patient treatment.", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = PatientTreatment.class)))
+//	public Uni<Response> getPatientTreatment(
+//			@PathParam("patientId") @Parameter(in = ParameterIn.PATH, description = "The identifier of the patient to get the treatment") long patientId,
+//			@PathParam("treatmentId") @Parameter(in = ParameterIn.PATH, description = "The identifier of the patient treatment") long treatmentId) {
+//
+//		return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Not implemented yet").build();
+//
+////		final var entity = model.toPatientEntity();
+////		entity.updateTime = TimeManager.now();
+////		final Uni<PatientEntity> action = entity.persistAndFlush();
+////		return action.map(stored -> {
+////
+////			model.id = stored.id;
+////			model.updateTime = stored.updateTime;
+////			return Response.status(Status.CREATED).entity(model).build();
+////
+////		}).onFailure().recoverWithItem(error -> {
+////
+////			Log.errorv(error, "Cannot create a patient entity.");
+////			return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Cannot create a patient").build();
+////
+////		});
+//
+//	}
 
-		final var entity = model.toPatientEntity();
-		entity.updateTime = TimeManager.now();
-		final Uni<PatientEntity> action = entity.persistAndFlush();
-		return action.map(stored -> {
-
-			model.id = stored.id;
-			model.updateTime = stored.updateTime;
-			return Response.status(Status.CREATED).entity(model).build();
-
-		}).onFailure().recoverWithItem(error -> {
-
-			Log.errorv(error, "Cannot create a patient entity.");
-			return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Cannot create a patient").build();
-
-		});
-
-	}
 }

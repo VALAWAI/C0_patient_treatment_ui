@@ -8,7 +8,7 @@
 
 package eu.valawai.c0_patient_treatment_ui.api;
 
-import eu.valawai.c0_patient_treatment_ui.ReflectionModelTestCase;
+import eu.valawai.c0_patient_treatment_ui.models.ReflectionModelTestCase;
 
 /**
  * Test the classes that extends the {@link Model}.

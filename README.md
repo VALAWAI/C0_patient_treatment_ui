@@ -247,11 +247,11 @@ The defined variables are:
  The default value is **password**.
  - **MONGO_LOCAL_DATA** is the local directory where the MongoDB will be stored.
  The default value is **~/mongo_data/movDB**.
- - **DB_NAME** is the name of the database used by the MOV.
+ - **MOV_DB_NAME** is the name of the database used by the MOV.
  The default value is **movDB**.
- - **DB_USER_NAME** is the name of the user used by the MOV to access the database.
+ - **MOV_DB_USER_NAME** is the name of the user used by the MOV to access the database.
  The default value is **mov**.
- - **DB_USER_PASSWORD** is the password of the user used by the MOV to access the database.
+ - **MOV_DB_USER_PASSWORD** is the password of the user used by the MOV to access the database.
  The default value is **password**.
  - **MOV_TAG** is the tag of the MOV docker image to use.
  The default value is **latest**.

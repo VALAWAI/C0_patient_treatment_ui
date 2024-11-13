@@ -6,10 +6,10 @@
   https://opensource.org/license/gpl-3-0/
 */
 
-package eu.valawai.c0_patient_treatment_ui.persistence;
+package eu.valawai.c0_patient_treatment_ui.models;
 
-import eu.valawai.c0_patient_treatment_ui.ReflectionModelTestCase;
 import eu.valawai.c0_patient_treatment_ui.ValueGenerator;
+import eu.valawai.c0_patient_treatment_ui.models.PatientStatusCriteria;
 
 /**
  * Test the {@link PatientStatusCriteria}.

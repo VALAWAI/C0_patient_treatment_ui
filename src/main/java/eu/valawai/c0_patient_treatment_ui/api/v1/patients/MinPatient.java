@@ -11,8 +11,7 @@ package eu.valawai.c0_patient_treatment_ui.api.v1.patients;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.hibernate.validator.constraints.Length;
 
-import eu.valawai.c0_patient_treatment_ui.ReflectionModel;
-import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntity;
+import eu.valawai.c0_patient_treatment_ui.models.ReflectionModel;
 
 /**
  * The information of a patient.
@@ -34,20 +33,5 @@ public class MinPatient extends ReflectionModel {
 	@Schema(title = "The name of the patient.")
 	@Length(max = 1024)
 	public String name;
-
-	/**
-	 * Return a minimal patient information form an entity.
-	 *
-	 * @param entity to get the patient information.
-	 *
-	 * @return the model with the data from the entity.
-	 */
-	public static MinPatient from(PatientEntity entity) {
-
-		final var model = new MinPatient();
-		model.id = entity.id;
-		model.name = entity.name;
-		return model;
-	}
 
 }
