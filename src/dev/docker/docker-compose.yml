@@ -101,7 +101,11 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PG_ADMIN_USER:-pg_admin@valawai.eu}
       PGADMIN_DEFAULT_PASSWORD: ${PG_ADMIN_PASSWORD:-password}
-
+    configs:
+      - source: servers.json
+        target: /pgadmin4/servers.json
+      - source: pgpass
+        target: /pgpass
 
   mov:
     image: valawai/mov:${MOV_TAG:-latest}
@@ -139,3 +143,19 @@ services:
 
 networks:
   c0_patient_treatment_ui_dev:
+
+configs:
+  pgpass:
+    content: ${PG_DB_NAME:-c0_patient_treatment_ui_db}:5432:*:${PG_USER_NAME:-c0_patient_treatment_ui}:${PG_USER_PASSWORD:-password}
+  servers.json:
+    content: |
+      {"Servers": {"1": {
+        "Group": "Servers",
+        "Name": "C0 Patient treatment ui DB",
+        "Host": "host.docker.internal",
+        "Port": 5432,
+        "MaintenanceDB": "${PG_DB_NAME:-c0_patient_treatment_ui_db}",
+        "Username": "${PG_USER_NAME:-c0_patient_treatment_ui}",
+        "PassFile": "/pgpass",
+        "SSLMode": "prefer"
+      }}}
