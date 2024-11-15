@@ -65,18 +65,14 @@ public class PatientsResource {
 	public Uni<Response> retrievePatient(
 			@PathParam("id") @Parameter(in = ParameterIn.PATH, description = "The identifier of the patient to retrieve") long id) {
 
-		return PatientEntity.retrievePatient(id).onFailure().recoverWithItem(error -> {
+		return PatientEntity.retrievePatient(id).map(patient -> Response.ok(patient).build()).onFailure()
+				.recoverWithItem(error -> {
 
-			Log.errorv(error, "Cannot retrieve a patient with the id {0}.", id);
-			return null;
+					Log.errorv(error, "Cannot found a patient with the id {0}.", id);
+					return Response.status(Status.NOT_FOUND)
+							.entity("Not found a patient with the identifier %d".formatted(id)).build();
 
-		}).map(patient -> Response.ok(patient).build()).onFailure().recoverWithItem(error -> {
-
-			Log.errorv(error, "Cannot found a patient with the id {0}.", id);
-			return Response.status(Status.NOT_FOUND).entity("Not found a patient with the identifier %d".formatted(id))
-					.build();
-
-		});
+				});
 
 	}
 

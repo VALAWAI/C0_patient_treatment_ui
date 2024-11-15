@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Test;
 
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntities;
+import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntity;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientStatusCriteriaEntity;
 import eu.valawai.c0_patient_treatment_ui.persistence.PostgreSQLTestResource;
 import io.quarkus.test.common.QuarkusTestResource;
@@ -81,24 +82,30 @@ public class PatientsResourceTest {
 
 	}
 
-//	/**
-//	 * Test delete a patient.
-//	 *
-//	 * @param asserter to use in the tests.
-//	 */
-//	@Test
-//	@RunOnVertxContext
-//	public void shouldDeletePatient(TransactionalUniAsserter asserter) {
-//
-//		asserter.assertThat(() -> PatientEntities.nextRandom(), entity -> {
-//
-//			given().pathParam("id", entity.id).when().delete("/v1/patients/{id}").then()
-//					.statusCode(Status.NO_CONTENT.getStatusCode());
-//
-//		}).assertNull(() -> PatientEntity.findById(entity.id));
-//
-//	}
-//
+	/**
+	 * Test delete a patient.
+	 *
+	 * @param asserter to use in the tests.
+	 */
+	@Test
+	@RunOnVertxContext
+	public void shouldDeletePatient(TransactionalUniAsserter asserter) {
+
+		asserter.assertThat(() -> PatientEntities.last(), last -> {
+
+			asserter.putData("LAST_ID", last.id);
+			given().pathParam("id", last.id).when().delete("/v1/patients/{id}").then()
+					.statusCode(Status.NO_CONTENT.getStatusCode());
+
+		}).assertNull(() -> {
+
+			final var lastId = (Long) asserter.getData("LAST_ID");
+			return PatientEntity.findById(lastId);
+
+		});
+
+	}
+
 //	/**
 //	 * Test create a patient.
 //	 *

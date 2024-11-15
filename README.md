@@ -67,6 +67,9 @@ The most useful environment variables on the docker image are:
  The default value is __0.0.0.0__.
  - **QUARKUS_HTTP_PORT** defines the server port that will expose the REST health endpoints.
  The default value is __8080__.
+ - **C0_PATIENT_TREATMENT_UI_URL** defines the URL where the component web UI is accessible.
+ The default value is __http://localhost:8080__.
+ 
  
 Other variables depend on the type of secure connection to the e-mail server. For example,
 you must define the next variables to  connect to GMail with **STARTTLS**: 
