@@ -14,6 +14,7 @@ import java.util.Collections;
 
 import eu.valawai.c0_patient_treatment_ui.TimeManager;
 import eu.valawai.c0_patient_treatment_ui.ValueGenerator;
+import eu.valawai.c0_patient_treatment_ui.api.v1.patients.MinPatientTest;
 import eu.valawai.c0_patient_treatment_ui.models.PatientStatusCriteriaTest;
 import eu.valawai.c0_patient_treatment_ui.models.ReflectionModelTestCase;
 import eu.valawai.c0_patient_treatment_ui.models.TreatmentAction;
@@ -44,18 +45,12 @@ public class TreatmentTest extends ReflectionModelTestCase<Treatment> {
 
 		model.id = ValueGenerator.rnd().nextLong();
 		model.createdTime = ValueGenerator.rnd().nextLong(0, TimeManager.now() - 360000);
+		model.patient = new MinPatientTest().nextModel();
 		model.beforeStatus = new PatientStatusCriteriaTest().nextModel();
 		model.treatmentActions = new ArrayList<>(Arrays.asList(TreatmentAction.values()));
 		Collections.shuffle(model.treatmentActions, ValueGenerator.rnd());
-		final var max = ValueGenerator.rnd().nextInt(0, model.treatmentActions.size());
-		if (max > 0) {
-
-			model.treatmentActions = model.treatmentActions.subList(0, max);
-
-		} else {
-
-			model.treatmentActions = null;
-		}
+		final var max = ValueGenerator.rnd().nextInt(1, model.treatmentActions.size());
+		model.treatmentActions = model.treatmentActions.subList(0, max);
 		model.expectedStatus = new PatientStatusCriteriaTest().nextModel();
 	}
 

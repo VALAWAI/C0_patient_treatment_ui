@@ -13,15 +13,21 @@ import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
+import eu.valawai.c0_patient_treatment_ui.TimeManager;
+import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntity;
+import eu.valawai.c0_patient_treatment_ui.persistence.PatientStatusCriteriaEntity;
 import eu.valawai.c0_patient_treatment_ui.persistence.TreatmentEntity;
 import io.quarkus.logging.Log;
 import io.smallrye.mutiny.Uni;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -90,36 +96,49 @@ public class TreatmentsResource {
 
 	}
 
-//	/**
-//	 * Create a treatment.
-//	 *
-//	 * @param model treatment to create.
-//	 *
-//	 * @return the information of the created treatment.
-//	 */
-//	@POST
-//	@Operation(description = "Create a treatment.")
-//	@APIResponse(responseCode = "201", description = "The created treatment.", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = Treatment.class)))
-//	public Uni<Response> createTreatment(
-//			@RequestBody(description = "The treatment to create", required = true, content = @Content(schema = @Schema(implementation = Treatment.class))) @Valid final Treatment model) {
-//
-//		final var entity = model.toTreatmentEntity();
-//		entity.updateTime = TimeManager.now();
-//		final Uni<TreatmentEntity> action = entity.persistAndFlush();
-//		return action.map(stored -> {
-//
-//			model.id = stored.id;
-//			model.updateTime = stored.updateTime;
-//			return Response.status(Status.CREATED).entity(model).build();
-//
-//		}).onFailure().recoverWithItem(error -> {
-//
-//			Log.errorv(error, "Cannot create a treatment entity.");
-//			return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Cannot create a treatment").build();
-//
-//		});
-//
-//	}
+	/**
+	 * Create a treatment.
+	 *
+	 * @param model treatment to create.
+	 *
+	 * @return the information of the created treatment.
+	 */
+	@POST
+	@Operation(description = "Create a treatment.")
+	@APIResponse(responseCode = "201", description = "The created treatment.", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = Treatment.class)))
+	public Uni<Response> createTreatment(
+			@RequestBody(description = "The treatment to create", required = true, content = @Content(schema = @Schema(implementation = Treatment.class))) @Valid final Treatment model) {
+
+		return PatientEntity.retrieve(model.patient.id).chain(patient -> {
+
+			return PatientStatusCriteriaEntity.retrieveOrPersist(model.beforeStatus).chain(before -> {
+
+				return PatientStatusCriteriaEntity.retrieveOrPersist(model.expectedStatus).chain(expected -> {
+
+					final var entity = new TreatmentEntity();
+					entity.createdTime = TimeManager.now();
+					entity.beforeStatus = before;
+					entity.treatmentActions = model.treatmentActions;
+					entity.expectedStatus = expected;
+					entity.patient = patient;
+					final Uni<TreatmentEntity> persist = entity.persistAndFlush();
+					return persist.map(stored -> {
+
+						final var treatment = stored.toTreatment();
+						return Response.status(Status.CREATED).entity(treatment).build();
+					});
+
+				});
+			});
+
+		}).onFailure().recoverWithItem(error -> {
+
+			Log.errorv(error, "Cannot create a treatment.");
+			return Response.status(Status.BAD_REQUEST).entity("Bad treatment parameters.").build();
+
+		});
+
+	}
 
 //	/**
 //	 * Return the information of some treatments.

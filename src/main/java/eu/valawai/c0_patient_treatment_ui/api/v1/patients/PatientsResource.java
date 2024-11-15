@@ -244,7 +244,7 @@ public class PatientsResource {
 //	}
 //
 //	/**
-//	 * Get a patient treatment.
+//	 * Get the treatments of a patient.
 //	 *
 //	 * @param patientId   identifier of the patient to get the treatment.
 //	 * @param treatmentId identifier of the patient treatment to get.
@@ -252,7 +252,7 @@ public class PatientsResource {
 //	 * @return the information of the patient treatment.
 //	 */
 //	@GET
-//	@Path("/{patientId:\\d+}/treatments/{treatmentId:\\d+}")
+//	@Path("/{patientId:\\d+}/treatments")
 //	@Operation(description = "Get a patient treatment.")
 //	@APIResponse(responseCode = "200", description = "The patient treatment.", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = PatientTreatment.class)))
 //	public Uni<Response> getPatientTreatment(

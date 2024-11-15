@@ -11,13 +11,11 @@ package eu.valawai.c0_patient_treatment_ui.persistence;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 import eu.valawai.c0_patient_treatment_ui.TimeManager;
 import eu.valawai.c0_patient_treatment_ui.ValueGenerator;
 import eu.valawai.c0_patient_treatment_ui.models.TreatmentAction;
 import io.quarkus.panache.common.Sort;
-import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
 
 /**
@@ -45,16 +43,8 @@ public class TreatmentEntities {
 					entity.beforeStatus = before;
 					entity.treatmentActions = new ArrayList<>(Arrays.asList(TreatmentAction.values()));
 					Collections.shuffle(entity.treatmentActions, ValueGenerator.rnd());
-					final var max = ValueGenerator.rnd().nextInt(0, entity.treatmentActions.size());
-					if (max > 0) {
-
-						entity.treatmentActions = entity.treatmentActions.subList(0, max);
-
-					} else {
-
-						entity.treatmentActions = null;
-					}
-
+					final var max = ValueGenerator.rnd().nextInt(1, entity.treatmentActions.size());
+					entity.treatmentActions = entity.treatmentActions.subList(0, max);
 					entity.expectedStatus = after;
 					return entity.persistAndFlush();
 				});
@@ -68,24 +58,19 @@ public class TreatmentEntities {
 	 *
 	 * @param min number minimum of treatments to be defined on the database.
 	 *
-	 * @return the created treatments.
+	 * @return an exception if can not create the required population.
 	 */
-	public static Uni<List<TreatmentEntity>> populateWith(int min) {
+	public static Uni<Void> populateWith(int min) {
 
 		return TreatmentEntity.count().chain(total -> {
 
-			final var max = min - Math.toIntExact(total);
-			if (max > 0) {
+			if (total < min) {
 
-				return Multi.createFrom().range(0, max).onItem().transformToUniAndMerge(index -> {
-
-					return nextRandom();
-
-				}).collect().asList();
+				return nextRandom().chain(any -> populateWith(min));
 
 			} else {
 
-				return Uni.createFrom().item(Collections.emptyList());
+				return Uni.createFrom().nullItem();
 			}
 
 		});

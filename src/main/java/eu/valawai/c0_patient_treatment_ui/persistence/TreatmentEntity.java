@@ -119,27 +119,33 @@ public class TreatmentEntity extends PanacheEntity {
 	 */
 	public static Uni<Treatment> retrieveTreatment(long id) {
 
-		return retrieve(id).map(entity -> {
+		return retrieve(id).map(entity -> entity.toTreatment());
+	}
 
-			final var treatment = new Treatment();
-			treatment.id = entity.id;
-			treatment.createdTime = entity.createdTime;
-			if (entity.patient != null) {
+	/**
+	 * Convert this entity to a {@link Treatment}.
+	 *
+	 * @return the treatment with the data of this entity.
+	 */
+	public Treatment toTreatment() {
 
-				treatment.patient = entity.patient.toMinPatient();
-			}
-			if (entity.beforeStatus != null) {
+		final var treatment = new Treatment();
+		treatment.id = this.id;
+		treatment.createdTime = this.createdTime;
+		if (this.patient != null) {
 
-				treatment.beforeStatus = entity.beforeStatus.status;
-			}
-			treatment.treatmentActions = entity.treatmentActions;
-			if (entity.expectedStatus != null) {
+			treatment.patient = this.patient.toMinPatient();
+		}
+		if (this.beforeStatus != null) {
 
-				treatment.expectedStatus = entity.expectedStatus.status;
-			}
+			treatment.beforeStatus = this.beforeStatus.status;
+		}
+		treatment.treatmentActions = this.treatmentActions;
+		if (this.expectedStatus != null) {
 
-			return treatment;
-		});
+			treatment.expectedStatus = this.expectedStatus.status;
+		}
+		return treatment;
 	}
 
 }

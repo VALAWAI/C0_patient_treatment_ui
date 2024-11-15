@@ -42,7 +42,8 @@ public class Treatment extends ReflectionModel {
 	/**
 	 * The information of the patient that the treatment has to be applied.
 	 */
-	@Schema(title = "The information of the patient that the treatment has to be applied.", readOnly = true)
+	@NotNull
+	@Schema(title = "The information of the patient that the treatment has to be applied.", required = true)
 	public MinPatient patient;
 
 	/**

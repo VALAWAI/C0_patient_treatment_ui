@@ -11,9 +11,12 @@ package eu.valawai.c0_patient_treatment_ui.api.v1.treatments;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import eu.valawai.c0_patient_treatment_ui.TimeManager;
+import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntities;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntity;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientStatusCriteriaEntity;
 import eu.valawai.c0_patient_treatment_ui.persistence.PostgreSQLTestResource;
@@ -142,6 +145,173 @@ public class TreatmentsResourceTest {
 
 			final var lastId = (Long) asserter.getData("LAST_ID");
 			return TreatmentEntity.findById(lastId);
+
+		});
+
+	}
+
+	/**
+	 * Test not create a treatment without a patient.
+	 */
+	@Test
+	public void shouldNotCreateTreatmentWithoutPatient() {
+
+		final var model = new TreatmentTest().nextModel();
+		model.patient = null;
+		given().contentType("application/json").body(model).when().post("/v1/treatments").then()
+				.statusCode(Status.BAD_REQUEST.getStatusCode());
+
+	}
+
+	/**
+	 * Test not create a treatment with an undefined name.
+	 *
+	 * @param asserter to use in the tests.
+	 */
+	@Test
+	@RunOnVertxContext
+	public void shouldNotCreateTreatmentWithoutUndefinedPatient(TransactionalUniAsserter asserter) {
+
+		asserter.assertThat(() -> PatientEntities.undefined(), undefined -> {
+
+			final var model = new TreatmentTest().nextModel();
+			model.patient.id = undefined;
+			given().contentType("application/json").body(model).when().post("/v1/treatments").then()
+					.statusCode(Status.BAD_REQUEST.getStatusCode());
+
+		});
+
+	}
+
+	/**
+	 * Test not create a treatment without before status.
+	 *
+	 * @param asserter to use in the tests.
+	 */
+	@Test
+	@RunOnVertxContext
+	public void shouldNotCreateTreatmentWithoutBeforeStatus(TransactionalUniAsserter asserter) {
+
+		asserter.assertThat(() -> PatientEntities.last(), last -> {
+
+			final var model = new TreatmentTest().nextModel();
+			model.patient.id = last.id;
+			model.beforeStatus = null;
+			given().contentType("application/json").body(model).when().post("/v1/treatments").then()
+					.statusCode(Status.BAD_REQUEST.getStatusCode());
+		});
+	}
+
+	/**
+	 * Test not create a treatment without actions.
+	 *
+	 * @param asserter to use in the tests.
+	 */
+	@Test
+	@RunOnVertxContext
+	public void shouldNotCreateTreatmentWithoutActions(TransactionalUniAsserter asserter) {
+
+		asserter.assertThat(() -> PatientEntities.last(), last -> {
+
+			final var model = new TreatmentTest().nextModel();
+			model.patient.id = last.id;
+			model.treatmentActions = null;
+			given().contentType("application/json").body(model).when().post("/v1/treatments").then()
+					.statusCode(Status.BAD_REQUEST.getStatusCode());
+		});
+	}
+
+	/**
+	 * Test not create a treatment with empty actions.
+	 *
+	 * @param asserter to use in the tests.
+	 */
+	@Test
+	@RunOnVertxContext
+	public void shouldNotCreateTreatmentWithoutEmptyActions(TransactionalUniAsserter asserter) {
+
+		asserter.assertThat(() -> PatientEntities.last(), last -> {
+
+			final var model = new TreatmentTest().nextModel();
+			model.patient.id = last.id;
+			model.treatmentActions.clear();
+			given().contentType("application/json").body(model).when().post("/v1/treatments").then()
+					.statusCode(Status.BAD_REQUEST.getStatusCode());
+		});
+	}
+
+	/**
+	 * Test not create a treatment without expected status.
+	 *
+	 * @param asserter to use in the tests.
+	 */
+	@Test
+	@RunOnVertxContext
+	public void shouldNotCreateTreatmentWithoutExpectedStatus(TransactionalUniAsserter asserter) {
+
+		asserter.assertThat(() -> PatientEntities.last(), last -> {
+
+			final var model = new TreatmentTest().nextModel();
+			model.patient.id = last.id;
+			model.expectedStatus = null;
+			given().contentType("application/json").body(model).when().post("/v1/treatments").then()
+					.statusCode(Status.BAD_REQUEST.getStatusCode());
+		});
+	}
+
+	/**
+	 * Test not create a treatment.
+	 *
+	 * @param asserter to use in the tests.
+	 */
+	@Test
+	@RunOnVertxContext
+	public void shouldCreateTreatment(TransactionalUniAsserter asserter) {
+
+		final var model = new TreatmentTest().nextModel();
+		asserter.assertThat(() -> PatientEntities.last(), last -> {
+
+			model.patient.id = last.id;
+			final var now = TimeManager.now();
+			final var created = given().contentType("application/json").body(model).when().post("/v1/treatments").then()
+					.statusCode(Status.CREATED.getStatusCode()).extract().as(Treatment.class);
+			model.id = created.id;
+			model.patient = last.toMinPatient();
+			assertEquals(model.patient, created.patient);
+			assertEquals(model.beforeStatus, created.beforeStatus);
+			assertEquals(model.treatmentActions, created.treatmentActions);
+			assertEquals(model.expectedStatus, created.expectedStatus);
+			assertTrue(now <= created.createdTime);
+			model.createdTime = created.createdTime;
+		});
+
+		asserter.assertThat(() -> TreatmentEntity.retrieve(model.id), found -> {
+
+			assertEquals(model, found.toTreatment());
+			asserter.putData("BEFORE_STATUS_ID", found.beforeStatus.id);
+			asserter.putData("EXPECTED_STATUS_ID", found.expectedStatus.id);
+
+		});
+
+		asserter.assertThat(() -> {
+
+			final long statusId = (Long) asserter.getData("BEFORE_STATUS_ID");
+			return PatientStatusCriteriaEntity.retrieve(statusId).map(found -> found.status);
+
+		}, found -> {
+
+			assertEquals(model.beforeStatus, found);
+
+		});
+
+		asserter.assertThat(() -> {
+
+			final long statusId = (Long) asserter.getData("EXPECTED_STATUS_ID");
+			return PatientStatusCriteriaEntity.retrieve(statusId).map(found -> found.status);
+
+		}, found -> {
+
+			assertEquals(model.expectedStatus, found);
 
 		});
 
