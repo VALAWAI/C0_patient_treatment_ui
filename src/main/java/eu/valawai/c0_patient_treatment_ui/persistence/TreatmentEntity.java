@@ -124,6 +124,10 @@ public class TreatmentEntity extends PanacheEntity {
 			final var treatment = new Treatment();
 			treatment.id = entity.id;
 			treatment.createdTime = entity.createdTime;
+			if (entity.patient != null) {
+
+				treatment.patient = entity.patient.toMinPatient();
+			}
 			if (entity.beforeStatus != null) {
 
 				treatment.beforeStatus = entity.beforeStatus.status;

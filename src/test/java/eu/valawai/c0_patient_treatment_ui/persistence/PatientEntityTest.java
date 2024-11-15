@@ -538,4 +538,22 @@ public class PatientEntityTest {
 
 	}
 
+	/**
+	 * Should retrieve a min patient.
+	 *
+	 * @param asserter to use in the tests.
+	 */
+	@Test
+	@RunOnVertxContext
+	public void shouldToMinPatient(TransactionalUniAsserter asserter) {
+
+		asserter.assertThat(() -> PatientEntities.nextRandom(), retrieved -> {
+
+			final var min = retrieved.toMinPatient();
+			assertNotNull(min);
+			assertEquals(retrieved.id, min.id);
+			assertEquals(retrieved.name, min.name);
+
+		});
+	}
 }

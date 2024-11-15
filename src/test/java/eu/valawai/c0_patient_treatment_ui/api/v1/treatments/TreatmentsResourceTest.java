@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 
+import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntity;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientStatusCriteriaEntity;
 import eu.valawai.c0_patient_treatment_ui.persistence.PostgreSQLTestResource;
 import eu.valawai.c0_patient_treatment_ui.persistence.TreatmentEntities;
@@ -64,11 +65,24 @@ public class TreatmentsResourceTest {
 			final var retrieved = given().pathParam("id", entity.id).when().get("/v1/treatments/{id}").then()
 					.statusCode(Status.OK.getStatusCode()).extract().as(Treatment.class);
 			assertNotNull(retrieved);
+			assertNotNull(retrieved.patient);
 			assertEquals(entity.id, retrieved.id);
 			asserter.putData("BEFORE_STATUS_ID", entity.beforeStatus.id);
 			assertEquals(retrieved.treatmentActions, entity.treatmentActions);
 			asserter.putData("EXPECTED_STATUS_ID", entity.expectedStatus.id);
 			asserter.putData("RETRIEVED", retrieved);
+
+		});
+
+		asserter.assertThat(() -> {
+
+			final Treatment retrieved = (Treatment) asserter.getData("RETRIEVED");
+			return PatientEntity.retrieve(retrieved.patient.id);
+
+		}, found -> {
+
+			final Treatment retrieved = (Treatment) asserter.getData("RETRIEVED");
+			assertEquals(retrieved.patient.name, found.name);
 
 		});
 

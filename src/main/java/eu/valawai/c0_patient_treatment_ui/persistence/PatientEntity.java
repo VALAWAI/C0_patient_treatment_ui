@@ -168,9 +168,7 @@ public class PatientEntity extends PanacheEntity {
 					page.patients = new ArrayList<>(size);
 					for (final var patient : patients) {
 
-						final var minPatient = new MinPatient();
-						minPatient.id = patient.id;
-						minPatient.name = patient.name;
+						final var minPatient = patient.toMinPatient();
 						page.patients.add(minPatient);
 					}
 
@@ -209,5 +207,18 @@ public class PatientEntity extends PanacheEntity {
 			return patient;
 
 		});
+	}
+
+	/**
+	 * Rwtun the min patient for this entity.
+	 *
+	 * @return the min patient associated to this patient.
+	 */
+	public MinPatient toMinPatient() {
+
+		final var model = new MinPatient();
+		model.id = this.id;
+		model.name = this.name;
+		return model;
 	}
 }
