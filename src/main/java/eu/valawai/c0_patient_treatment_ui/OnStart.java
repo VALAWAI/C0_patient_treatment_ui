@@ -30,7 +30,7 @@ public class OnStart {
 		router.getWithRegex("/.*").last().handler(rc -> {
 
 			final var path = rc.normalizedPath();
-			if (path.matches("/([ca|es|en]/)?index.html")) {
+			if (!path.matches("/([ca|es|en]/)?index.html")) {
 
 				rc.fail(404);
 
