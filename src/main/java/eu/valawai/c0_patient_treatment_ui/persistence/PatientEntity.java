@@ -51,7 +51,7 @@ public class PatientEntity extends PanacheEntity {
 	/**
 	 * The current status of the patient.
 	 */
-	@ManyToOne(targetEntity = PatientStatusCriteriaEntity.class, fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity = PatientStatusCriteriaEntity.class, fetch = FetchType.EAGER)
 	public PatientStatusCriteriaEntity status;
 
 	/**

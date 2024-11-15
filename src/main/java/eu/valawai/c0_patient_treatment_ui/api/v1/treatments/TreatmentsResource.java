@@ -55,18 +55,14 @@ public class TreatmentsResource {
 	public Uni<Response> retrieveTreatment(
 			@PathParam("id") @Parameter(in = ParameterIn.PATH, description = "The identifier of the treatment to retrieve") long id) {
 
-		return TreatmentEntity.retrieveTreatment(id).onFailure().recoverWithItem(error -> {
+		return TreatmentEntity.retrieveTreatment(id).map(treatment -> Response.ok(treatment).build()).onFailure()
+				.recoverWithItem(error -> {
 
-			Log.errorv(error, "Cannot retrieve a treatment with the id {0}.", id);
-			return null;
+					Log.errorv(error, "Cannot found a treatment with the id {0}.", id);
+					return Response.status(Status.NOT_FOUND)
+							.entity("Not found a treatment with the identifier %d".formatted(id)).build();
 
-		}).map(treatment -> Response.ok(treatment).build()).onFailure().recoverWithItem(error -> {
-
-			Log.errorv(error, "Cannot found a treatment with the id {0}.", id);
-			return Response.status(Status.NOT_FOUND)
-					.entity("Not found a treatment with the identifier %d".formatted(id)).build();
-
-		});
+				});
 	}
 
 	/**

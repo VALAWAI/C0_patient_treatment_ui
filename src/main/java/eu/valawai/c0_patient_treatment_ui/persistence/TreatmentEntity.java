@@ -42,13 +42,13 @@ public class TreatmentEntity extends PanacheEntity {
 	/**
 	 * The patient that has this treatment.
 	 */
-	@ManyToOne(targetEntity = PatientEntity.class, fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity = PatientEntity.class, fetch = FetchType.EAGER)
 	public PatientEntity patient;
 
 	/**
 	 * The status before to apply the treatment.
 	 */
-	@ManyToOne(targetEntity = PatientStatusCriteriaEntity.class, fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity = PatientStatusCriteriaEntity.class, fetch = FetchType.EAGER)
 	public PatientStatusCriteriaEntity beforeStatus;
 
 	/**
@@ -59,7 +59,7 @@ public class TreatmentEntity extends PanacheEntity {
 	/**
 	 * The expected status of the patient after applying the treatment.
 	 */
-	@ManyToOne(targetEntity = PatientStatusCriteriaEntity.class, fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity = PatientStatusCriteriaEntity.class, fetch = FetchType.EAGER)
 	public PatientStatusCriteriaEntity expectedStatus;
 
 	/**
@@ -119,7 +119,23 @@ public class TreatmentEntity extends PanacheEntity {
 	 */
 	public static Uni<Treatment> retrieveTreatment(long id) {
 
-		return null;
+		return retrieve(id).map(entity -> {
+
+			final var treatment = new Treatment();
+			treatment.id = entity.id;
+			treatment.createdTime = entity.createdTime;
+			if (entity.beforeStatus != null) {
+
+				treatment.beforeStatus = entity.beforeStatus.status;
+			}
+			treatment.treatmentActions = entity.treatmentActions;
+			if (entity.expectedStatus != null) {
+
+				treatment.expectedStatus = entity.expectedStatus.status;
+			}
+
+			return treatment;
+		});
 	}
 
 }

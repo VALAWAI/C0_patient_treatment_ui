@@ -57,23 +57,42 @@ public class PatientsResourceTest {
 	 * Test retrieve a patient.
 	 *
 	 * @param asserter to use in the tests.
+	 *
+	 * @see PatientsResource#retrievePatient(long)
 	 */
 	@Test
 	@RunOnVertxContext
 	public void shouldRetrievePatient(TransactionalUniAsserter asserter) {
 
-		asserter.assertThat(() -> PatientEntities.nextRandom(), entity -> {
+		asserter.assertThat(() -> PatientEntities.nextRandom().map(entity -> {
 
-			final var retrieved = given().pathParam("id", entity.id).when().get("/v1/patients/{id}").then()
+			final var expected = new Patient();
+			expected.id = entity.id;
+			expected.name = entity.name;
+			expected.updateTime = entity.updateTime;
+			expected.status = entity.status.status;
+			asserter.putData("STATUS_ID", entity.status.id);
+			return expected;
+
+		}), expected -> {
+
+			final var retrieved = given().pathParam("id", expected.id).when().get("/v1/patients/{id}").then()
 					.statusCode(Status.OK.getStatusCode()).extract().as(Patient.class);
 			assertNotNull(retrieved);
-			assertEquals(entity.id, retrieved.id);
-			assertEquals(entity.name, retrieved.name);
-			assertEquals(entity.updateTime, retrieved.updateTime);
-			asserter.assertThat(() -> PatientStatusCriteriaEntity.retrieve(entity.status.id), entityStatus -> {
+			assertEquals(expected, retrieved);
+			asserter.putData("RETRIEVED", retrieved);
 
-				assertEquals(entityStatus.status, retrieved.status);
-			});
+		});
+
+		asserter.assertThat(() -> {
+
+			final long statusId = (Long) asserter.getData("STATUS_ID");
+			return PatientStatusCriteriaEntity.retrieve(statusId).map(found -> found.status);
+
+		}, found -> {
+
+			final Patient retrieved = (Patient) asserter.getData("RETRIEVED");
+			assertEquals(retrieved.status, found);
 
 		});
 
