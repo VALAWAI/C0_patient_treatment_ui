@@ -8,13 +8,9 @@
 
 package eu.valawai.c0_patient_treatment_ui.persistence;
 
-import java.util.Collections;
-import java.util.List;
-
 import eu.valawai.c0_patient_treatment_ui.TimeManager;
 import eu.valawai.c0_patient_treatment_ui.ValueGenerator;
 import io.quarkus.panache.common.Sort;
-import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
 
 /**
@@ -47,24 +43,19 @@ public class PatientEntities {
 	 *
 	 * @param min number minimum of patients to be defined on the database.
 	 *
-	 * @return the created patients.
+	 * @return an exception if can not create the required population.
 	 */
-	public static Uni<List<PatientEntity>> populateWith(int min) {
+	public static Uni<Void> populateWith(int min) {
 
 		return PatientEntity.count().chain(total -> {
 
-			final var max = min - Math.toIntExact(total);
-			if (max > 0) {
+			if (total < min) {
 
-				return Multi.createFrom().range(0, max).onItem().transformToUniAndMerge(index -> {
-
-					return nextRandom();
-
-				}).collect().asList();
+				return nextRandom().chain(any -> populateWith(min));
 
 			} else {
 
-				return Uni.createFrom().item(Collections.emptyList());
+				return Uni.createFrom().nullItem();
 			}
 
 		});
