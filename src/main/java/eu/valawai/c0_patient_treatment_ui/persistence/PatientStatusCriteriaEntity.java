@@ -76,13 +76,21 @@ public class PatientStatusCriteriaEntity extends PanacheEntity {
 	 */
 	public static Uni<PatientStatusCriteriaEntity> retrieveOrPersist(PatientStatusCriteria status) {
 
-		return retrieveByStatus(status).onFailure().recoverWithUni(() -> {
+		if (status == null) {
 
-			final var entity = new PatientStatusCriteriaEntity();
-			entity.status = status;
-			return entity.persist();
+			return Uni.createFrom().failure(new IllegalArgumentException("The status is null"));
 
-		});
+		} else {
+
+			return retrieveByStatus(status).onFailure().recoverWithUni(() -> {
+
+				final var entity = new PatientStatusCriteriaEntity();
+				entity.status = status;
+				return entity.persistAndFlush();
+
+			});
+
+		}
 
 	}
 }

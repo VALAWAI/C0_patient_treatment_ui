@@ -8,6 +8,7 @@
 
 package eu.valawai.c0_patient_treatment_ui.persistence;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -514,6 +515,26 @@ public class PatientEntityTest {
 				lastName = patient.name;
 			}
 		});
+
+	}
+
+	/**
+	 * Should get empty patients page when offset is too high.
+	 *
+	 * @param asserter to use in the tests.
+	 */
+	@Test
+	@RunOnVertxContext
+	public void shouldGetEmptyMinPatientPageForHightOffset(TransactionalUniAsserter asserter) {
+
+		final var expected = new MinPatientPage();
+		asserter.assertThat(() -> PatientEntity.count(), total -> expected.total = Math.toIntExact(total));
+		asserter.assertThat(() -> PatientEntity.getMinPatientPageFor("%", Sort.ascending("id"), expected.total, 10),
+				found -> {
+
+					assertEquals(expected.total, found.total);
+					assertNull(found.patients);
+				});
 
 	}
 

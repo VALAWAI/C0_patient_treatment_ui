@@ -141,4 +141,19 @@ public class PatientStatusCriteriaEntityTest {
 		});
 	}
 
+	/**
+	 * Should not retrieve or persist a {@code null} status.
+	 *
+	 * @param asserter to use in the tests.
+	 *
+	 * @see PatientStatusCriteriaEntity#retrieveOrPersist
+	 */
+	@Test
+	@RunOnVertxContext
+	public void shouldNotRetrieveOrPersistNull(TransactionalUniAsserter asserter) {
+
+		asserter.assertFailedWith(() -> PatientStatusCriteriaEntity.retrieveOrPersist(null),
+				IllegalArgumentException.class);
+	}
+
 }

@@ -155,17 +155,22 @@ public class PatientsResource {
 			@PathParam("id") @Parameter(in = ParameterIn.PATH, description = "The identifier of the patient to update") long id,
 			@RequestBody(description = "The patient to update", required = true, content = @Content(schema = @Schema(implementation = Patient.class))) @Valid final Patient model) {
 
-		return PatientStatusCriteriaEntity.retrieveOrPersist(model.status).chain(status -> {
+		Uni<PatientStatusCriteriaEntity> definedStatus = null;
+		if (model.status == null) {
+
+			definedStatus = Uni.createFrom().nullItem();
+
+		} else {
+
+			definedStatus = PatientStatusCriteriaEntity.retrieveOrPersist(model.status);
+		}
+		return definedStatus.chain(status -> {
 
 			final var entity = new PatientEntity();
+			entity.id = id;
 			entity.name = model.name;
 			entity.status = status;
-			return entity.update().map(empty -> {
-
-				model.updateTime = entity.updateTime;
-				return Response.ok(model).build();
-
-			});
+			return entity.update().chain(empty -> this.retrievePatient(id));
 
 		}).onFailure().recoverWithItem(error -> {
 

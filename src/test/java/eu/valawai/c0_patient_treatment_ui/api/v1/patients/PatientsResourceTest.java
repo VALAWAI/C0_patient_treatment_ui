@@ -10,12 +10,20 @@ package eu.valawai.c0_patient_treatment_ui.api.v1.patients;
 
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Collections;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import eu.valawai.c0_patient_treatment_ui.TimeManager;
+import eu.valawai.c0_patient_treatment_ui.ValueGenerator;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntities;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntity;
+import eu.valawai.c0_patient_treatment_ui.persistence.PatientStatusCriteriaEntities;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientStatusCriteriaEntity;
 import eu.valawai.c0_patient_treatment_ui.persistence.PostgreSQLTestResource;
 import io.quarkus.test.common.QuarkusTestResource;
@@ -106,169 +114,271 @@ public class PatientsResourceTest {
 
 	}
 
-//	/**
-//	 * Test create a patient.
-//	 *
-//	 * @param asserter to use in the tests.
-//	 *
-//	 * @see PatientsResource#createPatient(Patient)
-//	 */
-//	@Test
-//	@RunOnVertxContext
-//	public void shouldCreatePatient(TransactionalUniAsserter asserter) {
-//
-//		final var model = new PatientTest().nextModel();
-//		final var now = TimeManager.now();
-//		final var patient = given().contentType("application/json").body(model).when().post("/v1/patients").then()
-//				.statusCode(Status.CREATED.getStatusCode()).extract().as(Patient.class);
-//		assertNotEquals(model, patient);
-//		assertNotNull(patient.id);
-//		assertTrue(patient.updateTime >= now);
-//		model.id = patient.id;
-//		model.updateTime = patient.updateTime;
-//		assertEquals(model, patient);
-//
-//		asserter.assertThat(() -> PatientEntities.byId(patient.id), entity -> {
-//
-//			assertNotNull(entity, "Not found created entity.");
-//			assertEquals(patient, Patient.from(entity));
-//
-//		});
-//
-//	}
-//
-//	/**
-//	 * Test not update an undefined patient.
-//	 */
-//	@Test
-//	public void shouldNotUpdateUndefinedPatient() {
-//
-//		final var model = new PatientTest().nextModel();
-//		given().contentType("application/json").body(model).pathParam("id", 0).when().patch("/v1/patients/{id}").then()
-//				.statusCode(Status.NOT_FOUND.getStatusCode());
-//
-//	}
-//
-//	/**
-//	 * Test update a patient.
-//	 *
-//	 * @param asserter to use in the tests.
-//	 */
-//	@Test
-//	@RunOnVertxContext
-//	public void shouldUpdatePatient(TransactionalUniAsserter asserter) {
-//
-//		final var newModel = new PatientTest().nextModel();
-//		asserter.assertThat(() -> PatientEntities.nextRandom(), patient -> {
-//
-//			final var before = Patient.from(patient);
-//			final var now = TimeManager.now();
-//			final var updated = given().contentType("application/json").body(newModel).pathParam("id", patient.id)
-//					.when().patch("/v1/patients/{id}").then().statusCode(Status.OK.getStatusCode()).extract()
-//					.as(Patient.class);
-//			assertNotEquals(before, updated);
-//			assertNotEquals(newModel, updated);
-//			newModel.id = patient.id;
-//			newModel.updateTime = updated.updateTime;
-//			assertEquals(newModel, updated);
-//			assertTrue(now <= updated.updateTime);
-//
-//		}).assertThat(() -> PatientEntities.byId(newModel.id), found -> {
-//
-//			assertNotNull(found);
-//			final var after = Patient.from(found);
-//			assertEquals(newModel, after);
-//
-//		});
-//
-//	}
-//
-//	/**
-//	 * Test update only patient name.
-//	 *
-//	 * @param asserter to use in the tests.
-//	 */
-//	@Test
-//	@RunOnVertxContext
-//	public void shouldUpdateOnlyPatientName(TransactionalUniAsserter asserter) {
-//
-//		final var newModel = new Patient();
-//		newModel.name = ValueGenerator.nextPattern("Patient name {0}");
-//		asserter.assertThat(() -> PatientEntities.nextRandom(), patient -> {
-//
-//			final var before = Patient.from(patient);
-//			final var now = TimeManager.now();
-//			final var updated = given().contentType("application/json").body(newModel).pathParam("id", patient.id)
-//					.when().patch("/v1/patients/{id}").then().statusCode(Status.OK.getStatusCode()).extract()
-//					.as(Patient.class);
-//			assertNotEquals(patient.name, updated.name);
-//			newModel.id = patient.id;
-//			newModel.updateTime = updated.updateTime;
-//			assertEquals(newModel.name, updated.name);
-//			assertTrue(now <= updated.updateTime);
-//			before.name = newModel.name;
-//			before.updateTime = updated.updateTime;
-//			assertEquals(before, updated);
-//
-//		}).assertThat(() -> PatientEntities.byId(newModel.id), found -> {
-//
-//			assertNotNull(found);
-//			assertEquals(newModel.name, found.name);
-//			assertEquals(newModel.updateTime, found.updateTime);
-//
-//		});
-//
-//	}
-//
-//	/**
-//	 * Should get a patient page.
-//	 *
-//	 * @param asserter to use in the tests.
-//	 */
-//	@Test
-//	@RunOnVertxContext
-//	public void shoulRetrievePatientPage(TransactionalUniAsserter asserter) {
-//
-//		asserter.assertThat(() -> PatientEntities.populateWith(50).chain(ignored -> PatientEntity.count()), total -> {
-//
-//			final var page = given().when().queryParam("limit", total).get("/v1/patients").then()
-//					.statusCode(Status.OK.getStatusCode()).extract().as(MinPatientPage.class);
-//			assertNotNull(page);
-//			assertEquals(total, page.total);
-//			assertNotNull(page.patients);
-//			assertEquals(total, page.patients.size());
-//
-//			final var page2 = given().queryParam("offset", "3").when().get("/v1/patients").then()
-//					.statusCode(Status.OK.getStatusCode()).extract().as(MinPatientPage.class);
-//			final var expected = new MinPatientPage();
-//			expected.total = page.total;
-//			expected.patients = page.patients.subList(3, 13);
-//			assertEquals(expected, page2);
-//
-//			final var page3 = given().queryParam("order", "-name").queryParam("name", "P*1*").queryParam("offset", "2")
-//					.queryParam("limit", "7").when().get("/v1/patients").then().statusCode(Status.OK.getStatusCode())
-//					.extract().as(MinPatientPage.class);
-//
-//			expected.patients = page.patients.stream().filter(p -> p.name.matches("P.*1.*"))
-//					.collect(Collectors.toList());
-//			expected.total = expected.patients.size();
-//			Collections.sort(expected.patients, (p1, p2) -> p2.name.compareTo(p1.name));
-//			final var maxPattern = expected.patients.size();
-//			if (maxPattern < 3) {
-//
-//				expected.patients = null;
-//
-//			} else if (maxPattern < 9) {
-//
-//				expected.patients = expected.patients.subList(2, maxPattern);
-//
-//			} else {
-//
-//				expected.patients = expected.patients.subList(2, 9);
-//			}
-//			assertEquals(expected, page3);
-//
-//		});
-//	}
+	/**
+	 * Test not create a patient with a large name.
+	 */
+	@Test
+	public void shouldNotCreatePatientWithLargeName() {
+
+		final var model = new PatientTest().nextModel();
+		while (model.name.length() < 1024) {
+
+			model.name += ValueGenerator.nextPattern(" and {0}");
+		}
+
+		given().contentType("application/json").body(model).when().post("/v1/patients").then()
+				.statusCode(Status.BAD_REQUEST.getStatusCode());
+
+	}
+
+	/**
+	 * Test create a patient.
+	 *
+	 * @param asserter to use in the tests.
+	 *
+	 * @see PatientsResource#createPatient(Patient)
+	 */
+	@Test
+	@RunOnVertxContext
+	public void shouldCreatePatient(TransactionalUniAsserter asserter) {
+
+		final var model = new PatientTest().nextModel();
+		final var now = TimeManager.now();
+		final var patient = given().contentType("application/json").body(model).when().post("/v1/patients").then()
+				.statusCode(Status.CREATED.getStatusCode()).extract().as(Patient.class);
+		assertNotEquals(model, patient);
+		assertNotNull(patient.id);
+		assertTrue(patient.updateTime >= now);
+		model.id = patient.id;
+		model.updateTime = patient.updateTime;
+		assertEquals(model, patient);
+
+		asserter.assertThat(() -> PatientEntity.retrieve(patient.id), found -> {
+
+			assertNotNull(found, "Not found created entity.");
+			assertEquals(patient.name, found.name);
+			assertEquals(patient.updateTime, found.updateTime);
+			assertNotNull(found.status);
+			asserter.putData("STATUS_ID", found.status.id);
+
+		});
+		asserter.assertThat(() -> {
+
+			final long statusId = (Long) asserter.getData("STATUS_ID");
+			return PatientStatusCriteriaEntity.retrieve(statusId);
+
+		}, found -> {
+
+			assertEquals(model.status, found.status);
+
+		});
+
+	}
+
+	/**
+	 * Test not update an undefined patient.
+	 *
+	 * @see PatientsResource#updatePatient(long, Patient)
+	 */
+	@Test
+	public void shouldNotUpdateUndefinedPatient() {
+
+		final var newModel = new PatientTest().nextModel();
+		newModel.id = null;
+		newModel.updateTime = null;
+		given().contentType("application/json").body(newModel).when().patch("/v1/patients/0").then()
+				.statusCode(Status.NOT_FOUND.getStatusCode());
+
+	}
+
+	/**
+	 * Test update a patient.
+	 *
+	 * @param asserter to use in the tests.
+	 *
+	 * @see PatientsResource#updatePatient(long, Patient)
+	 */
+	@Test
+	@RunOnVertxContext
+	public void shouldUpdatePatient(TransactionalUniAsserter asserter) {
+
+		final var newModel = new PatientTest().nextModel();
+		newModel.id = null;
+		newModel.updateTime = null;
+		asserter.assertThat(() -> PatientEntities.nextRandom(), patient -> {
+
+			final var now = TimeManager.now();
+			final var updated = given().contentType("application/json").body(newModel).pathParam("id", patient.id)
+					.when().patch("/v1/patients/{id}").then().statusCode(Status.OK.getStatusCode()).extract()
+					.as(Patient.class);
+			newModel.id = patient.id;
+			newModel.updateTime = updated.updateTime;
+			assertEquals(newModel, updated);
+			assertTrue(now <= updated.updateTime);
+
+		});
+		asserter.assertThat(() -> PatientEntity.retrieve(newModel.id), found -> {
+
+			assertEquals(newModel.name, found.name);
+			assertEquals(newModel.updateTime, found.updateTime);
+			assertNotNull(found.status);
+			asserter.putData("STATUS_ID", found.status.id);
+
+		});
+		asserter.assertThat(() -> {
+
+			final long statusId = (Long) asserter.getData("STATUS_ID");
+			return PatientStatusCriteriaEntity.retrieve(statusId);
+
+		}, found -> {
+
+			assertEquals(newModel.status, found.status);
+
+		});
+	}
+
+	/**
+	 * Test update only patient name.
+	 *
+	 * @param asserter to use in the tests.
+	 *
+	 * @see PatientsResource#updatePatient(long, Patient)
+	 */
+	@Test
+	@RunOnVertxContext
+	public void shouldUpdateOnlyPatientName(TransactionalUniAsserter asserter) {
+
+		final var newModel = new Patient();
+		newModel.name = ValueGenerator.nextPattern("Patient name {0}");
+		asserter.assertThat(() -> PatientEntities.nextRandom(), patient -> {
+
+			final var now = TimeManager.now();
+			final var updated = given().contentType("application/json").body(newModel).pathParam("id", patient.id)
+					.when().patch("/v1/patients/{id}").then().statusCode(Status.OK.getStatusCode()).extract()
+					.as(Patient.class);
+			assertNotEquals(patient.name, updated.name);
+			newModel.id = patient.id;
+			newModel.updateTime = updated.updateTime;
+			newModel.status = updated.status;
+			assertEquals(newModel.name, updated.name);
+			assertTrue(now <= updated.updateTime);
+			asserter.putData("BEFORE", patient);
+
+		});
+		asserter.assertThat(() -> PatientEntity.retrieve(newModel.id), found -> {
+
+			final PatientEntity before = (PatientEntity) asserter.getData("BEFORE");
+			if (before.status != null) {
+
+				assertNotNull(found.status);
+				assertEquals(before.status.id, found.status.id);
+			}
+			assertEquals(newModel.name, found.name);
+			assertEquals(newModel.updateTime, found.updateTime);
+
+		});
+
+	}
+
+	/**
+	 * Test update only patient status.
+	 *
+	 * @param asserter to use in the tests.
+	 *
+	 * @see PatientsResource#updatePatient(long, Patient)
+	 */
+	@Test
+	@RunOnVertxContext
+	public void shouldUpdateOnlyPatientStatus(TransactionalUniAsserter asserter) {
+
+		final var newModel = new Patient();
+		asserter.assertThat(() -> PatientStatusCriteriaEntities.nextRandom(), entity -> {
+			newModel.status = entity.status;
+			asserter.putData("NEXT_STATUS", entity);
+		});
+		asserter.assertThat(() -> PatientEntities.nextRandom(), patient -> {
+
+			final var now = TimeManager.now();
+			final var updated = given().contentType("application/json").body(newModel).pathParam("id", patient.id)
+					.when().patch("/v1/patients/{id}").then().statusCode(Status.OK.getStatusCode()).extract()
+					.as(Patient.class);
+			assertNotNull(updated.status);
+			if (patient.status != null) {
+
+				assertNotEquals(patient.status.status, updated.status);
+			}
+			assertEquals(newModel.status, updated.status);
+			assertEquals(patient.name, updated.name);
+
+			newModel.id = patient.id;
+			newModel.updateTime = updated.updateTime;
+			assertTrue(now <= updated.updateTime);
+			asserter.putData("BEFORE", patient);
+
+		});
+		asserter.assertThat(() -> PatientEntity.retrieve(newModel.id), found -> {
+
+			final PatientEntity before = (PatientEntity) asserter.getData("BEFORE");
+			assertNotNull(found.status);
+			final PatientStatusCriteriaEntity nextStatus = (PatientStatusCriteriaEntity) asserter
+					.getData("NEXT_STATUS");
+			assertEquals(nextStatus.id, found.status.id);
+			assertEquals(before.name, found.name);
+			assertEquals(newModel.updateTime, found.updateTime);
+
+		});
+
+	}
+
+	/**
+	 * Should get a patient page.
+	 *
+	 * @param asserter to use in the tests.
+	 */
+	@Test
+	@RunOnVertxContext
+	public void shoulRetrievePatientPage(TransactionalUniAsserter asserter) {
+
+		asserter.assertThat(() -> PatientEntities.populateWith(50).chain(ignored -> PatientEntity.count()), total -> {
+
+			final var page = given().when().queryParam("limit", total).get("/v1/patients").then()
+					.statusCode(Status.OK.getStatusCode()).extract().as(MinPatientPage.class);
+			assertNotNull(page);
+			assertEquals(total, page.total);
+			assertNotNull(page.patients);
+			assertEquals(total, page.patients.size());
+
+			final var page2 = given().queryParam("offset", "3").when().get("/v1/patients").then()
+					.statusCode(Status.OK.getStatusCode()).extract().as(MinPatientPage.class);
+			final var expected = new MinPatientPage();
+			expected.total = page.total;
+			expected.patients = page.patients.subList(3, 13);
+			assertEquals(expected, page2);
+
+			final var page3 = given().queryParam("order", "-name").queryParam("name", "P*1*").queryParam("offset", "2")
+					.queryParam("limit", "7").when().get("/v1/patients").then().statusCode(Status.OK.getStatusCode())
+					.extract().as(MinPatientPage.class);
+
+			expected.patients = page.patients.stream().filter(p -> p.name.matches("P.*1.*"))
+					.collect(Collectors.toList());
+			expected.total = expected.patients.size();
+			Collections.sort(expected.patients, (p1, p2) -> p2.name.compareTo(p1.name));
+			final var maxPattern = expected.patients.size();
+			if (maxPattern < 3) {
+
+				expected.patients = null;
+
+			} else if (maxPattern < 9) {
+
+				expected.patients = expected.patients.subList(2, maxPattern);
+
+			} else {
+
+				expected.patients = expected.patients.subList(2, 9);
+			}
+			assertEquals(expected, page3);
+
+		});
+	}
 
 }

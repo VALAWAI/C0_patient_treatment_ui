@@ -164,27 +164,24 @@ public class PatientEntity extends PanacheEntity {
 						.list();
 				return find.map(patients -> {
 
-					if (patients != null) {
+					final var size = patients.size();
+					page.patients = new ArrayList<>(size);
+					for (final var patient : patients) {
 
-						final var size = patients.size();
-						if (size > 0) {
-
-							page.patients = new ArrayList<>(size);
-							for (final var patient : patients) {
-
-								final var minPatient = new MinPatient();
-								minPatient.id = patient.id;
-								minPatient.name = patient.name;
-								page.patients.add(minPatient);
-							}
-						}
+						final var minPatient = new MinPatient();
+						minPatient.id = patient.id;
+						minPatient.name = patient.name;
+						page.patients.add(minPatient);
 					}
+
 					return page;
 				});
 
 			}
 
-		}).onFailure().recoverWithItem(error -> {
+		}).onFailure().recoverWithItem(error ->
+
+		{
 
 			Log.errorv(error, "Cannot find for the patients.");
 			return new MinPatientPage();
