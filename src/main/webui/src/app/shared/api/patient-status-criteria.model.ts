@@ -40,6 +40,8 @@ export type CognitiveImpairmentLevel = 'ABSENT' | 'MILD_MODERATE' | 'SEVERE' | '
 
 export type DiscomfortDegree = 'LOW' | 'MEDIUM' | 'HIGH' | 'UNKNOWN' | null;
 
+export type NITLevel = 'ONE' | 'TWO_A' | 'TWO_B' | 'THREE' | 'FOUR' | 'FIVE' | null;
+
 /**
  * The minimal information of a patient.
  *
@@ -133,5 +135,9 @@ export class PatientStatusCriteria {
 	 */
 	public discomfortDegree: DiscomfortDegree = null;
 
+	/**
+	 * Describe the level of therapeutic intensity of the patient
+	 */
+	public nitLevel: NITLevel = null;
 
 }

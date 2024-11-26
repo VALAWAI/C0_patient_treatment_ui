@@ -9,7 +9,6 @@
 package eu.valawai.c0_patient_treatment_ui.models;
 
 import eu.valawai.c0_patient_treatment_ui.ValueGenerator;
-import eu.valawai.c0_patient_treatment_ui.models.PatientStatusCriteria;
 
 /**
  * Test the {@link PatientStatusCriteria}.
@@ -51,7 +50,7 @@ public class PatientStatusCriteriaTest extends ReflectionModelTestCase<PatientSt
 		model.isCoerced = ValueGenerator.next(YesNoUnknownOption.values());
 		model.isCompetent = ValueGenerator.next(YesNoUnknownOption.values());
 		model.maca = ValueGenerator.next(YesNoUnknownOption.values());
-
+		model.nitLevel = ValueGenerator.next(NITLevel.values());
 	}
 
 }
