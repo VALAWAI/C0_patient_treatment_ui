@@ -21,25 +21,24 @@ import { TitleService } from '@app/shared';
 import { RouterLink } from '@angular/router';
 
 @Component({
-	selector: 'app-patients',
-	standalone: true,
-	imports: [
-		MatIcon,
-		ReactiveFormsModule,
-		MatPaginatorModule,
-		NgIf,
-		NgFor,
-		AvvvatarsComponent,
-		MatProgressBarModule,
-		MatMenuItem,
-		MatIcon,
-		MatButton,
-		MatMenuTrigger,
-		RouterLink,
-		MatMenu
-	],
-	templateUrl: './patients.component.html',
-	styleUrl: './patients.component.css'
+    selector: 'app-patients',
+    imports: [
+        MatIcon,
+        ReactiveFormsModule,
+        MatPaginatorModule,
+        NgIf,
+        NgFor,
+        AvvvatarsComponent,
+        MatProgressBarModule,
+        MatMenuItem,
+        MatIcon,
+        MatButton,
+        MatMenuTrigger,
+        RouterLink,
+        MatMenu
+    ],
+    templateUrl: './patients.component.html',
+    styleUrl: './patients.component.css'
 })
 export class PatientsComponent implements OnInit, OnDestroy {
 

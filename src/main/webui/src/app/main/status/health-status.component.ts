@@ -11,14 +11,13 @@ import { HealthStatus } from '@app/shared/api';
 import { NgIf } from '@angular/common';
 
 @Component({
-	selector: 'app-health-status',
-	standalone: true,
-	imports: [
-		MatIcon,
-		NgIf
-	],
-	templateUrl: './health-status.component.html',
-	styleUrl: './health-status.component.css'
+    selector: 'app-health-status',
+    imports: [
+        MatIcon,
+        NgIf
+    ],
+    templateUrl: './health-status.component.html',
+    styleUrl: './health-status.component.css'
 })
 export class HealthStatusComponent {
 

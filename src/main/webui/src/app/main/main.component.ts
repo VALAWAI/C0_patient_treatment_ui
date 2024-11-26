@@ -19,21 +19,20 @@ import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
 
 @Component({
-	selector: 'app-main',
-	standalone: true,
-	imports: [
-		RouterOutlet,
-		MatIcon,
-		MatMenu,
-		MatMenuTrigger,
-		MatMenuItem,
-		MatButton,
-		MatDivider,
-		RouterLink,
-		AsyncPipe
-	],
-	templateUrl: './main.component.html',
-	styleUrl: './main.component.css'
+    selector: 'app-main',
+    imports: [
+        RouterOutlet,
+        MatIcon,
+        MatMenu,
+        MatMenuTrigger,
+        MatMenuItem,
+        MatButton,
+        MatDivider,
+        RouterLink,
+        AsyncPipe
+    ],
+    templateUrl: './main.component.html',
+    styleUrl: './main.component.css'
 })
 export class MainComponent implements OnInit {
 

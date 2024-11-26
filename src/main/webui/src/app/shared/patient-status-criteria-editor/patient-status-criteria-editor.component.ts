@@ -24,14 +24,13 @@ import { Subscription } from 'rxjs';
 import { ReactiveFormsModule, FormControl, FormBuilder } from '@angular/forms';
 
 @Component({
-	selector: 'app-patient-status-criteria-editor',
-	standalone: true,
-	imports: [
-		ReactiveFormsModule,
-		MatRadioModule
-	],
-	templateUrl: './patient-status-criteria-editor.component.html',
-	styleUrls: ['./patient-status-criteria-editor.component.css']
+    selector: 'app-patient-status-criteria-editor',
+    imports: [
+        ReactiveFormsModule,
+        MatRadioModule
+    ],
+    templateUrl: './patient-status-criteria-editor.component.html',
+    styleUrls: ['./patient-status-criteria-editor.component.css']
 })
 export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 

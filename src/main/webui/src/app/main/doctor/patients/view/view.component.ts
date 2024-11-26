@@ -17,18 +17,17 @@ import { PatientStatusCriteriaEditorComponent } from '@app/shared/patient-status
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
-	selector: 'app-doctor-patient-view',
-	standalone: true,
-	imports: [
-		AsyncPipe,
-		NgIf,
-		AvvvatarsComponent,
-		PatientStatusCriteriaEditorComponent,
-		MatIcon,
-		RouterLink
-	],
-	templateUrl: './view.component.html',
-	styleUrl: './view.component.css'
+    selector: 'app-doctor-patient-view',
+    imports: [
+        AsyncPipe,
+        NgIf,
+        AvvvatarsComponent,
+        PatientStatusCriteriaEditorComponent,
+        MatIcon,
+        RouterLink
+    ],
+    templateUrl: './view.component.html',
+    styleUrl: './view.component.css'
 })
 export class ViewComponent implements OnInit {
 

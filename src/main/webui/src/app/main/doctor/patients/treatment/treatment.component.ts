@@ -39,29 +39,28 @@ export const AtLeastOneActionValidator: ValidatorFn = (control: AbstractControl)
 }
 
 @Component({
-	selector: 'app-doctor-patient-edit',
-	standalone: true,
-	imports: [
-		AsyncPipe,
-		NgIf,
-		MatStepperModule,
-		PatientStatusCriteriaEditorComponent,
-		ReactiveFormsModule,
-		MatButton,
-		RouterLink,
-		NgFor,
-		MatSlideToggle,
-		TreatmentActionNamePipe,
-		NgClass
-	],
-	templateUrl: './treatment.component.html',
-	styleUrl: './treatment.component.css',
-	providers: [
-		{
-			provide: STEPPER_GLOBAL_OPTIONS,
-			useValue: { showError: true },
-		},
-	]
+    selector: 'app-doctor-patient-edit',
+    imports: [
+        AsyncPipe,
+        NgIf,
+        MatStepperModule,
+        PatientStatusCriteriaEditorComponent,
+        ReactiveFormsModule,
+        MatButton,
+        RouterLink,
+        NgFor,
+        MatSlideToggle,
+        TreatmentActionNamePipe,
+        NgClass
+    ],
+    templateUrl: './treatment.component.html',
+    styleUrl: './treatment.component.css',
+    providers: [
+        {
+            provide: STEPPER_GLOBAL_OPTIONS,
+            useValue: { showError: true },
+        },
+    ]
 })
 export class TreatmentComponent implements OnInit {
 

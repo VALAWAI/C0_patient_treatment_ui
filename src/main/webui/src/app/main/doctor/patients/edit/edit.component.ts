@@ -20,22 +20,21 @@ import { MatInputModule } from '@angular/material/input';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
-	selector: 'app-doctor-patient-edit',
-	standalone: true,
-	imports: [
-		AsyncPipe,
-		NgIf,
-		AvvvatarsComponent,
-		PatientStatusCriteriaEditorComponent,
-		MatIcon,
-		RouterLink,
-		MatButton,
-		MatInputModule,
-		ReactiveFormsModule,
-		NgIf
-	],
-	templateUrl: './edit.component.html',
-	styleUrl: './edit.component.css'
+    selector: 'app-doctor-patient-edit',
+    imports: [
+        AsyncPipe,
+        NgIf,
+        AvvvatarsComponent,
+        PatientStatusCriteriaEditorComponent,
+        MatIcon,
+        RouterLink,
+        MatButton,
+        MatInputModule,
+        ReactiveFormsModule,
+        NgIf
+    ],
+    templateUrl: './edit.component.html',
+    styleUrl: './edit.component.css'
 })
 export class EditComponent implements OnInit {
 

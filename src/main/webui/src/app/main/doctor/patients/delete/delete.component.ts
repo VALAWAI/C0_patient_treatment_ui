@@ -14,15 +14,14 @@ import { ApiService, Patient } from '@app/shared/api';
 import { Observable, switchMap, tap } from 'rxjs';
 
 @Component({
-	selector: 'app-doctor-patient-delete',
-	standalone: true,
-	imports: [
-		AsyncPipe,
-		RouterLink,
-		NgIf
-	],
-	templateUrl: './delete.component.html',
-	styleUrl: './delete.component.css'
+    selector: 'app-doctor-patient-delete',
+    imports: [
+        AsyncPipe,
+        RouterLink,
+        NgIf
+    ],
+    templateUrl: './delete.component.html',
+    styleUrl: './delete.component.css'
 })
 export class DeleteComponent implements OnInit {
 

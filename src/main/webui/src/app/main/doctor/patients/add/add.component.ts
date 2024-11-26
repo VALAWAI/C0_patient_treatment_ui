@@ -20,22 +20,21 @@ import { MatInputModule } from '@angular/material/input';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
-	selector: 'app-doctor-patient-add',
-	standalone: true,
-	imports: [
-		AsyncPipe,
-		NgIf,
-		AvvvatarsComponent,
-		PatientStatusCriteriaEditorComponent,
-		MatIcon,
-		RouterLink,
-		MatButton,
-		MatInputModule,
-		ReactiveFormsModule,
-		NgIf
-	],
-	templateUrl: './add.component.html',
-	styleUrl: './add.component.css'
+    selector: 'app-doctor-patient-add',
+    imports: [
+        AsyncPipe,
+        NgIf,
+        AvvvatarsComponent,
+        PatientStatusCriteriaEditorComponent,
+        MatIcon,
+        RouterLink,
+        MatButton,
+        MatInputModule,
+        ReactiveFormsModule,
+        NgIf
+    ],
+    templateUrl: './add.component.html',
+    styleUrl: './add.component.css'
 })
 export class AddComponent implements OnInit, OnDestroy {
 

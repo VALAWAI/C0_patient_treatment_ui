@@ -12,14 +12,13 @@ import { HealthStatusComponent } from './health-status.component';
 import { NgFor } from '@angular/common';
 
 @Component({
-	selector: 'app-status',
-	standalone: true,
-	imports: [
-		HealthStatusComponent,
-		NgFor
-	],
-	templateUrl: './status.component.html',
-	styleUrl: './status.component.css'
+    selector: 'app-status',
+    imports: [
+        HealthStatusComponent,
+        NgFor
+    ],
+    templateUrl: './status.component.html',
+    styleUrl: './status.component.css'
 })
 export class StatusComponent implements OnInit {
 

@@ -75,14 +75,13 @@ export class Notification {
 }
 
 @Component({
-	selector: 'snack-bar-error-notification',
-	template: `
+    selector: 'snack-bar-error-notification',
+    template: `
 	<div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
 		<span matSnackBarLabel>{{data.text}}</span>
 	</div>
 	`,
-	standalone: true,
-	imports: [MatSnackBarLabel],
+    imports: [MatSnackBarLabel]
 })
 export class ErrorNotificationComponent {
 
@@ -97,14 +96,13 @@ export class ErrorNotificationComponent {
 }
 
 @Component({
-	selector: 'snack-bar-success-notification',
-	template: `
+    selector: 'snack-bar-success-notification',
+    template: `
 	<div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
 		<span matSnackBarLabel>{{data.text}}</span>
 	</div>
 	`,
-	standalone: true,
-	imports: [MatSnackBarLabel],
+    imports: [MatSnackBarLabel]
 })
 export class SuccessNotificationComponent {
 
@@ -120,14 +118,13 @@ export class SuccessNotificationComponent {
 
 
 @Component({
-	selector: 'snack-bar-info-notification',
-	template: `
+    selector: 'snack-bar-info-notification',
+    template: `
 	<div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
 		<span matSnackBarLabel>{{data.text}}</span>
 	</div>
 	`,
-	standalone: true,
-	imports: [MatSnackBarLabel],
+    imports: [MatSnackBarLabel]
 })
 export class InfoNotificationComponent {
 
