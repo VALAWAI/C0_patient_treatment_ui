@@ -41,7 +41,7 @@ public enum BarthelIndex {
 	INDEPENDENT,
 
 	/**
-	 * The index is unknown.
+	 * When the functional independence is unknown.
 	 */
 	UNKNOWN;
 

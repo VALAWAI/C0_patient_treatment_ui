@@ -9,6 +9,7 @@
 package eu.valawai.c0_patient_treatment_ui;
 
 import java.text.MessageFormat;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -196,6 +197,61 @@ public class ValueGenerator {
 	public static Double nextDouble() {
 
 		return CURRENT.nextDouble();
+	}
+
+	/**
+	 * Return a random past time.
+	 *
+	 * @return a past time.
+	 */
+	public static long nextPastTime() {
+
+		return CURRENT.nextLong(0, TimeManager.now());
+	}
+
+	/**
+	 * Shuffle a list of values.
+	 *
+	 * @param values to be shuffled.
+	 */
+	public static void shuffle(List<?> values) {
+
+		Collections.shuffle(values, CURRENT);
+	}
+
+	/**
+	 * Return a boolean value or {@code null}.
+	 *
+	 * @return a boolean value or a {@code null}.
+	 */
+	public static Boolean nextBoolean() {
+
+		return switch (CURRENT.nextInt(0, 3)) {
+		case 0 -> Boolean.TRUE;
+		case 1 -> Boolean.FALSE;
+		default -> null;
+		};
+	}
+
+	/**
+	 * Return an integer value in the range [0,max] or {@code null}.
+	 *
+	 * @param max maximum integer value (exclusive) to return.
+	 *
+	 * @return the random integer in the range [0,max] or {@code null}.
+	 */
+	public static Integer nextInteger(int max) {
+
+		final var value = CURRENT.nextInt(0, max + 2);
+		if (value > max) {
+
+			return null;
+
+		} else {
+
+			return value;
+		}
+
 	}
 
 }

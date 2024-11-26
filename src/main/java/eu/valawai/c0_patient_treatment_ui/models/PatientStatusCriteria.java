@@ -13,7 +13,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import jakarta.persistence.Embeddable;
 
 /**
- * An entity that stores the status of a patient by some criteria.
+ * A model that stores the status of a patient by some criteria.
  *
  * @author UDT-IA, IIIA-CSIC
  */
@@ -122,5 +122,11 @@ public class PatientStatusCriteria extends ReflectionModel {
 	 */
 	@Schema(title = "Describe the degree of discomfort of the patient status before applying any action.")
 	public DiscomfortDegree discomfortDegree;
+
+	/**
+	 * Describe the level of therapeutic intensity of the patient
+	 */
+	@Schema(title = "Describe the level of therapeutic intensity of the patient.")
+	public NITLevel nitLevel;
 
 }
