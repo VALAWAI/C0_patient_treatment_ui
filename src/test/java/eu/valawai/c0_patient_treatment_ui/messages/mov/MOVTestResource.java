@@ -5,8 +5,9 @@
   license that can be found in the LICENSE file or at
   https://opensource.org/license/gpl-3-0/
 */
-package eu.valawai.c0_patient_treatment_ui.mov;
+package eu.valawai.c0_patient_treatment_ui.messages.mov;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,7 +49,6 @@ public class MOVTestResource implements QuarkusTestResourceLifecycleManager {
 	/**
 	 * The mongo service container.
 	 */
-	@SuppressWarnings("resource")
 	static GenericContainer<?> mongoContainer = new GenericContainer<>(DockerImageName.parse(MONGO_DOCKER_NAME))
 			.withStartupAttempts(1).withEnv("MONGO_INITDB_ROOT_USERNAME", "root")
 			.withEnv("MONGO_INITDB_ROOT_PASSWORD", "password").withEnv("MONGO_INITDB_DATABASE", "movDB")
@@ -61,7 +61,6 @@ public class MOVTestResource implements QuarkusTestResourceLifecycleManager {
 	/**
 	 * The RabbitMQ service container.
 	 */
-	@SuppressWarnings("resource")
 	static GenericContainer<?> rabbitMQContainer = new GenericContainer<>(DockerImageName.parse(RABBITMQ_DOCKER_NAME))
 			.withStartupAttempts(1).withEnv("RABBITMQ_DEFAULT_USER", "mov").withEnv("RABBITMQ_DEFAULT_PASS", "password")
 			.withExposedPorts(5672).waitingFor(Wait.forListeningPort());
@@ -101,8 +100,10 @@ public class MOVTestResource implements QuarkusTestResourceLifecycleManager {
 
 			movContainer = new GenericContainer<>(DockerImageName.parse(MOV_DOCKER_NAME)).withStartupAttempts(1)
 					.withEnv("rabbitmq-host", rabbitMQHost).withEnv("rabbitmq-port", rabbitMQPort)
-					.withEnv("quarkus.mongodb.connection-string", mongoConnection).withExposedPorts(8080)
-					.waitingFor(Wait.forListeningPort());
+					.withEnv("quarkus.mongodb.connection-string", mongoConnection)
+					.withEnv("mov.url", "http://localhost:9084").withExposedPorts(8080);
+			movContainer.setPortBindings(Arrays.asList("9084:8080"));
+			movContainer.waitingFor(Wait.forListeningPort());
 			movContainer.start();
 			config.put(MOV_URL_CONFIG_PROPERTY_NAME,
 					"http://" + movContainer.getHost() + ":" + movContainer.getMappedPort(8080));

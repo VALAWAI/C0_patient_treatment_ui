@@ -175,4 +175,27 @@ public class ValueGenerator {
 
 	}
 
+	/**
+	 * Generate a random integer in the specified range.
+	 *
+	 * @param min value for the integer (inclusive).
+	 * @param max value for the integer (exclusive).
+	 *
+	 * @return a random integer value in the range.
+	 */
+	public static int nextInt(int min, int max) {
+
+		return CURRENT.nextInt(min, max);
+	}
+
+	/**
+	 * Generate a random double value in the range [0,1].
+	 *
+	 * @return new double value in the range [0,1].
+	 */
+	public static Double nextDouble() {
+
+		return CURRENT.nextDouble();
+	}
+
 }
