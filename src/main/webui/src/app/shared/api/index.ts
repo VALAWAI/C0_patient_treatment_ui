@@ -23,7 +23,8 @@ export {
 	BarthelIndex,
 	LawtonIndex,
 	CognitiveImpairmentLevel,
-	DiscomfortDegree
+	DiscomfortDegree,
+	NITLevel
 } from './patient-status-criteria.model';
 export { Treatment, TreatmentAction, TREATMENT_ACTION_NAMES } from './treatment.model';
 export { TreatmentActionNamePipe } from './treatment-action-name.pipe';
