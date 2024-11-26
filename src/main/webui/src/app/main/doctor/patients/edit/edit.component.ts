@@ -8,26 +8,24 @@
 
 import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { TitleService, UserNotificationService } from '@app/shared';
 import { ApiService, Patient, PatientStatusCriteria } from '@app/shared/api';
 import { Observable, switchMap, tap } from 'rxjs';
 import { AvvvatarsComponent } from '@ngxpert/avvvatars';
 import { PatientStatusCriteriaEditorComponent } from '@app/shared/patient-status-criteria-editor';
-import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
+	standalone: true,
     selector: 'app-doctor-patient-edit',
     imports: [
         AsyncPipe,
         NgIf,
         AvvvatarsComponent,
         PatientStatusCriteriaEditorComponent,
-        MatIcon,
-        RouterLink,
         MatButton,
         MatInputModule,
         ReactiveFormsModule,

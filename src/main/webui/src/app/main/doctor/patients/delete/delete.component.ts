@@ -14,6 +14,7 @@ import { ApiService, Patient } from '@app/shared/api';
 import { Observable, switchMap, tap } from 'rxjs';
 
 @Component({
+	standalone: true,
     selector: 'app-doctor-patient-delete',
     imports: [
         AsyncPipe,

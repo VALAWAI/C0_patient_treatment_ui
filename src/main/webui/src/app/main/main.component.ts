@@ -19,6 +19,7 @@ import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
 
 @Component({
+	standalone: true,
     selector: 'app-main',
     imports: [
         RouterOutlet,

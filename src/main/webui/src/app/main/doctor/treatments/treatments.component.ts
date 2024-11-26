@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 import { TitleService } from '@app/shared';
 
 @Component({
+	standalone: true,
     selector: 'app-treatments',
     imports: [],
     templateUrl: './treatments.component.html',

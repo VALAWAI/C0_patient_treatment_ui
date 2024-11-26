@@ -8,14 +8,13 @@
 
 import { AsyncPipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { TitleService, UserNotificationService } from '@app/shared';
 import { ApiService, Patient, PatientStatusCriteria, TREATMENT_ACTION_NAMES, TreatmentActionNamePipe } from '@app/shared/api';
 import { Observable, switchMap, tap } from 'rxjs';
 import { PatientStatusCriteriaEditorComponent } from '@app/shared/patient-status-criteria-editor';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
-import { MatButton } from '@angular/material/button';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 
@@ -39,6 +38,7 @@ export const AtLeastOneActionValidator: ValidatorFn = (control: AbstractControl)
 }
 
 @Component({
+	standalone: true,
     selector: 'app-doctor-patient-edit',
     imports: [
         AsyncPipe,
@@ -46,8 +46,6 @@ export const AtLeastOneActionValidator: ValidatorFn = (control: AbstractControl)
         MatStepperModule,
         PatientStatusCriteriaEditorComponent,
         ReactiveFormsModule,
-        MatButton,
-        RouterLink,
         NgFor,
         MatSlideToggle,
         TreatmentActionNamePipe,

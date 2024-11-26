@@ -17,6 +17,7 @@ import { PatientStatusCriteriaEditorComponent } from '@app/shared/patient-status
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
+	standalone: true,
     selector: 'app-doctor-patient-view',
     imports: [
         AsyncPipe,

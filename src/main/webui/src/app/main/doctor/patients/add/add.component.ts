@@ -6,28 +6,25 @@
   https://opensource.org/license/gpl-3-0/
 */
 
-import { AsyncPipe, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TitleService, UserNotificationService } from '@app/shared';
 import { ApiService, Patient, PatientStatusCriteria } from '@app/shared/api';
-import { Observable, Subscription, switchMap, tap } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { AvvvatarsComponent } from '@ngxpert/avvvatars';
 import { PatientStatusCriteriaEditorComponent } from '@app/shared/patient-status-criteria-editor';
-import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
+	standalone: true,
     selector: 'app-doctor-patient-add',
     imports: [
-        AsyncPipe,
         NgIf,
         AvvvatarsComponent,
         PatientStatusCriteriaEditorComponent,
-        MatIcon,
-        RouterLink,
         MatButton,
         MatInputModule,
         ReactiveFormsModule,

@@ -7,7 +7,7 @@
 */
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ApiService, MinPatient, MinPatientPage } from '@app/shared/api';
+import { ApiService, MinPatientPage } from '@app/shared/api';
 import { Subscription } from 'rxjs';
 import { ReactiveFormsModule, FormControl, FormBuilder } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
@@ -16,11 +16,11 @@ import { NgIf, NgFor } from '@angular/common';
 import { AvvvatarsComponent } from '@ngxpert/avvvatars';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatMenuItem, MatMenuTrigger, MatMenu } from '@angular/material/menu';
-import { MatButton } from '@angular/material/button';
 import { TitleService } from '@app/shared';
 import { RouterLink } from '@angular/router';
 
 @Component({
+	standalone: true,
     selector: 'app-patients',
     imports: [
         MatIcon,
@@ -32,7 +32,6 @@ import { RouterLink } from '@angular/router';
         MatProgressBarModule,
         MatMenuItem,
         MatIcon,
-        MatButton,
         MatMenuTrigger,
         RouterLink,
         MatMenu

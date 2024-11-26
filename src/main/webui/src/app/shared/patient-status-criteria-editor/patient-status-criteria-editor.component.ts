@@ -24,6 +24,7 @@ import { Subscription } from 'rxjs';
 import { ReactiveFormsModule, FormControl, FormBuilder } from '@angular/forms';
 
 @Component({
+	standalone: true,
     selector: 'app-patient-status-criteria-editor',
     imports: [
         ReactiveFormsModule,
