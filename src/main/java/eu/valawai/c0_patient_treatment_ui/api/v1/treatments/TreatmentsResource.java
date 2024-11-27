@@ -16,11 +16,9 @@ import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-import org.eclipse.microprofile.reactive.messaging.Channel;
-import org.eclipse.microprofile.reactive.messaging.Emitter;
 
 import eu.valawai.c0_patient_treatment_ui.TimeManager;
-import eu.valawai.c0_patient_treatment_ui.messages.TreatmentPayload;
+import eu.valawai.c0_patient_treatment_ui.messages.TreatmentService;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntity;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientStatusCriteriaEntity;
 import eu.valawai.c0_patient_treatment_ui.persistence.TreatmentEntity;
@@ -51,11 +49,10 @@ import jakarta.ws.rs.core.Response.Status;
 public class TreatmentsResource {
 
 	/**
-	 * The component to send the treatment messages.
+	 * The service to publish treatments.
 	 */
-	@Channel("publish_treatment")
 	@Inject
-	Emitter<TreatmentPayload> service;
+	protected TreatmentService service;
 
 	/**
 	 * Return the information of a treatment.
@@ -133,14 +130,12 @@ public class TreatmentsResource {
 					entity.expectedStatus = expected;
 					entity.patient = patient;
 					final Uni<TreatmentEntity> persist = entity.persistAndFlush();
-					return persist.chain(stored -> {
+					return persist.map(stored -> {
 
 						final var treatment = stored.toTreatment();
 						final var payload = stored.toTreatmentPayload();
-						return Uni.createFrom().completionStage(this.service.send(payload)).map(any -> {
-							Log.debugv("Sent {0}.", treatment);
-							return Response.status(Status.CREATED).entity(treatment).build();
-						});
+						this.service.send(payload);
+						return Response.status(Status.CREATED).entity(treatment).build();
 					});
 
 				});

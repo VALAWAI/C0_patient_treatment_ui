@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import eu.valawai.c0_patient_treatment_ui.TimeManager;
 import eu.valawai.c0_patient_treatment_ui.messages.TreatmentQueue;
+import eu.valawai.c0_patient_treatment_ui.messages.mov.MOVTestResource;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntities;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntity;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientStatusCriteriaEntity;
@@ -40,6 +41,7 @@ import jakarta.ws.rs.core.Response.Status;
  * @author UDT-IA, IIIA-CSIC
  */
 @QuarkusTest
+@QuarkusTestResource(MOVTestResource.class)
 @QuarkusTestResource(PostgreSQLTestResource.class)
 public class TreatmentsResourceTest {
 
@@ -301,9 +303,9 @@ public class TreatmentsResourceTest {
 			assertEquals(model, found.toTreatment());
 			asserter.putData("BEFORE_STATUS_ID", found.beforeStatus.id);
 			asserter.putData("EXPECTED_STATUS_ID", found.expectedStatus.id);
-			final var payload = this.queue.waitUntilNextTreatment(Duration.ofSeconds(30));
-			assertEquals(found.toTreatmentPayload(), payload);
-
+			final var expectedPayload = found.toTreatmentPayload();
+			final var received = this.queue.waitUntilNextTreatment(Duration.ofSeconds(30));
+			assertEquals(expectedPayload, received);
 		});
 
 		asserter.assertThat(() -> {
