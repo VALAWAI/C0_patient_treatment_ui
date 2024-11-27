@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -30,6 +31,7 @@ import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.hibernate.reactive.panache.TransactionalUniAsserter;
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.vertx.RunOnVertxContext;
+import io.smallrye.mutiny.Uni;
 import jakarta.ws.rs.core.Response.Status;
 
 /**
@@ -358,46 +360,71 @@ public class PatientsResourceTest {
 	@RunOnVertxContext
 	public void shoulRetrievePatientPage(TransactionalUniAsserter asserter) {
 
-		asserter.assertThat(() -> PatientEntities.populateWith(50).chain(ignored -> PatientEntity.count()), total -> {
+		asserter.assertThat(() -> PatientEntities.populateWith(50).chain(ignored -> PatientEntity.count()),
+				total -> asserter.putData("TOTAL", total));
 
-			final var page = given().when().queryParam("limit", total).get("/v1/patients").then()
-					.statusCode(Status.OK.getStatusCode()).extract().as(MinPatientPage.class);
+		asserter.assertThat(() -> {
+
+			final long total = (Long) asserter.getData("TOTAL");
+			return Uni.createFrom().item(() -> given().when().queryParam("limit", total)
+
+					.get("/v1/patients").then().statusCode(Status.OK.getStatusCode()).extract()
+					.as(MinPatientPage.class));
+
+		}, page -> {
+
+			final long total = (Long) asserter.getData("TOTAL");
 			assertNotNull(page);
 			assertEquals(total, page.total);
 			assertNotNull(page.patients);
 			assertEquals(total, page.patients.size());
-
-			final var page2 = given().queryParam("offset", "3").when().get("/v1/patients").then()
-					.statusCode(Status.OK.getStatusCode()).extract().as(MinPatientPage.class);
-			final var expected = new MinPatientPage();
-			expected.total = page.total;
-			expected.patients = page.patients.subList(3, 13);
-			assertEquals(expected, page2);
-
-			final var page3 = given().queryParam("order", "-name").queryParam("name", "P*1*").queryParam("offset", "2")
-					.queryParam("limit", "7").when().get("/v1/patients").then().statusCode(Status.OK.getStatusCode())
-					.extract().as(MinPatientPage.class);
-
-			expected.patients = page.patients.stream().filter(p -> p.name.matches("P.*1.*"))
-					.collect(Collectors.toList());
-			expected.total = expected.patients.size();
-			Collections.sort(expected.patients, (p1, p2) -> p2.name.compareTo(p1.name));
-			final var maxPattern = expected.patients.size();
-			if (maxPattern < 3) {
-
-				expected.patients = null;
-
-			} else if (maxPattern < 9) {
-
-				expected.patients = expected.patients.subList(2, maxPattern);
-
-			} else {
-
-				expected.patients = expected.patients.subList(2, 9);
-			}
-			assertEquals(expected, page3);
-
+			asserter.putData("PATIENTS", page.patients);
 		});
+
+		asserter.assertThat(() -> Uni.createFrom().item(() -> given().queryParam("offset", "3").when()
+				.get("/v1/patients").then().statusCode(Status.OK.getStatusCode()).extract().as(MinPatientPage.class)),
+				page -> {
+
+					final int total = ((Long) asserter.getData("TOTAL")).intValue();
+					@SuppressWarnings("unchecked")
+					final List<MinPatient> patients = (List<MinPatient>) asserter.getData("PATIENTS");
+					final var expected = new MinPatientPage();
+					expected.total = total;
+					expected.patients = patients.subList(3, 13);
+					assertEquals(expected, page);
+				});
+
+		asserter.assertThat(() -> Uni.createFrom()
+				.item(() -> given().queryParam("order", "-name").queryParam("name", "P*1*").queryParam("offset", "2")
+						.queryParam("limit", "7").when().get("/v1/patients").then()
+						.statusCode(Status.OK.getStatusCode()).extract().as(MinPatientPage.class)),
+				page -> {
+
+					final int total = ((Long) asserter.getData("TOTAL")).intValue();
+					@SuppressWarnings("unchecked")
+					final List<MinPatient> patients = (List<MinPatient>) asserter.getData("PATIENTS");
+					final var expected = new MinPatientPage();
+					expected.total = total;
+					expected.patients = patients.stream().filter(p -> p.name.matches("P.*1.*"))
+							.collect(Collectors.toList());
+					expected.total = expected.patients.size();
+					Collections.sort(expected.patients, (p1, p2) -> p2.name.compareTo(p1.name));
+					final var maxPattern = expected.patients.size();
+					if (maxPattern < 3) {
+
+						expected.patients = null;
+
+					} else if (maxPattern < 9) {
+
+						expected.patients = expected.patients.subList(2, maxPattern);
+
+					} else {
+
+						expected.patients = expected.patients.subList(2, 9);
+					}
+					assertEquals(expected, page);
+
+				});
 	}
 
 }

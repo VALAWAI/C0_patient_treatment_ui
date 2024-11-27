@@ -149,7 +149,7 @@ public class PatientEntity extends PanacheEntity {
 	 */
 	public static Uni<MinPatientPage> getMinPatientPageFor(String pattern, Sort sort, int from, int limit) {
 
-		return count("#PatientEntity.MinPatientTotal", pattern).chain(total -> {
+		return PatientEntity.count("#PatientEntity.MinPatientTotal", pattern).chain(total -> {
 
 			final var page = new MinPatientPage();
 			page.total = Math.toIntExact(total);
@@ -177,9 +177,7 @@ public class PatientEntity extends PanacheEntity {
 
 			}
 
-		}).onFailure().recoverWithItem(error ->
-
-		{
+		}).onFailure().recoverWithItem(error -> {
 
 			Log.errorv(error, "Cannot find for the patients.");
 			return new MinPatientPage();

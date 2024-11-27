@@ -12,6 +12,7 @@ import java.util.List;
 
 import eu.valawai.c0_patient_treatment_ui.TimeManager;
 import eu.valawai.c0_patient_treatment_ui.api.v1.treatments.Treatment;
+import eu.valawai.c0_patient_treatment_ui.messages.TreatmentPayload;
 import eu.valawai.c0_patient_treatment_ui.models.TreatmentAction;
 import io.quarkus.hibernate.reactive.panache.PanacheEntity;
 import io.smallrye.mutiny.Uni;
@@ -146,6 +147,34 @@ public class TreatmentEntity extends PanacheEntity {
 			treatment.expectedStatus = this.expectedStatus.status;
 		}
 		return treatment;
+	}
+
+	/**
+	 * Convert this entity to a {@link TreatmentPayload}.
+	 *
+	 * @return the treatment payload with the data of this
+	 */
+	public TreatmentPayload toTreatmentPayload() {
+
+		final var payload = new TreatmentPayload();
+		payload.id = String.valueOf(this.id);
+		if (this.patient != null) {
+
+			payload.patient_id = String.valueOf(this.patient.id);
+		}
+		payload.created_time = this.createdTime;
+		payload.actions = this.treatmentActions;
+		if (this.beforeStatus != null) {
+
+			payload.before_status = this.beforeStatus.toPatientStatusCriteriaPayload();
+		}
+
+		if (this.expectedStatus != null) {
+
+			payload.expected_status = this.expectedStatus.toPatientStatusCriteriaPayload();
+		}
+		return payload;
+
 	}
 
 }

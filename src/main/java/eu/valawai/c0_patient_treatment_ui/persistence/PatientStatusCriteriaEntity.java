@@ -8,7 +8,10 @@
 
 package eu.valawai.c0_patient_treatment_ui.persistence;
 
+import eu.valawai.c0_patient_treatment_ui.messages.PatientStatusCriteriaPayload;
+import eu.valawai.c0_patient_treatment_ui.models.LawtonIndex;
 import eu.valawai.c0_patient_treatment_ui.models.PatientStatusCriteria;
+import eu.valawai.c0_patient_treatment_ui.models.YesNoUnknownOption;
 import io.quarkus.hibernate.reactive.panache.PanacheEntity;
 import io.smallrye.mutiny.Uni;
 import jakarta.persistence.Embedded;
@@ -93,4 +96,90 @@ public class PatientStatusCriteriaEntity extends PanacheEntity {
 		}
 
 	}
+
+	/**
+	 * Convert this entity to a {@link PatientStatusCriteriaPayload}.
+	 *
+	 * @return the patient status criteria payload with the data of this
+	 */
+	public PatientStatusCriteriaPayload toPatientStatusCriteriaPayload() {
+
+		final var payload = new PatientStatusCriteriaPayload();
+		if (this.status != null) {
+
+			payload.age_range = this.status.ageRange;
+			payload.ccd = toBoolean(this.status.ccd);
+			payload.maca = toBoolean(this.status.maca);
+			payload.expected_survival = this.status.expectedSurvival;
+			payload.frail_VIG = this.status.frailVIG;
+			payload.clinical_risk_group = this.status.clinicalRiskGroup;
+			payload.has_social_support = toBoolean(this.status.hasSocialSupport);
+			payload.independence_at_admission = this.status.independenceAtAdmission;
+			payload.independence_instrumental_activities = toInteger(this.status.independenceInstrumentalActivities);
+			payload.has_advance_directives = toBoolean(this.status.hasAdvanceDirectives);
+			payload.is_competent = toBoolean(this.status.isCompetent);
+			payload.has_been_informed = toBoolean(this.status.hasBeenInformed);
+			payload.is_coerced = toBoolean(this.status.isCoerced);
+			payload.has_cognitive_impairment = this.status.hasCognitiveImpairment;
+			payload.has_emocional_pain = toBoolean(this.status.hasEmocionalPain);
+			payload.discomfort_degree = this.status.discomfortDegree;
+			payload.nit_level = this.status.nitLevel;
+
+		}
+		return payload;
+
+	}
+
+	/**
+	 * Convert the index to an integer.
+	 *
+	 * @param index to convert.
+	 *
+	 * @return the integer value of the index.
+	 */
+	private static Integer toInteger(LawtonIndex index) {
+
+		if (index == null) {
+
+			return null;
+
+		} else {
+
+			return switch (index) {
+			case ZERO -> 0;
+			case ONE -> 1;
+			case TWO -> 2;
+			case THREE -> 3;
+			case FOUR -> 4;
+			case FIVE -> 5;
+			case SIX -> 6;
+			case SEVEN -> 7;
+			case EIGHT -> 8;
+			default -> null;
+			};
+		}
+	}
+
+	/**
+	 * Convert a {@link YesNoUnknownOption} to a boolean.
+	 *
+	 * @parma option to convert to a boolean value.
+	 */
+	private static Boolean toBoolean(YesNoUnknownOption option) {
+
+		if (option == YesNoUnknownOption.YES) {
+
+			return Boolean.TRUE;
+
+		} else if (option == YesNoUnknownOption.NO) {
+
+			return Boolean.FALSE;
+
+		} else {
+
+			return null;
+		}
+
+	}
+
 }

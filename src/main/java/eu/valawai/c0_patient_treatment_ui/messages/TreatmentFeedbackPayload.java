@@ -10,6 +10,8 @@ package eu.valawai.c0_patient_treatment_ui.messages;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import jakarta.validation.constraints.NotEmpty;
+
 /**
  * The feedback for a treatment.
  *
@@ -21,6 +23,7 @@ public class TreatmentFeedbackPayload extends Payload {
 	/**
 	 * The id of the treatment that this is the feedback.
 	 */
+	@NotEmpty
 	public String treatment_id;
 
 }
