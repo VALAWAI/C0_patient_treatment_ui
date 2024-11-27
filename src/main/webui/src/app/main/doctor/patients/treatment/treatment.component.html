@@ -34,11 +34,11 @@
 		<button mat-button matStepperNext
 			i18n="The label for the go to next step@@common_stepper_next">Next</button>
 	</div>
-	</mat-step> <mat-step [stepControl]="afterStatus"> <ng-template
+	</mat-step> <mat-step [stepControl]="expectedStatus"> <ng-template
 		matStepLabel
 		i18n="The label for the third step to define a treatment@@main_doctor_patients_treatment_step3-label">Select
 	the expected state after the treatment</ng-template> <app-patient-status-criteria-editor
-		[data]="patient.status" (dataChanged)="afterStatus.setValue($event)"></app-patient-status-criteria-editor>
+		[data]="patient.status" (dataChanged)="expectedStatus.setValue($event)"></app-patient-status-criteria-editor>
 	<div class="flex flex-row gap-3">
 		<button mat-button matStepperPrevious
 			i18n="The label for the go to previous step@@common_stepper_previous">Previous</button>

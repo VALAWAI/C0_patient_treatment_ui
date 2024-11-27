@@ -8,9 +8,9 @@
 
 import { AsyncPipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TitleService, UserNotificationService } from '@app/shared';
-import { ApiService, Patient, PatientStatusCriteria, TREATMENT_ACTION_NAMES, TreatmentActionNamePipe } from '@app/shared/api';
+import { ApiService, MinPatient, Patient, PatientStatusCriteria, TREATMENT_ACTION_NAMES, Treatment, TreatmentActionNamePipe } from '@app/shared/api';
 import { Observable, switchMap, tap } from 'rxjs';
 import { PatientStatusCriteriaEditorComponent } from '@app/shared/patient-status-criteria-editor';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
@@ -39,26 +39,26 @@ export const AtLeastOneActionValidator: ValidatorFn = (control: AbstractControl)
 
 @Component({
 	standalone: true,
-    selector: 'app-doctor-patient-edit',
-    imports: [
-        AsyncPipe,
-        NgIf,
-        MatStepperModule,
-        PatientStatusCriteriaEditorComponent,
-        ReactiveFormsModule,
-        NgFor,
-        MatSlideToggle,
-        TreatmentActionNamePipe,
-        NgClass
-    ],
-    templateUrl: './treatment.component.html',
-    styleUrl: './treatment.component.css',
-    providers: [
-        {
-            provide: STEPPER_GLOBAL_OPTIONS,
-            useValue: { showError: true },
-        },
-    ]
+	selector: 'app-doctor-patient-edit',
+	imports: [
+		AsyncPipe,
+		NgIf,
+		MatStepperModule,
+		PatientStatusCriteriaEditorComponent,
+		ReactiveFormsModule,
+		NgFor,
+		MatSlideToggle,
+		TreatmentActionNamePipe,
+		NgClass
+	],
+	templateUrl: './treatment.component.html',
+	styleUrl: './treatment.component.css',
+	providers: [
+		{
+			provide: STEPPER_GLOBAL_OPTIONS,
+			useValue: { showError: true },
+		},
+	]
 })
 export class TreatmentComponent implements OnInit {
 
@@ -84,7 +84,7 @@ export class TreatmentComponent implements OnInit {
 		this.fb.group({
 			beforeStatus: this.fb.control<PatientStatusCriteria | null>(null, Validators.required),
 			actions: this.fb.group({}, { validators: AtLeastOneActionValidator }),
-			afterStatus: this.fb.control<PatientStatusCriteria | null>(null, Validators.required),
+			expectedStatus: this.fb.control<PatientStatusCriteria | null>(null, Validators.required),
 		});
 
 	/**
@@ -94,6 +94,7 @@ export class TreatmentComponent implements OnInit {
 		private title: TitleService,
 		private api: ApiService,
 		private route: ActivatedRoute,
+		private router: Router,
 		private fb: FormBuilder,
 		private notifier: UserNotificationService
 	) {
@@ -128,10 +129,10 @@ export class TreatmentComponent implements OnInit {
 	/**
 	 * Get the after status form.
 	 */
-	public get afterStatus(): FormControl<PatientStatusCriteria | null> {
+	public get expectedStatus(): FormControl<PatientStatusCriteria | null> {
 
 
-		return this.form.controls['afterStatus'] as FormControl<PatientStatusCriteria | null>;
+		return this.form.controls['expectedStatus'] as FormControl<PatientStatusCriteria | null>;
 
 	}
 
@@ -151,7 +152,7 @@ export class TreatmentComponent implements OnInit {
 							this.form.patchValue(
 								{
 									beforeStatus: patient.status,
-									afterStatus: patient.status
+									expectedStatus: patient.status
 								}
 							);
 						}
@@ -179,6 +180,31 @@ export class TreatmentComponent implements OnInit {
 
 		if (this.form.valid) {
 
+			var treatment = new Treatment();
+			treatment.patient = new MinPatient();
+			treatment.patient.id = this.patientId;
+			treatment.actions = [];
+			for (var name of TREATMENT_ACTION_NAMES) {
+
+				if (this.getControl(name).value === true) {
+
+					treatment.actions.push(name);
+				}
+			}
+			treatment.beforeStatus = this.beforeStatus.value;
+			treatment.expectedStatus = this.expectedStatus.value;
+			this.api.addTreatment(treatment).subscribe({
+				next: (added) => {
+
+					this.router.navigate(['/main/docstor/treatment/', added.id, '/view']);
+
+				},
+				error: err => {
+
+					this.notifier.showError($localize`:The error message when can not add teh treatment@@main_doctor_patients_edit_code_add-error:Canot add the treatement`);
+					console.error(err);
+				}
+			});
 		} else {
 
 			this.form.markAllAsTouched();

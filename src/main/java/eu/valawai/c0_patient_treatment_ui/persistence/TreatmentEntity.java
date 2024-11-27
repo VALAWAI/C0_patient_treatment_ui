@@ -141,7 +141,7 @@ public class TreatmentEntity extends PanacheEntity {
 
 			treatment.beforeStatus = this.beforeStatus.status;
 		}
-		treatment.treatmentActions = this.treatmentActions;
+		treatment.actions = this.treatmentActions;
 		if (this.expectedStatus != null) {
 
 			treatment.expectedStatus = this.expectedStatus.status;

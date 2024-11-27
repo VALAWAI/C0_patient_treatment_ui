@@ -58,7 +58,7 @@ public class Treatment extends ReflectionModel {
 	 */
 	@NotEmpty
 	@Schema(title = "The treatment actions to apply over the patient.")
-	public List<TreatmentAction> treatmentActions;
+	public List<TreatmentAction> actions;
 
 	/**
 	 * The expected status of the patient after applying the treatment.

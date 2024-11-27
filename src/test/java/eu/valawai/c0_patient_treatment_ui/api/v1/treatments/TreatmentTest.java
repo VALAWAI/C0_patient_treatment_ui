@@ -47,10 +47,10 @@ public class TreatmentTest extends ReflectionModelTestCase<Treatment> {
 		model.createdTime = ValueGenerator.rnd().nextLong(0, TimeManager.now() - 360000);
 		model.patient = new MinPatientTest().nextModel();
 		model.beforeStatus = new PatientStatusCriteriaTest().nextModel();
-		model.treatmentActions = new ArrayList<>(Arrays.asList(TreatmentAction.values()));
-		Collections.shuffle(model.treatmentActions, ValueGenerator.rnd());
-		final var max = ValueGenerator.rnd().nextInt(1, model.treatmentActions.size());
-		model.treatmentActions = model.treatmentActions.subList(0, max);
+		model.actions = new ArrayList<>(Arrays.asList(TreatmentAction.values()));
+		Collections.shuffle(model.actions, ValueGenerator.rnd());
+		final var max = ValueGenerator.rnd().nextInt(1, model.actions.size());
+		model.actions = model.actions.subList(0, max);
 		model.expectedStatus = new PatientStatusCriteriaTest().nextModel();
 	}
 

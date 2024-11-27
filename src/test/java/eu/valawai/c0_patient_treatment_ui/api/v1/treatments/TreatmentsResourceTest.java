@@ -13,9 +13,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.Duration;
+
 import org.junit.jupiter.api.Test;
 
 import eu.valawai.c0_patient_treatment_ui.TimeManager;
+import eu.valawai.c0_patient_treatment_ui.messages.TreatmentQueue;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntities;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntity;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientStatusCriteriaEntity;
@@ -26,6 +29,7 @@ import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.hibernate.reactive.panache.TransactionalUniAsserter;
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.vertx.RunOnVertxContext;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response.Status;
 
 /**
@@ -38,6 +42,12 @@ import jakarta.ws.rs.core.Response.Status;
 @QuarkusTest
 @QuarkusTestResource(PostgreSQLTestResource.class)
 public class TreatmentsResourceTest {
+
+	/**
+	 * The queue to listen for the payloads.
+	 */
+	@Inject
+	TreatmentQueue queue;
 
 	/**
 	 * Test not retrieve an undefined treatment.
@@ -71,7 +81,7 @@ public class TreatmentsResourceTest {
 			assertNotNull(retrieved.patient);
 			assertEquals(entity.id, retrieved.id);
 			asserter.putData("BEFORE_STATUS_ID", entity.beforeStatus.id);
-			assertEquals(retrieved.treatmentActions, entity.treatmentActions);
+			assertEquals(retrieved.actions, entity.treatmentActions);
 			asserter.putData("EXPECTED_STATUS_ID", entity.expectedStatus.id);
 			asserter.putData("RETRIEVED", retrieved);
 
@@ -215,7 +225,7 @@ public class TreatmentsResourceTest {
 
 			final var model = new TreatmentTest().nextModel();
 			model.patient.id = last.id;
-			model.treatmentActions = null;
+			model.actions = null;
 			given().contentType("application/json").body(model).when().post("/v1/treatments").then()
 					.statusCode(Status.BAD_REQUEST.getStatusCode());
 		});
@@ -234,7 +244,7 @@ public class TreatmentsResourceTest {
 
 			final var model = new TreatmentTest().nextModel();
 			model.patient.id = last.id;
-			model.treatmentActions.clear();
+			model.actions.clear();
 			given().contentType("application/json").body(model).when().post("/v1/treatments").then()
 					.statusCode(Status.BAD_REQUEST.getStatusCode());
 		});
@@ -268,6 +278,7 @@ public class TreatmentsResourceTest {
 	@RunOnVertxContext
 	public void shouldCreateTreatment(TransactionalUniAsserter asserter) {
 
+		this.queue.clearTreatments();
 		final var model = new TreatmentTest().nextModel();
 		asserter.assertThat(() -> PatientEntities.last(), last -> {
 
@@ -279,7 +290,7 @@ public class TreatmentsResourceTest {
 			model.patient = last.toMinPatient();
 			assertEquals(model.patient, created.patient);
 			assertEquals(model.beforeStatus, created.beforeStatus);
-			assertEquals(model.treatmentActions, created.treatmentActions);
+			assertEquals(model.actions, created.actions);
 			assertEquals(model.expectedStatus, created.expectedStatus);
 			assertTrue(now <= created.createdTime);
 			model.createdTime = created.createdTime;
@@ -290,6 +301,8 @@ public class TreatmentsResourceTest {
 			assertEquals(model, found.toTreatment());
 			asserter.putData("BEFORE_STATUS_ID", found.beforeStatus.id);
 			asserter.putData("EXPECTED_STATUS_ID", found.expectedStatus.id);
+			final var payload = this.queue.waitUntilNextTreatment(Duration.ofSeconds(30));
+			assertEquals(found.toTreatmentPayload(), payload);
 
 		});
 
