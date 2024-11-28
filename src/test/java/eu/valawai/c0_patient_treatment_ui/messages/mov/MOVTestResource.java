@@ -7,7 +7,6 @@
 */
 package eu.valawai.c0_patient_treatment_ui.messages.mov;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -100,10 +99,8 @@ public class MOVTestResource implements QuarkusTestResourceLifecycleManager {
 
 			movContainer = new GenericContainer<>(DockerImageName.parse(MOV_DOCKER_NAME)).withStartupAttempts(1)
 					.withEnv("rabbitmq-host", rabbitMQHost).withEnv("rabbitmq-port", rabbitMQPort)
-					.withEnv("quarkus.mongodb.connection-string", mongoConnection)
-					.withEnv("mov.url", "http://localhost:9084").withExposedPorts(8080);
-			movContainer.setPortBindings(Arrays.asList("9084:8080"));
-			movContainer.waitingFor(Wait.forListeningPort());
+					.withEnv("quarkus.mongodb.connection-string", mongoConnection).withExposedPorts(8080)
+					.waitingFor(Wait.forListeningPort());
 			movContainer.start();
 			config.put(MOV_URL_CONFIG_PROPERTY_NAME,
 					"http://" + movContainer.getHost() + ":" + movContainer.getMappedPort(8080));
