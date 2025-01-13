@@ -2,28 +2,496 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-DV" datatype="plaintext" original="ng2.template">
     <body>
-      <trans-unit id="main_doctor_text" datatype="html">
-        <source>doctor works!</source>
+      <trans-unit id="main_doctor_patients_edit_name" datatype="html">
+        <source>Patient name</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/main/doctor/doctor.component.html</context>
+          <context context-type="sourcefile">src/app/main/doctor/patients/add/add.component.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/edit/edit.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+        <note priority="1" from="description">The label to write the patient name</note>
+      </trans-unit>
+      <trans-unit id="2060264826327259421" datatype="html">
+        <source> You must define a name of the patient. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/add/add.component.html</context>
+          <context context-type="linenumber">11,12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/edit/edit.component.html</context>
+          <context context-type="linenumber">12,13</context>
+        </context-group>
+        <note priority="1" from="description">The error message when name is required@main_doctor_patients_edit_name-required</note>
+      </trans-unit>
+      <trans-unit id="5106859429615230101" datatype="html">
+        <source> The name can not have more than 1024 characters. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/add/add.component.html</context>
+          <context context-type="linenumber">13,18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/edit/edit.component.html</context>
+          <context context-type="linenumber">14,19</context>
+        </context-group>
+        <note priority="1" from="description">The error message when name is required@main_doctor_patients_edit_name-required</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_add-submit" datatype="html">
+        <source>Add</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/add/add.component.html</context>
+          <context context-type="linenumber">24,27</context>
+        </context-group>
+        <note priority="1" from="description">The label to add the patient information</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_add_code_page-title" datatype="html">
+        <source>Add patient</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/add/add.component.ts</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+        <note priority="1" from="description">The header title for the add patient page</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_add_code_added-success" datatype="html">
+        <source>Patient has been added</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/add/add.component.ts</context>
+          <context context-type="linenumber">112</context>
+        </context-group>
+        <note priority="1" from="description">The success notification when the patient has been added</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_add_code_add-error" datatype="html">
+        <source>Patient not add the patient</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/add/add.component.ts</context>
+          <context context-type="linenumber">117</context>
+        </context-group>
+        <note priority="1" from="description">The error notification when the patient cannot be added</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_delete_msg-title" datatype="html">
+        <source> Delete the patient <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;font-bold&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{patient.name}}"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/delete/delete.component.html</context>
+          <context context-type="linenumber">7,9</context>
+        </context-group>
+        <note priority="1" from="description">The title to confirm the delete patient</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_delete_msg-content" datatype="html">
+        <source> Deleting a patient cannot be undone, so don&apos;t do it unless you&apos;re sure. In addition, this action will cause that all the treatment associated with this patient will also be removed.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/delete/delete.component.html</context>
+          <context context-type="linenumber">11,16</context>
+        </context-group>
+        <note priority="1" from="description">The message to confirm the delete patient</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_delete_ok-label" datatype="html">
+        <source>Delete</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/delete/delete.component.html</context>
+          <context context-type="linenumber">18,20</context>
+        </context-group>
+        <note priority="1" from="description">Accept to delete the patient</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_delete_cancel-label" datatype="html">
+        <source> Cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/delete/delete.component.html</context>
+          <context context-type="linenumber">24,27</context>
+        </context-group>
+        <note priority="1" from="description">Cancel to delete the patient</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_delete_code_page-title" datatype="html">
+        <source>Delete patient</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/delete/delete.component.ts</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+        <note priority="1" from="description">The header title for the delete patient</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_delete_code_update-success" datatype="html">
+        <source>Patient deleted</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/delete/delete.component.ts</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+        <note priority="1" from="description">The success notification when the patient is updated</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_delete_code_update-error" datatype="html">
+        <source>Patient cannot be deleted</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/delete/delete.component.ts</context>
+          <context context-type="linenumber">83</context>
+        </context-group>
+        <note priority="1" from="description">The error notification when the patient is updated</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_edit_update" datatype="html">
+        <source>Update</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/edit/edit.component.html</context>
+          <context context-type="linenumber">25,28</context>
+        </context-group>
+        <note priority="1" from="description">The label to update the patient information</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_edit_code_page-title" datatype="html">
+        <source>Edit patient information</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/edit/edit.component.ts</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+        <note priority="1" from="description">The header title for the edit patient</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_edit_code_update-success" datatype="html">
+        <source>Updated patient</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/edit/edit.component.ts</context>
+          <context context-type="linenumber">109</context>
+        </context-group>
+        <note priority="1" from="description">The success notification when the patient is updated</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_edit_code_update-error" datatype="html">
+        <source>Patient not updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/edit/edit.component.ts</context>
+          <context context-type="linenumber">114</context>
+        </context-group>
+        <note priority="1" from="description">The error notification when the patient is updated</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_search-placeholder" datatype="html">
+        <source>Write a patient name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/patients.component.html</context>
+          <context context-type="linenumber">13,14</context>
+        </context-group>
+        <note priority="1" from="description">Help to show when search for a patienth</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_add-label" datatype="html">
+        <source>Add</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/patients.component.html</context>
+          <context context-type="linenumber">20,25</context>
+        </context-group>
+        <note priority="1" from="description">Label of the button to add a new patienth</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_view-patient-menu-item-label" datatype="html">
+        <source>View</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/patients.component.html</context>
+          <context context-type="linenumber">41,43</context>
+        </context-group>
+        <note priority="1" from="description">Menu item to view patient information</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_edit-patient-menu-item-label" datatype="html">
+        <source>Edit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/patients.component.html</context>
+          <context context-type="linenumber">44,46</context>
+        </context-group>
+        <note priority="1" from="description">Menu item to edit patient information</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_delete-patient-menu-item-label" datatype="html">
+        <source>Delete</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/patients.component.html</context>
+          <context context-type="linenumber">47,49</context>
+        </context-group>
+        <note priority="1" from="description">Menu item to delete a patient</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_patient-treatment-menu-item-label" datatype="html">
+        <source>Add treatment</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/patients.component.html</context>
+          <context context-type="linenumber">51,56</context>
+        </context-group>
+        <note priority="1" from="description">Menu item to define a treatment for a patient</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_code_page-title" datatype="html">
+        <source>Patients</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/patients.component.ts</context>
+          <context context-type="linenumber">101</context>
+        </context-group>
+        <note priority="1" from="description">The header title for the treatments</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_treatment_step1-label" datatype="html">
+        <source>Check the status of the patient <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;font-bold&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{patient.name}}"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+        <note priority="1" from="description">The label for the first step to define a treatment</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_treatment_action-required" datatype="html">
+        <source>You must select at least one action to do.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">16,18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">28,32</context>
+        </context-group>
+        <note priority="1" from="description">The error message when rewuire to select at leat one action</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_treatment_step2-label" datatype="html">
+        <source>Select treatment actions to do over the patient</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">19,22</context>
+        </context-group>
+        <note priority="1" from="description">The label for the second step to define a treatment</note>
+      </trans-unit>
+      <trans-unit id="common_stepper_previous" datatype="html">
+        <source>Previous</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">32,34</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">43,45</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">52,54</context>
+        </context-group>
+        <note priority="1" from="description">The label for the go to previous step</note>
+      </trans-unit>
+      <trans-unit id="common_stepper_next" datatype="html">
+        <source>Next</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">34,36</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">45,47</context>
+        </context-group>
+        <note priority="1" from="description">The label for the go to next step</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_treatment_step3-label" datatype="html">
+        <source>Select the expected state after the treatment</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">39,40</context>
+        </context-group>
+        <note priority="1" from="description">The label for the third step to define a treatment</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_treatment_step4-label" datatype="html">
+        <source>Add treatment to the patient</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">49,52</context>
+        </context-group>
+        <note priority="1" from="description">The label for the fourst step to define a treatment</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_treatment_add-label" datatype="html">
+        <source>Add treatment</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">55,59</context>
+        </context-group>
+        <note priority="1" from="description">The label for the add treatment</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_treatment_code_page-title" datatype="html">
+        <source>Add treatment to a patient</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.ts</context>
+          <context context-type="linenumber">144</context>
+        </context-group>
+        <note priority="1" from="description">The header title for the patient treatment</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_edit_code_add-error" datatype="html">
+        <source>Canot add the treatement</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.ts</context>
+          <context context-type="linenumber">204</context>
+        </context-group>
+        <note priority="1" from="description">The error message when can not add teh treatment</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_view_code_page-title" datatype="html">
+        <source>View patient information</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/view/view.component.ts</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+        <note priority="1" from="description">The header title for the treatments</note>
+      </trans-unit>
+      <trans-unit id="main_treatments_text" datatype="html">
+        <source>treatments works!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/treatments.component.html</context>
           <context context-type="linenumber">1,2</context>
         </context-group>
-        <note priority="1" from="description">Test to the doctor page</note>
+        <note priority="1" from="description">Test to the treatments page</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_code_page-title" datatype="html">
+        <source>Treatments</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/treatments.component.ts</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+        <note priority="1" from="description">The header title for the treatments</note>
+      </trans-unit>
+      <trans-unit id="main_patients-menu-item-label" datatype="html">
+        <source>Patients</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/main.component.html</context>
+          <context context-type="linenumber">10,12</context>
+        </context-group>
+        <note priority="1" from="description">The label for the option to go to the patients menu</note>
+      </trans-unit>
+      <trans-unit id="main_treatments-menu-item-label" datatype="html">
+        <source>Treatments</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/main.component.html</context>
+          <context context-type="linenumber">13,16</context>
+        </context-group>
+        <note priority="1" from="description">The label for the option to go to the treatments menu</note>
+      </trans-unit>
+      <trans-unit id="main_status-menu-item-label" datatype="html">
+        <source>Status</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/main.component.html</context>
+          <context context-type="linenumber">17,19</context>
+        </context-group>
+        <note priority="1" from="description">The label for the option to seee the component status</note>
       </trans-unit>
       <trans-unit id="main_copyright-text" datatype="html">
         <source> Copyright © 2022-2026 <x id="TAG_IMG" ctype="image" equiv-text="&lt;img class=&quot;h-4&quot; src=&quot;images/valawai-logo.png&quot;
 				alt=&quot;VALAWAI logo&quot;&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/main.component.html</context>
-          <context context-type="linenumber">8,11</context>
+          <context context-type="linenumber">27,30</context>
         </context-group>
         <note priority="1" from="description">The copyright text</note>
+      </trans-unit>
+      <trans-unit id="main_status_version-label" datatype="html">
+        <source> Version:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/status/status.component.html</context>
+          <context context-type="linenumber">7,10</context>
+        </context-group>
+        <note priority="1" from="description">The label of the status with the MOV version</note>
+      </trans-unit>
+      <trans-unit id="main_status_profile-label" datatype="html">
+        <source> Profile:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/status/status.component.html</context>
+          <context context-type="linenumber">13,16</context>
+        </context-group>
+        <note priority="1" from="description">The label of the status with the MOV profile</note>
+      </trans-unit>
+      <trans-unit id="main_status_health-label" datatype="html">
+        <source> Health:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/status/status.component.html</context>
+          <context context-type="linenumber">19,21</context>
+        </context-group>
+        <note priority="1" from="description">The label of the status with the MOV health</note>
+      </trans-unit>
+      <trans-unit id="main_status_code_page-title" datatype="html">
+        <source>Status</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/status/status.component.ts</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+        <note priority="1" from="description">The header title for the status</note>
+      </trans-unit>
+      <trans-unit id="shared_treatment-action-name_CPR" datatype="html">
+        <source>Cardiopulmonary resuscitation (CPR)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/treatment-action-name.pipe.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <note priority="1" from="description">The human readable name for the treatment action CPR</note>
+      </trans-unit>
+      <trans-unit id="shared_treatment-action-name_TRANSPLANT" datatype="html">
+        <source>Transplant</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/treatment-action-name.pipe.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <note priority="1" from="description">The human readable name for the treatment action TRANSPLANT</note>
+      </trans-unit>
+      <trans-unit id="shared_treatment-action-name_ICU" datatype="html">
+        <source>Intense care unit (ICU)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/treatment-action-name.pipe.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <note priority="1" from="description">The human readable name for the treatment action ICU</note>
+      </trans-unit>
+      <trans-unit id="shared_treatment-action-name_NIMV" datatype="html">
+        <source>Non-invasive mechanical ventilation (NIMV)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/treatment-action-name.pipe.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <note priority="1" from="description">The human readable name for the treatment action NIMV</note>
+      </trans-unit>
+      <trans-unit id="shared_treatment-action-name_VASOACTIVE_DRUGS" datatype="html">
+        <source>Vasoactive drugs</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/treatment-action-name.pipe.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <note priority="1" from="description">The human readable name for the treatment action VASOACTIVE_DRUGS</note>
+      </trans-unit>
+      <trans-unit id="shared_treatment-action-name_DIALYSIS" datatype="html">
+        <source>Dialysis</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/treatment-action-name.pipe.ts</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <note priority="1" from="description">The human readable name for the treatment action DIALYSIS</note>
+      </trans-unit>
+      <trans-unit id="shared_treatment-action-name_SIMPLE_CLINICAL_TRIAL" datatype="html">
+        <source>Simple clinical trials: X-rays / Analytics / Cultures / Antibodies</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/treatment-action-name.pipe.ts</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+        <note priority="1" from="description">The human readable name for the treatment action SIMPLE_CLINICAL_TRIAL</note>
+      </trans-unit>
+      <trans-unit id="shared_treatment-action-name_MEDIUM_CLINICAL_TRIAL" datatype="html">
+        <source>Medium clinical trials: Computed tomography / Transfusion / Peripherally placed central catheter / Enteral administration</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/treatment-action-name.pipe.ts</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+        <note priority="1" from="description">The human readable name for the treatment action MEDIUM_CLINICAL_TRIAL</note>
+      </trans-unit>
+      <trans-unit id="shared_treatment-action-name_ADVANCED_CLINICAL_TRIAL" datatype="html">
+        <source>Advanced clinical trials: MRI / Endoscopy / Parenteral nutrition</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/treatment-action-name.pipe.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+        <note priority="1" from="description">The human readable name for the treatment action ADVANCED_CLINICAL_TRIAL</note>
+      </trans-unit>
+      <trans-unit id="shared_treatment-action-name_PALLIATIVE_SURGERY" datatype="html">
+        <source>Paliative surgery</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/treatment-action-name.pipe.ts</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <note priority="1" from="description">The human readable name for the treatment action PALLIATIVE_SURGERY</note>
+      </trans-unit>
+      <trans-unit id="shared_treatment-action-name_CURE_SURGERY" datatype="html">
+        <source>Cure surgery</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/treatment-action-name.pipe.ts</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+        <note priority="1" from="description">The human readable name for the treatment action CURE_SURGERY</note>
       </trans-unit>
       <trans-unit id="shared_not-found_title" datatype="html">
         <source>Page not found</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/not-found/not-found.component.html</context>
-          <context context-type="linenumber">4,6</context>
+          <context context-type="linenumber">7,9</context>
         </context-group>
         <note priority="1" from="description">Not found title</note>
       </trans-unit>
@@ -31,7 +499,7 @@
         <source>The page you are looking for might have been removed, or its name changed, or it temporarily unavailable</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/not-found/not-found.component.html</context>
-          <context context-type="linenumber">6,10</context>
+          <context context-type="linenumber">9,13</context>
         </context-group>
         <note priority="1" from="description">Not found message</note>
       </trans-unit>
@@ -39,9 +507,725 @@
         <source>Go to home page </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/not-found/not-found.component.html</context>
-          <context context-type="linenumber">12,14</context>
+          <context context-type="linenumber">15,19</context>
         </context-group>
         <note priority="1" from="description">Not found go home page</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_age-range-question" datatype="html">
+        <source>Patient age range</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">6,10</context>
+        </context-group>
+        <note priority="1" from="description">The question to ask about the age range of a patient</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_age-range-0-19" datatype="html">
+        <source>0 - 19</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">14,15</context>
+        </context-group>
+        <note priority="1" from="description">Age range label for AGE_BETWEEN_0_AND_19</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_age-range-20-29" datatype="html">
+        <source>20 - 29</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">16,17</context>
+        </context-group>
+        <note priority="1" from="description">Age range label for AGE_BETWEEN_20_AND_29</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_age-range-30-39" datatype="html">
+        <source>30 - 39</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">18,19</context>
+        </context-group>
+        <note priority="1" from="description">Age range label for AGE_BETWEEN_30_AND_39</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_age-range-40-49" datatype="html">
+        <source>40 - 49</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">20,21</context>
+        </context-group>
+        <note priority="1" from="description">Age range label for AGE_BETWEEN_40_AND_49</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_age-range-50-59" datatype="html">
+        <source>50 - 59</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">22,23</context>
+        </context-group>
+        <note priority="1" from="description">Age range label for AGE_BETWEEN_50_AND_59</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_age-range-60-69" datatype="html">
+        <source>60 - 69</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">24,25</context>
+        </context-group>
+        <note priority="1" from="description">Age range label for AGE_BETWEEN_60_AND_69</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_age-range-70-79" datatype="html">
+        <source>70 - 79</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">26,27</context>
+        </context-group>
+        <note priority="1" from="description">Age range label for AGE_BETWEEN_70_AND_79</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_age-range-80-89" datatype="html">
+        <source>80 - 89</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">28,29</context>
+        </context-group>
+        <note priority="1" from="description">Age range label for AGE_BETWEEN_80_AND_89</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_age-range-90-99" datatype="html">
+        <source>90 - 99</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">30,31</context>
+        </context-group>
+        <note priority="1" from="description">Age range label for AGE_BETWEEN_90_AND_99</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_age-range-more-than-99" datatype="html">
+        <source>+99</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">31,36</context>
+        </context-group>
+        <note priority="1" from="description">Age range label for AGE_MORE_THAN_99</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_ccd-question" datatype="html">
+        <source> Complex Cronic Disease (CCD)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">39,42</context>
+        </context-group>
+        <note priority="1" from="description">The question to ask about the CCD of a patient</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_ccd-yes" datatype="html">
+        <source>Yes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">46,48</context>
+        </context-group>
+        <note priority="1" from="description">CCD label for YES</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_ccd-no" datatype="html">
+        <source>No</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">48,50</context>
+        </context-group>
+        <note priority="1" from="description">CCD label for NO</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_ccd-unknown" datatype="html">
+        <source>Unknown</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">50,55</context>
+        </context-group>
+        <note priority="1" from="description">CCD label for UNKNOWN</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_maca-question" datatype="html">
+        <source> MACA patient (advance chronic disease and need for palliative care)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">59,61</context>
+        </context-group>
+        <note priority="1" from="description">The question to ask about the age range of a patient</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_maca-question_explanation" datatype="html">
+        <source> This is a classification of patients with a clinical profile similar to PCC but of greater severity and with a life prognosis of less than 12 months. Patients classified as MACA = patients whose The answer to the next question is NO: do you It would be surprising if this patient died in less than 12 months?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">62,70</context>
+        </context-group>
+        <note priority="1" from="description">The explanation to ask about the MACA of a patient</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_maca-yes" datatype="html">
+        <source>Yes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">74,76</context>
+        </context-group>
+        <note priority="1" from="description">MACA label for YES</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_maca-no" datatype="html">
+        <source>No</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">76,78</context>
+        </context-group>
+        <note priority="1" from="description">MACA label for NO</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_maca-unknown" datatype="html">
+        <source>Unknown</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">78,81</context>
+        </context-group>
+        <note priority="1" from="description">MACA label for UNKNOWN</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_maca-answer_explanation" datatype="html">
+        <source> (Would you be surprised if the patient died in less than 12 months? If the answer is NO, the patient is MACA)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">82,88</context>
+        </context-group>
+        <note priority="1" from="description">The explanation to MACA answer of a patient</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_expected-survival-question" datatype="html">
+        <source> Life expectancy / Expected survival (in months)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">90,94</context>
+        </context-group>
+        <note priority="1" from="description">The question to ask about the expected-survival of a patient</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_expected-survival-less-12s" datatype="html">
+        <source>&lt; 12 months</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">98,99</context>
+        </context-group>
+        <note priority="1" from="description">Expected survival label for LESS_THAN_12_MONTHS</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_expected-survival-more-12" datatype="html">
+        <source>&gt; 12 months</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">100,101</context>
+        </context-group>
+        <note priority="1" from="description">Expected survival label for MORE_THAN_12_MONTHS</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_expected-survival-unknown" datatype="html">
+        <source>Unknown</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">101,106</context>
+        </context-group>
+        <note priority="1" from="description">Expected survival label for UNKNOWN</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_frail-vig-question" datatype="html">
+        <source> Frail-VIG fragility index (Spict scale)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">110,112</context>
+        </context-group>
+        <note priority="1" from="description">The question to ask about the frailVIG of a patient</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_frail-vig-question_explanation" datatype="html">
+        <source> It helps identify the most fragile people who have one or more health problems. It is based on the comprehensive geriatric assessment (applicable to non-geriatric patients) that evaluates areas such as functional independence, nutritional status, cognitive, emotional, social, geriatric syndromes (confusion syndrome, falls, ulcers, polypharmacy, dysphagia), symptoms (pain or dyspnea) and diseases oncological, respiratory, cardiac, neurological, digestive or renal).</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">113,124</context>
+        </context-group>
+        <note priority="1" from="description">The explanation to ask about the MACA of a patient</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_frail-vig-low" datatype="html">
+        <source>Low</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">128,130</context>
+        </context-group>
+        <note priority="1" from="description">Frail VIG label for SPICT scale LOW</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_frail-vig-moderate" datatype="html">
+        <source>Moderate</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">130,132</context>
+        </context-group>
+        <note priority="1" from="description">Frail VIG label for SPICT scale MODERATE</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_frail-vig-high" datatype="html">
+        <source>High</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">132,134</context>
+        </context-group>
+        <note priority="1" from="description">Frail VIG label for SPICT scale HIGH</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_frail-vig-unknown" datatype="html">
+        <source>Unknown</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">134,139</context>
+        </context-group>
+        <note priority="1" from="description">Frail VIG label for SPICT scale UNKNOWN</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_clinical-risk-group-question" datatype="html">
+        <source> Clinical Risk Group</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">142,146</context>
+        </context-group>
+        <note priority="1" from="description">The question to ask about the clinical-risk-group of a patient</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_clinical-risk-group-promation-and-prevention" datatype="html">
+        <source> 0 Promotion &amp; Prevention </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">150,152</context>
+        </context-group>
+        <note priority="1" from="description">Clinical risk group label for PROMOTION_AND_PREVENTION</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_clinical-risk-group-self-management-support" datatype="html">
+        <source> 1 Self-management support </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">153,155</context>
+        </context-group>
+        <note priority="1" from="description">Clinical risk group label for SELF_MANAGEMENT_SUPPORT</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_clinical-risk-group-illness-management" datatype="html">
+        <source> 2 Illness management </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">156,157</context>
+        </context-group>
+        <note priority="1" from="description">Clinical risk group label for ILLNESS_MANAGEMENT</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_clinical-risk-group-case-management" datatype="html">
+        <source> 3 Case management </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">158,159</context>
+        </context-group>
+        <note priority="1" from="description">Clinical risk group label for CASE_MANAGEMENT</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_clinical-risk-group-unknown" datatype="html">
+        <source>4 Unknown</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">160,164</context>
+        </context-group>
+        <note priority="1" from="description">Clinical risk group label for UNKNOWN</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_has-social-support-question" datatype="html">
+        <source> Does the patient have social support?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">167,171</context>
+        </context-group>
+        <note priority="1" from="description">The question to ask about the Has social support of a patient</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_has-social-support-yes" datatype="html">
+        <source>Yes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">174,176</context>
+        </context-group>
+        <note priority="1" from="description">Has social support label for YES</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_has-social-support-no" datatype="html">
+        <source>No</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">176,178</context>
+        </context-group>
+        <note priority="1" from="description">Has social support label for NO</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_has-social-support-unknown" datatype="html">
+        <source>Unknown</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">178,183</context>
+        </context-group>
+        <note priority="1" from="description">Has social support label for UNKNOWN</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_independence-at-admission-question" datatype="html">
+        <source> Barthel index</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">187,189</context>
+        </context-group>
+        <note priority="1" from="description">The question to ask about the frailVIG of a patient</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_independence-at-admission-question_explanation" datatype="html">
+        <source> Functional independence for basic activities of daily living at admission.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">190,196</context>
+        </context-group>
+        <note priority="1" from="description">The explanation to ask about the MACA of a patient</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_independence-at-admission-total" datatype="html">
+        <source>0 - 20% Total</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">200,201</context>
+        </context-group>
+        <note priority="1" from="description">Independence at admission label for Barthel index TOTAL</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_independence-at-admission-severe" datatype="html">
+        <source>21 - 60% Severe</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">202,203</context>
+        </context-group>
+        <note priority="1" from="description">Independence at admission label for Barthel index SEVERE</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_independence-at-admission-moderate" datatype="html">
+        <source>61 - 90% Moderate</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">204,205</context>
+        </context-group>
+        <note priority="1" from="description">Independence at admission label for Barthel index MODERATE</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_independence-at-admission-mild" datatype="html">
+        <source>91 - 99% Mild</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">206,207</context>
+        </context-group>
+        <note priority="1" from="description">Independence at admission label for Barthel index MILD</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_independence-at-admission-independent" datatype="html">
+        <source>100% Independent</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">208,209</context>
+        </context-group>
+        <note priority="1" from="description">Independence at admission label for Barthel index INDEPENDENT</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_independence-at-admission-unknown" datatype="html">
+        <source>Unknown</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">209,215</context>
+        </context-group>
+        <note priority="1" from="description">Independence at admission label for Barthel index UNKNOWN</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_independence-instrumental-activities-question" datatype="html">
+        <source> Lawton index</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">219,221</context>
+        </context-group>
+        <note priority="1" from="description">The question to ask about the frailVIG of a patient</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_independence-instrumental-activities-question_explanation" datatype="html">
+        <source> Independence instrumental activities.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">222,227</context>
+        </context-group>
+        <note priority="1" from="description">The explanation to ask about the MACA of a patient</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_independence-instrumental-activities-zero" datatype="html">
+        <source>0 points </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">231,232</context>
+        </context-group>
+        <note priority="1" from="description">Independence instrumental activities label for Lawton index zero</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_independence-instrumental-activities-one" datatype="html">
+        <source>1 point </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">233,234</context>
+        </context-group>
+        <note priority="1" from="description">Independence instrumental activities label for Lawton index one</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_independence-instrumental-activities-two" datatype="html">
+        <source>2 points </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">235,236</context>
+        </context-group>
+        <note priority="1" from="description">Independence instrumental activities label for Lawton index two</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_independence-instrumental-activities-three" datatype="html">
+        <source>3 points </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">237,238</context>
+        </context-group>
+        <note priority="1" from="description">Independence instrumental activities label for Lawton index three</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_independence-instrumental-activities-four" datatype="html">
+        <source>4 points </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">239,240</context>
+        </context-group>
+        <note priority="1" from="description">Independence instrumental activities label for Lawton index four</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_independence-instrumental-activities-five" datatype="html">
+        <source>5 points </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">241,242</context>
+        </context-group>
+        <note priority="1" from="description">Independence instrumental activities label for Lawton index five</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_independence-instrumental-activities-six" datatype="html">
+        <source>6 points </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">243,244</context>
+        </context-group>
+        <note priority="1" from="description">Independence instrumental activities label for Lawton index six</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_independence-instrumental-activities-seven" datatype="html">
+        <source>7 points </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">245,246</context>
+        </context-group>
+        <note priority="1" from="description">Independence instrumental activities label for Lawton index seven</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_independence-instrumental-activities-eight" datatype="html">
+        <source>8 points </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">247,248</context>
+        </context-group>
+        <note priority="1" from="description">Independence instrumental activities label for Lawton index eight</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_independence-instrumental-activities-unknown" datatype="html">
+        <source>Unknown</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">248,254</context>
+        </context-group>
+        <note priority="1" from="description">Independence instrumental activities label for Lawton index UNKNOWN</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_has-advance-directives-question" datatype="html">
+        <source> Does the patient have advance directives?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">256,260</context>
+        </context-group>
+        <note priority="1" from="description">The question to ask about the has advance directives of a patient</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_has-advance-directives-yes" datatype="html">
+        <source>Yes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">263,265</context>
+        </context-group>
+        <note priority="1" from="description">Has advance directives label for YES</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_has-advance-directives-no" datatype="html">
+        <source>No</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">265,267</context>
+        </context-group>
+        <note priority="1" from="description">Has advance directives label for NO</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_has-advance-directives-unknown" datatype="html">
+        <source>Unknown</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">267,272</context>
+        </context-group>
+        <note priority="1" from="description">Has advance directives label for UNKNOWN</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_is-competent-question" datatype="html">
+        <source> Is the patient competent to understand the instructions of health personnel?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">275,280</context>
+        </context-group>
+        <note priority="1" from="description">The question to ask about the is competent of a patient</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_is-competent-yes" datatype="html">
+        <source>Yes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">283,285</context>
+        </context-group>
+        <note priority="1" from="description">Is competent label for YES</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_is-competent-no" datatype="html">
+        <source>No</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">285,287</context>
+        </context-group>
+        <note priority="1" from="description">Is competent label for NO</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_is-competent-unknown" datatype="html">
+        <source>Unknown</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">287,292</context>
+        </context-group>
+        <note priority="1" from="description">Is competent label for UNKNOWN</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_has-been-informed-question" datatype="html">
+        <source> To the patient or his/her referent authorized has been informed of possible treatments and the consequences of receiving it or No?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">295,300</context>
+        </context-group>
+        <note priority="1" from="description">The question to ask about the has been informed of a patient</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_has-been-informed-yes" datatype="html">
+        <source>Yes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">303,305</context>
+        </context-group>
+        <note priority="1" from="description">Has been informed label for YES</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_has-been-informed-no" datatype="html">
+        <source>No</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">305,307</context>
+        </context-group>
+        <note priority="1" from="description">Has been informed label for NO</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_has-been-informed-unknown" datatype="html">
+        <source>Unknown</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">307,312</context>
+        </context-group>
+        <note priority="1" from="description">Has been informed label for UNKNOWN</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_is-coerced-question" datatype="html">
+        <source> Is it detected that the patient has seen coerced/pressured by third parties?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">315,320</context>
+        </context-group>
+        <note priority="1" from="description">The question to ask about the is coerced of a patient</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_is-coerced-yes" datatype="html">
+        <source>Yes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">323,325</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">363,365</context>
+        </context-group>
+        <note priority="1" from="description">Is coerced label for YES</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_is-coerced-no" datatype="html">
+        <source>No</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">325,327</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">365,367</context>
+        </context-group>
+        <note priority="1" from="description">Is coerced label for NO</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_is-coerced-unknown" datatype="html">
+        <source>Unknown</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">327,332</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">367,372</context>
+        </context-group>
+        <note priority="1" from="description">Is coerced label for UNKNOWN</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_has-cognitive-impairment-question" datatype="html">
+        <source> Does the patient have cognitive impairment?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">335,339</context>
+        </context-group>
+        <note priority="1" from="description">The question to ask about the has cognitive impairment of a patient</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_has-cognitive-impairment-absent" datatype="html">
+        <source>Absent</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">342,344</context>
+        </context-group>
+        <note priority="1" from="description">Has cognitive impairment label for ABSENT</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_has-cognitive-impairment-mild-moderate" datatype="html">
+        <source>Mild-moderate</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">344,346</context>
+        </context-group>
+        <note priority="1" from="description">Has cognitive impairment label for MILD_MODERATE</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_has-cognitive-impairment-severe" datatype="html">
+        <source>Severe</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">346,348</context>
+        </context-group>
+        <note priority="1" from="description">Has cognitive impairment label for SEVERE</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_has-cognitive-impairment-unknown" datatype="html">
+        <source>Unknown</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">348,353</context>
+        </context-group>
+        <note priority="1" from="description">Has cognitive impairment label for UNKNOWN</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_emotional-state-question" datatype="html">
+        <source> Emotional state. Does the patient have emotional discomfort?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">356,360</context>
+        </context-group>
+        <note priority="1" from="description">The question to ask about the emotinal state of a patient</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_disconfort-degree-question" datatype="html">
+        <source> Degree of discomfort/discomfort of the patient before applying any action.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">375,380</context>
+        </context-group>
+        <note priority="1" from="description">The question to ask about the disconfort degree of a patient</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_disconfort-degree-low" datatype="html">
+        <source>Low</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">383,385</context>
+        </context-group>
+        <note priority="1" from="description">Disconfort degree label for LOW</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_disconfort-degree-medium" datatype="html">
+        <source>Medium</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">385,387</context>
+        </context-group>
+        <note priority="1" from="description">Disconfort degree label for MEDIUM</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_disconfort-degree-high" datatype="html">
+        <source>High</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">387,389</context>
+        </context-group>
+        <note priority="1" from="description">Disconfort degree label for HIGH</note>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_criteria_disconfort-degree-unknown" datatype="html">
+        <source>Unknown</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">389,394</context>
+        </context-group>
+        <note priority="1" from="description">Disconfort degree label for UNKNOWN</note>
       </trans-unit>
     </body>
   </file>

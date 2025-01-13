@@ -11,7 +11,6 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuTrigger, MatMenuItem } from '@angular/material/menu';
-import { MatButton } from '@angular/material/button';
 import { MatDivider } from '@angular/material/divider';
 import { RouterLink } from '@angular/router';
 import { TitleService } from '@app/shared/title.service';
@@ -27,7 +26,6 @@ import { Observable } from 'rxjs';
         MatMenu,
         MatMenuTrigger,
         MatMenuItem,
-        MatButton,
         MatDivider,
         RouterLink,
         AsyncPipe

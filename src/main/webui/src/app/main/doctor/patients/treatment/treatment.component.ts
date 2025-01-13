@@ -141,7 +141,7 @@ export class TreatmentComponent implements OnInit {
 	 */
 	ngOnInit(): void {
 
-		this.title.changeHeaderTitle($localize`:The header title for the patient treatment@@main_doctor_patients_edit_code_page-title:Add treatment to a patient`);
+		this.title.changeHeaderTitle($localize`:The header title for the patient treatment@@main_doctor_patients_treatment_code_page-title:Add treatment to a patient`);
 		this.patient$ = this.route.paramMap.pipe(
 			switchMap(params => {
 
