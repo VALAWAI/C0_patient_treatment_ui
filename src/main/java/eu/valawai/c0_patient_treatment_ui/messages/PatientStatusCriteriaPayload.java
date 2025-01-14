@@ -114,7 +114,7 @@ public class PatientStatusCriteriaPayload extends Payload {
 	public DiscomfortDegree discomfort_degree;
 
 	/**
-	 * Describe the level of therapeutic intensity of the patient
+	 * Describe the level of therapeutic intensity of the patient.
 	 */
 	public NITLevel nit_level;
 

@@ -17,6 +17,18 @@
 			routerLink="/main/status">Status</button>
 		</mat-menu>
 		<div class="grow text-center font-bold text-2xl">{{title$|async}}</div>
+		<button mat-icon-button [matMenuTriggerFor]="localeMenu"
+			class="flex-none text-right">
+			<mat-icon>language</mat-icon>
+		</button>
+		<mat-menu #localeMenu="matMenu">
+		<button *ngIf="!isLocalizedIn('ca')" mat-menu-item
+			(click)="changeLocaleTo('ca')">Català</button>
+		<button *ngIf="!isLocalizedIn('en')" mat-menu-item
+			(click)="changeLocaleTo('en')">English</button>
+		<button *ngIf="!isLocalizedIn('es')" mat-menu-item
+			(click)="changeLocaleTo('es')">Español</button>
+		</mat-menu>
 	</header>
 	<div class="p-3 grow">
 		<router-outlet></router-outlet>

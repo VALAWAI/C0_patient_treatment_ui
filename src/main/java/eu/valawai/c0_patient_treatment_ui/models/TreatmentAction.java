@@ -36,7 +36,7 @@ public enum TreatmentAction {
 	NIMV,
 
 	/**
-	 * The patient can receive vasoactive drugs;
+	 * The patient can receive vasoactive drugs.
 	 */
 	VASOACTIVE_DRUGS,
 

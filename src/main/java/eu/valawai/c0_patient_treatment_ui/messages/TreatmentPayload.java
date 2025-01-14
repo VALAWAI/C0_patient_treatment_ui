@@ -28,7 +28,7 @@ public class TreatmentPayload extends Payload {
 	public String id;
 
 	/**
-	 * The id of the patient.
+	 * The identifier of the patient that the treatment is applied.
 	 */
 	public String patient_id;
 

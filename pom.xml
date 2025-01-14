@@ -6,7 +6,6 @@
 	<groupId>eu.valawai</groupId>
 	<artifactId>c0-patient-treatment-ui</artifactId>
 	<version>1.0.0</version>
-
 	<properties>
 		<compiler-plugin.version>3.13.0</compiler-plugin.version>
 		<maven.compiler.release>21</maven.compiler.release>
@@ -14,14 +13,13 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
 		<quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-		<quarkus.platform.version>3.17.0</quarkus.platform.version>
+		<quarkus.platform.version>3.17.6</quarkus.platform.version>
 		<skipITs>true</skipITs>
 		<surefire-plugin.version>3.5.0</surefire-plugin.version>
 		<resources-plugin.version>3.3.1</resources-plugin.version>
 		<jacoco.version>0.8.12</jacoco.version>
-		<quarkus.quinoa.version>2.5.0</quarkus.quinoa.version>
+		<quarkus.quinoa.version>2.5.1</quarkus.quinoa.version>
 	</properties>
-
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -33,7 +31,6 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
 	<dependencies>
 		<dependency>
 			<groupId>io.quarkus</groupId>
@@ -49,24 +46,15 @@
 		</dependency>
 		<dependency>
 			<groupId>io.quarkus</groupId>
-			<artifactId>quarkus-hibernate-validator</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.quarkus</groupId>
-			<artifactId>quarkus-smallrye-openapi</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-rest-jackson</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>io.quarkus</groupId>
-			<artifactId>quarkus-smallrye-health</artifactId>
+			<artifactId>quarkus-hibernate-validator</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>io.quarkiverse.quinoa</groupId>
-			<artifactId>quarkus-quinoa</artifactId>
-			<version>${quarkus.quinoa.version}</version>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-smallrye-health</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>io.quarkus</groupId>
@@ -86,12 +74,16 @@
 		</dependency>
 		<dependency>
 			<groupId>io.quarkus</groupId>
-			<artifactId>quarkus-junit5</artifactId>
-			<scope>test</scope>
+			<artifactId>quarkus-smallrye-openapi</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.testcontainers</groupId>
-			<artifactId>testcontainers</artifactId>
+			<groupId>io.quarkiverse.quinoa</groupId>
+			<artifactId>quarkus-quinoa</artifactId>
+			<version>${quarkus.quinoa.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-junit5</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -102,6 +94,11 @@
 		<dependency>
 			<groupId>io.rest-assured</groupId>
 			<artifactId>rest-assured</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>testcontainers</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -121,7 +118,6 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>

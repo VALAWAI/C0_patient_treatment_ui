@@ -18,7 +18,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 /**
- *
+ * The assertion methods over the log on the MOV.
  *
  * @author UDT-IA, IIIA-CSIC
  */

@@ -13,7 +13,7 @@ import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntity;
 /**
  * The different ranges of ages for a {@link PatientEntity}.
  *
- * @see PatientStatusEntity#ageRange
+ * @see PatientStatusCriteria#ageRange
  *
  * @author UDT-IA, IIIA-CSIC
  */

@@ -8,7 +8,11 @@
 
 package eu.valawai.c0_patient_treatment_ui;
 
+import java.util.regex.Pattern;
+
+import io.vertx.mutiny.core.http.HttpHeaders;
 import io.vertx.mutiny.ext.web.Router;
+import io.vertx.mutiny.ext.web.RoutingContext;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
 
@@ -21,6 +25,11 @@ import jakarta.enterprise.event.Observes;
 public class OnStart {
 
 	/**
+	 * The pattern to check the on page resource.
+	 */
+	private static final Pattern INDEX_PATTERN = Pattern.compile(".*(/[a-z]{2})(/.*)?");
+
+	/**
 	 * Called when the application has been started.
 	 *
 	 * @param router for the webs.
@@ -30,21 +39,42 @@ public class OnStart {
 		router.getWithRegex("/.*").last().handler(rc -> {
 
 			final var path = rc.normalizedPath();
-			if (!path.matches("/([ca|es|en]/)?index.html")) {
+			if (path.endsWith("env.js")) {
+				// redirect to the API resource
+				rc.reroute("/env.js");
 
-				rc.fail(404);
+			} else if (this.isHtmlRequest(rc)) {
+
+				final var matcher = INDEX_PATTERN.matcher(path);
+				var lang = "en";
+				if (matcher.find()) {
+
+					final var group = matcher.group();
+					lang = group.substring(1, 3);
+				}
+				// Redirect for one Page Angular
+				rc.reroute("/" + lang + "/index.html");
 
 			} else {
-
-				var lang = "en";
-				if (path.matches("/([ca|es|en]/).*")) {
-
-					lang = path.substring(1, 3);
-				}
-				rc.reroute("/" + lang + "/index.html");
+				// Must be handled by another
+				rc.next();
 			}
 
 		});
+
+	}
+
+	/**
+	 * Check if the request accept HTML page.
+	 *
+	 * @param context of the request.
+	 *
+	 * @return {@code true} if the request accept HTML content.
+	 */
+	private boolean isHtmlRequest(RoutingContext context) {
+
+		final var accept = context.request().getHeader(HttpHeaders.ACCEPT);
+		return accept == null || accept.contains("text/html");
 	}
 
 }
