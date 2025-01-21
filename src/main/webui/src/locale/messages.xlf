@@ -363,7 +363,7 @@
 				alt=&quot;VALAWAI logo&quot;&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/main.component.html</context>
-          <context context-type="linenumber">27,30</context>
+          <context context-type="linenumber">39,42</context>
         </context-group>
         <note priority="1" from="description">The copyright text</note>
       </trans-unit>

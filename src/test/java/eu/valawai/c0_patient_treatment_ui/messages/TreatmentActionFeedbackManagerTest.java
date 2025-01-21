@@ -25,22 +25,22 @@ import io.vertx.core.json.JsonObject;
 import jakarta.inject.Inject;
 
 /**
- * Test the {@link TreatmentFeedbackManager}.
+ * Test the {@link TreatmentActionFeedbackManager}.
  *
- * @see TreatmentFeedbackManager
+ * @see TreatmentActionFeedbackManager
  *
  * @author UDT-IA, IIIA-CSIC
  */
 @QuarkusTest
 @WithTestResource(value = MOVTestResource.class)
 @QuarkusTestResource(PostgreSQLTestResource.class)
-public class TreatmentFeedbackManagerTest {
+public class TreatmentActionFeedbackManagerTest {
 
 	/**
 	 * The service to publish treatment feedbacks.
 	 */
 	@Inject
-	TreatmentFeedbackService service;
+	TreatmentActionFeedbackService service;
 
 	/**
 	 * The service to assert that the log.
@@ -67,7 +67,7 @@ public class TreatmentFeedbackManagerTest {
 	@Test
 	public void shouldNotAddFeedbackWithBadTreatmentId() {
 
-		final var feedback = new TreatmentFeedbackPayloadTest().nextModel();
+		final var feedback = new TreatmentActionFeedbackPayloadTest().nextModel();
 		this.service.send(feedback);
 		this.logAsserts.waitUntiLogMatch(
 				LogAsserts.withLogLevel(LogLevel.ERROR).and(LogAsserts.withLogMessageContains(feedback.treatment_id)));
@@ -86,7 +86,7 @@ public class TreatmentFeedbackManagerTest {
 		asserter.assertThat(() -> TreatmentEntities.undefined(), undefinedId -> {
 
 			asserter.putData("UNDEFINED_ID", undefinedId);
-			final var feedback = new TreatmentFeedbackPayloadTest().nextModel();
+			final var feedback = new TreatmentActionFeedbackPayloadTest().nextModel();
 			feedback.treatment_id = String.valueOf(undefinedId);
 			this.service.send(feedback);
 

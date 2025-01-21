@@ -18,17 +18,17 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 /**
- * The service to publish a {@link TreatmentFeedbackPayload}.
+ * The service to publish a {@link TreatmentActionFeedbackPayload}.
  *
  * @author UDT-IA, IIIA-CSIC
  */
 @ApplicationScoped
-public class TreatmentFeedbackService {
+public class TreatmentActionFeedbackService {
 
 	/**
 	 * The component to send the treatment messages.
 	 */
-	@Channel("publish_treatment_feedback")
+	@Channel("publish_treatment_action_feedback")
 	@Inject
 	Emitter<JsonObject> service;
 
@@ -37,7 +37,7 @@ public class TreatmentFeedbackService {
 	 *
 	 * @param feedback to apply.
 	 */
-	public void send(TreatmentFeedbackPayload feedback) {
+	public void send(TreatmentActionFeedbackPayload feedback) {
 
 		final var encode = Json.encode(feedback);
 		final var json = Json.decodeValue(encode, JsonObject.class);

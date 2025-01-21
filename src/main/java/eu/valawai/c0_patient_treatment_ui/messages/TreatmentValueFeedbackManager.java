@@ -24,12 +24,12 @@ import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validator;
 
 /**
- * The component that manage the treatment feedback.
+ * The component that manage a value feedback for a treatment.
  *
  * @author UDT-IA, IIIA-CSIC
  */
 @ApplicationScoped
-public class TreatmentFeedbackManager {
+public class TreatmentValueFeedbackManager {
 
 	/**
 	 * The service to generate log messages.
@@ -44,22 +44,22 @@ public class TreatmentFeedbackManager {
 	Validator validator;
 
 	/**
-	 * Called when a new e-mail is sensed by the component.
+	 * Called when a new feedback for a treatment value has been received.
 	 *
-	 * @param msg with the e-mail that has been sensed.
+	 * @param msg with the feedback for a treatment value.
 	 *
 	 * @return the result if the message process.
 	 */
-	@Incoming("received_treatment_feedback")
-	public CompletionStage<Void> receivedTreatmentFeedback(Message<JsonObject> msg) {
+	@Incoming("received_treatment_value_feedback")
+	public CompletionStage<Void> receivedTreatmentValueFeedback(Message<JsonObject> msg) {
 
-		return this.toValiedTreatmentFeedbackPayload(msg).chain(payload -> this.store(payload)).onFailure()
+		return this.toValiedTreatmentValueFeedbackPayload(msg).chain(payload -> this.store(payload)).onFailure()
 				.recoverWithItem(error -> error).subscribeAsCompletionStage().thenCompose(error -> {
 
 					if (error != null) {
 
 						this.log.errorWithPayload(msg.getPayload(),
-								"Unexpected treatment feedback message, because {0}", error.getMessage());
+								"Unexpected treatment value feedback message, because {0}", error.getMessage());
 						return msg.nack(error);
 
 					} else {
@@ -78,11 +78,11 @@ public class TreatmentFeedbackManager {
 	 *
 	 * @return the treatment feedback payload.
 	 */
-	protected Uni<TreatmentFeedbackPayload> toValiedTreatmentFeedbackPayload(Message<JsonObject> msg) {
+	protected Uni<TreatmentValueFeedbackPayload> toValiedTreatmentValueFeedbackPayload(Message<JsonObject> msg) {
 
 		try {
 
-			final var payload = msg.getPayload().mapTo(TreatmentFeedbackPayload.class);
+			final var payload = msg.getPayload().mapTo(TreatmentValueFeedbackPayload.class);
 			final var violations = this.validator.validate(payload);
 			if (!violations.isEmpty()) {
 
@@ -103,7 +103,7 @@ public class TreatmentFeedbackManager {
 	 *
 	 */
 	@WithTransaction
-	protected Uni<Throwable> store(TreatmentFeedbackPayload payload) {
+	protected Uni<Throwable> store(TreatmentValueFeedbackPayload payload) {
 
 		try {
 

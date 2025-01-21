@@ -26,11 +26,17 @@ channels:
       message:
         $ref: '#/components/messages/treatment'
 
-  valawai/c0/patient_treatment_ui/data/treatment_feedback:
-    description: The feedback about a treatment.
+  valawai/c0/patient_treatment_ui/data/treatment_value_feedback:
+    description: The feedback about a value associated to a treatment.
     subscribe:
       message:
-        $ref: '#/components/messages/treatment_feedback'
+        $ref: '#/components/messages/treatment_value_feedback'
+
+  valawai/c0/patient_treatment_ui/data/treatment_action_feedback:
+    description: The feedback about an action of a treatment.
+    subscribe:
+      message:
+        $ref: '#/components/messages/treatment_action_feedback'
 
 
 components:
@@ -40,11 +46,16 @@ components:
       payload:
         $ref: '#/components/schemas/treatment_payload'
 
-    treatment_feedback:
+    treatment_value_feedback:
       contentType: application/json
       payload:
-        $ref: '#/components/schemas/treatment_feedback_payload'
-        
+        $ref: '#/components/schemas/treatment_value_feedback_payload'
+
+    treatment_action_feedback:
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/treatment_action_feedback_payload'
+
     registered_component:
       contentType: application/json
       payload:
@@ -299,40 +310,43 @@ components:
           oneOf:
             - $ref: '#/components/schemas/patient_status_criteria_payload'
         actions:
+          description:  The treatment actions to apply over the patient.
           type: array
-          minItems: 1
-          description:  >
-           The treatment actions to apply over the patient.
-            * 'CPR' The patient can receive a Cardiopulmonary resuscitation.
-            * 'TRANSPLANT' The patient need an organ transplant.
-            * 'ICU' The patient can be in the intensive curing unit.
-            * 'NIMV' The patient can have non-invasive mechanical ventilation.
-            * 'VASOACTIVE_DRUGS' The patient can receive vasoactive drugs;
-            * 'DIALYSIS' The patient can have dialysis.
-            * 'SIMPLE_CLINICAL_TRIAL' The patient can receive simple clinical trials.
-            * 'MEDIUM_CLINICAL_TRIAL' The patient can receive medium clinical trials.
-            * 'ADVANCED_CLINICAL_TRIAL' The patient can receive advanced clinical trials.
-            * 'PALLIATIVE_SURGERY' The patient can have palliative surgery.
-            * 'CURE_SURGERY' The patient can have surgery with the intention of curing.
           items:
-            type: string
-            enum:
-              -  CPR
-              - TRANSPLANT
-              - ICU
-              - NIMV
-              - VASOACTIVE_DRUGS
-              - DIALYSIS
-              - SIMPLE_CLINICAL_TRIAL
-              - MEDIUM_CLINICAL_TRIAL
-              - ADVANCED_CLINICAL_TRIAL
-              - PALLIATIVE_SURGERY
-              - CURE_SURGERY
+            - $ref: '#/components/schemas/treatment_action'
         expected_status:
           description: The expected status of the patient after applying the treatment.
           oneOf:
             - $ref: '#/components/schemas/patient_status_criteria_payload'
     
+    treatment_action:
+      description:  >
+         The posible treatment actions to apply over a patient.
+          * 'CPR' The patient can receive a Cardiopulmonary resuscitation.
+          * 'TRANSPLANT' The patient need an organ transplant.
+          * 'ICU' The patient can be in the intensive curing unit.
+          * 'NIMV' The patient can have non-invasive mechanical ventilation.
+          * 'VASOACTIVE_DRUGS' The patient can receive vasoactive drugs;
+          * 'DIALYSIS' The patient can have dialysis.
+          * 'SIMPLE_CLINICAL_TRIAL' The patient can receive simple clinical trials.
+          * 'MEDIUM_CLINICAL_TRIAL' The patient can receive medium clinical trials.
+          * 'ADVANCED_CLINICAL_TRIAL' The patient can receive advanced clinical trials.
+          * 'PALLIATIVE_SURGERY' The patient can have palliative surgery.
+          * 'CURE_SURGERY' The patient can have surgery with the intention of curing.
+      type: string
+      enum:
+        -  CPR
+        - TRANSPLANT
+        - ICU
+        - NIMV
+        - VASOACTIVE_DRUGS
+        - DIALYSIS
+        - SIMPLE_CLINICAL_TRIAL
+        - MEDIUM_CLINICAL_TRIAL
+        - ADVANCED_CLINICAL_TRIAL
+        - PALLIATIVE_SURGERY
+        - CURE_SURGERY
+
     patient_status_criteria_payload:
       description: Describe the status of a patient using some criteria.
       type: object
@@ -473,12 +487,45 @@ components:
             - FOUR
             - FIVE
 
-    treatment_feedback_payload:
-      description: The payload with the feedback to a treatment.
+    treatment_value_feedback_payload:
+      description: Provides the alignment of a treatment with a value.
       type: object
       properties:
         treatment_id:
           type: string
-          description: The identifier of the treatment that provide feedback.
-          example:
+          description: The identifier of the treatment.
+          examples:
            - "1234"
+        value_name:
+          type: string
+          description: The name of the value that the treatment is aligned.
+          example:
+            - "Autonomy"
+        alignment:
+          type: number
+          description: The alignment of the value with the the treatment.
+          maximum: 1
+          minimum: -1
+          Example:
+            - 0.81675
+
+    treatment_action_feedback_payload:
+      description: The feedback about an action of a treatment.
+      type: object
+      properties:
+        treatment_id:
+          type: string
+          description: The identifier of the treatment.
+          examples:
+           - "1234"
+        action:
+          description: The action to provide feedback.
+          oneOf:
+            - $ref: '#/components/schemas/treatment_action'
+        feedback:
+          type: string
+          description: The feedbacl about if the treatment action.
+          enum:
+            - ALLOW
+            - DENY
+            - UNKNOWN
