@@ -19,7 +19,7 @@ export class MinPatient {
 	public id: number | null = null;
 
 	/**
-	 * The name of teh patient.
+	 * The name of the patient.
 	 */
 	public name: string | null = null;
 

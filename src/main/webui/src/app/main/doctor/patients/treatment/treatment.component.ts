@@ -164,7 +164,7 @@ export class TreatmentComponent implements OnInit {
 	}
 
 	/**
-	 * Return teh contorl for an action name.
+	 * Return the contorl for an action name.
 	 */
 	getControl(name: string): FormControl<boolean> {
 
@@ -201,7 +201,7 @@ export class TreatmentComponent implements OnInit {
 				},
 				error: err => {
 
-					this.notifier.showError($localize`:The error message when can not add teh treatment@@main_doctor_patients_edit_code_add-error:Canot add the treatement`);
+					this.notifier.showError($localize`:The error message when can not add the treatment@@main_doctor_patients_edit_code_add-error:Canot add the treatment`);
 					console.error(err);
 				}
 			});

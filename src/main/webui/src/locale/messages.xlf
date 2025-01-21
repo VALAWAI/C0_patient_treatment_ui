@@ -303,12 +303,12 @@
         <note priority="1" from="description">The header title for the patient treatment</note>
       </trans-unit>
       <trans-unit id="main_doctor_patients_edit_code_add-error" datatype="html">
-        <source>Canot add the treatement</source>
+        <source>Canot add the treatment</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.ts</context>
           <context context-type="linenumber">204</context>
         </context-group>
-        <note priority="1" from="description">The error message when can not add teh treatment</note>
+        <note priority="1" from="description">The error message when can not add the treatment</note>
       </trans-unit>
       <trans-unit id="main_doctor_patients_view_code_page-title" datatype="html">
         <source>View patient information</source>
@@ -472,7 +472,7 @@
         <note priority="1" from="description">The human readable name for the treatment action ADVANCED_CLINICAL_TRIAL</note>
       </trans-unit>
       <trans-unit id="shared_treatment-action-name_PALLIATIVE_SURGERY" datatype="html">
-        <source>Paliative surgery</source>
+        <source>Palliative surgery</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/api/treatment-action-name.pipe.ts</context>
           <context context-type="linenumber">46</context>

@@ -43,7 +43,7 @@ export class TreatmentActionNamePipe implements PipeTransform {
 				case 'ADVANCED_CLINICAL_TRIAL':
 					return $localize`:The human readable name for the treatment action ADVANCED_CLINICAL_TRIAL@@shared_treatment-action-name_ADVANCED_CLINICAL_TRIAL:Advanced clinical trials: MRI / Endoscopy / Parenteral nutrition`;
 				case 'PALLIATIVE_SURGERY':
-					return $localize`:The human readable name for the treatment action PALLIATIVE_SURGERY@@shared_treatment-action-name_PALLIATIVE_SURGERY:Paliative surgery`;
+					return $localize`:The human readable name for the treatment action PALLIATIVE_SURGERY@@shared_treatment-action-name_PALLIATIVE_SURGERY:Palliative surgery`;
 				case 'CURE_SURGERY':
 					return $localize`:The human readable name for the treatment action CURE_SURGERY@@shared_treatment-action-name_CURE_SURGERY:Cure surgery`;
 			}

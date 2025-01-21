@@ -16,7 +16,7 @@ import { MinPatient } from './min-patient.model';
 export class MinPatientPage {
 
 	/**
-	 * The maximum number of patients that satisfy teh query.
+	 * The maximum number of patients that satisfy the query.
 	 */
 	public total: number = 0;
 
