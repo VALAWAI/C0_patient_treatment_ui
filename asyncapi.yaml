@@ -21,7 +21,7 @@ channels:
 
   
   valawai/c0/patient_treatment_ui/data/treatment:
-    description: Notify about a treatement to apply to a patient.
+    description: Notify about a treatment to apply to a patient.
     publish:
       message:
         $ref: '#/components/messages/treatment'
@@ -276,7 +276,7 @@ components:
                 - $ref: '#/components/schemas/payload_schema'
 
     treatment_payload:
-      description: The payload that contains the information of a treatement.
+      description: The payload that contains the information of a treatment.
       type: object
       properties:
         id:
