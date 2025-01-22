@@ -37,6 +37,7 @@ public class TreatmentValueFeedbackPayload extends Payload {
 	 * The alignment of the value with the the treatment.
 	 */
 	@NotNull
+	@IsAlignValue
 	public double alignment;
 
 }

@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import eu.valawai.c0_patient_treatment_ui.models.TreatmentAction;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * The feedback for an action in a treatment.
@@ -30,13 +31,13 @@ public class TreatmentActionFeedbackPayload extends Payload {
 	/**
 	 * The action that this is feedback.
 	 */
-	@NotEmpty
+	@NotNull
 	public TreatmentAction action;
 
 	/**
 	 * If feedback over the action of the treatment.
 	 */
-	@NotEmpty
+	@NotNull
 	public TreatmentActionFeedback feedback;
 
 }

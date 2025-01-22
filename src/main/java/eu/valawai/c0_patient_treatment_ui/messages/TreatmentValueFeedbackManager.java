@@ -14,7 +14,7 @@ import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.eclipse.microprofile.reactive.messaging.Message;
 
 import eu.valawai.c0_patient_treatment_ui.messages.mov.LogService;
-import eu.valawai.c0_patient_treatment_ui.persistence.TreatmentEntity;
+import eu.valawai.c0_patient_treatment_ui.persistence.TreatmentValueFeedbackEntity;
 import io.quarkus.hibernate.reactive.panache.common.WithTransaction;
 import io.smallrye.mutiny.Uni;
 import io.vertx.core.json.JsonObject;
@@ -64,6 +64,7 @@ public class TreatmentValueFeedbackManager {
 
 					} else {
 
+						this.log.infoWithPayload(msg.getPayload(), "Treatment value feedback received");
 						return msg.ack();
 					}
 
@@ -100,34 +101,15 @@ public class TreatmentValueFeedbackManager {
 	}
 
 	/**
+	 * Store the feedback.
 	 *
+	 * @param payload with the feedback to store.
 	 */
 	@WithTransaction
 	protected Uni<Throwable> store(TreatmentValueFeedbackPayload payload) {
 
-		try {
-
-			final var id = Long.parseLong(payload.treatment_id);
-			final Uni<TreatmentEntity> find = TreatmentEntity.findById(id);
-			return find.onFailure().recoverWithNull().chain(entity -> {
-
-				if (entity == null) {
-
-					return Uni.createFrom()
-							.failure(new IllegalArgumentException("Not defined treatment with the id " + id));
-
-				} else {
-
-					return Uni.createFrom().nullItem();
-				}
-
-			});
-
-		} catch (final Throwable error) {
-			// bad identifier
-			return Uni.createFrom().failure(
-					new IllegalArgumentException("Not defined treatment with the id " + payload.treatment_id, error));
-		}
+		return TreatmentValueFeedbackEntity.store(payload).map(any -> (Throwable) null).onFailure()
+				.recoverWithItem(error -> error);
 
 	};
 

@@ -8,13 +8,19 @@
 
 package eu.valawai.c0_patient_treatment_ui.messages;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import org.junit.jupiter.api.Test;
 
+import eu.valawai.c0_patient_treatment_ui.TimeManager;
 import eu.valawai.c0_patient_treatment_ui.messages.mov.LogAsserts;
 import eu.valawai.c0_patient_treatment_ui.messages.mov.LogLevel;
 import eu.valawai.c0_patient_treatment_ui.messages.mov.MOVTestResource;
 import eu.valawai.c0_patient_treatment_ui.persistence.PostgreSQLTestResource;
 import eu.valawai.c0_patient_treatment_ui.persistence.TreatmentEntities;
+import eu.valawai.c0_patient_treatment_ui.persistence.TreatmentEntity;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.common.WithTestResource;
 import io.quarkus.test.hibernate.reactive.panache.TransactionalUniAsserter;
@@ -85,23 +91,124 @@ public class TreatmentValueFeedbackManagerTest {
 
 		asserter.assertThat(() -> TreatmentEntities.undefined(), undefinedId -> {
 
-			asserter.putData("UNDEFINED_ID", undefinedId);
-			final var feedback = new TreatmentValueFeedbackPayloadTest().nextModel();
-			feedback.treatment_id = String.valueOf(undefinedId);
-			this.service.send(feedback);
+			final var payload = new TreatmentValueFeedbackPayloadTest().nextModel();
+			payload.treatment_id = String.valueOf(undefinedId);
+			asserter.putData("PAYLOAD", payload);
+			this.service.send(payload);
 
 		});
 
 		asserter.assertThat(() -> {
 
-			final var undefinedId = String.valueOf(asserter.getData("UNDEFINED_ID"));
-			return Uni.createFrom().item(undefinedId);
+			final TreatmentValueFeedbackPayload payload = (TreatmentValueFeedbackPayload) asserter.getData("PAYLOAD");
+			return Uni.createFrom().item(payload);
 
-		}, undefinedId -> {
+		}, payload -> {
 
-			this.logAsserts.waitUntiLogMatch(
-					LogAsserts.withLogLevel(LogLevel.ERROR).and(LogAsserts.withLogMessageContains(undefinedId)));
+			this.logAsserts
+					.waitUntiLogMatch(LogAsserts.withLogLevel(LogLevel.ERROR).and(LogAsserts.withLogPayload(payload)));
 
+		});
+
+	}
+
+	/**
+	 * Should not add a feedback for a bad alignment value.
+	 *
+	 * @param asserter to use in the tests.
+	 */
+	@Test
+	@RunOnVertxContext
+	public void shouldNotAddFeedbackForUndefinedTreatmentValue(TransactionalUniAsserter asserter) {
+
+		asserter.assertThat(() -> TreatmentEntities.nextRandom(), last -> {
+
+			asserter.putData("LAST", last);
+			final var payload = new TreatmentValueFeedbackPayloadTest().nextModel();
+			payload.treatment_id = String.valueOf(last.id);
+			payload.alignment = -2d;
+			asserter.putData("PAYLOAD", payload);
+			this.service.send(payload);
+
+		});
+
+		asserter.assertThat(() -> {
+
+			final TreatmentValueFeedbackPayload payload = (TreatmentValueFeedbackPayload) asserter.getData("PAYLOAD");
+			return Uni.createFrom().item(payload);
+
+		}, payload -> {
+
+			this.logAsserts
+					.waitUntiLogMatch(LogAsserts.withLogLevel(LogLevel.ERROR).and(LogAsserts.withLogPayload(payload)));
+
+		});
+
+	}
+
+	/**
+	 * Should add a feedback for a treatment.
+	 *
+	 * @param asserter to use in the tests.
+	 */
+	@Test
+	@RunOnVertxContext
+	public void shouldAddFeedbackForTreatment(TransactionalUniAsserter asserter) {
+
+		asserter.assertThat(() -> TreatmentEntities.nextRandom(), last -> {
+
+			asserter.putData("LAST", last);
+			final var payload = new TreatmentValueFeedbackPayloadTest().nextModel();
+			payload.treatment_id = String.valueOf(last.id);
+			asserter.putData("PAYLOAD", payload);
+			asserter.putData("NOW", TimeManager.now());
+			this.service.send(payload);
+
+		});
+
+		asserter.assertThat(() -> {
+
+			final TreatmentValueFeedbackPayload payload = (TreatmentValueFeedbackPayload) asserter.getData("PAYLOAD");
+			return Uni.createFrom().item(payload);
+
+		}, payload -> {
+
+			this.logAsserts
+					.waitUntiLogMatch(LogAsserts.withLogLevel(LogLevel.INFO).and(LogAsserts.withLogPayload(payload)));
+
+		});
+
+		asserter.assertThat(() -> {
+
+			final TreatmentEntity last = (TreatmentEntity) asserter.getData("LAST");
+			return TreatmentEntity.retrieve(last.id);
+
+		}, updated -> {
+
+			assertNotNull(updated.valueFeedbacks);
+			final TreatmentEntity last = (TreatmentEntity) asserter.getData("LAST");
+			if (last.valueFeedbacks == null) {
+
+				assertEquals(1, updated.valueFeedbacks.size());
+
+			} else {
+
+				assertEquals(last.valueFeedbacks.size() + 1, updated.valueFeedbacks.size());
+			}
+
+			var found = false;
+			final long now = (Long) asserter.getData("NOW");
+			final TreatmentValueFeedbackPayload payload = (TreatmentValueFeedbackPayload) asserter.getData("PAYLOAD");
+			for (final var feedback : updated.valueFeedbacks) {
+
+				if (now <= feedback.createdTime && payload.value_name.equals(feedback.valueName)) {
+					found = true;
+					assertEquals(payload.alignment, feedback.alignment, 0.0000001d);
+					break;
+				}
+			}
+
+			assertTrue("Not found stored action in the treatment", found);
 		});
 
 	}

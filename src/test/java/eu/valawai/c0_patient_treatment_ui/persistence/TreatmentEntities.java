@@ -32,6 +32,20 @@ public class TreatmentEntities {
 	 */
 	public static Uni<TreatmentEntity> nextRandom() {
 
+		final var max = ValueGenerator.rnd().nextInt(1, TreatmentAction.values().length);
+		return nextRandom(max);
+
+	}
+
+	/**
+	 * Create a random treatment status.
+	 *
+	 * @param max number maximum of actions for the treatment.
+	 *
+	 * @return the random status.
+	 */
+	public static Uni<TreatmentEntity> nextRandom(int max) {
+
 		return PatientEntities.nextRandom().chain(patient -> {
 			return PatientStatusCriteriaEntities.nextRandom().chain(before -> {
 
@@ -43,8 +57,7 @@ public class TreatmentEntities {
 					entity.beforeStatus = before;
 					entity.treatmentActions = new ArrayList<>(Arrays.asList(TreatmentAction.values()));
 					Collections.shuffle(entity.treatmentActions, ValueGenerator.rnd());
-					final var max = ValueGenerator.rnd().nextInt(1, entity.treatmentActions.size());
-					entity.treatmentActions = entity.treatmentActions.subList(0, max);
+					entity.treatmentActions = entity.treatmentActions.subList(0, Math.max(1, max));
 					entity.expectedStatus = after;
 					return entity.persistAndFlush();
 				});

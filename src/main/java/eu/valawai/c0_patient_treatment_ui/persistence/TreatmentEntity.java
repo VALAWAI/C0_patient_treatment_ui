@@ -16,9 +16,11 @@ import eu.valawai.c0_patient_treatment_ui.messages.TreatmentPayload;
 import eu.valawai.c0_patient_treatment_ui.models.TreatmentAction;
 import io.quarkus.hibernate.reactive.panache.PanacheEntity;
 import io.smallrye.mutiny.Uni;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 /**
  * An entity that stores the information of a treatment.
@@ -62,6 +64,18 @@ public class TreatmentEntity extends PanacheEntity {
 	 */
 	@ManyToOne(targetEntity = PatientStatusCriteriaEntity.class, fetch = FetchType.EAGER)
 	public PatientStatusCriteriaEntity expectedStatus;
+
+	/**
+	 * The received feedbacks for the treatment actions.
+	 */
+	@OneToMany(mappedBy = "treatment", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	public List<TreatmentActionFeedbackEntity> actionFeedbacks;
+
+	/**
+	 * The received value feedbacks for the treatment.
+	 */
+	@OneToMany(mappedBy = "treatment", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	public List<TreatmentValueFeedbackEntity> valueFeedbacks;
 
 	/**
 	 * Create a new treatment.
