@@ -10,7 +10,7 @@ import { AsyncPipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TitleService, UserNotificationService } from '@app/shared';
-import { ApiService, MinPatient, Patient, PatientStatusCriteria, TREATMENT_ACTION_NAMES, Treatment, TreatmentActionNamePipe } from '@app/shared/api';
+import { ApiService, TreatmentToAdd, Patient, PatientStatusCriteria, TREATMENT_ACTION_NAMES, TreatmentActionNamePipe } from '@app/shared/api';
 import { Observable, switchMap, tap } from 'rxjs';
 import { PatientStatusCriteriaEditorComponent } from '@app/shared/patient-status-criteria-editor';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
@@ -180,9 +180,8 @@ export class TreatmentComponent implements OnInit {
 
 		if (this.form.valid) {
 
-			var treatment = new Treatment();
-			treatment.patient = new MinPatient();
-			treatment.patient.id = this.patientId;
+			var treatment = new TreatmentToAdd();
+			treatment.patientId = this.patientId;
 			treatment.actions = [];
 			for (var name of TREATMENT_ACTION_NAMES) {
 

@@ -7,7 +7,7 @@
 */
 
 import { Pipe, PipeTransform } from '@angular/core';
-import { TreatmentAction } from './treatment.model';
+import { TreatmentAction } from './treatment-action.model';
 
 @Pipe({
 	name: 'treatmentActionName',

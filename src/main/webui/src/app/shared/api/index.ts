@@ -26,5 +26,10 @@ export {
 	DiscomfortDegree,
 	NITLevel
 } from './patient-status-criteria.model';
-export { Treatment, TreatmentAction, TREATMENT_ACTION_NAMES } from './treatment.model';
+export { Treatment } from './treatment.model';
 export { TreatmentActionNamePipe } from './treatment-action-name.pipe';
+export { TreatmentAction, TREATMENT_ACTION_NAMES } from './treatment-action.model';
+export { TreatmentToAdd } from './treatment-to-add.model';
+export { TreatmentActionFeedback, TREATMENT_ACTION_FEEDBACK } from './treatment-action-feedback.model';
+export { TreatmentActionWithFeedback } from './treatment-action-with-feedback.model';
+export { TreatmentValue } from './treatment-value.model';

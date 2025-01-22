@@ -15,6 +15,7 @@ import { Observable } from 'rxjs';
 import { MinPatientPage } from "./min-patient-page.model";
 import { Patient } from "./patient.model";
 import { Treatment } from "./treatment.model";
+import { TreatmentToAdd } from "./treatment-to-add.model";
 
 /**
  * The service used to interact with the 
@@ -185,18 +186,18 @@ export class ApiService {
 		var url = this.url('/v1/treatments', [treatmentId]);
 		return this.http.get<Treatment>(url);
 	}
+	
 	/**
 	 * Add a treatment.
 	 * 
 	 * @param treatment informaiton of the treatment to add.
 	 */
-	addTreatment(treatment: Treatment): Observable<Treatment> {
+	addTreatment(treatment: TreatmentToAdd): Observable<Treatment> {
 
 		var url = this.url('/v1/treatments');
 		return this.http.post<Treatment>(url, treatment);
 
 	}
-
 
 	/**
 	 * Delete a treatment.
