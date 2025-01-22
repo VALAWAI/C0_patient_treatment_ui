@@ -9,15 +9,12 @@
 package eu.valawai.c0_patient_treatment_ui.api.v1.treatments;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 import eu.valawai.c0_patient_treatment_ui.TimeManager;
 import eu.valawai.c0_patient_treatment_ui.ValueGenerator;
 import eu.valawai.c0_patient_treatment_ui.api.v1.patients.MinPatientTest;
 import eu.valawai.c0_patient_treatment_ui.models.PatientStatusCriteriaTest;
 import eu.valawai.c0_patient_treatment_ui.models.ReflectionModelTestCase;
-import eu.valawai.c0_patient_treatment_ui.models.TreatmentAction;
 
 /**
  * Test the {@link Treatment}.
@@ -47,11 +44,38 @@ public class TreatmentTest extends ReflectionModelTestCase<Treatment> {
 		model.createdTime = ValueGenerator.rnd().nextLong(0, TimeManager.now() - 360000);
 		model.patient = new MinPatientTest().nextModel();
 		model.beforeStatus = new PatientStatusCriteriaTest().nextModel();
-		model.actions = new ArrayList<>(Arrays.asList(TreatmentAction.values()));
-		Collections.shuffle(model.actions, ValueGenerator.rnd());
-		final var max = ValueGenerator.rnd().nextInt(1, model.actions.size());
-		model.actions = model.actions.subList(0, max);
 		model.expectedStatus = new PatientStatusCriteriaTest().nextModel();
+
+		final int maxActions = ValueGenerator.rnd().nextInt(5);
+		if (maxActions > 0) {
+
+			model.actions = new ArrayList<>(maxActions);
+
+			final var builder = new TreatmentActionWithFeedbackTest();
+			for (int i = 0; i < maxActions; i++) {
+
+				final var action = builder.nextModel();
+				model.actions.add(action);
+
+			}
+
+		}
+
+		final int maxValues = ValueGenerator.rnd().nextInt(5);
+		if (maxValues > 0) {
+
+			model.values = new ArrayList<>(maxValues);
+
+			final var builder = new TreatmentValueTest();
+			for (int i = 0; i < maxValues; i++) {
+
+				final var value = builder.nextModel();
+				model.values.add(value);
+
+			}
+
+		}
+
 	}
 
 }

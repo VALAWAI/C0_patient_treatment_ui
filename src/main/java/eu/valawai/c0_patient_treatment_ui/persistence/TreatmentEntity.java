@@ -8,10 +8,14 @@
 
 package eu.valawai.c0_patient_treatment_ui.persistence;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import eu.valawai.c0_patient_treatment_ui.TimeManager;
 import eu.valawai.c0_patient_treatment_ui.api.v1.treatments.Treatment;
+import eu.valawai.c0_patient_treatment_ui.api.v1.treatments.TreatmentActionWithFeedback;
+import eu.valawai.c0_patient_treatment_ui.api.v1.treatments.TreatmentValue;
 import eu.valawai.c0_patient_treatment_ui.messages.TreatmentPayload;
 import eu.valawai.c0_patient_treatment_ui.models.TreatmentAction;
 import io.quarkus.hibernate.reactive.panache.PanacheEntity;
@@ -155,11 +159,67 @@ public class TreatmentEntity extends PanacheEntity {
 
 			treatment.beforeStatus = this.beforeStatus.status;
 		}
-		treatment.actions = this.treatmentActions;
 		if (this.expectedStatus != null) {
 
 			treatment.expectedStatus = this.expectedStatus.status;
 		}
+		if (this.treatmentActions != null) {
+
+			treatment.actions = new ArrayList<>();
+			for (final var action : this.treatmentActions) {
+
+				final var feedback = new TreatmentActionWithFeedback();
+				feedback.action = action;
+				treatment.actions.add(feedback);
+			}
+
+			if (this.actionFeedbacks != null) {
+
+				Collections.sort(this.actionFeedbacks, (a1, a2) -> Long.compare(a1.createdTime, a2.createdTime));
+				for (final var actionFeedback : this.actionFeedbacks) {
+
+					for (final var action : treatment.actions) {
+
+						if (action.action == actionFeedback.action) {
+
+							action.feedback = actionFeedback.feedback;
+							action.updatedTime = actionFeedback.createdTime;
+							break;
+						}
+					}
+				}
+			}
+
+		}
+
+		if (this.valueFeedbacks != null) {
+
+			Collections.sort(this.valueFeedbacks, (a1, a2) -> Long.compare(a1.createdTime, a2.createdTime));
+			for (final var valueFeedback : this.valueFeedbacks) {
+
+				var found = false;
+				for (final var value : treatment.values) {
+
+					if (value.name.equalsIgnoreCase(valueFeedback.valueName)) {
+
+						value.alignment = valueFeedback.alignment;
+						value.updatedTime = valueFeedback.createdTime;
+						found = true;
+						break;
+					}
+				}
+
+				if (!found) {
+
+					final var value = new TreatmentValue();
+					value.name = valueFeedback.valueName.toUpperCase();
+					value.alignment = valueFeedback.alignment;
+					value.updatedTime = valueFeedback.createdTime;
+					treatment.values.add(value);
+				}
+			}
+		}
+
 		return treatment;
 	}
 

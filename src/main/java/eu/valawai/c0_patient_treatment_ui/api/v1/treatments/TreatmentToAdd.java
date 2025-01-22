@@ -12,9 +12,9 @@ import java.util.List;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
-import eu.valawai.c0_patient_treatment_ui.api.v1.patients.MinPatient;
 import eu.valawai.c0_patient_treatment_ui.models.PatientStatusCriteria;
 import eu.valawai.c0_patient_treatment_ui.models.ReflectionModel;
+import eu.valawai.c0_patient_treatment_ui.models.TreatmentAction;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
@@ -24,26 +24,14 @@ import jakarta.validation.constraints.NotNull;
  * @author UDT-IA, IIIA-CSIC
  */
 @Schema(title = "A treatment that is apply to a patient")
-public class Treatment extends ReflectionModel {
-
-	/**
-	 * The identifier of the treatment or {@code null} if it is not stored.
-	 */
-	@Schema(title = "The identifier of the patient treatment.", readOnly = true)
-	public Long id;
-
-	/**
-	 * The epoch time, in seconds, when the patient treatment is created.
-	 */
-	@Schema(title = "The epoch time, in seconds, when the patient treatment is created.", readOnly = true)
-	public Long createdTime;
+public class TreatmentToAdd extends ReflectionModel {
 
 	/**
 	 * The information of the patient that the treatment has to be applied.
 	 */
 	@NotNull
-	@Schema(title = "The information of the patient that the treatment has to be applied.", required = true)
-	public MinPatient patient;
+	@Schema(title = "The identifier of the patient to add the treatment.", required = true)
+	public Long patientId;
 
 	/**
 	 * The status before to apply the treatment.
@@ -57,7 +45,7 @@ public class Treatment extends ReflectionModel {
 	 */
 	@NotEmpty
 	@Schema(title = "The treatment actions to apply over the patient.")
-	public List<TreatmentActionWithFeedback> actions;
+	public List<TreatmentAction> actions;
 
 	/**
 	 * The expected status of the patient after applying the treatment.
@@ -65,12 +53,5 @@ public class Treatment extends ReflectionModel {
 	@NotNull
 	@Schema(title = "The expected status of the patient after applying the treatment.", required = true)
 	public PatientStatusCriteria expectedStatus;
-
-	/**
-	 * The values associated to the treatment.
-	 */
-	@NotEmpty
-	@Schema(title = "The values values associated to the treatment.")
-	public List<TreatmentValue> values;
 
 }

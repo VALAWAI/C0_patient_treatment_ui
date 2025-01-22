@@ -113,11 +113,11 @@ public class TreatmentsResource {
 	 */
 	@POST
 	@Operation(description = "Create a treatment.")
-	@APIResponse(responseCode = "201", description = "The created treatment.", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = Treatment.class)))
+	@APIResponse(responseCode = "201", description = "The created treatment.", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = TreatmentToAdd.class)))
 	public Uni<Response> createTreatment(
-			@RequestBody(description = "The treatment to create", required = true, content = @Content(schema = @Schema(implementation = Treatment.class))) @Valid final Treatment model) {
+			@RequestBody(description = "The treatment to create", required = true, content = @Content(schema = @Schema(implementation = TreatmentToAdd.class))) @Valid final TreatmentToAdd model) {
 
-		return PatientEntity.retrieve(model.patient.id).chain(patient -> {
+		return PatientEntity.retrieve(model.patientId).chain(patient -> {
 
 			return PatientStatusCriteriaEntity.retrieveOrPersist(model.beforeStatus).chain(before -> {
 
@@ -150,30 +150,4 @@ public class TreatmentsResource {
 
 	}
 
-//	/**
-//	 * Return the information of some treatments.
-//	 *
-//	 * @param name   of the treatments to return.
-//	 * @param offset the index of the first treatment to retrieve.
-//	 * @param limit  the number maximum of treatments to retrieve.
-//	 * @param order  the order to return the treatments.
-//	 *
-//	 * @return the page with the treatments.
-//	 */
-//	@GET
-//	@Operation(description = "Get a treatment information.")
-//	@APIResponse(responseCode = "200", description = "The treatments that satisfy the query.", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = MinTreatmentPage.class)))
-//	public Uni<Response> retrieveTreatmentPage(
-//			@QueryParam("name") @DefaultValue("*") @Parameter(in = ParameterIn.QUERY, description = "The pattern to match  of the treatment to retrieve") String name,
-//			@QueryParam("offset") @DefaultValue("0") @Parameter(in = ParameterIn.QUERY, description = "The index of the first treatment to retrieve") @Min(0) int offset,
-//			@QueryParam("limit") @DefaultValue("10") @Parameter(in = ParameterIn.QUERY, description = "The number maximum of treatments to retrieve") @Min(1) int limit,
-//			@QueryParam("order") @DefaultValue("") @Parameter(in = ParameterIn.QUERY, description = "The order to return the treatments. You can define the fields name or id with the prefix + to ascending order and - to descending order.") String order) {
-//
-//		final var pattern = QueryParameters.toPattern(name);
-//		final var sort = QueryParameters.toSort(order);
-//		return TreatmentEntity.getMinTreatmentPageFor(pattern, sort, offset, limit)
-//				.map(page -> Response.ok(page).build());
-//
-//	}
-//
 }

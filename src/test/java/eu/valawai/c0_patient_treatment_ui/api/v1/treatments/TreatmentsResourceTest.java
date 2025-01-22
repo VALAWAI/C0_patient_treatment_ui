@@ -9,15 +9,17 @@
 package eu.valawai.c0_patient_treatment_ui.api.v1.treatments;
 
 import static io.restassured.RestAssured.given;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.Duration;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
 import eu.valawai.c0_patient_treatment_ui.TimeManager;
+import eu.valawai.c0_patient_treatment_ui.api.v1.patients.MinPatient;
 import eu.valawai.c0_patient_treatment_ui.messages.TreatmentQueue;
 import eu.valawai.c0_patient_treatment_ui.messages.mov.MOVTestResource;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntities;
@@ -83,9 +85,16 @@ public class TreatmentsResourceTest {
 			assertNotNull(retrieved.patient);
 			assertEquals(entity.id, retrieved.id);
 			asserter.putData("BEFORE_STATUS_ID", entity.beforeStatus.id);
-			assertEquals(retrieved.actions, entity.treatmentActions);
 			asserter.putData("EXPECTED_STATUS_ID", entity.expectedStatus.id);
 			asserter.putData("RETRIEVED", retrieved);
+
+			final var copy = new ArrayList<>(entity.treatmentActions);
+			for (final var action : retrieved.actions) {
+
+				assertTrue("Undefined action", copy.remove(action.action));
+
+			}
+			assertTrue("Not obtained all the action", copy.isEmpty());
 
 		});
 
@@ -168,8 +177,8 @@ public class TreatmentsResourceTest {
 	@Test
 	public void shouldNotCreateTreatmentWithoutPatient() {
 
-		final var model = new TreatmentTest().nextModel();
-		model.patient = null;
+		final var model = new TreatmentToAddTest().nextModel();
+		model.patientId = null;
 		given().contentType("application/json").body(model).when().post("/v1/treatments").then()
 				.statusCode(Status.BAD_REQUEST.getStatusCode());
 
@@ -184,10 +193,14 @@ public class TreatmentsResourceTest {
 	@RunOnVertxContext
 	public void shouldNotCreateTreatmentWithoutUndefinedPatient(TransactionalUniAsserter asserter) {
 
-		asserter.assertThat(() -> PatientEntities.undefined(), undefined -> {
+		asserter.assertThat(() -> PatientEntities.undefined().map(undefined -> {
 
-			final var model = new TreatmentTest().nextModel();
-			model.patient.id = undefined;
+			final var model = new TreatmentToAddTest().nextModel();
+			model.patientId = undefined;
+			return model;
+
+		}), model -> {
+
 			given().contentType("application/json").body(model).when().post("/v1/treatments").then()
 					.statusCode(Status.BAD_REQUEST.getStatusCode());
 
@@ -204,11 +217,15 @@ public class TreatmentsResourceTest {
 	@RunOnVertxContext
 	public void shouldNotCreateTreatmentWithoutBeforeStatus(TransactionalUniAsserter asserter) {
 
-		asserter.assertThat(() -> PatientEntities.last(), last -> {
+		asserter.assertThat(() -> PatientEntities.last().map(last -> {
 
-			final var model = new TreatmentTest().nextModel();
-			model.patient.id = last.id;
+			final var model = new TreatmentToAddTest().nextModel();
+			model.patientId = last.id;
 			model.beforeStatus = null;
+			return model;
+
+		}), model -> {
+
 			given().contentType("application/json").body(model).when().post("/v1/treatments").then()
 					.statusCode(Status.BAD_REQUEST.getStatusCode());
 		});
@@ -223,11 +240,15 @@ public class TreatmentsResourceTest {
 	@RunOnVertxContext
 	public void shouldNotCreateTreatmentWithoutActions(TransactionalUniAsserter asserter) {
 
-		asserter.assertThat(() -> PatientEntities.last(), last -> {
+		asserter.assertThat(() -> PatientEntities.last().map(last -> {
 
-			final var model = new TreatmentTest().nextModel();
-			model.patient.id = last.id;
+			final var model = new TreatmentToAddTest().nextModel();
+			model.patientId = last.id;
 			model.actions = null;
+			return model;
+
+		}), model -> {
+
 			given().contentType("application/json").body(model).when().post("/v1/treatments").then()
 					.statusCode(Status.BAD_REQUEST.getStatusCode());
 		});
@@ -242,11 +263,15 @@ public class TreatmentsResourceTest {
 	@RunOnVertxContext
 	public void shouldNotCreateTreatmentWithoutEmptyActions(TransactionalUniAsserter asserter) {
 
-		asserter.assertThat(() -> PatientEntities.last(), last -> {
+		asserter.assertThat(() -> PatientEntities.last().map(last -> {
 
-			final var model = new TreatmentTest().nextModel();
-			model.patient.id = last.id;
+			final var model = new TreatmentToAddTest().nextModel();
+			model.patientId = last.id;
 			model.actions.clear();
+			return model;
+
+		}), model -> {
+
 			given().contentType("application/json").body(model).when().post("/v1/treatments").then()
 					.statusCode(Status.BAD_REQUEST.getStatusCode());
 		});
@@ -261,11 +286,15 @@ public class TreatmentsResourceTest {
 	@RunOnVertxContext
 	public void shouldNotCreateTreatmentWithoutExpectedStatus(TransactionalUniAsserter asserter) {
 
-		asserter.assertThat(() -> PatientEntities.last(), last -> {
+		asserter.assertThat(() -> PatientEntities.last().map(last -> {
 
-			final var model = new TreatmentTest().nextModel();
-			model.patient.id = last.id;
+			final var model = new TreatmentToAddTest().nextModel();
+			model.patientId = last.id;
 			model.expectedStatus = null;
+			return model;
+
+		}), model -> {
+
 			given().contentType("application/json").body(model).when().post("/v1/treatments").then()
 					.statusCode(Status.BAD_REQUEST.getStatusCode());
 		});
@@ -281,26 +310,50 @@ public class TreatmentsResourceTest {
 	public void shouldCreateTreatment(TransactionalUniAsserter asserter) {
 
 		this.queue.clearTreatments();
-		final var model = new TreatmentTest().nextModel();
+		final var model = new TreatmentToAddTest().nextModel();
 		asserter.assertThat(() -> PatientEntities.last(), last -> {
 
-			model.patient.id = last.id;
+			model.patientId = last.id;
 			final var now = TimeManager.now();
 			final var created = given().contentType("application/json").body(model).when().post("/v1/treatments").then()
 					.statusCode(Status.CREATED.getStatusCode()).extract().as(Treatment.class);
-			model.id = created.id;
-			model.patient = last.toMinPatient();
-			assertEquals(model.patient, created.patient);
+			assertNotNull(created.id);
+			final var patient = last.toMinPatient();
+			assertEquals(patient, created.patient);
 			assertEquals(model.beforeStatus, created.beforeStatus);
-			assertEquals(model.actions, created.actions);
+
 			assertEquals(model.expectedStatus, created.expectedStatus);
 			assertTrue(now <= created.createdTime);
-			model.createdTime = created.createdTime;
+			final var copy = new ArrayList<>(model.actions);
+			for (final var action : created.actions) {
+
+				assertTrue("Undefined action", copy.remove(action.action));
+
+			}
+			assertTrue("Not obtained all the action", copy.isEmpty());
+			asserter.putData("TREATMENT_ID", created.id);
+			asserter.putData("PATIENT", patient);
+			asserter.putData("CREATED_TIME", created.createdTime);
+
 		});
 
-		asserter.assertThat(() -> TreatmentEntity.retrieve(model.id), found -> {
+		asserter.assertThat(() -> {
 
-			assertEquals(model, found.toTreatment());
+			final var id = (Long) asserter.getData("TREATMENT_ID");
+			return TreatmentEntity.retrieve(id);
+
+		}, found -> {
+
+			final var id = (Long) asserter.getData("TREATMENT_ID");
+			assertEquals(id, found.id);
+			final var patient = (MinPatient) asserter.getData("PATIENT");
+			assertEquals(patient, found.patient.toMinPatient());
+			final var createdTime = (Long) asserter.getData("CREATED_TIME");
+			assertEquals(createdTime, found.createdTime);
+			assertEquals(model.beforeStatus, found.beforeStatus.status);
+			assertEquals(model.actions, found.treatmentActions);
+			assertEquals(model.expectedStatus, found.expectedStatus.status);
+
 			asserter.putData("BEFORE_STATUS_ID", found.beforeStatus.id);
 			asserter.putData("EXPECTED_STATUS_ID", found.expectedStatus.id);
 			final var expectedPayload = found.toTreatmentPayload();
