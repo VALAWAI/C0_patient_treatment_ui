@@ -15,7 +15,6 @@ export { MinPatient } from './min-patient.model';
 export { Patient } from './patient.model';
 export {
 	PatientStatusCriteria,
-	SPICT_Scale,
 	ClinicalRiskGroupOption,
 	BarthelIndex,
 	LawtonIndex,
@@ -36,3 +35,5 @@ export { YesNoUnknownOption, YES_NO_UNKNOWN_OPTION_NAMES } from './yes-no-unknow
 export { YesNoUnknownOptionNamePipe } from './yes-no-unknown-option-name.pipe';
 export { SurvivalOption, SURVIVAL_OPTION_NAMES } from './survival-option.model';
 export { SurvivalOptionNamePipe } from './survival-option-name.pipe';
+export { SPICT_Scale, SPICT_SCALE_NAMES } from './spict-scale.model';
+export { SPICT_ScaleNamePipe } from './spict-scale-name.pipe';

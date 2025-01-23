@@ -99,18 +99,15 @@
 		</div>
 		<div class="grow"></div>
 		<div class="max-w-xs">
-			<mat-radio-group aria-labelledby="example-radio-group-label"
+			<mat-radio-group
+				*ngIf="form.controls.frailVIG.enabled; else noFrailVIG"
+				aria-labelledby="example-radio-group-label"
 				formControlName="frailVIG"
 				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button value="LOW"
-				i18n="Frail VIG label for SPICT scale LOW@@shared_patient-status-criteria_main_criteria_frail-vig-low">Low</mat-radio-button>
-			<mat-radio-button value="MODERATE"
-				i18n="Frail VIG label for SPICT scale MODERATE@@shared_patient-status-criteria_main_criteria_frail-vig-moderate">Moderate</mat-radio-button>
-			<mat-radio-button value="HIGH"
-				i18n="Frail VIG label for SPICT scale HIGH@@shared_patient-status-criteria_main_criteria_frail-vig-high">High</mat-radio-button>
-			<mat-radio-button value="UNKNOWN"
-				i18n="Frail VIG label for SPICT scale UNKNOWN@@shared_patient-status-criteria_main_criteria_frail-vig-unknown">Unknown</mat-radio-button>
-			</mat-radio-group>
+			<mat-radio-button *ngFor="let name of SPICT_SCALE_NAMES"
+				[value]="name">{{name|spictScaleName}}</mat-radio-button> </mat-radio-group>
+			<ng-template #noFrailVIG>
+			{{form.controls.frailVIG.value|spictScaleName}} </ng-template>
 		</div>
 	</div>
 	<div

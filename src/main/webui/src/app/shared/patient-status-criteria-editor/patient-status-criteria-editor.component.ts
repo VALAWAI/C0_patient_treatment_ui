@@ -23,7 +23,9 @@ import {
 	YesNoUnknownOptionNamePipe,
 	YES_NO_UNKNOWN_OPTION_NAMES,
 	SurvivalOptionNamePipe,
-	SURVIVAL_OPTION_NAMES
+	SURVIVAL_OPTION_NAMES,
+	SPICT_ScaleNamePipe,
+	SPICT_SCALE_NAMES
 } from '@app/shared/api';
 import { MatRadioModule } from '@angular/material/radio';
 import { Subscription } from 'rxjs';
@@ -40,7 +42,8 @@ import { NgFor, NgIf } from '@angular/common';
 		NgFor,
 		AgeRangeOptionNamePipe,
 		YesNoUnknownOptionNamePipe,
-		SurvivalOptionNamePipe
+		SurvivalOptionNamePipe,
+		SPICT_ScaleNamePipe
 	],
 	templateUrl: './patient-status-criteria-editor.component.html',
 	styleUrls: ['./patient-status-criteria-editor.component.css']
@@ -63,6 +66,11 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 	public SURVIVAL_OPTION_NAMES = SURVIVAL_OPTION_NAMES;
 
 	/**
+	 * The posible SPICT scale names.
+	 */
+	public SPICT_SCALE_NAMES = SPICT_SCALE_NAMES;
+
+	/**
 	 * Notify a paretn component that a patient has bene selected.
 	 */
 	@Output()
@@ -77,7 +85,7 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 		'clinicalRiskGroup': this.fb.control<ClinicalRiskGroupOption>(null),
 		'discomfortDegree': this.fb.control<DiscomfortDegree>(null),
 		'expectedSurvival': this.fb.control<SurvivalOption | null>(null),
-		'frailVIG': this.fb.control<SPICT_Scale>(null),
+		'frailVIG': this.fb.control<SPICT_Scale | null >(null),
 		'hasAdvanceDirectives': this.fb.control<YesNoUnknownOption | null>(null),
 		'hasBeenInformed': this.fb.control<YesNoUnknownOption | null>(null),
 		'hasCognitiveImpairment': this.fb.control<CognitiveImpairmentLevel>(null),
@@ -161,7 +169,7 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 			this.form.controls.hasCognitiveImpairment.disable();
 			this.form.controls.hasEmocionalPain.enable();
 			this.form.controls.discomfortDegree.enable();
-			
+
 		} else {
 
 			this.form.enable();

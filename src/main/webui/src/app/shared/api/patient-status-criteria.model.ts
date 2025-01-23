@@ -7,12 +7,9 @@
 */
 
 import { AgeRangeOption } from './age-range-option.model';
-
 import { SurvivalOption } from './survival-option.model';
-
 import { YesNoUnknownOption } from './yes-no-unknown-option.model';
-
-export type SPICT_Scale = 'LOW' | 'MODERATE' | 'HIGH' | 'UNKNOWN' | null;
+import { SPICT_Scale } from './spict-scale.model';
 
 export type ClinicalRiskGroupOption = 'PROMOTION_AND_PREVENTION'
 	| 'SELF_MANAGEMENT_SUPPORT'
@@ -57,12 +54,12 @@ export class PatientStatusCriteria {
 	/**
 	 * The expected survival time for the patient status.
 	 */
-	public expectedSurvival: SurvivalOption |null = null;
+	public expectedSurvival: SurvivalOption | null = null;
 
 	/**
 	 * The fragility index of the patient status.
 	 */
-	public frailVIG: SPICT_Scale = null;
+	public frailVIG: SPICT_Scale | null = null;
 
 	/**
 	 * The clinical risk group of the patient status.
