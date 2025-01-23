@@ -10,12 +10,12 @@ import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TitleService, UserNotificationService } from '@app/shared';
-import { ApiService, Patient } from '@app/shared/api';
+import { ApiService, Treatment } from '@app/shared/api';
 import { Observable, switchMap, tap } from 'rxjs';
 
 @Component({
 	standalone: true,
-    selector: 'app-doctor-patient-delete',
+    selector: 'app-doctor-treatment-delete',
     imports: [
         AsyncPipe,
         RouterLink,
@@ -27,14 +27,14 @@ import { Observable, switchMap, tap } from 'rxjs';
 export class DeleteComponent implements OnInit {
 
 	/**
-	 * The patient to delete.
+	 * The treatment to delete.
 	 */
-	public patient$: Observable<Patient> | null = null;
+	public treatment$: Observable<Treatment> | null = null;
 
 	/**
-	 * The identifier of the patient that is deleteing.
+	 * The identifier of the treatment that is deleteing.
 	 */
-	private patientId: number = 0;
+	private treatmentId: number = 0;
 
 	/**
 	 *  Create the component.
@@ -55,32 +55,32 @@ export class DeleteComponent implements OnInit {
 	 */
 	ngOnInit(): void {
 
-		this.title.changeHeaderTitle($localize`:The header title for the delete patient@@main_doctor_patients_delete_code_page-title:Delete patient`);
-		this.patient$ = this.route.paramMap.pipe(
+		this.title.changeHeaderTitle($localize`:The header title for the delete a treatment@@main_doctor_treatments_delete_code_page-title:Delete treatment`);
+		this.treatment$ = this.route.paramMap.pipe(
 			switchMap(params => {
 
-				this.patientId = Number(params.get('patientId'));
-				return this.api.getPatient(this.patientId);
+				this.treatmentId = Number(params.get('treatmentId'));
+				return this.api.getTreatment(this.treatmentId);
 
 			})
 		);
 	}
 
 	/**
-	 * Called when udate a patient.
+	 * Called when udate a treatment.
 	 */
-	deletePatient() {
+	deleteTreatment() {
 
-		this.api.deletePatient(this.patientId).subscribe(
+		this.api.deleteTreatment(this.treatmentId).subscribe(
 			{
 				next: () => {
 
-					this.notifier.showSuccess($localize`:The success notification when the patient is deleted@@main_doctor_patients_delete_code_success-msg:Patient deleted`);
-					this.router.navigate(['/main/doctor/patients'])
+					this.notifier.showSuccess($localize`:The success notification when the treatment is deleted@@main_doctor_treatments_delete_code_success-msg:Treatment deleted`);
+					this.router.navigate(['/main/doctor/treatments'])
 				},
 				error: err => {
 
-					this.notifier.showError($localize`:The error notification when the patient can nto be deleted@@main_doctor_patients_delete_code_error-msg:Patient cannot be deleted`);
+					this.notifier.showError($localize`:The error notification when the treatment can not be removed@@main_doctor_treatments_delete_code_error-msg:Treatment cannot be deleted`);
 					console.error(err);
 				}
 			}
