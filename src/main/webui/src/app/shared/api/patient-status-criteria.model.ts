@@ -10,13 +10,7 @@ import { AgeRangeOption } from './age-range-option.model';
 import { SurvivalOption } from './survival-option.model';
 import { YesNoUnknownOption } from './yes-no-unknown-option.model';
 import { SPICT_Scale } from './spict-scale.model';
-
-export type ClinicalRiskGroupOption = 'PROMOTION_AND_PREVENTION'
-	| 'SELF_MANAGEMENT_SUPPORT'
-	| 'ILLNESS_MANAGEMENT'
-	| 'CASE_MANAGEMENT'
-	| 'UNKNOWN'
-	| null;
+import { ClinicalRiskGroupOption } from './clinical-risk-group-option.model';
 
 export type BarthelIndex = 'TOTAL' | 'SEVERE' | 'MODERATE' | 'MILD' | 'INDEPENDENT' | 'UNKNOWN' | null;
 
@@ -64,7 +58,7 @@ export class PatientStatusCriteria {
 	/**
 	 * The clinical risk group of the patient status.
 	 */
-	public clinicalRiskGroup: ClinicalRiskGroupOption = null;
+	public clinicalRiskGroup: ClinicalRiskGroupOption | null = null;
 
 	/**
 	 * Check if the patient status has social support.

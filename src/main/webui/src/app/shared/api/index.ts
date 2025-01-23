@@ -15,7 +15,6 @@ export { MinPatient } from './min-patient.model';
 export { Patient } from './patient.model';
 export {
 	PatientStatusCriteria,
-	ClinicalRiskGroupOption,
 	BarthelIndex,
 	LawtonIndex,
 	CognitiveImpairmentLevel,
@@ -37,3 +36,5 @@ export { SurvivalOption, SURVIVAL_OPTION_NAMES } from './survival-option.model';
 export { SurvivalOptionNamePipe } from './survival-option-name.pipe';
 export { SPICT_Scale, SPICT_SCALE_NAMES } from './spict-scale.model';
 export { SPICT_ScaleNamePipe } from './spict-scale-name.pipe';
+export { ClinicalRiskGroupOption, CLINICAL_RISK_GROUP_OPTION_NAMES } from './clinical-risk-group-option.model';
+export { ClinicalRiskGroupOptionNamePipe } from './clinical-risk-group-option-name.pipe';

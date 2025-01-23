@@ -16,7 +16,7 @@ import { SPICT_Scale } from './spict-scale.model';
 export class SPICT_ScaleNamePipe implements PipeTransform {
 
 	/**
-	 * REturn a human readable name of a treatment action. 
+	 * Return a human readable name of a SPICT scale value. 
 	 */
 	transform(value: SPICT_Scale | null | undefined): string {
 

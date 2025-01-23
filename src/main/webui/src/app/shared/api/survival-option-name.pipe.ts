@@ -16,7 +16,7 @@ import { SurvivalOption } from './survival-option.model';
 export class SurvivalOptionNamePipe implements PipeTransform {
 
 	/**
-	 * REturn a human readable name of a treatment action. 
+	 * Return a human readable name of a survival option. 
 	 */
 	transform(value: SurvivalOption | null | undefined): string {
 

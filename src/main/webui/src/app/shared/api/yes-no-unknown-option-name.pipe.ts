@@ -16,7 +16,7 @@ import { YesNoUnknownOption } from './yes-no-unknown-option.model';
 export class YesNoUnknownOptionNamePipe implements PipeTransform {
 
 	/**
-	 * REturn a human readable name of a treatment action. 
+	 * Return a human readable name of a yes,no or unknown option. 
 	 */
 	transform(value: YesNoUnknownOption | null | undefined): string {
 

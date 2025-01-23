@@ -25,11 +25,13 @@ import {
 	SurvivalOptionNamePipe,
 	SURVIVAL_OPTION_NAMES,
 	SPICT_ScaleNamePipe,
-	SPICT_SCALE_NAMES
+	SPICT_SCALE_NAMES,
+	ClinicalRiskGroupOptionNamePipe,
+	CLINICAL_RISK_GROUP_OPTION_NAMES
 } from '@app/shared/api';
 import { MatRadioModule } from '@angular/material/radio';
 import { Subscription } from 'rxjs';
-import { ReactiveFormsModule, FormControl, FormBuilder } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
 
 @Component({
@@ -43,7 +45,8 @@ import { NgFor, NgIf } from '@angular/common';
 		AgeRangeOptionNamePipe,
 		YesNoUnknownOptionNamePipe,
 		SurvivalOptionNamePipe,
-		SPICT_ScaleNamePipe
+		SPICT_ScaleNamePipe,
+		ClinicalRiskGroupOptionNamePipe
 	],
 	templateUrl: './patient-status-criteria-editor.component.html',
 	styleUrls: ['./patient-status-criteria-editor.component.css']
@@ -71,6 +74,11 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 	public SPICT_SCALE_NAMES = SPICT_SCALE_NAMES;
 
 	/**
+	 * The posible clinicla risk group option names.
+	 */
+	public CLINICAL_RISK_GROUP_OPTION_NAMES = CLINICAL_RISK_GROUP_OPTION_NAMES;
+
+	/**
 	 * Notify a paretn component that a patient has bene selected.
 	 */
 	@Output()
@@ -82,7 +90,7 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 	public form = this.fb.group({
 		'ageRange': this.fb.control<AgeRangeOption | null>(null),
 		'ccd': this.fb.control<YesNoUnknownOption | null>(null),
-		'clinicalRiskGroup': this.fb.control<ClinicalRiskGroupOption>(null),
+		'clinicalRiskGroup': this.fb.control<ClinicalRiskGroupOption | null>(null),
 		'discomfortDegree': this.fb.control<DiscomfortDegree>(null),
 		'expectedSurvival': this.fb.control<SurvivalOption | null>(null),
 		'frailVIG': this.fb.control<SPICT_Scale | null >(null),

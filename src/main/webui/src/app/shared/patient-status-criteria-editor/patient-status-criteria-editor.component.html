@@ -117,22 +117,17 @@
 			Clinical Risk Group</div>
 		<div class="grow"></div>
 		<div class="max-w-xs">
-			<mat-radio-group aria-labelledby="example-radio-group-label"
-				formControlName="clinicalRiskGroup"
+			<mat-radio-group
+				*ngIf="form.controls.clinicalRiskGroup.enabled; else noClinicalRiskGroup"
+				aria-labelledby="example-radio-group-label"
+				formControlName="frailVIG"
 				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button value="PROMOTION_AND_PREVENTION"
-				i18n="Clinical risk group label for PROMOTION_AND_PREVENTION@@shared_patient-status-criteria_main_criteria_clinical-risk-group-promation-and-prevention">
-			0 Promotion & Prevention </mat-radio-button> <mat-radio-button
-				value="SELF_MANAGEMENT_SUPPORT"
-				i18n="Clinical risk group label for SELF_MANAGEMENT_SUPPORT@@shared_patient-status-criteria_main_criteria_clinical-risk-group-self-management-support">
-			1 Self-management support </mat-radio-button> <mat-radio-button
-				value="ILLNESS_MANAGEMENT"
-				i18n="Clinical risk group label for ILLNESS_MANAGEMENT@@shared_patient-status-criteria_main_criteria_clinical-risk-group-illness-management">
-			2 Illness management </mat-radio-button> <mat-radio-button value="CASE_MANAGEMENT"
-				i18n="Clinical risk group label for CASE_MANAGEMENT@@shared_patient-status-criteria_main_criteria_clinical-risk-group-case-management">
-			3 Case management </mat-radio-button> <mat-radio-button value="UNKNOWN"
-				i18n="Clinical risk group label for UNKNOWN@@shared_patient-status-criteria_main_criteria_clinical-risk-group-unknown">4
-			Unknown</mat-radio-button> </mat-radio-group>
+			<mat-radio-button
+				*ngFor="let name of CLINICAL_RISK_GROUP_OPTION_NAMES" [value]="name">{{name|clinicalRiskGroupOptionName}}</mat-radio-button>
+			</mat-radio-group>
+			<ng-template #noClinicalRiskGroup>
+			{{form.controls.clinicalRiskGroup.value|clinicalRiskGroupOptionName}}
+			</ng-template>
 		</div>
 	</div>
 	<div

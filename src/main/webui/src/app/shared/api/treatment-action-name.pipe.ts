@@ -16,7 +16,7 @@ import { TreatmentAction } from './treatment-action.model';
 export class TreatmentActionNamePipe implements PipeTransform {
 
 	/**
-	 * REturn a human readable name of a treatment action. 
+	 * Return a human readable name of a treatment action. 
 	 */
 	transform(value: TreatmentAction | null | undefined): string {
 

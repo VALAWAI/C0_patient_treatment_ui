@@ -16,7 +16,7 @@ import { AgeRangeOption } from './age-range-option.model';
 export class AgeRangeOptionNamePipe implements PipeTransform {
 
 	/**
-	 * REturn a human readable name of a treatment action. 
+	 * Return a human readable name of an age range option. 
 	 */
 	transform(value: AgeRangeOption | null | undefined): string {
 
