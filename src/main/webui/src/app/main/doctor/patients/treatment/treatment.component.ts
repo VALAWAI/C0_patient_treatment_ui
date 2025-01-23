@@ -195,7 +195,7 @@ export class TreatmentComponent implements OnInit {
 			this.api.addTreatment(treatment).subscribe({
 				next: (added) => {
 
-					this.router.navigate(['/main/docstor/treatment/', added.id, '/view']);
+					this.router.navigate(['/main/doctor/treatments/', added.id, '/view']);
 
 				},
 				error: err => {
