@@ -204,16 +204,15 @@
 			Does the patient have advance directives?</div>
 		<div class="grow"></div>
 		<div class="max-w-xs">
-			<mat-radio-group aria-labelledby="example-radio-group-label"
+			<mat-radio-group
+				*ngIf="form.controls.hasAdvanceDirectives.enabled; else noHasAdvanceDirectives"
+				aria-labelledby="example-radio-group-label"
 				formControlName="hasAdvanceDirectives"
 				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button value="YES"
-				i18n="Has advance directives label for YES@@shared_patient-status-criteria_main_criteria_has-advance-directives-yes">Yes</mat-radio-button>
-			<mat-radio-button value="NO"
-				i18n="Has advance directives label for NO@@shared_patient-status-criteria_main_criteria_has-advance-directives-no">No</mat-radio-button>
-			<mat-radio-button value="UNKNOWN"
-				i18n="Has advance directives label for UNKNOWN@@shared_patient-status-criteria_main_criteria_has-advance-directives-unknown">Unknown</mat-radio-button>
-			</mat-radio-group>
+			<mat-radio-button *ngFor="let name of YES_NO_UNKNOWN_OPTION_NAMES"
+				[value]="name">{{name|yesNoUnknownOptionName}}</mat-radio-button> </mat-radio-group>
+			<ng-template #noHasAdvanceDirectives>
+			{{form.controls.hasAdvanceDirectives.value|yesNoUnknownOptionName}} </ng-template>
 		</div>
 	</div>
 	<div
@@ -224,16 +223,15 @@
 			personnel?</div>
 		<div class="grow"></div>
 		<div class="max-w-xs">
-			<mat-radio-group aria-labelledby="example-radio-group-label"
+			<mat-radio-group
+				*ngIf="form.controls.isCompetent.enabled; else noIsCompetent"
+				aria-labelledby="example-radio-group-label"
 				formControlName="isCompetent"
 				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button value="YES"
-				i18n="Is competent label for YES@@shared_patient-status-criteria_main_criteria_is-competent-yes">Yes</mat-radio-button>
-			<mat-radio-button value="NO"
-				i18n="Is competent label for NO@@shared_patient-status-criteria_main_criteria_is-competent-no">No</mat-radio-button>
-			<mat-radio-button value="UNKNOWN"
-				i18n="Is competent label for UNKNOWN@@shared_patient-status-criteria_main_criteria_is-competent-unknown">Unknown</mat-radio-button>
-			</mat-radio-group>
+			<mat-radio-button *ngFor="let name of YES_NO_UNKNOWN_OPTION_NAMES"
+				[value]="name">{{name|yesNoUnknownOptionName}}</mat-radio-button> </mat-radio-group>
+			<ng-template #noIsCompetent>
+			{{form.controls.isCompetent.value|yesNoUnknownOptionName}} </ng-template>
 		</div>
 	</div>
 	<div
@@ -244,16 +242,15 @@
 			possible treatments and the consequences of receiving it or No?</div>
 		<div class="grow"></div>
 		<div class="max-w-xs">
-			<mat-radio-group aria-labelledby="example-radio-group-label"
+			<mat-radio-group
+				*ngIf="form.controls.hasBeenInformed.enabled; else noHasBeenInformed"
+				aria-labelledby="example-radio-group-label"
 				formControlName="hasBeenInformed"
 				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button value="YES"
-				i18n="Has been informed label for YES@@shared_patient-status-criteria_main_criteria_has-been-informed-yes">Yes</mat-radio-button>
-			<mat-radio-button value="NO"
-				i18n="Has been informed label for NO@@shared_patient-status-criteria_main_criteria_has-been-informed-no">No</mat-radio-button>
-			<mat-radio-button value="UNKNOWN"
-				i18n="Has been informed label for UNKNOWN@@shared_patient-status-criteria_main_criteria_has-been-informed-unknown">Unknown</mat-radio-button>
-			</mat-radio-group>
+			<mat-radio-button *ngFor="let name of YES_NO_UNKNOWN_OPTION_NAMES"
+				[value]="name">{{name|yesNoUnknownOptionName}}</mat-radio-button> </mat-radio-group>
+			<ng-template #noHasBeenInformed>
+			{{form.controls.hasBeenInformed.value|yesNoUnknownOptionName}} </ng-template>
 		</div>
 	</div>
 	<div
@@ -264,16 +261,15 @@
 			parties?</div>
 		<div class="grow"></div>
 		<div class="max-w-xs">
-			<mat-radio-group aria-labelledby="example-radio-group-label"
+			<mat-radio-group
+				*ngIf="form.controls.isCoerced.enabled; else noIsCoerced"
+				aria-labelledby="example-radio-group-label"
 				formControlName="isCoerced"
 				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button value="YES"
-				i18n="Is coerced label for YES@@shared_patient-status-criteria_main_criteria_is-coerced-yes">Yes</mat-radio-button>
-			<mat-radio-button value="NO"
-				i18n="Is coerced label for NO@@shared_patient-status-criteria_main_criteria_is-coerced-no">No</mat-radio-button>
-			<mat-radio-button value="UNKNOWN"
-				i18n="Is coerced label for UNKNOWN@@shared_patient-status-criteria_main_criteria_is-coerced-unknown">Unknown</mat-radio-button>
-			</mat-radio-group>
+			<mat-radio-button *ngFor="let name of YES_NO_UNKNOWN_OPTION_NAMES"
+				[value]="name">{{name|yesNoUnknownOptionName}}</mat-radio-button> </mat-radio-group>
+			<ng-template #noIsCoerced>
+			{{form.controls.isCoerced.value|yesNoUnknownOptionName}} </ng-template>
 		</div>
 	</div>
 	<div
@@ -283,18 +279,17 @@
 			Does the patient have cognitive impairment?</div>
 		<div class="grow"></div>
 		<div class="max-w-xs">
-			<mat-radio-group aria-labelledby="example-radio-group-label"
+			<mat-radio-group
+				*ngIf="form.controls.hasCognitiveImpairment.enabled; else noHasCognitiveImpairment"
+				aria-labelledby="example-radio-group-label"
 				formControlName="hasCognitiveImpairment"
 				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button value="ABSENT"
-				i18n="Has cognitive impairment label for ABSENT@@shared_patient-status-criteria_main_criteria_has-cognitive-impairment-absent">Absent</mat-radio-button>
-			<mat-radio-button value="MILD_MODERATE"
-				i18n="Has cognitive impairment label for MILD_MODERATE@@shared_patient-status-criteria_main_criteria_has-cognitive-impairment-mild-moderate">Mild-moderate</mat-radio-button>
-			<mat-radio-button value="SEVERE"
-				i18n="Has cognitive impairment label for SEVERE@@shared_patient-status-criteria_main_criteria_has-cognitive-impairment-severe">Severe</mat-radio-button>
-			<mat-radio-button value="UNKNOWN"
-				i18n="Has cognitive impairment label for UNKNOWN@@shared_patient-status-criteria_main_criteria_has-cognitive-impairment-unknown">Unknown</mat-radio-button>
+			<mat-radio-button
+				*ngFor="let name of COGNITIVE_IMPAIRMENT_LEVEL_NAMES" [value]="name">{{name|cognitiveImpairmentLevelName}}</mat-radio-button>
 			</mat-radio-group>
+			<ng-template #noHasCognitiveImpairment>
+			{{form.controls.hasCognitiveImpairment.value|cognitiveImpairmentLevelName}}
+			</ng-template>
 		</div>
 	</div>
 	<div
@@ -304,16 +299,15 @@
 			Emotional state. Does the patient have emotional discomfort?</div>
 		<div class="grow"></div>
 		<div class="max-w-xs">
-			<mat-radio-group aria-labelledby="example-radio-group-label"
+			<mat-radio-group
+				*ngIf="form.controls.hasEmocionalPain.enabled; else noHasEmocionalPain"
+				aria-labelledby="example-radio-group-label"
 				formControlName="hasEmocionalPain"
 				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button value="YES"
-				i18n="Is coerced label for YES@@shared_patient-status-criteria_main_criteria_is-coerced-yes">Yes</mat-radio-button>
-			<mat-radio-button value="NO"
-				i18n="Is coerced label for NO@@shared_patient-status-criteria_main_criteria_is-coerced-no">No</mat-radio-button>
-			<mat-radio-button value="UNKNOWN"
-				i18n="Is coerced label for UNKNOWN@@shared_patient-status-criteria_main_criteria_is-coerced-unknown">Unknown</mat-radio-button>
-			</mat-radio-group>
+			<mat-radio-button *ngFor="let name of YES_NO_UNKNOWN_OPTION_NAMES"
+				[value]="name">{{name|yesNoUnknownOptionName}}</mat-radio-button> </mat-radio-group>
+			<ng-template #noHasEmocionalPain>
+			{{form.controls.hasEmocionalPain.value|yesNoUnknownOptionName}} </ng-template>
 		</div>
 	</div>
 	<div
@@ -324,6 +318,17 @@
 			action.</div>
 		<div class="grow"></div>
 		<div class="max-w-xs">
+			<!-- 
+					<mat-radio-group
+				*ngIf="form.controls.discomfortDegree.enabled; else noDiscomfortDegree"
+				aria-labelledby="example-radio-group-label"
+				formControlName="discomfortDegree"
+				class="flex flex-row flex-wrap gap-2 place-content-center">
+			<mat-radio-button *ngFor="let name of YES_NO_UNKNOWN_OPTION_NAMES"
+				[value]="name">{{name|yesNoUnknownOptionName}}</mat-radio-button> </mat-radio-group>
+			<ng-template #noDiscomfortDegree>
+			{{form.controls.discomfortDegree.value|yesNoUnknownOptionName}} </ng-template>
+		 -->
 			<mat-radio-group aria-labelledby="example-radio-group-label"
 				formControlName="discomfortDegree"
 				class="flex flex-row flex-wrap gap-2 place-content-center">

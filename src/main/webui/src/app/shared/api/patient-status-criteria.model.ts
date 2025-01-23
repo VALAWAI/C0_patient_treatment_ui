@@ -13,7 +13,7 @@ import { SPICT_Scale } from './spict-scale.model';
 import { ClinicalRiskGroupOption } from './clinical-risk-group-option.model';
 import { BarthelIndex } from './barthel-index.model';
 import { LawtonIndex } from './lawton-index.model';
-export type CognitiveImpairmentLevel = 'ABSENT' | 'MILD_MODERATE' | 'SEVERE' | 'UNKNOWN' | null;
+import { CognitiveImpairmentLevel } from './cognitive-impairment-level.model';
 
 export type DiscomfortDegree = 'LOW' | 'MEDIUM' | 'HIGH' | 'UNKNOWN' | null;
 
@@ -99,7 +99,7 @@ export class PatientStatusCriteria {
 	/**
 	 * Inform if the patient status has cognitive impairment.
 	 */
-	public hasCognitiveImpairment: CognitiveImpairmentLevel = null;
+	public hasCognitiveImpairment: CognitiveImpairmentLevel | null = null;
 
 	/**
 	 * Inform if the patient status has emotional pain.

@@ -31,7 +31,9 @@ import {
 	BarthelIndexNamePipe,
 	BARTHEL_INDEX_NAMES,
 	LawtonIndexNamePipe,
-	LAWTON_INDEX_NAMES
+	LAWTON_INDEX_NAMES,
+	CognitiveImpairmentLevelNamePipe,
+	COGNITIVE_IMPAIRMENT_LEVEL_NAMES
 } from '@app/shared/api';
 import { MatRadioModule } from '@angular/material/radio';
 import { Subscription } from 'rxjs';
@@ -52,7 +54,8 @@ import { NgFor, NgIf } from '@angular/common';
 		SPICT_ScaleNamePipe,
 		ClinicalRiskGroupOptionNamePipe,
 		BarthelIndexNamePipe,
-		LawtonIndexNamePipe
+		LawtonIndexNamePipe,
+		CognitiveImpairmentLevelNamePipe
 	],
 	templateUrl: './patient-status-criteria-editor.component.html',
 	styleUrls: ['./patient-status-criteria-editor.component.css']
@@ -95,6 +98,11 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 	public LAWTON_INDEX_NAMES = LAWTON_INDEX_NAMES;
 
 	/**
+	 * The posible cognitive impairment level names.
+	 */
+	public COGNITIVE_IMPAIRMENT_LEVEL_NAMES = COGNITIVE_IMPAIRMENT_LEVEL_NAMES;
+	
+	/**
 	 * Notify a paretn component that a patient has bene selected.
 	 */
 	@Output()
@@ -112,7 +120,7 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 		'frailVIG': this.fb.control<SPICT_Scale | null>(null),
 		'hasAdvanceDirectives': this.fb.control<YesNoUnknownOption | null>(null),
 		'hasBeenInformed': this.fb.control<YesNoUnknownOption | null>(null),
-		'hasCognitiveImpairment': this.fb.control<CognitiveImpairmentLevel>(null),
+		'hasCognitiveImpairment': this.fb.control<CognitiveImpairmentLevel |null>(null),
 		'hasEmocionalPain': this.fb.control<YesNoUnknownOption | null>(null),
 		'hasSocialSupport': this.fb.control<YesNoUnknownOption | null>(null),
 		'independenceAtAdmission': this.fb.control<BarthelIndex | null>(null),

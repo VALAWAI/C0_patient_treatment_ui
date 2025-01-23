@@ -15,7 +15,6 @@ export { MinPatient } from './min-patient.model';
 export { Patient } from './patient.model';
 export {
 	PatientStatusCriteria,
-	CognitiveImpairmentLevel,
 	DiscomfortDegree,
 	NITLevel
 } from './patient-status-criteria.model';
@@ -40,3 +39,5 @@ export { BarthelIndex, BARTHEL_INDEX_NAMES } from './barthel-index.model';
 export { BarthelIndexNamePipe } from './barthel-index-name.pipe';
 export { LawtonIndex, LAWTON_INDEX_NAMES } from './lawton-index.model';
 export { LawtonIndexNamePipe } from './lawton-index-name.pipe';
+export { CognitiveImpairmentLevel, COGNITIVE_IMPAIRMENT_LEVEL_NAMES } from './cognitive-impairment-level.model';
+export { CognitiveImpairmentLevelNamePipe } from './cognitive-impairment-level-name.pipe';
