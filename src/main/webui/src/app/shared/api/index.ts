@@ -15,9 +15,6 @@ export { MinPatient } from './min-patient.model';
 export { Patient } from './patient.model';
 export {
 	PatientStatusCriteria,
-	AgeRangeOption,
-	YesNoUnknownOption,
-	SurvivalOptions,
 	SPICT_Scale,
 	ClinicalRiskGroupOption,
 	BarthelIndex,
@@ -33,3 +30,9 @@ export { TreatmentToAdd } from './treatment-to-add.model';
 export { TreatmentActionFeedback, TREATMENT_ACTION_FEEDBACK } from './treatment-action-feedback.model';
 export { TreatmentActionWithFeedback } from './treatment-action-with-feedback.model';
 export { TreatmentValue } from './treatment-value.model';
+export { AgeRangeOption, AGE_RANGE_OPTION_NAMES } from './age-range-option.model';
+export { AgeRangeOptionNamePipe } from './age-range-option-name.pipe';
+export { YesNoUnknownOption, YES_NO_UNKNOWN_OPTION_NAMES } from './yes-no-unknown-option.model';
+export { YesNoUnknownOptionNamePipe } from './yes-no-unknown-option-name.pipe';
+export { SurvivalOption, SURVIVAL_OPTION_NAMES } from './survival-option.model';
+export { SurvivalOptionNamePipe } from './survival-option-name.pipe';

@@ -11,29 +11,56 @@ import {
 	PatientStatusCriteria,
 	AgeRangeOption,
 	YesNoUnknownOption,
-	SurvivalOptions,
+	SurvivalOption,
 	SPICT_Scale,
 	ClinicalRiskGroupOption,
 	BarthelIndex,
 	LawtonIndex,
 	CognitiveImpairmentLevel,
-	DiscomfortDegree
+	DiscomfortDegree,
+	AgeRangeOptionNamePipe,
+	AGE_RANGE_OPTION_NAMES,
+	YesNoUnknownOptionNamePipe,
+	YES_NO_UNKNOWN_OPTION_NAMES,
+	SurvivalOptionNamePipe,
+	SURVIVAL_OPTION_NAMES
 } from '@app/shared/api';
 import { MatRadioModule } from '@angular/material/radio';
 import { Subscription } from 'rxjs';
 import { ReactiveFormsModule, FormControl, FormBuilder } from '@angular/forms';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
 	standalone: true,
-    selector: 'app-patient-status-criteria-editor',
-    imports: [
-        ReactiveFormsModule,
-        MatRadioModule
-    ],
-    templateUrl: './patient-status-criteria-editor.component.html',
-    styleUrls: ['./patient-status-criteria-editor.component.css']
+	selector: 'app-patient-status-criteria-editor',
+	imports: [
+		ReactiveFormsModule,
+		MatRadioModule,
+		NgIf,
+		NgFor,
+		AgeRangeOptionNamePipe,
+		YesNoUnknownOptionNamePipe,
+		SurvivalOptionNamePipe
+	],
+	templateUrl: './patient-status-criteria-editor.component.html',
+	styleUrls: ['./patient-status-criteria-editor.component.css']
 })
 export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
+
+	/**
+	 * The posible age range option names.
+	 */
+	public AGE_RANGE_OPTION_NAMES = AGE_RANGE_OPTION_NAMES;
+
+	/**
+	 * The posible yes, no and unknown option names.
+	 */
+	public YES_NO_UNKNOWN_OPTION_NAMES = YES_NO_UNKNOWN_OPTION_NAMES;
+
+	/**
+	 * The posible survival option names.
+	 */
+	public SURVIVAL_OPTION_NAMES = SURVIVAL_OPTION_NAMES;
 
 	/**
 	 * Notify a paretn component that a patient has bene selected.
@@ -45,22 +72,22 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 	 * The form control to edit the name.
 	 */
 	public form = this.fb.group({
-		'ageRange': this.fb.control<AgeRangeOption>(null),
-		'ccd': this.fb.control<YesNoUnknownOption>(null),
+		'ageRange': this.fb.control<AgeRangeOption | null>(null),
+		'ccd': this.fb.control<YesNoUnknownOption | null>(null),
 		'clinicalRiskGroup': this.fb.control<ClinicalRiskGroupOption>(null),
 		'discomfortDegree': this.fb.control<DiscomfortDegree>(null),
-		'expectedSurvival': this.fb.control<SurvivalOptions>(null),
+		'expectedSurvival': this.fb.control<SurvivalOption | null>(null),
 		'frailVIG': this.fb.control<SPICT_Scale>(null),
-		'hasAdvanceDirectives': this.fb.control<YesNoUnknownOption>(null),
-		'hasBeenInformed': this.fb.control<YesNoUnknownOption>(null),
+		'hasAdvanceDirectives': this.fb.control<YesNoUnknownOption | null>(null),
+		'hasBeenInformed': this.fb.control<YesNoUnknownOption | null>(null),
 		'hasCognitiveImpairment': this.fb.control<CognitiveImpairmentLevel>(null),
-		'hasEmocionalPain': this.fb.control<YesNoUnknownOption>(null),
-		'hasSocialSupport': this.fb.control<YesNoUnknownOption>(null),
+		'hasEmocionalPain': this.fb.control<YesNoUnknownOption | null>(null),
+		'hasSocialSupport': this.fb.control<YesNoUnknownOption | null>(null),
 		'independenceAtAdmission': this.fb.control<BarthelIndex>(null),
 		'independenceInstrumentalActivities': this.fb.control<LawtonIndex>(null),
-		'isCoerced': this.fb.control<YesNoUnknownOption>(null),
-		'isCompetent': this.fb.control<YesNoUnknownOption>(null),
-		'maca': this.fb.control<YesNoUnknownOption>(null)
+		'isCoerced': this.fb.control<YesNoUnknownOption | null>(null),
+		'isCompetent': this.fb.control<YesNoUnknownOption | null>(null),
+		'maca': this.fb.control<YesNoUnknownOption | null>(null)
 	});
 
 	/**
@@ -73,7 +100,9 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 	 */
 	constructor(
 		private fb: FormBuilder
-	) { }
+	) {
+
+	}
 
 	/**
 	 * Initialize the component.
@@ -107,6 +136,38 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 			this.form.enable();
 		}
 	}
+
+	/**
+	 * Disable or enable only the criteria that can not be modified by a treatment.
+	 */
+	@Input()
+	set disableNotTreatmentCriteria(disabled: boolean) {
+
+		if (disabled) {
+
+			this.form.controls.ageRange.disable();
+			this.form.controls.ccd.enable();
+			this.form.controls.maca.enable();
+			this.form.controls.expectedSurvival.enable();
+			this.form.controls.frailVIG.enable();
+			this.form.controls.clinicalRiskGroup.enable();
+			this.form.controls.hasSocialSupport.disable();
+			this.form.controls.independenceAtAdmission.disable();
+			this.form.controls.independenceInstrumentalActivities.enable();
+			this.form.controls.hasAdvanceDirectives.disable();
+			this.form.controls.isCompetent.disable();
+			this.form.controls.hasBeenInformed.disable();
+			this.form.controls.isCoerced.disable();
+			this.form.controls.hasCognitiveImpairment.disable();
+			this.form.controls.hasEmocionalPain.enable();
+			this.form.controls.discomfortDegree.enable();
+			
+		} else {
+
+			this.form.enable();
+		}
+	}
+
 
 	/**
 	 * Sunbscribe to the changes of the form.

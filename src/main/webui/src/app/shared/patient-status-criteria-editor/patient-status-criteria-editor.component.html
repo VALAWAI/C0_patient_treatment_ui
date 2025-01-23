@@ -6,30 +6,15 @@
 			age range</div>
 		<div class="grow"></div>
 		<div class="max-w-xs">
-			<mat-radio-group aria-labelledby="example-radio-group-label"
+			<mat-radio-group
+				*ngIf="form.controls.ageRange.enabled; else noAgeRange"
+				aria-labelledby="example-radio-group-label"
 				formControlName="ageRange"
 				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button value="AGE_BETWEEN_0_AND_19"
-				i18n="Age range label for AGE_BETWEEN_0_AND_19@@shared_patient-status-criteria_main_criteria_age-range-0-19">0
-			- 19</mat-radio-button> <mat-radio-button value="AGE_BETWEEN_20_AND_29"
-				i18n="Age range label for AGE_BETWEEN_20_AND_29@@shared_patient-status-criteria_main_criteria_age-range-20-29">20
-			- 29</mat-radio-button> <mat-radio-button value="AGE_BETWEEN_30_AND_39"
-				i18n="Age range label for AGE_BETWEEN_30_AND_39@@shared_patient-status-criteria_main_criteria_age-range-30-39">30
-			- 39</mat-radio-button> <mat-radio-button value="AGE_BETWEEN_40_AND_49"
-				i18n="Age range label for AGE_BETWEEN_40_AND_49@@shared_patient-status-criteria_main_criteria_age-range-40-49">40
-			- 49</mat-radio-button> <mat-radio-button value="AGE_BETWEEN_50_AND_59"
-				i18n="Age range label for AGE_BETWEEN_50_AND_59@@shared_patient-status-criteria_main_criteria_age-range-50-59">50
-			- 59</mat-radio-button> <mat-radio-button value="AGE_BETWEEN_60_AND_69"
-				i18n="Age range label for AGE_BETWEEN_60_AND_69@@shared_patient-status-criteria_main_criteria_age-range-60-69">60
-			- 69</mat-radio-button> <mat-radio-button value="AGE_BETWEEN_70_AND_79"
-				i18n="Age range label for AGE_BETWEEN_70_AND_79@@shared_patient-status-criteria_main_criteria_age-range-70-79">70
-			- 79</mat-radio-button> <mat-radio-button value="AGE_BETWEEN_80_AND_89"
-				i18n="Age range label for AGE_BETWEEN_80_AND_89@@shared_patient-status-criteria_main_criteria_age-range-80-89">80
-			- 89</mat-radio-button> <mat-radio-button value="AGE_BETWEEN_90_AND_99"
-				i18n="Age range label for AGE_BETWEEN_90_AND_99@@shared_patient-status-criteria_main_criteria_age-range-90-99">90
-			- 99</mat-radio-button> <mat-radio-button value="AGE_MORE_THAN_99"
-				i18n="Age range label for AGE_MORE_THAN_99@@shared_patient-status-criteria_main_criteria_age-range-more-than-99">+99</mat-radio-button>
-			</mat-radio-group>
+			<mat-radio-button *ngFor="let name of AGE_RANGE_OPTION_NAMES"
+				[value]="name">{{name|ageRangeOptionName}}</mat-radio-button> </mat-radio-group>
+			<ng-template #noAgeRange>
+			{{form.controls.ageRange.value|ageRangeOptionName}} </ng-template>
 		</div>
 	</div>
 	<div
@@ -39,16 +24,13 @@
 			Complex Cronic Disease (CCD)</div>
 		<div class="grow"></div>
 		<div class="max-w-xs">
-			<mat-radio-group aria-labelledby="example-radio-group-label"
-				formControlName="ccd"
+			<mat-radio-group *ngIf="form.controls.ccd.enabled; else noCCD"
+				aria-labelledby="example-radio-group-label" formControlName="ccd"
 				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button value="YES"
-				i18n="CCD label for YES@@shared_patient-status-criteria_main_criteria_ccd-yes">Yes</mat-radio-button>
-			<mat-radio-button value="NO"
-				i18n="CCD label for NO@@shared_patient-status-criteria_main_criteria_ccd-no">No</mat-radio-button>
-			<mat-radio-button value="UNKNOWN"
-				i18n="CCD label for UNKNOWN@@shared_patient-status-criteria_main_criteria_ccd-unknown">Unknown</mat-radio-button>
-			</mat-radio-group>
+			<mat-radio-button *ngFor="let name of YES_NO_UNKNOWN_OPTION_NAMES"
+				[value]="name">{{name|yesNoUnknownOptionName}}</mat-radio-button> </mat-radio-group>
+			<ng-template #noCCD>
+			{{form.controls.ccd.value|yesNoUnknownOptionName}} </ng-template>
 		</div>
 	</div>
 	<div
@@ -67,16 +49,13 @@
 		</div>
 		<div class="grow"></div>
 		<div class="max-w-xs flex flex-col items-end">
-			<mat-radio-group aria-labelledby="example-radio-group-label"
-				formControlName="maca"
+			<mat-radio-group *ngIf="form.controls.maca.enabled; else noMACA"
+				aria-labelledby="example-radio-group-label" formControlName="maca"
 				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button value="YES"
-				i18n="MACA label for YES@@shared_patient-status-criteria_main_criteria_maca-yes">Yes</mat-radio-button>
-			<mat-radio-button value="NO"
-				i18n="MACA label for NO@@shared_patient-status-criteria_main_criteria_maca-no">No</mat-radio-button>
-			<mat-radio-button value="UNKNOWN"
-				i18n="MACA label for UNKNOWN@@shared_patient-status-criteria_main_criteria_maca-unknown">Unknown</mat-radio-button>
-			</mat-radio-group>
+			<mat-radio-button *ngFor="let name of YES_NO_UNKNOWN_OPTION_NAMES"
+				[value]="name">{{name|yesNoUnknownOptionName}}</mat-radio-button> </mat-radio-group>
+			<ng-template #noMACA>
+			{{form.controls.maca.value|yesNoUnknownOptionName}} </ng-template>
 			<div class="text-wrap text-center font-light"
 				i18n="The explanation to MACA answer of a patient@@shared_patient-status-criteria_main_criteria_maca-answer_explanation">
 				(Would you be surprised if the patient died in less than 12 months?
@@ -90,16 +69,15 @@
 			Life expectancy / Expected survival (in months)</div>
 		<div class="grow"></div>
 		<div class="max-w-xs">
-			<mat-radio-group aria-labelledby="example-radio-group-label"
+			<mat-radio-group
+				*ngIf="form.controls.expectedSurvival.enabled; else noExpectedSurvival"
+				aria-labelledby="example-radio-group-label"
 				formControlName="expectedSurvival"
 				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button value="LESS_THAN_12_MONTHS"
-				i18n="Expected survival label for LESS_THAN_12_MONTHS@@shared_patient-status-criteria_main_criteria_expected-survival-less-12s">&lt;
-			12 months</mat-radio-button> <mat-radio-button value="MORE_THAN_12_MONTHS"
-				i18n="Expected survival label for MORE_THAN_12_MONTHS@@shared_patient-status-criteria_main_criteria_expected-survival-more-12">&gt;
-			12 months</mat-radio-button> <mat-radio-button value="UNKNOWN"
-				i18n="Expected survival label for UNKNOWN@@shared_patient-status-criteria_main_criteria_expected-survival-unknown">Unknown</mat-radio-button>
-			</mat-radio-group>
+			<mat-radio-button *ngFor="let name of SURVIVAL_OPTION_NAMES"
+				[value]="name">{{name|survivalOptionName}}</mat-radio-button> </mat-radio-group>
+			<ng-template #noExpectedSurvival>
+			{{form.controls.expectedSurvival.value|survivalOptionName}} </ng-template>
 		</div>
 	</div>
 	<div
