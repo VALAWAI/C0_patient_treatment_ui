@@ -15,9 +15,7 @@ import { BarthelIndex } from './barthel-index.model';
 import { LawtonIndex } from './lawton-index.model';
 import { CognitiveImpairmentLevel } from './cognitive-impairment-level.model';
 import { DiscomfortDegree } from './disconfort-degree.model';
-
-
-export type NITLevel = 'ONE' | 'TWO_A' | 'TWO_B' | 'THREE' | 'FOUR' | 'FIVE' | null;
+import { NITLevel } from './nit-level.model';
 
 /**
  * The minimal information of a patient.
@@ -115,6 +113,6 @@ export class PatientStatusCriteria {
 	/**
 	 * Describe the level of therapeutic intensity of the patient
 	 */
-	public nitLevel: NITLevel = null;
+	public nitLevel: NITLevel | null = null;
 
 }

@@ -35,7 +35,10 @@ import {
 	CognitiveImpairmentLevelNamePipe,
 	COGNITIVE_IMPAIRMENT_LEVEL_NAMES,
 	DiscomfortDegreeNamePipe,
-	DISCOMFORT_DEGREE_NAMES
+	DISCOMFORT_DEGREE_NAMES,
+	NITLevel,
+	NITLevelNamePipe,
+	NIT_LEVEL_NAMES
 } from '@app/shared/api';
 import { MatRadioModule } from '@angular/material/radio';
 import { Subscription } from 'rxjs';
@@ -58,7 +61,8 @@ import { NgFor, NgIf } from '@angular/common';
 		BarthelIndexNamePipe,
 		LawtonIndexNamePipe,
 		CognitiveImpairmentLevelNamePipe,
-		DiscomfortDegreeNamePipe
+		DiscomfortDegreeNamePipe,
+		NITLevelNamePipe
 	],
 	templateUrl: './patient-status-criteria-editor.component.html',
 	styleUrls: ['./patient-status-criteria-editor.component.css']
@@ -109,6 +113,11 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 	 * The posible disconfort degree names.
 	 */
 	public DISCOMFORT_DEGREE_NAMES = DISCOMFORT_DEGREE_NAMES;
+
+	/**
+	 * The posible NIT level names.
+	 */
+	public NIT_LEVEL_NAMES = NIT_LEVEL_NAMES;
 	
 	/**
 	 * Notify a paretn component that a patient has bene selected.
@@ -135,7 +144,8 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 		'independenceInstrumentalActivities': this.fb.control<LawtonIndex | null>(null),
 		'isCoerced': this.fb.control<YesNoUnknownOption | null>(null),
 		'isCompetent': this.fb.control<YesNoUnknownOption | null>(null),
-		'maca': this.fb.control<YesNoUnknownOption | null>(null)
+		'maca': this.fb.control<YesNoUnknownOption | null>(null),
+		'nitLevel': this.fb.control<NITLevel | null>(null),
 	});
 
 	/**
