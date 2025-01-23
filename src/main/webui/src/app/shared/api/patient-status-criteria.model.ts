@@ -11,8 +11,8 @@ import { SurvivalOption } from './survival-option.model';
 import { YesNoUnknownOption } from './yes-no-unknown-option.model';
 import { SPICT_Scale } from './spict-scale.model';
 import { ClinicalRiskGroupOption } from './clinical-risk-group-option.model';
+import { BarthelIndex } from './barthel-index.model';
 
-export type BarthelIndex = 'TOTAL' | 'SEVERE' | 'MODERATE' | 'MILD' | 'INDEPENDENT' | 'UNKNOWN' | null;
 
 export type LawtonIndex = 'ZERO' | 'ONE' | 'TWO' | 'THREE' | 'FOUR' | 'FIVE' | 'SIX' | 'SEVEN' | 'EIGHT' | 'UNKNOWN' | null;
 
@@ -68,7 +68,7 @@ export class PatientStatusCriteria {
 	/**
 	 * The independence for basic activities of daily living at admission.
 	 */
-	public independenceAtAdmission: BarthelIndex = null;
+	public independenceAtAdmission: BarthelIndex | null = null;
 
 	/**
 	 * The index that measures the independence for instrumental activities.

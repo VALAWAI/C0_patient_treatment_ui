@@ -15,7 +15,6 @@ export { MinPatient } from './min-patient.model';
 export { Patient } from './patient.model';
 export {
 	PatientStatusCriteria,
-	BarthelIndex,
 	LawtonIndex,
 	CognitiveImpairmentLevel,
 	DiscomfortDegree,
@@ -38,3 +37,5 @@ export { SPICT_Scale, SPICT_SCALE_NAMES } from './spict-scale.model';
 export { SPICT_ScaleNamePipe } from './spict-scale-name.pipe';
 export { ClinicalRiskGroupOption, CLINICAL_RISK_GROUP_OPTION_NAMES } from './clinical-risk-group-option.model';
 export { ClinicalRiskGroupOptionNamePipe } from './clinical-risk-group-option-name.pipe';
+export { BarthelIndex, BARTHEL_INDEX_NAMES } from './barthel-index.model';
+export { BarthelIndexNamePipe } from './barthel-index-name.pipe';

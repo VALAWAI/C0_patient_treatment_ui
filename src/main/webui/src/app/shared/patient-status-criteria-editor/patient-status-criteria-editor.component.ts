@@ -27,7 +27,9 @@ import {
 	SPICT_ScaleNamePipe,
 	SPICT_SCALE_NAMES,
 	ClinicalRiskGroupOptionNamePipe,
-	CLINICAL_RISK_GROUP_OPTION_NAMES
+	CLINICAL_RISK_GROUP_OPTION_NAMES,
+	BarthelIndexNamePipe,
+	BARTHEL_INDEX_NAMES
 } from '@app/shared/api';
 import { MatRadioModule } from '@angular/material/radio';
 import { Subscription } from 'rxjs';
@@ -46,7 +48,8 @@ import { NgFor, NgIf } from '@angular/common';
 		YesNoUnknownOptionNamePipe,
 		SurvivalOptionNamePipe,
 		SPICT_ScaleNamePipe,
-		ClinicalRiskGroupOptionNamePipe
+		ClinicalRiskGroupOptionNamePipe,
+		BarthelIndexNamePipe
 	],
 	templateUrl: './patient-status-criteria-editor.component.html',
 	styleUrls: ['./patient-status-criteria-editor.component.css']
@@ -74,9 +77,14 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 	public SPICT_SCALE_NAMES = SPICT_SCALE_NAMES;
 
 	/**
-	 * The posible clinicla risk group option names.
+	 * The posible clinic risk group option names.
 	 */
 	public CLINICAL_RISK_GROUP_OPTION_NAMES = CLINICAL_RISK_GROUP_OPTION_NAMES;
+
+	/**
+	 * The posible Barthel index option names.
+	 */
+	public BARTHEL_INDEX_NAMES = BARTHEL_INDEX_NAMES;
 
 	/**
 	 * Notify a paretn component that a patient has bene selected.
@@ -93,13 +101,13 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 		'clinicalRiskGroup': this.fb.control<ClinicalRiskGroupOption | null>(null),
 		'discomfortDegree': this.fb.control<DiscomfortDegree>(null),
 		'expectedSurvival': this.fb.control<SurvivalOption | null>(null),
-		'frailVIG': this.fb.control<SPICT_Scale | null >(null),
+		'frailVIG': this.fb.control<SPICT_Scale | null>(null),
 		'hasAdvanceDirectives': this.fb.control<YesNoUnknownOption | null>(null),
 		'hasBeenInformed': this.fb.control<YesNoUnknownOption | null>(null),
 		'hasCognitiveImpairment': this.fb.control<CognitiveImpairmentLevel>(null),
 		'hasEmocionalPain': this.fb.control<YesNoUnknownOption | null>(null),
 		'hasSocialSupport': this.fb.control<YesNoUnknownOption | null>(null),
-		'independenceAtAdmission': this.fb.control<BarthelIndex>(null),
+		'independenceAtAdmission': this.fb.control<BarthelIndex | null>(null),
 		'independenceInstrumentalActivities': this.fb.control<LawtonIndex>(null),
 		'isCoerced': this.fb.control<YesNoUnknownOption | null>(null),
 		'isCompetent': this.fb.control<YesNoUnknownOption | null>(null),

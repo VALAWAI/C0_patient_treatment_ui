@@ -137,16 +137,15 @@
 			Does the patient have social support?</div>
 		<div class="grow"></div>
 		<div class="max-w-xs">
-			<mat-radio-group aria-labelledby="example-radio-group-label"
+			<mat-radio-group
+				*ngIf="form.controls.hasSocialSupport.enabled; else noHasSocialSupport"
+				aria-labelledby="example-radio-group-label"
 				formControlName="hasSocialSupport"
 				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button value="YES"
-				i18n="Has social support label for YES@@shared_patient-status-criteria_main_criteria_has-social-support-yes">Yes</mat-radio-button>
-			<mat-radio-button value="NO"
-				i18n="Has social support label for NO@@shared_patient-status-criteria_main_criteria_has-social-support-no">No</mat-radio-button>
-			<mat-radio-button value="UNKNOWN"
-				i18n="Has social support label for UNKNOWN@@shared_patient-status-criteria_main_criteria_has-social-support-unknown">Unknown</mat-radio-button>
-			</mat-radio-group>
+			<mat-radio-button *ngFor="let name of YES_NO_UNKNOWN_OPTION_NAMES"
+				[value]="name">{{name|yesNoUnknownOptionName}}</mat-radio-button> </mat-radio-group>
+			<ng-template #noHasSocialSupport>
+			{{form.controls.hasSocialSupport.value|yesNoUnknownOptionName}} </ng-template>
 		</div>
 	</div>
 	<div
@@ -162,22 +161,15 @@
 		</div>
 		<div class="grow"></div>
 		<div class="max-w-xs">
-			<mat-radio-group aria-labelledby="example-radio-group-label"
+			<mat-radio-group
+				*ngIf="form.controls.independenceAtAdmission.enabled; else noIndependenceAtAdmission"
+				aria-labelledby="example-radio-group-label"
 				formControlName="independenceAtAdmission"
 				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button value="TOTAL"
-				i18n="Independence at admission label for Barthel index TOTAL@@shared_patient-status-criteria_main_criteria_independence-at-admission-total">0
-			- 20% Total</mat-radio-button> <mat-radio-button value="SEVERE"
-				i18n="Independence at admission label for Barthel index SEVERE@@shared_patient-status-criteria_main_criteria_independence-at-admission-severe">21
-			- 60% Severe</mat-radio-button> <mat-radio-button value="MODERATE"
-				i18n="Independence at admission label for Barthel index MODERATE@@shared_patient-status-criteria_main_criteria_independence-at-admission-moderate">61
-			- 90% Moderate</mat-radio-button> <mat-radio-button value="MILD"
-				i18n="Independence at admission label for Barthel index MILD@@shared_patient-status-criteria_main_criteria_independence-at-admission-mild">91
-			- 99% Mild</mat-radio-button> <mat-radio-button value="INDEPENDENT"
-				i18n="Independence at admission label for Barthel index INDEPENDENT@@shared_patient-status-criteria_main_criteria_independence-at-admission-independent">100%
-			Independent</mat-radio-button> <mat-radio-button value="UNKNOWN"
-				i18n="Independence at admission label for Barthel index UNKNOWN@@shared_patient-status-criteria_main_criteria_independence-at-admission-unknown">Unknown</mat-radio-button>
-			</mat-radio-group>
+			<mat-radio-button *ngFor="let name of BARTHEL_INDEX_NAMES"
+				[value]="name">{{name|barthelIndexName}}</mat-radio-button> </mat-radio-group>
+			<ng-template #noIndependenceAtAdmission>
+			{{form.controls.independenceAtAdmission.value|barthelIndexName}} </ng-template>
 		</div>
 	</div>
 
