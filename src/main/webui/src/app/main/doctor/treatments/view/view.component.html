@@ -1,4 +1,4 @@
-<div *ngIf="treatment$ | async; let treatment"
+<div *ngIf="treatment != null; else noTreatment"
 	class="flex flex-col items-center max-w-4xl mx-auto gap-3">
 	<div class="flex flex-row gap-2 items-center">
 		<div class="text-5xl font-bold"
@@ -36,31 +36,39 @@
 						class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
 						role="alert">
 						<div class="flex flex-row gap-3">
-							<mat-icon>check</mat-icon>
-							<span
+							<div class="flex-grow-0">
+								<mat-icon>check</mat-icon>
+							</div>
+							<div class="flex-grow"
 								i18n="The message when the treatment action feedback is allow@@main_doctor_treatments_view_action-feedback-allow">
-								The NIT protocol allow to do this action. </span>
+								The NIT protocol allow to do this action.</div>
 						</div>
 					</div>
 					<div *ngSwitchCase="'DENY'"
 						class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
 						role="alert">
 						<div class="flex flex-row gap-3">
-							<mat-icon>error</mat-icon>
-							<span
-								i18n="The message when the treatment action feedback is deny@@main_doctor_treatments_view_action-feedback-deny">
-								The NIT protocol does NOT allow to do this action. </span>
+							<div class="flex-grow-0">
+								<mat-icon>error</mat-icon>
+							</div>
+							<div class="flex-grow"
+								i18n="The message when the treatment
+								action feedback is
+								deny@@main_doctor_treatments_view_action-feedback-deny">
+								The NIT protocol does NOT allow to do this action.</div>
 						</div>
 					</div>
 					<div *ngSwitchCase="'UNKNOWN'"
 						class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300"
 						role="alert">
 						<div class="flex flex-row gap-3">
-							<mat-icon>warning</mat-icon>
-							<span
+							<div class="flex-grow-0">
+								<mat-icon>warning</mat-icon>
+							</div>
+							<div class="flex-grow"
 								i18n="The message when the treatment action feedback is unknown@@main_doctor_treatments_view_action-feedback-unknown">
 								I don't have enough information to know if the action is aligned
-								with the protocol. </span>
+								with the protocol.</div>
 						</div>
 					</div>
 					<div *ngSwitchDefault class="max-w-md mx-auto h-4 w-full">
@@ -100,3 +108,8 @@
 		</ng-template> </mat-expansion-panel> </mat-accordion>
 	</div>
 </div>
+<ng-template #noTreatment>
+<div class="max-w-md mx-auto h-4 w-full">
+	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+</ng-template>
