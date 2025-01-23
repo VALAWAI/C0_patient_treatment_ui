@@ -1,0 +1,102 @@
+<div *ngIf="treatment$ | async; let treatment"
+	class="flex flex-col items-center max-w-4xl mx-auto gap-3">
+	<div class="flex flex-row gap-2 items-center">
+		<div class="text-5xl font-bold"
+			i18n="The title for the treatment header title @@main_doctor_treatments_view_header-title">
+			Treatment for patient <a class="underline text-blue-800"
+				[routerLink]="['/main/doctor/patients',treatment.patient?.id,'view']">
+				{{treatment.patient?.name}}</a>
+		</div>
+		<div [routerLink]="['/main/doctor/treatments',treatment.id,'delete']"
+			class="text-red-500  px-3 py-1 text-xs">
+			<mat-icon>delete</mat-icon>
+		</div>
+	</div>
+	<div class="w-full">
+		<mat-accordion multi> <mat-expansion-panel>
+		<mat-expansion-panel-header> <mat-panel-title
+			i18n="The tile of the treatement before status@@main_doctor_treatments_view_before-status-title">Before
+		status</mat-panel-title> <mat-panel-description
+			i18n="The description of the treatement before status@@main_doctor_treatments_view_before-status-description">
+		The patient status before to apply the treatment</mat-panel-description> </mat-expansion-panel-header> <app-patient-status-criteria-editor
+			[data]="treatment.beforeStatus" [disable]="true"></app-patient-status-criteria-editor>
+		</mat-expansion-panel> <mat-expansion-panel [expanded]="true"> <mat-expansion-panel-header>
+		<mat-panel-title
+			i18n="The tile of the treatement actions@@main_doctor_treatments_view_actions-title">Actions
+		</mat-panel-title> <mat-panel-description
+			i18n="The description of the treatement actions@@main_doctor_treatments_view_actions-description">
+		The actions to do over the patient for this treatment</mat-panel-description> </mat-expansion-panel-header>
+		<div
+			*ngIf="treatment.actions != null && treatment.actions.length > 0;else noActions">
+			<div *ngFor="let action of treatment.actions"
+				class="flex flex-row gap-3">
+				<div class="font-bold my-auto">{{action.action|treatmentActionName}}</div>
+				<div [ngSwitch]="action.feedback" class="flex-grow my-auto">
+					<div *ngSwitchCase="'ALLOW'"
+						class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+						role="alert">
+						<div class="flex flex-row gap-3">
+							<mat-icon>check</mat-icon>
+							<span
+								i18n="The message when the treatment action feedback is allow@@main_doctor_treatments_view_action-feedback-allow">
+								The NIT protocol allow to do this action. </span>
+						</div>
+					</div>
+					<div *ngSwitchCase="'DENY'"
+						class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+						role="alert">
+						<div class="flex flex-row gap-3">
+							<mat-icon>error</mat-icon>
+							<span
+								i18n="The message when the treatment action feedback is deny@@main_doctor_treatments_view_action-feedback-deny">
+								The NIT protocol does NOT allow to do this action. </span>
+						</div>
+					</div>
+					<div *ngSwitchCase="'UNKNOWN'"
+						class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300"
+						role="alert">
+						<div class="flex flex-row gap-3">
+							<mat-icon>warning</mat-icon>
+							<span
+								i18n="The message when the treatment action feedback is unknown@@main_doctor_treatments_view_action-feedback-unknown">
+								I don't have enough information to know if the action is aligned
+								with the protocol. </span>
+						</div>
+					</div>
+					<div *ngSwitchDefault class="max-w-md mx-auto h-4 w-full">
+						<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+					</div>
+				</div>
+			</div>
+		</div>
+		<ng-template #noActions>
+		<div
+			class="max-w-4xl mx-auto gap-3 p-4 mb-4 text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 dark:border-yellow-800"
+			role="alert"
+			i18n="The message two show when the treatement does not have actions yet@@main_doctor_treatments_view_no-actions-message">
+			At the moment this treatment does not have any associated action.</div>
+		</ng-template></mat-expansion-panel> <mat-expansion-panel> <mat-expansion-panel-header>
+		<mat-panel-title
+			i18n="The tile of the treatement expected status@@main_doctor_treatments_view_expected-status-title">Expected
+		status</mat-panel-title> <mat-panel-description
+			i18n="The description of the treatement expected status@@main_doctor_treatments_view_expected-status-description">
+		The expected patient status after apply this treatment</mat-panel-description> </mat-expansion-panel-header> <app-patient-status-criteria-editor
+			[data]="treatment.expectedStatus" [disable]="true"></app-patient-status-criteria-editor>
+		</mat-expansion-panel> <mat-expansion-panel [expanded]="true"> <mat-expansion-panel-header>
+		<mat-panel-title
+			i18n="The tile of the treatement values@@main_doctor_treatments_view_values-title">Values
+		</mat-panel-title> <mat-panel-description
+			i18n="The description of the treatement values@@main_doctor_treatments_view_values-description">
+		The values to do over the patient for this treatment</mat-panel-description> </mat-expansion-panel-header>
+		<div
+			*ngIf="treatment.values != null && treatment.values.length > 0;else noValues">
+			VALUES</div>
+		<ng-template #noValues>
+		<div
+			class="max-w-4xl mx-auto gap-3 p-4 mb-4 text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 dark:border-yellow-800"
+			role="alert"
+			i18n="The message two show when the treatement does not have values yet@@main_doctor_treatments_view_no-values-message">
+			At the moment this treatment does not have any associated value.</div>
+		</ng-template> </mat-expansion-panel> </mat-accordion>
+	</div>
+</div>

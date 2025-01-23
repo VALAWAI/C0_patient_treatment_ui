@@ -6,9 +6,7 @@
 		i18n="The label for the first step to define a treatment@@main_doctor_patients_treatment_step1-label">Check
 	the status of the patient <span class="font-bold">{{patient.name}}</span></ng-template>
 	<app-patient-status-criteria-editor [data]="patient.status"
-		[disable]="true"
 		(dataChanged)="beforeStatus.setValue($event)"></app-patient-status-criteria-editor>
-
 	<div>
 		<button mat-button matStepperNext>Next</button>
 	</div>

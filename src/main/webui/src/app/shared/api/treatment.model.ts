@@ -34,7 +34,7 @@ export class Treatment {
 	public patient: MinPatient | null = null;
 
 	/**
-	 * The range of age of the patient status.
+	 * The status of the patient before the treatment actions.
 	 */
 	public beforeStatus: PatientStatusCriteria | null = null;
 

@@ -17,6 +17,14 @@ export const TREATMENTS_ROUTES: Routes = [
 				loadComponent: () => import('./treatments.component').then(m => m.TreatmentsComponent)
 			},
 			{
+				path: ':treatmentId/view',
+				loadComponent: () => import('./view/view.component').then(m => m.ViewComponent)
+			},
+			{
+				path: ':treatmentId/delete',
+				loadComponent: () => import('./delete/delete.component').then(m => m.DeleteComponent)
+			},
+			{
 				path: '',
 				pathMatch: 'full',
 				redirectTo: 'search'

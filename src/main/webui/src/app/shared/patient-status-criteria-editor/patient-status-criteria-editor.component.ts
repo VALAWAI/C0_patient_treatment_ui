@@ -108,7 +108,7 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 	 * The posible cognitive impairment level names.
 	 */
 	public COGNITIVE_IMPAIRMENT_LEVEL_NAMES = COGNITIVE_IMPAIRMENT_LEVEL_NAMES;
-	
+
 	/**
 	 * The posible disconfort degree names.
 	 */
@@ -118,7 +118,7 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 	 * The posible NIT level names.
 	 */
 	public NIT_LEVEL_NAMES = NIT_LEVEL_NAMES;
-	
+
 	/**
 	 * Notify a paretn component that a patient has bene selected.
 	 */
@@ -137,7 +137,7 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 		'frailVIG': this.fb.control<SPICT_Scale | null>(null),
 		'hasAdvanceDirectives': this.fb.control<YesNoUnknownOption | null>(null),
 		'hasBeenInformed': this.fb.control<YesNoUnknownOption | null>(null),
-		'hasCognitiveImpairment': this.fb.control<CognitiveImpairmentLevel |null>(null),
+		'hasCognitiveImpairment': this.fb.control<CognitiveImpairmentLevel | null>(null),
 		'hasEmocionalPain': this.fb.control<YesNoUnknownOption | null>(null),
 		'hasSocialSupport': this.fb.control<YesNoUnknownOption | null>(null),
 		'independenceAtAdmission': this.fb.control<BarthelIndex | null>(null),
@@ -219,6 +219,7 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 			this.form.controls.hasCognitiveImpairment.disable();
 			this.form.controls.hasEmocionalPain.enable();
 			this.form.controls.discomfortDegree.enable();
+			this.form.controls.nitLevel.enable();
 
 		} else {
 
