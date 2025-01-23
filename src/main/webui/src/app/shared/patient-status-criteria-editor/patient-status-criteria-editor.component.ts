@@ -33,7 +33,9 @@ import {
 	LawtonIndexNamePipe,
 	LAWTON_INDEX_NAMES,
 	CognitiveImpairmentLevelNamePipe,
-	COGNITIVE_IMPAIRMENT_LEVEL_NAMES
+	COGNITIVE_IMPAIRMENT_LEVEL_NAMES,
+	DiscomfortDegreeNamePipe,
+	DISCOMFORT_DEGREE_NAMES
 } from '@app/shared/api';
 import { MatRadioModule } from '@angular/material/radio';
 import { Subscription } from 'rxjs';
@@ -55,7 +57,8 @@ import { NgFor, NgIf } from '@angular/common';
 		ClinicalRiskGroupOptionNamePipe,
 		BarthelIndexNamePipe,
 		LawtonIndexNamePipe,
-		CognitiveImpairmentLevelNamePipe
+		CognitiveImpairmentLevelNamePipe,
+		DiscomfortDegreeNamePipe
 	],
 	templateUrl: './patient-status-criteria-editor.component.html',
 	styleUrls: ['./patient-status-criteria-editor.component.css']
@@ -103,6 +106,11 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 	public COGNITIVE_IMPAIRMENT_LEVEL_NAMES = COGNITIVE_IMPAIRMENT_LEVEL_NAMES;
 	
 	/**
+	 * The posible disconfort degree names.
+	 */
+	public DISCOMFORT_DEGREE_NAMES = DISCOMFORT_DEGREE_NAMES;
+	
+	/**
 	 * Notify a paretn component that a patient has bene selected.
 	 */
 	@Output()
@@ -115,7 +123,7 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 		'ageRange': this.fb.control<AgeRangeOption | null>(null),
 		'ccd': this.fb.control<YesNoUnknownOption | null>(null),
 		'clinicalRiskGroup': this.fb.control<ClinicalRiskGroupOption | null>(null),
-		'discomfortDegree': this.fb.control<DiscomfortDegree>(null),
+		'discomfortDegree': this.fb.control<DiscomfortDegree | null>(null),
 		'expectedSurvival': this.fb.control<SurvivalOption | null>(null),
 		'frailVIG': this.fb.control<SPICT_Scale | null>(null),
 		'hasAdvanceDirectives': this.fb.control<YesNoUnknownOption | null>(null),

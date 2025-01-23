@@ -14,8 +14,8 @@ import { ClinicalRiskGroupOption } from './clinical-risk-group-option.model';
 import { BarthelIndex } from './barthel-index.model';
 import { LawtonIndex } from './lawton-index.model';
 import { CognitiveImpairmentLevel } from './cognitive-impairment-level.model';
+import { DiscomfortDegree } from './disconfort-degree.model';
 
-export type DiscomfortDegree = 'LOW' | 'MEDIUM' | 'HIGH' | 'UNKNOWN' | null;
 
 export type NITLevel = 'ONE' | 'TWO_A' | 'TWO_B' | 'THREE' | 'FOUR' | 'FIVE' | null;
 
@@ -110,7 +110,7 @@ export class PatientStatusCriteria {
 	 * Describe the degree of discomfort of the patient status before applying any
 	 * action.
 	 */
-	public discomfortDegree: DiscomfortDegree = null;
+	public discomfortDegree: DiscomfortDegree | null = null;
 
 	/**
 	 * Describe the level of therapeutic intensity of the patient

@@ -13,9 +13,7 @@ export { Info } from './info.model';
 export { MinPatientPage } from './min-patient-page.model';
 export { MinPatient } from './min-patient.model';
 export { Patient } from './patient.model';
-export {
-	PatientStatusCriteria,
-	DiscomfortDegree,
+export { PatientStatusCriteria,
 	NITLevel
 } from './patient-status-criteria.model';
 export { Treatment } from './treatment.model';
@@ -41,3 +39,5 @@ export { LawtonIndex, LAWTON_INDEX_NAMES } from './lawton-index.model';
 export { LawtonIndexNamePipe } from './lawton-index-name.pipe';
 export { CognitiveImpairmentLevel, COGNITIVE_IMPAIRMENT_LEVEL_NAMES } from './cognitive-impairment-level.model';
 export { CognitiveImpairmentLevelNamePipe } from './cognitive-impairment-level-name.pipe';
+export { DiscomfortDegree, DISCOMFORT_DEGREE_NAMES } from './disconfort-degree.model';
+export { DiscomfortDegreeNamePipe } from './discoonfort-degree-name.pipe';

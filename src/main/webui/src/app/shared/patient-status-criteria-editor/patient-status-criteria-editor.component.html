@@ -318,29 +318,15 @@
 			action.</div>
 		<div class="grow"></div>
 		<div class="max-w-xs">
-			<!-- 
-					<mat-radio-group
+			<mat-radio-group
 				*ngIf="form.controls.discomfortDegree.enabled; else noDiscomfortDegree"
 				aria-labelledby="example-radio-group-label"
 				formControlName="discomfortDegree"
 				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button *ngFor="let name of YES_NO_UNKNOWN_OPTION_NAMES"
-				[value]="name">{{name|yesNoUnknownOptionName}}</mat-radio-button> </mat-radio-group>
+			<mat-radio-button *ngFor="let name of DISCOMFORT_DEGREE_NAMES"
+				[value]="name">{{name|discomfortDegreeName}}</mat-radio-button> </mat-radio-group>
 			<ng-template #noDiscomfortDegree>
-			{{form.controls.discomfortDegree.value|yesNoUnknownOptionName}} </ng-template>
-		 -->
-			<mat-radio-group aria-labelledby="example-radio-group-label"
-				formControlName="discomfortDegree"
-				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button value="LOW"
-				i18n="Disconfort degree label for LOW@@shared_patient-status-criteria_main_criteria_disconfort-degree-low">Low</mat-radio-button>
-			<mat-radio-button value="MEDIUM"
-				i18n="Disconfort degree label for MEDIUM@@shared_patient-status-criteria_main_criteria_disconfort-degree-medium">Medium</mat-radio-button>
-			<mat-radio-button value="HIGH"
-				i18n="Disconfort degree label for HIGH@@shared_patient-status-criteria_main_criteria_disconfort-degree-high">High</mat-radio-button>
-			<mat-radio-button value="UNKNOWN"
-				i18n="Disconfort degree label for UNKNOWN@@shared_patient-status-criteria_main_criteria_disconfort-degree-unknown">Unknown</mat-radio-button>
-			</mat-radio-group>
+			{{form.controls.discomfortDegree.value|discomfortDegreeName}} </ng-template>
 		</div>
 	</div>
 </form>
