@@ -185,30 +185,16 @@
 		</div>
 		<div class="grow"></div>
 		<div class="max-w-xs">
-			<mat-radio-group aria-labelledby="example-radio-group-label"
+			<mat-radio-group
+				*ngIf="form.controls.independenceInstrumentalActivities.enabled; else noIndependenceInstrumentalActivities"
+				aria-labelledby="example-radio-group-label"
 				formControlName="independenceInstrumentalActivities"
 				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button value="ZERO"
-				i18n="Independence instrumental activities label for Lawton index zero@@shared_patient-status-criteria_main_criteria_independence-instrumental-activities-zero">0
-			points </mat-radio-button> <mat-radio-button value="ONE"
-				i18n="Independence instrumental activities label for Lawton index one@@shared_patient-status-criteria_main_criteria_independence-instrumental-activities-one">1
-			point </mat-radio-button> <mat-radio-button value="TWO"
-				i18n="Independence instrumental activities label for Lawton index two@@shared_patient-status-criteria_main_criteria_independence-instrumental-activities-two">2
-			points </mat-radio-button> <mat-radio-button value="THREE"
-				i18n="Independence instrumental activities label for Lawton index three@@shared_patient-status-criteria_main_criteria_independence-instrumental-activities-three">3
-			points </mat-radio-button> <mat-radio-button value="FOUR"
-				i18n="Independence instrumental activities label for Lawton index four@@shared_patient-status-criteria_main_criteria_independence-instrumental-activities-four">4
-			points </mat-radio-button> <mat-radio-button value="FIVE"
-				i18n="Independence instrumental activities label for Lawton index five@@shared_patient-status-criteria_main_criteria_independence-instrumental-activities-five">5
-			points </mat-radio-button> <mat-radio-button value="SIX"
-				i18n="Independence instrumental activities label for Lawton index six@@shared_patient-status-criteria_main_criteria_independence-instrumental-activities-six">6
-			points </mat-radio-button> <mat-radio-button value="SEVEN"
-				i18n="Independence instrumental activities label for Lawton index seven@@shared_patient-status-criteria_main_criteria_independence-instrumental-activities-seven">7
-			points </mat-radio-button> <mat-radio-button value="EIGHT"
-				i18n="Independence instrumental activities label for Lawton index eight@@shared_patient-status-criteria_main_criteria_independence-instrumental-activities-eight">8
-			points </mat-radio-button> <mat-radio-button value="UNKNOWN"
-				i18n="Independence instrumental activities label for Lawton index UNKNOWN@@shared_patient-status-criteria_main_criteria_independence-instrumental-activities-unknown">Unknown</mat-radio-button>
-			</mat-radio-group>
+			<mat-radio-button *ngFor="let name of LAWTON_INDEX_NAMES"
+				[value]="name">{{name|lawtonIndexName}}</mat-radio-button> </mat-radio-group>
+			<ng-template #noIndependenceInstrumentalActivities>
+			{{form.controls.independenceInstrumentalActivities.value|lawtonIndexName}}
+			</ng-template>
 		</div>
 	</div>
 	<div

@@ -29,7 +29,9 @@ import {
 	ClinicalRiskGroupOptionNamePipe,
 	CLINICAL_RISK_GROUP_OPTION_NAMES,
 	BarthelIndexNamePipe,
-	BARTHEL_INDEX_NAMES
+	BARTHEL_INDEX_NAMES,
+	LawtonIndexNamePipe,
+	LAWTON_INDEX_NAMES
 } from '@app/shared/api';
 import { MatRadioModule } from '@angular/material/radio';
 import { Subscription } from 'rxjs';
@@ -49,7 +51,8 @@ import { NgFor, NgIf } from '@angular/common';
 		SurvivalOptionNamePipe,
 		SPICT_ScaleNamePipe,
 		ClinicalRiskGroupOptionNamePipe,
-		BarthelIndexNamePipe
+		BarthelIndexNamePipe,
+		LawtonIndexNamePipe
 	],
 	templateUrl: './patient-status-criteria-editor.component.html',
 	styleUrls: ['./patient-status-criteria-editor.component.css']
@@ -87,6 +90,11 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 	public BARTHEL_INDEX_NAMES = BARTHEL_INDEX_NAMES;
 
 	/**
+	 * The posible Lawton index option names.
+	 */
+	public LAWTON_INDEX_NAMES = LAWTON_INDEX_NAMES;
+
+	/**
 	 * Notify a paretn component that a patient has bene selected.
 	 */
 	@Output()
@@ -108,7 +116,7 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 		'hasEmocionalPain': this.fb.control<YesNoUnknownOption | null>(null),
 		'hasSocialSupport': this.fb.control<YesNoUnknownOption | null>(null),
 		'independenceAtAdmission': this.fb.control<BarthelIndex | null>(null),
-		'independenceInstrumentalActivities': this.fb.control<LawtonIndex>(null),
+		'independenceInstrumentalActivities': this.fb.control<LawtonIndex | null>(null),
 		'isCoerced': this.fb.control<YesNoUnknownOption | null>(null),
 		'isCompetent': this.fb.control<YesNoUnknownOption | null>(null),
 		'maca': this.fb.control<YesNoUnknownOption | null>(null)

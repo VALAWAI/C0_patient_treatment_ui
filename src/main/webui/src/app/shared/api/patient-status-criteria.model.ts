@@ -12,10 +12,7 @@ import { YesNoUnknownOption } from './yes-no-unknown-option.model';
 import { SPICT_Scale } from './spict-scale.model';
 import { ClinicalRiskGroupOption } from './clinical-risk-group-option.model';
 import { BarthelIndex } from './barthel-index.model';
-
-
-export type LawtonIndex = 'ZERO' | 'ONE' | 'TWO' | 'THREE' | 'FOUR' | 'FIVE' | 'SIX' | 'SEVEN' | 'EIGHT' | 'UNKNOWN' | null;
-
+import { LawtonIndex } from './lawton-index.model';
 export type CognitiveImpairmentLevel = 'ABSENT' | 'MILD_MODERATE' | 'SEVERE' | 'UNKNOWN' | null;
 
 export type DiscomfortDegree = 'LOW' | 'MEDIUM' | 'HIGH' | 'UNKNOWN' | null;
@@ -73,7 +70,7 @@ export class PatientStatusCriteria {
 	/**
 	 * The index that measures the independence for instrumental activities.
 	 */
-	public independenceInstrumentalActivities: LawtonIndex = null;
+	public independenceInstrumentalActivities: LawtonIndex | null = null;
 
 	/**
 	 * The answers to the question: Does the patient status have advance directives?
