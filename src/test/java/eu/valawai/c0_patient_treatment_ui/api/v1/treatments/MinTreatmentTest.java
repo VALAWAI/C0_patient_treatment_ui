@@ -6,24 +6,24 @@
   https://opensource.org/license/gpl-3-0/
 */
 
-package eu.valawai.c0_patient_treatment_ui.api.v1.patients;
+package eu.valawai.c0_patient_treatment_ui.api.v1.treatments;
 
 /**
- * Test the {@link MinPatient}.
+ * Test the {@link MinTreatment}.
  *
- * @see MinPatient
+ * @see MinTreatment
  *
  * @author UDT-IA, IIIA-CSIC
  */
-public class MinPatientTest extends MinPatientTestCase<MinPatient> {
+public class MinTreatmentTest extends MinTreatmentTestCase<MinTreatment> {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MinPatient createEmptyModel() {
+	public MinTreatment createEmptyModel() {
 
-		return new MinPatient();
+		return new MinTreatment();
 	}
 
 }

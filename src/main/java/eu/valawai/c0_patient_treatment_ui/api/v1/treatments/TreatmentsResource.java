@@ -18,6 +18,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import eu.valawai.c0_patient_treatment_ui.TimeManager;
+import eu.valawai.c0_patient_treatment_ui.api.QueryParameters;
 import eu.valawai.c0_patient_treatment_ui.messages.TreatmentService;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientEntity;
 import eu.valawai.c0_patient_treatment_ui.persistence.PatientStatusCriteriaEntity;
@@ -26,13 +27,16 @@ import io.quarkus.logging.Log;
 import io.smallrye.mutiny.Uni;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
@@ -117,28 +121,40 @@ public class TreatmentsResource {
 	public Uni<Response> createTreatment(
 			@RequestBody(description = "The treatment to create", required = true, content = @Content(schema = @Schema(implementation = TreatmentToAdd.class))) @Valid final TreatmentToAdd model) {
 
-		return PatientEntity.retrieve(model.patientId).chain(patient -> {
+		return PatientEntity.retrieve(model.patientId).map(patient -> {
 
-			return PatientStatusCriteriaEntity.retrieveOrPersist(model.beforeStatus).chain(before -> {
+			final var entity = new TreatmentEntity();
+			entity.createdTime = TimeManager.now();
+			entity.patient = patient;
+			entity.treatmentActions = model.actions;
+			return entity;
 
-				return PatientStatusCriteriaEntity.retrieveOrPersist(model.expectedStatus).chain(expected -> {
+		}).chain(entity -> {
 
-					final var entity = new TreatmentEntity();
-					entity.createdTime = TimeManager.now();
-					entity.beforeStatus = before;
-					entity.treatmentActions = model.actions;
-					entity.expectedStatus = expected;
-					entity.patient = patient;
-					final Uni<TreatmentEntity> persist = entity.persistAndFlush();
-					return persist.map(stored -> {
+			return PatientStatusCriteriaEntity.retrieveOrPersist(model.beforeStatus).map(before -> {
 
-						final var treatment = stored.toTreatment();
-						final var payload = stored.toTreatmentPayload();
-						this.service.send(payload);
-						return Response.status(Status.CREATED).entity(treatment).build();
-					});
+				entity.beforeStatus = before;
+				return entity;
+			});
 
-				});
+		}).chain(entity -> {
+
+			return PatientStatusCriteriaEntity.retrieveOrPersist(model.expectedStatus).map(expected -> {
+
+				entity.expectedStatus = expected;
+				return entity;
+			});
+
+		}).chain(entity -> {
+
+			final Uni<TreatmentEntity> persist = entity.persistAndFlush();
+			return persist.map(stored -> {
+
+				final var treatment = stored.toTreatment();
+				final var payload = stored.toTreatmentPayload();
+				this.service.send(payload);
+				return Response.status(Status.CREATED).entity(treatment).build();
+
 			});
 
 		}).onFailure().recoverWithItem(error -> {
@@ -147,6 +163,44 @@ public class TreatmentsResource {
 			return Response.status(Status.BAD_REQUEST).entity("Bad treatment parameters.").build();
 
 		});
+
+	}
+
+	/**
+	 * Return the information of some treatments.
+	 *
+	 * @param patientName pattern to match the patient name in the treatments to
+	 *                    return. If it {@code null} it will be ignored.
+	 * @param patientId   identifier of the patient in the treatments to return. If
+	 *                    it {@code null} it will be ignored.
+	 * @param offset      the index of the first treatment to retrieve.
+	 * @param limit       the number maximum of treatments to retrieve.
+	 * @param order       the order to return the treatments.
+	 *
+	 * @return the page with the treatments.
+	 */
+	@GET
+	@Operation(description = "Get some treatment information.")
+	@APIResponse(responseCode = "200", description = "The treatments that satisfy the query.", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = MinTreatmentPage.class)))
+	public Uni<Response> retrieveTreatmentPage(
+			@QueryParam("patientName") @Parameter(in = ParameterIn.QUERY, description = "The pattern to match of the patient name in the treatment to retrieve") String patientName,
+			@QueryParam("patientId") @Parameter(in = ParameterIn.QUERY, description = "The identifier of the patient in the treatment to retrieve") Long patientId,
+			@QueryParam("offset") @DefaultValue("0") @Parameter(in = ParameterIn.QUERY, description = "The index of the first treatment to retrieve") @Min(0) int offset,
+			@QueryParam("limit") @DefaultValue("10") @Parameter(in = ParameterIn.QUERY, description = "The number maximum of treatments to retrieve") @Min(1) int limit,
+			@QueryParam("order") @DefaultValue("patient.name,id") @Parameter(in = ParameterIn.QUERY, description = "The order to return the treatments. You can define the fields name or id with the prefix + to ascending order and - to descending order.") String order) {
+
+		final var sort = QueryParameters.toSort(order);
+		if (patientId != null) {
+
+			return TreatmentEntity.getMinTreatmentPageForPatient(patientId, sort, offset, limit)
+					.map(page -> Response.ok(page).build());
+
+		} else {
+
+			final var pattern = QueryParameters.toPattern(patientName);
+			return TreatmentEntity.getMinTreatmentPageForPatientName(pattern, sort, offset, limit)
+					.map(page -> Response.ok(page).build());
+		}
 
 	}
 

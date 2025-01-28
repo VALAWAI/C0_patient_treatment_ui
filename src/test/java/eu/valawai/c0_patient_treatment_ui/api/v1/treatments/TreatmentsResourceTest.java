@@ -15,6 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -32,6 +34,7 @@ import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.hibernate.reactive.panache.TransactionalUniAsserter;
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.vertx.RunOnVertxContext;
+import io.smallrye.mutiny.Uni;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response.Status;
 
@@ -193,17 +196,17 @@ public class TreatmentsResourceTest {
 	@RunOnVertxContext
 	public void shouldNotCreateTreatmentWithoutUndefinedPatient(TransactionalUniAsserter asserter) {
 
-		asserter.assertThat(() -> PatientEntities.undefined().map(undefined -> {
+		asserter.assertThat(() -> PatientEntities.undefined(), undefined -> {
 
 			final var model = new TreatmentToAddTest().nextModel();
 			model.patientId = undefined;
-			return model;
+			asserter.putData("MODEL", model);
+		});
+		asserter.assertThat(() -> Uni.createFrom().nullItem(), any -> {
 
-		}), model -> {
-
+			final var model = (TreatmentToAdd) asserter.getData("MODEL");
 			given().contentType("application/json").body(model).when().post("/v1/treatments").then()
 					.statusCode(Status.BAD_REQUEST.getStatusCode());
-
 		});
 
 	}
@@ -217,15 +220,16 @@ public class TreatmentsResourceTest {
 	@RunOnVertxContext
 	public void shouldNotCreateTreatmentWithoutBeforeStatus(TransactionalUniAsserter asserter) {
 
-		asserter.assertThat(() -> PatientEntities.last().map(last -> {
+		asserter.assertThat(() -> PatientEntities.last(), last -> {
 
 			final var model = new TreatmentToAddTest().nextModel();
 			model.patientId = last.id;
 			model.beforeStatus = null;
-			return model;
+			asserter.putData("MODEL", model);
+		});
+		asserter.assertThat(() -> Uni.createFrom().nullItem(), any -> {
 
-		}), model -> {
-
+			final var model = (TreatmentToAdd) asserter.getData("MODEL");
 			given().contentType("application/json").body(model).when().post("/v1/treatments").then()
 					.statusCode(Status.BAD_REQUEST.getStatusCode());
 		});
@@ -240,15 +244,16 @@ public class TreatmentsResourceTest {
 	@RunOnVertxContext
 	public void shouldNotCreateTreatmentWithoutActions(TransactionalUniAsserter asserter) {
 
-		asserter.assertThat(() -> PatientEntities.last().map(last -> {
+		asserter.assertThat(() -> PatientEntities.last(), last -> {
 
 			final var model = new TreatmentToAddTest().nextModel();
 			model.patientId = last.id;
 			model.actions = null;
-			return model;
+			asserter.putData("MODEL", model);
+		});
+		asserter.assertThat(() -> Uni.createFrom().nullItem(), any -> {
 
-		}), model -> {
-
+			final var model = (TreatmentToAdd) asserter.getData("MODEL");
 			given().contentType("application/json").body(model).when().post("/v1/treatments").then()
 					.statusCode(Status.BAD_REQUEST.getStatusCode());
 		});
@@ -263,15 +268,16 @@ public class TreatmentsResourceTest {
 	@RunOnVertxContext
 	public void shouldNotCreateTreatmentWithoutEmptyActions(TransactionalUniAsserter asserter) {
 
-		asserter.assertThat(() -> PatientEntities.last().map(last -> {
+		asserter.assertThat(() -> PatientEntities.last(), last -> {
 
 			final var model = new TreatmentToAddTest().nextModel();
 			model.patientId = last.id;
 			model.actions.clear();
-			return model;
+			asserter.putData("MODEL", model);
+		});
+		asserter.assertThat(() -> Uni.createFrom().nullItem(), any -> {
 
-		}), model -> {
-
+			final var model = (TreatmentToAdd) asserter.getData("MODEL");
 			given().contentType("application/json").body(model).when().post("/v1/treatments").then()
 					.statusCode(Status.BAD_REQUEST.getStatusCode());
 		});
@@ -286,15 +292,16 @@ public class TreatmentsResourceTest {
 	@RunOnVertxContext
 	public void shouldNotCreateTreatmentWithoutExpectedStatus(TransactionalUniAsserter asserter) {
 
-		asserter.assertThat(() -> PatientEntities.last().map(last -> {
+		asserter.assertThat(() -> PatientEntities.last(), last -> {
 
 			final var model = new TreatmentToAddTest().nextModel();
 			model.patientId = last.id;
 			model.expectedStatus = null;
-			return model;
+			asserter.putData("MODEL", model);
+		});
+		asserter.assertThat(() -> Uni.createFrom().nullItem(), any -> {
 
-		}), model -> {
-
+			final var model = (TreatmentToAdd) asserter.getData("MODEL");
 			given().contentType("application/json").body(model).when().post("/v1/treatments").then()
 					.statusCode(Status.BAD_REQUEST.getStatusCode());
 		});
@@ -385,4 +392,162 @@ public class TreatmentsResourceTest {
 
 	}
 
+	/**
+	 * Should get a treatment page.
+	 *
+	 * @param asserter to use in the tests.
+	 */
+	@Test
+	@RunOnVertxContext
+	public void shoulRetrieveTreatmentPage(TransactionalUniAsserter asserter) {
+
+		asserter.assertThat(() -> TreatmentEntities.populateWith(50).chain(ignored -> TreatmentEntity.count()),
+				total -> {
+
+					final var page = given().when().queryParam("limit", total).get("/v1/treatments").then()
+							.statusCode(Status.OK.getStatusCode()).extract().as(MinTreatmentPage.class);
+					assertNotNull(page);
+					assertEquals(total, page.total);
+					assertNotNull(page.treatments);
+					assertEquals(total, page.treatments.size());
+					final var treatments = page.treatments;
+					asserter.putData("TREATMENTS", treatments);
+					asserter.putData("TOTAL", total);
+
+				});
+
+		asserter.assertThat(() -> Uni.createFrom().nullItem(), any -> {
+
+			@SuppressWarnings("unchecked")
+			final List<MinTreatment> treatments = (List<MinTreatment>) asserter.getData("TREATMENTS");
+			final long total = ((Number) asserter.getData("TOTAL")).longValue();
+			final var page = given().queryParam("offset", "3").when().get("/v1/treatments").then()
+					.statusCode(Status.OK.getStatusCode()).extract().as(MinTreatmentPage.class);
+			final var expected = new MinTreatmentPage();
+			expected.total = Math.toIntExact(total);
+			expected.treatments = treatments.subList(3, 13);
+			assertEquals(expected, page);
+
+		});
+
+		asserter.assertThat(() -> Uni.createFrom().nullItem(), any -> {
+
+			final var page = given().queryParam("order", "-patient.name").queryParam("patientName", "P*1*")
+					.queryParam("offset", "2").queryParam("limit", "7").when().get("/v1/treatments").then()
+					.statusCode(Status.OK.getStatusCode()).extract().as(MinTreatmentPage.class);
+
+			final var expected = new MinTreatmentPage();
+			@SuppressWarnings("unchecked")
+			final List<MinTreatment> treatments = (List<MinTreatment>) asserter.getData("TREATMENTS");
+			expected.treatments = treatments.stream().sorted((t1, t2) -> t2.patient.name.compareTo(t1.patient.name))
+					.filter(t -> t.patient.name.matches("P.*1.*")).collect(Collectors.toList());
+			expected.total = expected.treatments.size();
+			final var maxPattern = expected.treatments.size();
+			if (maxPattern < 3) {
+
+				expected.treatments = null;
+
+			} else if (maxPattern < 9) {
+
+				expected.treatments = expected.treatments.subList(2, maxPattern);
+
+			} else {
+
+				expected.treatments = expected.treatments.subList(2, 9);
+			}
+			assertEquals(expected, page);
+
+		});
+
+	}
+
+	/**
+	 * Should get an empty treatment page for an undefined patient.
+	 *
+	 * @param asserter to use in the tests.
+	 */
+	@Test
+	@RunOnVertxContext
+	public void shoulRetrieveEmptyTreatmentPageForUndefinedPatient(TransactionalUniAsserter asserter) {
+
+		asserter.assertThat(() -> PatientEntities.undefined(), undefined -> {
+
+			final var page = given().when().queryParam("patientId", String.valueOf(undefined)).get("/v1/treatments")
+					.then().statusCode(Status.OK.getStatusCode()).extract().as(MinTreatmentPage.class);
+			assertNotNull(page);
+			assertEquals(new MinTreatmentPage(), page);
+		});
+
+	}
+
+	/**
+	 * Should get a treatment page for a patient.
+	 *
+	 * @param asserter to use in the tests.
+	 */
+	@Test
+	@RunOnVertxContext
+	public void shoulRetrieveTreatmentPageForAPatient(TransactionalUniAsserter asserter) {
+
+		asserter.assertThat(() -> PatientEntities.nextRandom(), patient -> asserter.putData("PATIENT", patient));
+		asserter.execute(() -> TreatmentEntities.populateWith((PatientEntity) asserter.getData("PATIENT"), 20));
+		asserter.assertThat(() -> {
+
+			final var patient = (PatientEntity) asserter.getData("PATIENT");
+			final Uni<List<TreatmentEntity>> action = TreatmentEntity.find("patient.id = ?1", patient.id).list();
+			return action;
+
+		}, treatments -> {
+
+			final var patient = (PatientEntity) asserter.getData("PATIENT");
+			final var page = given().when().queryParam("patientId", String.valueOf(patient.id)).get("/v1/treatments")
+					.then().statusCode(Status.OK.getStatusCode()).extract().as(MinTreatmentPage.class);
+			assertNotNull(page);
+			final var expected = new MinTreatmentPage();
+			expected.total = treatments.size();
+			expected.treatments = treatments.stream().sorted((t1, t2) -> {
+
+				var cmp = t1.patient.name.compareTo(t2.patient.name);
+				if (cmp == 0) {
+
+					cmp = t1.id.compareTo(t2.id);
+				}
+				return cmp;
+
+			}).map(t -> t.toMinTreatment()).collect(Collectors.toList());
+			assertEquals(expected, page);
+			asserter.putData("TREATMENTS", treatments);
+
+		});
+
+		asserter.assertThat(() -> Uni.createFrom().nullItem(), any -> {
+
+			final var patient = (PatientEntity) asserter.getData("PATIENT");
+			@SuppressWarnings("unchecked")
+			final var treatments = (List<TreatmentEntity>) asserter.getData("TREATMENTS");
+			final var offset = 3;
+			final var limit = 7;
+			final var page = given().when().queryParam("patientId", String.valueOf(patient.id))
+					.queryParam("offset", String.valueOf(offset)).queryParam("limit", String.valueOf(limit))
+					.queryParam("order", "-createdTime").get("/v1/treatments").then()
+					.statusCode(Status.OK.getStatusCode()).extract().as(MinTreatmentPage.class);
+			assertNotNull(page);
+			assertNotNull(page);
+			final var expected = new MinTreatmentPage();
+			expected.total = treatments.size();
+			expected.treatments = treatments.stream().sorted((t1, t2) -> {
+
+				var cmp = Long.compare(t2.createdTime, t1.createdTime);
+				if (cmp == 0) {
+
+					cmp = t1.id.compareTo(t2.id);
+				}
+				return cmp;
+
+			}).skip(offset).limit(limit).map(t -> t.toMinTreatment()).collect(Collectors.toList());
+			assertEquals(expected, page);
+
+		});
+
+	}
 }

@@ -46,21 +46,47 @@ public class TreatmentEntities {
 	 */
 	public static Uni<TreatmentEntity> nextRandom(int max) {
 
-		return PatientEntities.nextRandom().chain(patient -> {
-			return PatientStatusCriteriaEntities.nextRandom().chain(before -> {
+		return PatientEntities.nextRandom().chain(patient -> nextRandomWith(patient, max));
 
-				return PatientStatusCriteriaEntities.nextRandom().chain(after -> {
+	}
 
-					final var entity = new TreatmentEntity();
-					entity.patient = patient;
-					entity.createdTime = ValueGenerator.rnd().nextLong(0, TimeManager.now() - 360000);
-					entity.beforeStatus = before;
-					entity.treatmentActions = new ArrayList<>(Arrays.asList(TreatmentAction.values()));
-					Collections.shuffle(entity.treatmentActions, ValueGenerator.rnd());
-					entity.treatmentActions = entity.treatmentActions.subList(0, Math.max(1, max));
-					entity.expectedStatus = after;
-					return entity.persistAndFlush();
-				});
+	/**
+	 * Create a random treatment status for a patient.
+	 *
+	 * @param patient for the treatment.
+	 *
+	 * @return the random status.
+	 */
+	public static Uni<TreatmentEntity> nextRandomWith(PatientEntity patient) {
+
+		final var max = ValueGenerator.rnd().nextInt(1, TreatmentAction.values().length);
+		return nextRandomWith(patient, max);
+
+	}
+
+	/**
+	 * Create a random treatment status for a patient.
+	 *
+	 * @param patient for the treatment.
+	 * @param max     number maximum of actions for the treatment.
+	 *
+	 * @return the random status.
+	 */
+	public static Uni<TreatmentEntity> nextRandomWith(PatientEntity patient, int max) {
+
+		return PatientStatusCriteriaEntities.nextRandom().chain(before -> {
+
+			return PatientStatusCriteriaEntities.nextRandom().chain(after -> {
+
+				final var entity = new TreatmentEntity();
+				entity.patient = patient;
+				entity.createdTime = ValueGenerator.rnd().nextLong(0, TimeManager.now() - 360000);
+				entity.beforeStatus = before;
+				entity.treatmentActions = new ArrayList<>(Arrays.asList(TreatmentAction.values()));
+				Collections.shuffle(entity.treatmentActions, ValueGenerator.rnd());
+				entity.treatmentActions = entity.treatmentActions.subList(0, Math.max(1, max));
+				entity.expectedStatus = after;
+				return entity.persistAndFlush();
 			});
 		});
 
@@ -80,6 +106,30 @@ public class TreatmentEntities {
 			if (total < min) {
 
 				return nextRandom().chain(any -> populateWith(min));
+
+			} else {
+
+				return Uni.createFrom().nullItem();
+			}
+
+		});
+	}
+
+	/**
+	 * Populate the database with the a minimum of treatments.
+	 *
+	 * @param min     number minimum of treatments to be defined on the database.
+	 * @param patient to be in the treatment.
+	 *
+	 * @return an exception if can not create the required population.
+	 */
+	public static Uni<Void> populateWith(PatientEntity patient, int min) {
+
+		return TreatmentEntity.count("patient.id = ?1", patient.id).chain(total -> {
+
+			if (total < min) {
+
+				return nextRandomWith(patient).chain(any -> populateWith(patient, min));
 
 			} else {
 

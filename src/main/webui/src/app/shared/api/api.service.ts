@@ -16,6 +16,7 @@ import { MinPatientPage } from "./min-patient-page.model";
 import { Patient } from "./patient.model";
 import { Treatment } from "./treatment.model";
 import { TreatmentToAdd } from "./treatment-to-add.model";
+import { MinTreatmentPage } from "./min-treatment-page.model";
 
 /**
  * The service used to interact with the 
@@ -186,7 +187,7 @@ export class ApiService {
 		var url = this.url('/v1/treatments', [treatmentId]);
 		return this.http.get<Treatment>(url);
 	}
-	
+
 	/**
 	 * Add a treatment.
 	 * 
@@ -208,6 +209,26 @@ export class ApiService {
 
 		var url = this.url('/v1/treatments', [treatmentId]);
 		return this.http.delete<any>(url);
+	}
+
+	/**
+	 * Get the information for some treatments 
+	 */
+	getTreatmentsPage(pattern: string = "*", order: string = "+name", offset: number = 0, limit: number = 10): Observable<MinTreatmentPage> {
+
+		var url = this.url('/v1/treatments');
+		return this.http.get<MinTreatmentPage>(
+			url,
+			this.optionsWithParams(
+				{
+					'name': pattern,
+					'order': order,
+					'offset': offset,
+					'limit': limit
+				}
+			)
+		);
+
 	}
 
 }

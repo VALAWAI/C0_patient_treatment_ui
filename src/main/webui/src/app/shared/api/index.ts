@@ -42,3 +42,5 @@ export { DiscomfortDegreeNamePipe } from './discoonfort-degree-name.pipe';
 export { NITLevel, NIT_LEVEL_NAMES } from './nit-level.model';
 export { NITLevelNamePipe } from './nit-level-name.pipe';
 export { TreatmentValueNamePipe } from './treatment-value-name.pipe';
+export { MinTreatmentPage } from './min-treatment-page.model';
+export { MinTreatment } from './min-treatment.model';
