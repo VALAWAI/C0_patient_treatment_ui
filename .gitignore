@@ -278,3 +278,4 @@ nb-configuration.xml
 var/
 .patientsDB
 /target-ide/
+.quarkus

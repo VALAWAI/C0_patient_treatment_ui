@@ -1,20 +1,27 @@
 # C0_patient_treatment_ui
 
-The C0 patient treatment provides a web user interface that any doctor can use to define
-the treatment to apply to a patient.
-e-mail actuator component sends e-mails outside the VALAWAI infrastructure.
-Thus, this component converts the messages  received into the channel
-**valawai/c0/email_actuator/data/e_mail** to e-mails that send to a server.
-You can read more about this service and the payload of the message on
-the [aysncapi](asyncapi.yaml) or on the [component documentation](https://valawai.github.io/docs/components/C0/email_actuator).
+The C0 Patient Treatment UI is a web-based component within a larger demonstration. 
+This tool showcases functionalities that would be beneficial in a real-world patient
+care setting, including:
+
+ - **Patient data management**: Efficient storage and access to patient information.
+ - **Personalized treatment plan creation**: Tailoring treatments to individual patient needs.
+ - **Display of NIT protocol verification results**: Presentation of the results of NIT protocol
+  verification.
+ - **Treatment value visualization**: Clear and concise display of the specific values associated
+  with treatment options.
+
+This component aims to demonstrate the potential value of a user interface that could assist doctors
+in improving patient care by streamlining access to patient information, facilitating personalized
+treatment plans, and providing clear and concise presentation of critical information related to patient care.
 
 
 ## Summary
 
  - Type: C0
  - Name: Patient treatment UI
- - Version: 1.0.0 (October 16,2024)
- - API: [1.0.0 (October 16,2024)](https://raw.githubusercontent.com/VALAWAI/C0_patient_treatment_ui/ASYNCAPI_1.0.0/asyncapi.yml)
+ - Version: 1.0.0 (January 28,2025)
+ - API: [1.0.0 (January 28,2025)](https://raw.githubusercontent.com/VALAWAI/C0_patient_treatment_ui/ASYNCAPI_1.0.0/asyncapi.yml)
  - VALAWAI API: [1.2.0 (March 9, 2024)](https://raw.githubusercontent.com/valawai/MOV/ASYNCAPI_1.2.0/asyncapi.yml)
  - Developed By: [IIIA-CSIC](https://www.iiia.csic.es)
  - License: [GPL 3](LICENSE)
@@ -22,23 +29,29 @@ the [aysncapi](asyncapi.yaml) or on the [component documentation](https://valawa
  
 ## Generate Docker image
 
-The easy way to create the docker image of this component is to execute
-the next script.
+The recommended way to create a Docker image for this component is to run the script:
  
  ```
 ./buildDockerImages.sh
 ```
 
-At the end you must have the docker image **valawai/c0_patient_treatment_ui:Z.Y.Z**
-where **X.Y.Z** will be the version of the component. If you want to have
-the image with another tag, for example **latest**, you must call the script
-with this tag as a parameter, for example:
+This script will build the image and tag it with the component's version 
+(e.g., `valawai/c0_patient_treatment_ui:1.0.1`).
 
-```
-./buildDockerImages.sh latest
+The script offers several options for customization:
+
+* **Specify tag:** Use `-t <tag>` or `--tag <tag>` to assign a custom tag name 
+to the image (e.g., `./buildDockerImages.sh -t my-custom-image-name`).
+* **Help message:** Use `-h` or `--help` to display a detailed explanation 
+of all available options.
+
+For example, to build an image with the tag `latest`, run:
+
+```bash
+./buildDockerImages.sh -t latest
 ```
 
-And you will obtain the container **valawai/c0_patient_treatment_ui:latest**.
+This will create the container named `valawai/c0_patient_treatment_ui:latest`.
 
 
 ### Docker environment variables
@@ -55,14 +68,6 @@ The most useful environment variables on the docker image are:
  The default value is **password**.
  - **LOG_LEVEL** defines the level of the log messages to be stored.
  The default value is **INFO**.
- - **QUARKUS_MAILER_FROM** defines the address that specifies from which the e-mails will come.
- The default value is **no-reply@valawai.eu**.
- - **QUARKUS_MAILER_HOST** the host where the e-mail server is.
- - **QUARKUS_MAILER_PORT** is the port where the e-mail server is listening.
- - **QUARKUS_MAILER_USERNAME** is the name of the user who will connect to the e-mail server.
- The default value is **no-reply@valawai.eu**.
- - **QUARKUS_MAILER_PASSWORD** is the credential to identify the user that can connect to the e-mail server.
- The default value is **password**.
  - **QUARKUS_HTTP_HOST** contains the server host that will expose the REST health endpoints.
  The default value is __0.0.0.0__.
  - **QUARKUS_HTTP_PORT** defines the server port that will expose the REST health endpoints.
@@ -71,50 +76,32 @@ The most useful environment variables on the docker image are:
  The default value is __http://localhost:8080__.
  
  
-Other variables depend on the type of secure connection to the e-mail server. For example,
-you must define the next variables to  connect to GMail with **STARTTLS**: 
-
-```
-QUARKUS_MAILER_AUTH_METHODS=DIGEST-MD5 CRAM-SHA256 CRAM-SHA1 CRAM-MD5 PLAIN LOGIN
-QUARKUS_MAILER_FROM=YOUREMAIL@gmail.com
-QUARKUS_MAILER_HOST=smtp.gmail.com
-QUARKUS_MAILER_PORT=587
-QUARKUS_MAILER_START_TLS=REQUIRED
-QUARKUS_MAILER_USERNAME=YOUREMAIL@gmail.com
-QUARKUS_MAILER_PASSWORD=YOURGENERATEDAPPLICATIONPASSWORD
-```
-
-Or with **TLS/SSL**:
-
-```
-QUARKUS_MAILER_AUTH_METHODS=DIGEST-MD5 CRAM-SHA256 CRAM-SHA1 CRAM-MD5 PLAIN LOGIN
-QUARKUS_MAILER_FROM=YOUREMAIL@gmail.com
-QUARKUS_MAILER_HOST=smtp.gmail.com
-QUARKUS_MAILER_PORT=465
-QUARKUS_MAILER_TLS=true
-QUARKUS_MAILER_USERNAME=YOUREMAIL@gmail.com
-QUARKUS_MAILER_PASSWORD=YOURGENERATEDAPPLICATIONPASSWORD
-```
-
-On the [Quarkus mail configuration](https://quarkus.io/guides/mailer-reference#configuration-reference) documentation you can read more about the variables to configure the connection to the e-mail server and also some examples to the [most common](https://quarkus.io/guides/mailer-reference#popular) e-mail servers.
-
-Finally, you can  change any environment
-variable [defined on Quarkus](https://quarkus.io/guides/all-config).
-
 
 ### Docker health check
 
-This component exposes the following REST endpoints to check their health status.
+This component provides several REST endpoints for monitoring its health status, 
+enabling external systems and orchestration tools to assess its operational state.
 
- - **/q/health/live** can be used to check if the component is running.
- - **/q/health/ready** can be used to check if the component can process the messages
-  from the VALAWAI infrastructure.
- - **/q/health/started** can be used to check if the component has started.
- - **/q/health** can be used to obtain all the previous check procedures in the component.
- 
-All of them will return a JSON which will have the **status** of the state (**UP** or **DOWN**)
-and the list of **checks** that have been evaluated. It looks like the following example was obtained
-from doing a **GET** over the **/q/health** endpoint.
+The following endpoints are available:
+
+*   **/q/health/live**: This endpoint indicates whether the component is currently
+ running. A successful response signifies that the component's process is active.
+
+*   **/q/health/ready**: This endpoint indicates whether the component is ready 
+to process messages from the VALAWAI infrastructure. A successful response signifies 
+that the component's dependencies and internal services are initialized and functioning 
+correctly.
+
+*   **/q/health/started**: This endpoint indicates whether the component has completed 
+its startup sequence. A successful response signifies that the component's initialization
+ procedures have finished.
+
+*   **/q/health**: This endpoint provides a comprehensive health status report, encompassing
+ the results of all the aforementioned checks.
+
+Each endpoint returns a JSON payload containing a `status` field (with values of `UP` or `DOWN`)
+and a `checks` array detailing the individual health checks performed. The following example 
+illustrates the response from a `GET` request to the `/q/health` endpoint:
 
  
  ```json
@@ -157,11 +144,13 @@ from doing a **GET** over the **/q/health** endpoint.
 }
  ```
  
-An alternative is to see the state of the component using the health user interface that
-is exposed at [/q/health-ui/](http://localhost:8080/q/health-ui/).
- 
-These endpoints are useful to do the **healthcheck** in a **docker compose**. Thus, you can add
-the following section into the service of the component.
+A user interface is also available for visualizing the component's health status at 
+[http://localhost:8080/q/health-ui/](http://localhost:8080/q/health-ui/). This interface 
+provides a more user-friendly representation of the health check data.
+
+These endpoints are particularly useful for configuring health checks within orchestration 
+tools such as Docker Compose. The following example demonstrates a Docker Compose health 
+check configuration for this component:
 
 ```
     healthcheck:
@@ -173,8 +162,9 @@ the following section into the service of the component.
       start_interval: 5s
 ```
 
-Finally, remember that the  docker environment variables **QUARKUS_HTTP_HOST** and **QUARKUS_HTTP_PORT**
-can be used to configure where the REST health endpoints will be exposed by the component.
+It is important to note that the host and port on which these REST health endpoints 
+are exposed can be configured using the Docker environment variables **QUARKUS_HTTP_HOST**
+and **QUARKUS_HTTP_PORT**, respectively.
 
 
 ## Deploy
@@ -221,23 +211,6 @@ The defined variables are:
  The default value is **mov**.
  - **MQ_PASSWORD** is the password used to authenticate the user who can access the message queue broker.
  The default value is **password**.
- - **MAIL_HOST** is the host to the e-mail server. The default value is **mail**.
- - **MAIL_PORT** defines the port of the e-mail server. The default value is **25**.
- - **MAIL_FROM** is the e-mail address that will appear in the form of the sent e-mails.
- The default value is **no-reply@valawai.eu**.
- - **MAIL_USERNAME** contains the user's name that can access the e-mail server.
- The default value is **user**.
- - **MAIL_PASSWORD** defines the credential to authenticate the user that can access the e-mail server.
- The default value is **password**.
- - **MAIL_STARTTLS** is used to define the connection of the e-mail server
- using a STARTTLS connection. The possible values are: DISABLED, OPTIONAL or REQUIRED.
- The default value is **DISABLED**.
- - **QUARKUS_MAILER_TLS** is used to define the connection of the e-mail server
- using a TTLS/SSL connection. The default value is **false**.
- - **QUARKUS_MAILER_AUTH_METHODS** is used to define the type of authentication methods
- that can be used in the e-mail server. The default value is **DIGEST-MD5 CRAM-SHA256 CRAM-SHA1 CRAM-MD5 PLAIN LOGIN**.
- - **MAIL_CATCHER_TAG** is the tag of the [email server](https://hub.docker.com/r/schickling/mailcatcher/) docker image to use.
- The default value is **latest**.
  - **RABBITMQ_TAG** is the tag of the RabbitMQ docker image to use.
  The default value is **management**.
  - **MONGODB_TAG** is the tag of the MongoDB docker image to use.
