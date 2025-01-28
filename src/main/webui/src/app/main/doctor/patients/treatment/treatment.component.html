@@ -3,12 +3,21 @@
 	<mat-stepper orientation="vertical" [linear]="true" #treatmentSteps>
 	<mat-step [stepControl]="beforeStatus"> <ng-template
 		matStepLabel
-		i18n="The label for the first step to define a treatment@@main_doctor_patients_treatment_step1-label">Check
-	the status of the patient <span class="font-bold">{{patient.name}}</span></ng-template>
-	<app-patient-status-criteria-editor [data]="patient.status"
-		(dataChanged)="beforeStatus.setValue($event)"></app-patient-status-criteria-editor>
-	<div>
-		<button mat-button matStepperNext>Next</button>
+		i18n="The label for the first step to define a treatment@@main_doctor_patients_treatment_step1-label">Current
+	staus of <span class="font-bold">{{patient.name}}</span></ng-template>
+	<div class="flex flex-col gap-3">
+		<div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4"
+			role="alert"
+			i18n="The instructions for the first step to define a treatment@@main_doctor_patients_treatment_step1-instructions">Before
+			adding a treatment to a patient, it's crucial to assess their current
+			status. This involves completing a series of questions, completing
+			the next form that outlines various patient criteria.</div>
+		<app-patient-status-criteria-editor [data]="patient.status"
+			(dataChanged)="beforeStatus.setValue($event)"></app-patient-status-criteria-editor>
+
+		<div>
+			<button mat-button matStepperNext>Next</button>
+		</div>
 	</div>
 	</mat-step> <mat-step [stepControl]="actions"
 		i18n-errorMessage="The error message when rewuire to select at leat one action@@main_doctor_patients_treatment_action-required"
@@ -16,44 +25,77 @@
 	<ng-template matStepLabel
 		i18n="The label for the second step to define a treatment@@main_doctor_patients_treatment_step2-label">Select
 	treatment actions to do over the patient</ng-template>
-	<div class="my-2 flex flex-col gap-3">
-		<div *ngFor="let action of TREATMENT_ACTIONS">
-			<mat-slide-toggle [formControl]="getControl(action)">
-			<span class="p-2 text-lg"
-				[ngClass]="{'font-bold text-blue-500':actions.get(action)?.value||false}">{{action|treatmentActionName}}</span></mat-slide-toggle>
+	<div class="flex flex-col gap-3">
+		<div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4"
+			role="alert"
+			i18n="The instructions for the second step to define a treatment@@main_doctor_patients_treatment_ste2-instructions">Now
+			you must select the actions that should be applied to the patient as
+			their treatment plan. You must select at least one action.</div>
+		<div class="my-2 flex flex-col gap-3">
+			<div *ngFor="let action of TREATMENT_ACTIONS">
+				<mat-slide-toggle [formControl]="getControl(action)">
+				<span class="p-2 text-lg"
+					[ngClass]="{'font-bold text-blue-500':actions.get(action)?.value||false}">{{action|treatmentActionName}}</span></mat-slide-toggle>
+			</div>
+			<div *ngIf="!actions.valid"
+				class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+				i18n="The error message when rewuire to select at leat one action@@main_doctor_patients_treatment_action-required">You
+				must select at least one action to do.</div>
 		</div>
-		<div *ngIf="!actions.valid"
-			class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
-			i18n="The error message when rewuire to select at leat one action@@main_doctor_patients_treatment_action-required">You
-			must select at least one action to do.</div>
 	</div>
 	<div class="flex flex-row gap-3">
 		<button mat-button matStepperPrevious
 			i18n="The label for the go to previous step@@common_stepper_previous">Previous</button>
 		<button mat-button matStepperNext
-			i18n="The label for the go to next step@@common_stepper_next">Next</button>
+			i18n="The label for the go to next step@@common_stepper_next"
+			class="text-blue-600">Next</button>
 	</div>
 	</mat-step> <mat-step [stepControl]="expectedStatus"> <ng-template
 		matStepLabel
 		i18n="The label for the third step to define a treatment@@main_doctor_patients_treatment_step3-label">Select
-	the expected state after the treatment</ng-template> <app-patient-status-criteria-editor
-		[disableNotTreatmentCriteria]="true" [data]="patient.status"
-		(dataChanged)="expectedStatus.setValue($event)"></app-patient-status-criteria-editor>
-	<div class="flex flex-row gap-3">
-		<button mat-button matStepperPrevious
-			i18n="The label for the go to previous step@@common_stepper_previous">Previous</button>
-		<button mat-button matStepperNext
-			i18n="The label for the go to next step@@common_stepper_next">Next</button>
+	the expected state after the treatment</ng-template>
+	<div class="flex flex-col gap-3">
+		<div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4"
+			role="alert"
+			i18n="The instructions for the second step to define a treatment@@main_doctor_patients_treatment_ste2-instructions">
+			After selecting the treatment action to be performed on the patient,
+			you must define the expected status for the patient after these
+			actions have been applied. To this end, you must fill in the
+			following form. In this form, you can only edit the criteria that can
+			be changed by the treatment actions.</div>
+		<app-patient-status-criteria-editor
+			[disableNotTreatmentCriteria]="true" [data]="patient.status"
+			(dataChanged)="expectedStatus.setValue($event)"></app-patient-status-criteria-editor>
+		<div class="flex flex-row gap-3">
+			<button mat-button matStepperPrevious
+				i18n="The label for the go to previous step@@common_stepper_previous">Previous</button>
+			<button mat-button matStepperNext
+				i18n="The label for the go to next step@@common_stepper_next"
+				class="text-blue-600">Next</button>
+		</div>
 	</div>
 	</mat-step> <mat-step> <ng-template matStepLabel
 		i18n="The label for the fourst step to define a treatment@@main_doctor_patients_treatment_step4-label">Add
 	treatment to the patient</ng-template>
-	<div class="flex flex-row gap-3">
-		<button mat-button matStepperPrevious
-			i18n="The label for the go to previous step@@common_stepper_previous">Previous</button>
-		<button mat-button matStepperNext
-			i18n="The label for the add treatment@@main_doctor_patients_treatment_add-label"
-			(click)="addTreatment()">Add treatment</button>
+	<div class="flex flex-col gap-3">
+		<div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4"
+			role="alert"
+			i18n="The instructions for the second step to define a treatment@@main_doctor_patients_treatment_ste2-instructions">
+			Once you've defined the patient's current status, the planned
+			treatment actions, and the expected outcome, you can add the
+			treatment plan to the patient's record. This allows for obtaining
+			feedback on the treatment's effectiveness, especially if the actions
+			comply with the NIT protocol and the treatment aligns with the
+			patient's values.</div>
+		<div class="flex flex-row gap-3">
+			<button mat-button matStepperPrevious
+				i18n="The label for the go to previous step@@common_stepper_previous">Previous</button>
+			<button mat-button matStepperNext
+				i18n="The label for the add treatment@@main_doctor_patients_treatment_add-label"
+				(click)="addTreatment()">
+				Add treatment to <span class="font-bold">{{patient.name}}</span>
+			</button>
+		</div>
 	</div>
 	</mat-step> </mat-stepper>
 </div>

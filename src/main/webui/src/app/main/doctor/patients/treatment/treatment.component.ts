@@ -17,6 +17,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModu
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { MatButtonModule } from '@angular/material/button';
 
 /**
  * Validator to check that at least one action is selected.
@@ -49,7 +50,8 @@ export const AtLeastOneActionValidator: ValidatorFn = (control: AbstractControl)
 		NgFor,
 		MatSlideToggle,
 		TreatmentActionNamePipe,
-		NgClass
+		NgClass,
+		MatButtonModule
 	],
 	templateUrl: './treatment.component.html',
 	styleUrl: './treatment.component.css',
