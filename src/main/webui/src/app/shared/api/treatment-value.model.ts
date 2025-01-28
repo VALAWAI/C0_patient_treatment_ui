@@ -13,4 +13,19 @@
  */
 export class TreatmentValue {
 
+	/**
+	 * The name of the value.
+	 */
+	public name: string = '';
+
+	/**
+	 * The alignment of the value with the the treatment.
+	 */
+	public alignment: number = 0;;
+
+	/**
+	 * The epoch time, in second, that his action is updated.
+	 */
+	public updatedTime: number = 0;
+
 }

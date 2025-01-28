@@ -194,6 +194,7 @@ public class TreatmentEntity extends PanacheEntity {
 
 		if (this.valueFeedbacks != null) {
 
+			treatment.values = new ArrayList<>();
 			Collections.sort(this.valueFeedbacks, (a1, a2) -> Long.compare(a1.createdTime, a2.createdTime));
 			for (final var valueFeedback : this.valueFeedbacks) {
 

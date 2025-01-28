@@ -13,7 +13,7 @@ export { Info } from './info.model';
 export { MinPatientPage } from './min-patient-page.model';
 export { MinPatient } from './min-patient.model';
 export { Patient } from './patient.model';
-export { PatientStatusCriteria} from './patient-status-criteria.model';
+export { PatientStatusCriteria } from './patient-status-criteria.model';
 export { Treatment } from './treatment.model';
 export { TreatmentActionNamePipe } from './treatment-action-name.pipe';
 export { TreatmentAction, TREATMENT_ACTION_NAMES } from './treatment-action.model';
@@ -41,3 +41,4 @@ export { DiscomfortDegree, DISCOMFORT_DEGREE_NAMES } from './disconfort-degree.m
 export { DiscomfortDegreeNamePipe } from './discoonfort-degree-name.pipe';
 export { NITLevel, NIT_LEVEL_NAMES } from './nit-level.model';
 export { NITLevelNamePipe } from './nit-level-name.pipe';
+export { TreatmentValueNamePipe } from './treatment-value-name.pipe';

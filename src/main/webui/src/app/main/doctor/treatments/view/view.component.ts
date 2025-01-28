@@ -10,12 +10,13 @@ import { NgFor, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/c
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TitleService } from '@app/shared';
-import { ApiService, Treatment, TreatmentActionNamePipe } from '@app/shared/api';
+import { ApiService, Treatment, TreatmentActionNamePipe, TreatmentValueNamePipe } from '@app/shared/api';
 import { Subscription } from 'rxjs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIcon } from '@angular/material/icon';
 import { PatientStatusCriteriaEditorComponent } from '@app/shared/patient-status-criteria-editor';
+import { NgApexchartsModule, ApexAxisChartSeries, ApexChart, ApexXAxis, ApexPlotOptions, ApexYAxis } from 'ng-apexcharts';
 
 @Component({
 	standalone: true,
@@ -31,7 +32,11 @@ import { PatientStatusCriteriaEditorComponent } from '@app/shared/patient-status
 		NgSwitch,
 		NgSwitchCase,
 		NgSwitchDefault,
-		MatProgressBarModule
+		MatProgressBarModule,
+		NgApexchartsModule
+	],
+	providers: [
+		TreatmentValueNamePipe
 	],
 	templateUrl: './view.component.html',
 	styleUrl: './view.component.css'
@@ -52,11 +57,72 @@ export class ViewComponent implements OnInit, OnDestroy {
 	 * The treatment to view.
 	 */
 	public treatment: Treatment | null = null;
-	
+
 	/**
 	 * The identifier of the timeout timer.
 	 */
 	private timerId: any | null = null;
+
+	/**
+	 * The treatement value chart series. 
+	 */
+	public valuesChartSeries: ApexAxisChartSeries = [
+		{
+			data: []
+		}
+	];
+
+	/**
+	 * The treatement value chart. 
+	 */
+	public valuesChart: ApexChart = {
+		type: "bar"
+	};
+
+	/**
+	 * The treatement value chart axis. 
+	 */
+	public valuesChartXaxis: ApexXAxis = {
+		categories: []
+	};
+
+	/**
+	 * The treatment value chart options.
+	 */
+	public valuesChartOptions: ApexPlotOptions = {
+		bar: {
+			distributed: true,
+			horizontal: true,
+			borderRadius: 5,
+			borderRadiusApplication: 'end', // 'around', 'end'
+			borderRadiusWhenStacked: 'all', // 'all', 'last'
+			barHeight: '80%',
+		}
+	};
+
+	/**
+	 * The treatement value chart axis. 
+	 */
+	public valuesChartYaxis: ApexYAxis = {
+		min: -1.0,
+		max: 1.0
+	};
+
+	/**
+	 * The treatement value chart colors.
+	 */
+	public valuesChartColors: string[] = [
+		"#33b2df",
+		"#546E7A",
+		"#d4526e",
+		"#13d8aa",
+		"#A5978B",
+		"#2b908f",
+		"#f9a3a4",
+		"#90ee7e",
+		"#f48024",
+		"#69d2e7"
+	];
 
 	/**
 	 *  Create the component.
@@ -64,8 +130,10 @@ export class ViewComponent implements OnInit, OnDestroy {
 	constructor(
 		private title: TitleService,
 		private api: ApiService,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+		private valueNamePipe: TreatmentValueNamePipe
 	) {
+
 
 	}
 
@@ -96,8 +164,8 @@ export class ViewComponent implements OnInit, OnDestroy {
 			this.treatementIdSubscription.unsubscribe();
 			this.treatementIdSubscription = null;
 		}
-		if( this.timerId != null ){
-			
+		if (this.timerId != null) {
+
 			clearTimeout(this.timerId);
 			this.timerId = null;
 		}
@@ -113,6 +181,7 @@ export class ViewComponent implements OnInit, OnDestroy {
 				next: (treatment) => {
 
 					this.treatment = treatment;
+					this.treatmentUpdated();
 					this.timerId = setTimeout(() => this.updateTreatment(), 1500);
 				}
 			}
@@ -120,5 +189,25 @@ export class ViewComponent implements OnInit, OnDestroy {
 
 	}
 
+	/**
+	 * Called when the treatement has been updated. 
+	 */
+	private treatmentUpdated() {
+
+		if (this.treatment && this.treatment.values.length > 0) {
+
+			var data: number[] = [];
+			var categories: string[] = [];
+			for (var value of this.treatment.values) {
+
+				categories.push(this.valueNamePipe.transform(value));
+				data.push(value.alignment);
+			}
+			this.valuesChartSeries[0].data = data;
+			this.valuesChartXaxis.categories = categories;
+
+		}
+
+	}
 }
 

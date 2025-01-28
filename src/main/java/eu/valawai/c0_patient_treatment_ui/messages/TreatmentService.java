@@ -12,7 +12,6 @@ import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
 
 import eu.valawai.c0_patient_treatment_ui.messages.mov.LogService;
-import io.quarkus.logging.Log;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
@@ -44,16 +43,15 @@ public class TreatmentService {
 	 */
 	public void send(TreatmentPayload treatment) {
 
-		this.log.debugWithPayload(treatment, "Publish treatment.");
 		this.service.send(treatment).handle((success, error) -> {
 
 			if (error == null) {
 
-				Log.debugv("Sent {0}.", treatment);
+				this.log.debugWithPayload(treatment, "Publish treatment.");
 
 			} else {
 
-				Log.errorv(error, "Cannot send {0}.", treatment);
+				this.log.errorWithPayload(treatment, "Cannot publish treatment.");
 			}
 			return null;
 		});

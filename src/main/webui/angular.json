@@ -36,7 +36,9 @@
 							"@angular/material/prebuilt-themes/azure-blue.css",
 							"src/styles.css"
 						],
-						"scripts": []
+						"scripts": [
+							"node_modules/apexcharts/dist/apexcharts.min.js"
+						]
 					},
 					"configurations": {
 						"production": {
@@ -99,7 +101,9 @@
 							"@angular/material/prebuilt-themes/azure-blue.css",
 							"src/styles.css"
 						],
-						"scripts": []
+						"scripts": [
+							"node_modules/apexcharts/dist/apexcharts.min.js"
+						]
 					}
 				}
 			},

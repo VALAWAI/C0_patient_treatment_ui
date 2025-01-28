@@ -64,7 +64,7 @@ public class TreatmentActionFeedbackManager {
 
 					} else {
 
-						this.log.infoWithPayload(msg.getPayload(), "Treatment action feedback received");
+						this.log.debugWithPayload(msg.getPayload(), "Treatment action feedback received");
 						return msg.ack();
 					}
 
