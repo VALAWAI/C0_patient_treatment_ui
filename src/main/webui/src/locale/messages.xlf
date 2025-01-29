@@ -450,7 +450,7 @@
         <source>Treatments</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/doctor/treatments/treatments.component.ts</context>
-          <context context-type="linenumber">108</context>
+          <context context-type="linenumber">104</context>
         </context-group>
         <note priority="1" from="description">The header title for the treatments</note>
       </trans-unit>
@@ -475,7 +475,7 @@
         <source>Before status</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.html</context>
-          <context context-type="linenumber">19,20</context>
+          <context context-type="linenumber">23,24</context>
         </context-group>
         <note priority="1" from="description">The tile of the treatement before status</note>
       </trans-unit>
@@ -483,7 +483,7 @@
         <source> The patient status before to apply the treatment</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.html</context>
-          <context context-type="linenumber">21,22</context>
+          <context context-type="linenumber">25,26</context>
         </context-group>
         <note priority="1" from="description">The description of the treatement before status</note>
       </trans-unit>
@@ -491,7 +491,7 @@
         <source>Actions </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.html</context>
-          <context context-type="linenumber">26,27</context>
+          <context context-type="linenumber">30,31</context>
         </context-group>
         <note priority="1" from="description">The tile of the treatement actions</note>
       </trans-unit>
@@ -499,7 +499,7 @@
         <source> The actions to do over the patient for this treatment</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.html</context>
-          <context context-type="linenumber">28,30</context>
+          <context context-type="linenumber">32,34</context>
         </context-group>
         <note priority="1" from="description">The description of the treatement actions</note>
       </trans-unit>
@@ -507,7 +507,7 @@
         <source> The NIT protocol allow to do this action.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.html</context>
-          <context context-type="linenumber">44,48</context>
+          <context context-type="linenumber">48,52</context>
         </context-group>
         <note priority="1" from="description">The message when the treatment action feedback is allow</note>
       </trans-unit>
@@ -515,7 +515,7 @@
         <source> The NIT protocol does NOT allow to do this action.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.html</context>
-          <context context-type="linenumber">58,62</context>
+          <context context-type="linenumber">62,66</context>
         </context-group>
         <note priority="1" from="description">The message when the treatment
 								action feedback is
@@ -525,7 +525,7 @@
         <source> I don&apos;t have enough information to know if the action is aligned with the protocol.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.html</context>
-          <context context-type="linenumber">70,75</context>
+          <context context-type="linenumber">74,79</context>
         </context-group>
         <note priority="1" from="description">The message when the treatment action feedback is unknown</note>
       </trans-unit>
@@ -533,7 +533,7 @@
         <source> At the moment this treatment does not have any associated action.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.html</context>
-          <context context-type="linenumber">85,88</context>
+          <context context-type="linenumber">89,92</context>
         </context-group>
         <note priority="1" from="description">The message two show when the treatement does not have actions yet</note>
       </trans-unit>
@@ -541,7 +541,7 @@
         <source>Expected status</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.html</context>
-          <context context-type="linenumber">89,90</context>
+          <context context-type="linenumber">93,94</context>
         </context-group>
         <note priority="1" from="description">The tile of the treatement expected status</note>
       </trans-unit>
@@ -549,7 +549,7 @@
         <source> The expected patient status after apply this treatment</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.html</context>
-          <context context-type="linenumber">91,92</context>
+          <context context-type="linenumber">95,96</context>
         </context-group>
         <note priority="1" from="description">The description of the treatement expected status</note>
       </trans-unit>
@@ -557,7 +557,7 @@
         <source>Values </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.html</context>
-          <context context-type="linenumber">96,97</context>
+          <context context-type="linenumber">100,101</context>
         </context-group>
         <note priority="1" from="description">The tile of the treatement values</note>
       </trans-unit>
@@ -565,7 +565,7 @@
         <source> The values to do over the patient for this treatment</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.html</context>
-          <context context-type="linenumber">98,100</context>
+          <context context-type="linenumber">102,104</context>
         </context-group>
         <note priority="1" from="description">The description of the treatement values</note>
       </trans-unit>
@@ -573,7 +573,7 @@
         <source> At the moment this treatment does not have any associated value.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.html</context>
-          <context context-type="linenumber">110,115</context>
+          <context context-type="linenumber">114,119</context>
         </context-group>
         <note priority="1" from="description">The message two show when the treatement does not have values yet</note>
       </trans-unit>
@@ -581,15 +581,23 @@
         <source>View treatment information</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.ts</context>
-          <context context-type="linenumber">146</context>
+          <context context-type="linenumber">149</context>
         </context-group>
         <note priority="1" from="description">The header title when view a treatement</note>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_view_code_do-again-error" datatype="html">
+        <source>Cannot do again this treatment.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.ts</context>
+          <context context-type="linenumber">227</context>
+        </context-group>
+        <note priority="1" from="description">The error message when can not do agin the treatment</note>
       </trans-unit>
       <trans-unit id="main_patients-menu-item-label" datatype="html">
         <source>Patients</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/main.component.html</context>
-          <context context-type="linenumber">10,12</context>
+          <context context-type="linenumber">12,14</context>
         </context-group>
         <note priority="1" from="description">The label for the option to go to the patients menu</note>
       </trans-unit>
@@ -597,7 +605,7 @@
         <source>Treatments</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/main.component.html</context>
-          <context context-type="linenumber">13,16</context>
+          <context context-type="linenumber">15,18</context>
         </context-group>
         <note priority="1" from="description">The label for the option to go to the treatments menu</note>
       </trans-unit>
@@ -605,7 +613,7 @@
         <source>Status</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/main.component.html</context>
-          <context context-type="linenumber">17,19</context>
+          <context context-type="linenumber">19,21</context>
         </context-group>
         <note priority="1" from="description">The label for the option to seee the component status</note>
       </trans-unit>
@@ -614,7 +622,7 @@
 				alt=&quot;VALAWAI logo&quot;&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/main.component.html</context>
-          <context context-type="linenumber">39,42</context>
+          <context context-type="linenumber">41,44</context>
         </context-group>
         <note priority="1" from="description">The copyright text</note>
       </trans-unit>
