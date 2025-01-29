@@ -12,6 +12,7 @@ import eu.valawai.c0_patient_treatment_ui.TimeManager;
 import eu.valawai.c0_patient_treatment_ui.messages.TreatmentValueFeedbackPayload;
 import io.quarkus.hibernate.reactive.panache.PanacheEntity;
 import io.smallrye.mutiny.Uni;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
@@ -30,12 +31,12 @@ public class TreatmentValueFeedbackEntity extends PanacheEntity {
 	/**
 	 * The name of the table that will contains the treatments.
 	 */
-	public static final String TABLE_NAME = "TREATMENT_VALUE_FEEDBAKCS";
+	public static final String TABLE_NAME = "TREATMENT_VALUE_FEEDBACKS";
 
 	/**
 	 * The treatment associated to the feedback.
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
 	public TreatmentEntity treatment;
 
 	/**

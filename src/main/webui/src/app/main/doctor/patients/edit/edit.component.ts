@@ -9,7 +9,7 @@
 import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TitleService, UserNotificationService } from '@app/shared';
+import { TitleService } from '@app/shared';
 import { ApiService, Patient, PatientStatusCriteria } from '@app/shared/api';
 import { Observable, switchMap, tap } from 'rxjs';
 import { AvvvatarsComponent } from '@ngxpert/avvvatars';
@@ -17,6 +17,7 @@ import { PatientStatusCriteriaEditorComponent } from '@app/shared/patient-status
 import { MatButton } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MessagesService } from '@app/shared/messages';
 
 @Component({
 	standalone: true,
@@ -64,7 +65,7 @@ export class EditComponent implements OnInit {
 		private api: ApiService,
 		private route: ActivatedRoute,
 		private fb: FormBuilder,
-		private notifier:UserNotificationService
+		private notifier:MessagesService
 	) {
 
 	}

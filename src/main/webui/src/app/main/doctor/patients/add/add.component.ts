@@ -9,7 +9,7 @@
 import { NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TitleService, UserNotificationService } from '@app/shared';
+import { TitleService } from '@app/shared';
 import { ApiService, Patient, PatientStatusCriteria } from '@app/shared/api';
 import { Subscription } from 'rxjs';
 import { AvvvatarsComponent } from '@ngxpert/avvvatars';
@@ -17,21 +17,22 @@ import { PatientStatusCriteriaEditorComponent } from '@app/shared/patient-status
 import { MatButton } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MessagesService } from '@app/shared/messages';
 
 @Component({
 	standalone: true,
-    selector: 'app-doctor-patient-add',
-    imports: [
-        NgIf,
-        AvvvatarsComponent,
-        PatientStatusCriteriaEditorComponent,
-        MatButton,
-        MatInputModule,
-        ReactiveFormsModule,
-        NgIf
-    ],
-    templateUrl: './add.component.html',
-    styleUrl: './add.component.css'
+	selector: 'app-doctor-patient-add',
+	imports: [
+		NgIf,
+		AvvvatarsComponent,
+		PatientStatusCriteriaEditorComponent,
+		MatButton,
+		MatInputModule,
+		ReactiveFormsModule,
+		NgIf
+	],
+	templateUrl: './add.component.html',
+	styleUrl: './add.component.css'
 })
 export class AddComponent implements OnInit, OnDestroy {
 
@@ -58,7 +59,7 @@ export class AddComponent implements OnInit, OnDestroy {
 		private api: ApiService,
 		private route: ActivatedRoute,
 		private fb: FormBuilder,
-		private notifier: UserNotificationService,
+		private notifier: MessagesService,
 		private router: Router
 	) {
 

@@ -86,7 +86,7 @@ services:
       POSTGRES_PASSWORD: ${PG_USER_PASSWORD:-password}
       POSTGRES_DB: ${PG_DB_NAME:-c0_patient_treatment_ui_db}
     volumes:
-      - ${PG_LOCAL_DATA:-~/pg_data/c0_patient_treatment_ui_db}:/var/lib/postgresql/data 
+      - ${PG_LOCAL_DATA:-~/.pg_data/c0_patient_treatment_ui_db}:/var/lib/postgresql/data 
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 1m

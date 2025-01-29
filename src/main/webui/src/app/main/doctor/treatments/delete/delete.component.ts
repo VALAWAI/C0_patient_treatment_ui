@@ -9,20 +9,21 @@
 import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { TitleService, UserNotificationService } from '@app/shared';
+import { TitleService } from '@app/shared';
 import { ApiService, Treatment } from '@app/shared/api';
+import { MessagesService } from '@app/shared/messages';
 import { Observable, switchMap, tap } from 'rxjs';
 
 @Component({
 	standalone: true,
-    selector: 'app-doctor-treatment-delete',
-    imports: [
-        AsyncPipe,
-        RouterLink,
-        NgIf
-    ],
-    templateUrl: './delete.component.html',
-    styleUrl: './delete.component.css'
+	selector: 'app-doctor-treatment-delete',
+	imports: [
+		AsyncPipe,
+		RouterLink,
+		NgIf
+	],
+	templateUrl: './delete.component.html',
+	styleUrl: './delete.component.css'
 })
 export class DeleteComponent implements OnInit {
 
@@ -43,7 +44,7 @@ export class DeleteComponent implements OnInit {
 		private title: TitleService,
 		private api: ApiService,
 		private route: ActivatedRoute,
-		private notifier: UserNotificationService,
+		private notifier: MessagesService,
 		private router: Router
 	) {
 

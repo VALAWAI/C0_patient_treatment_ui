@@ -62,13 +62,13 @@ public class TreatmentEntity extends PanacheEntity {
 	/**
 	 * The patient that has this treatment.
 	 */
-	@ManyToOne(targetEntity = PatientEntity.class, fetch = FetchType.EAGER)
+	@ManyToOne(targetEntity = PatientEntity.class, fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
 	public PatientEntity patient;
 
 	/**
 	 * The status before to apply the treatment.
 	 */
-	@ManyToOne(targetEntity = PatientStatusCriteriaEntity.class, fetch = FetchType.EAGER)
+	@ManyToOne(targetEntity = PatientStatusCriteriaEntity.class, fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
 	public PatientStatusCriteriaEntity beforeStatus;
 
 	/**
@@ -79,7 +79,7 @@ public class TreatmentEntity extends PanacheEntity {
 	/**
 	 * The expected status of the patient after applying the treatment.
 	 */
-	@ManyToOne(targetEntity = PatientStatusCriteriaEntity.class, fetch = FetchType.EAGER)
+	@ManyToOne(targetEntity = PatientStatusCriteriaEntity.class, fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
 	public PatientStatusCriteriaEntity expectedStatus;
 
 	/**

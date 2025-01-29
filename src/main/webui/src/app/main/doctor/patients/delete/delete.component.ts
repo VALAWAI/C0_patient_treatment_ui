@@ -9,8 +9,9 @@
 import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { TitleService, UserNotificationService } from '@app/shared';
+import { TitleService } from '@app/shared';
 import { ApiService, Patient } from '@app/shared/api';
+import { MessagesService } from '@app/shared/messages';
 import { Observable, switchMap, tap } from 'rxjs';
 
 @Component({
@@ -43,7 +44,7 @@ export class DeleteComponent implements OnInit {
 		private title: TitleService,
 		private api: ApiService,
 		private route: ActivatedRoute,
-		private notifier: UserNotificationService,
+		private notifier: MessagesService,
 		private router: Router
 	) {
 

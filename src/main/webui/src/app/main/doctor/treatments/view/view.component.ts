@@ -219,9 +219,17 @@ export class ViewComponent implements OnInit, OnDestroy {
 	public doItAgain() {
 
 		if (this.treatment) {
+
 			this.api.doAgainTreatment(this.treatment).subscribe({
 
-				next: added => this.router.navigate(['/main/doctor/treatments', added.id, 'view']),
+				next: added => {
+					if (this.timerId != null) {
+
+						clearTimeout(this.timerId);
+						this.timerId = null;
+					}
+					this.router.navigate(['/main/doctor/treatments', added.id, 'view']);
+				},
 				error: (err) => {
 
 					this.message.showError($localize`:The error message when can not do agin the treatment@@main_doctor_treatments_view_code_do-again-error:Cannot do again this treatment.`);
