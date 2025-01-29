@@ -47,6 +47,1386 @@
         </context-group>
         <note priority="1" from="description">Not found go home page</note>
       </trans-unit>
+      <trans-unit id="main_doctor_patients_delete_code_page-title" datatype="html" xml:space="preserve">
+        <source>Delete patient</source>
+        <target state="translated">Elimina el pacient</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/delete/delete.component.ts</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_delete_code_success-msg" datatype="html" xml:space="preserve">
+        <source>Patient deleted</source>
+        <target state="translated">Pacient eliminat</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/delete/delete.component.ts</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_edit_name" datatype="html" xml:space="preserve">
+        <source>Patient name</source>
+        <target state="translated">Nom del pacient</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/add/add.component.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/edit/edit.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2060264826327259421" datatype="html" xml:space="preserve">
+        <source>You must define a name of the patient.</source>
+        <target state="translated">Heu de definir un nom del pacient.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/add/add.component.html</context>
+          <context context-type="linenumber">11,12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/edit/edit.component.html</context>
+          <context context-type="linenumber">12,13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5106859429615230101" datatype="html" xml:space="preserve">
+        <source>The name can not have more than 1024 characters.</source>
+        <target state="translated">El nom no pot tenir més de 1024 caràcters.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/add/add.component.html</context>
+          <context context-type="linenumber">13,18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/edit/edit.component.html</context>
+          <context context-type="linenumber">14,19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_add-submit" datatype="html" xml:space="preserve">
+        <source>Add</source>
+        <target state="translated">Afegir</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/add/add.component.html</context>
+          <context context-type="linenumber">24,27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_add_code_page-title" datatype="html" xml:space="preserve">
+        <source>Add patient</source>
+        <target state="translated">Afegeix un pacient</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/add/add.component.ts</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_add_code_added-success" datatype="html" xml:space="preserve">
+        <source>Patient has been added</source>
+        <target state="translated">S'ha afegit el pacient</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/add/add.component.ts</context>
+          <context context-type="linenumber">112</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_delete_msg-title" datatype="html" xml:space="preserve">
+        <source>Delete the patient <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;font-bold&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{patient.name}}"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <target state="translated">Eliminar el pacient <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;font-bold&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{patient.name}}"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/delete/delete.component.html</context>
+          <context context-type="linenumber">7,9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_delete_msg-content" datatype="html" xml:space="preserve">
+        <source>Deleting a patient cannot be undone, so don't do it unless you're sure. In addition, this action will cause that all the treatment associated with this patient will also be removed.</source>
+        <target state="translated">La supressió d'un pacient no es pot desfer, així que no ho feu tret que n'estigueu segur. A més, aquesta acció farà que també s'elimini tots els tractaments associats a aquest pacient.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/delete/delete.component.html</context>
+          <context context-type="linenumber">11,16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_delete_ok-label" datatype="html" xml:space="preserve">
+        <source>Delete</source>
+        <target state="translated">Suprimeix</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/delete/delete.component.html</context>
+          <context context-type="linenumber">18,20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_delete_cancel-label" datatype="html" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">Cancel·la</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/delete/delete.component.html</context>
+          <context context-type="linenumber">24,27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_add_code_add-error" datatype="html" xml:space="preserve">
+        <source>Cannot add the patient</source>
+        <target state="needs-translation">No és pot afegir el pacient</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/add/add.component.ts</context>
+          <context context-type="linenumber">117</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_edit_update" datatype="html" xml:space="preserve">
+        <source>Update</source>
+        <target state="translated">Actualitza</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/edit/edit.component.html</context>
+          <context context-type="linenumber">25,28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_edit_code_page-title" datatype="html" xml:space="preserve">
+        <source>Edit patient information</source>
+        <target state="translated">Edita la informació del pacient</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/edit/edit.component.ts</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_edit_code_update-success" datatype="html" xml:space="preserve">
+        <source>Updated patient</source>
+        <target state="translated">Pacient actualitzat</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/edit/edit.component.ts</context>
+          <context context-type="linenumber">109</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_edit_code_update-error" datatype="html" xml:space="preserve">
+        <source>Patient not updated</source>
+        <target state="translated">Pacient no actualitzat</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/edit/edit.component.ts</context>
+          <context context-type="linenumber">114</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_search-placeholder" datatype="html" xml:space="preserve">
+        <source>Write a patient name</source>
+        <target state="translated">Escriu el nom del pacient</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/patients.component.html</context>
+          <context context-type="linenumber">13,14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_add-label" datatype="html" xml:space="preserve">
+        <source>Add</source>
+        <target state="translated">Afegir</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/patients.component.html</context>
+          <context context-type="linenumber">20,25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_view-patient-menu-item-label" datatype="html" xml:space="preserve">
+        <source>View</source>
+        <target state="translated">Visualització</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/patients.component.html</context>
+          <context context-type="linenumber">41,43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_edit-patient-menu-item-label" datatype="html" xml:space="preserve">
+        <source>Edit</source>
+        <target state="translated">Edició</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/patients.component.html</context>
+          <context context-type="linenumber">44,46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_delete-patient-menu-item-label" datatype="html" xml:space="preserve">
+        <source>Delete</source>
+        <target state="translated">Supressió</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/patients.component.html</context>
+          <context context-type="linenumber">47,49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_code_page-title" datatype="html" xml:space="preserve">
+        <source>Patients</source>
+        <target state="translated">Pacients</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/patients.component.ts</context>
+          <context context-type="linenumber">101</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_treatment_step1-instructions" datatype="html" xml:space="preserve">
+        <source>Before adding a treatment to a patient, it's crucial to assess their current status. This involves completing a series of questions, completing the next form that outlines various patient criteria.</source>
+        <target state="translated">Abans d'afegir un tractament a un pacient, és crucial avaluar el seu estat actual. Això implica completar una sèrie de preguntes, completant el següent formulari que descriu diversos criteris del pacient.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">12,16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_treatment_action-required" datatype="html" xml:space="preserve">
+        <source>You must select at least one action to do.</source>
+        <target state="translated">Has de seleccionar com a mínim una acció.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">24,26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">43,48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_treatment_step2-label" datatype="html" xml:space="preserve">
+        <source>Select treatment actions to do over the patient</source>
+        <target state="translated">Seleccionar les accions de tractament a realitzar sobre el pacient</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">27,29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_treatment_step2-instructions" datatype="html" xml:space="preserve">
+        <source>Now you must select the actions that should be applied to the patient as their treatment plan. You must select at least one action.</source>
+        <target state="translated">Ara cal seleccionar les accions que s'han d'aplicar al pacient com a pla de tractament. Heu de seleccionar almenys una acció.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">32,36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="common_stepper_previous" datatype="html" xml:space="preserve">
+        <source>Previous</source>
+        <target state="translated">Anterior</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">48,50</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">71,73</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">92,94</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="common_stepper_next" datatype="html" xml:space="preserve">
+        <source>Next</source>
+        <target state="translated">Següent</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">51,53</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">74,77</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_treatment_step3-label" datatype="html" xml:space="preserve">
+        <source>Select the expected state after the treatment</source>
+        <target state="translated">Selecciona l'estat previst després del tractament</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">56,58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_treatment_step4-label" datatype="html" xml:space="preserve">
+        <source>Add treatment to the patient</source>
+        <target state="translated">Afegir tractament al pacient</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">79,81</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_treatment_code_page-title" datatype="html" xml:space="preserve">
+        <source>Add treatment to a patient</source>
+        <target state="translated">Afegeix tractament a un pacient</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.ts</context>
+          <context context-type="linenumber">146</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_edit_code_add-error" datatype="html" xml:space="preserve">
+        <source>Canot add the treatment</source>
+        <target state="translated">No es pot afegir el tractament</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.ts</context>
+          <context context-type="linenumber">205</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_view_code_page-title" datatype="html" xml:space="preserve">
+        <source>View patient information</source>
+        <target state="translated">Mostra la informació del pacient</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/view/view.component.ts</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_delete_msg-title" datatype="html" xml:space="preserve">
+        <source>Delete the treatment for the patient <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;font-bold&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{treatment.patient?.name}}"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <target state="translated">Elimina el tractament per al pacient <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;font-bold&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{treatment.patient?.name}}"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/delete/delete.component.html</context>
+          <context context-type="linenumber">7,9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_delete_msg-content" datatype="html" xml:space="preserve">
+        <source>Deleting a treatment cannot be undone, so don't do it unless you're sure. In addition, this action will cause that all the feedbacks associated with this treatment will also be removed.</source>
+        <target state="translated">L'eliminació d'un tractament no es pot desfer, així que no ho feu tret que n'estigueu segur. A més, aquesta acció farà que també s'eliminin tots els feedbacks associats a aquest tractament.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/delete/delete.component.html</context>
+          <context context-type="linenumber">11,16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_delete_ok-label" datatype="html" xml:space="preserve">
+        <source>Delete</source>
+        <target state="translated">Supressió</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/delete/delete.component.html</context>
+          <context context-type="linenumber">18,20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_delete_cancel-label" datatype="html" xml:space="preserve">
+        <source>Cancel</source>
+        <target state="translated">Cancel·la</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/delete/delete.component.html</context>
+          <context context-type="linenumber">24,27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_delete_code_page-title" datatype="html" xml:space="preserve">
+        <source>Delete treatment</source>
+        <target state="translated">Elimina el tractament</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/delete/delete.component.ts</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_delete_code_success-msg" datatype="html" xml:space="preserve">
+        <source>Treatment deleted</source>
+        <target state="translated">Tractament eliminat</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/delete/delete.component.ts</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_delete_code_error-msg" datatype="html" xml:space="preserve">
+        <source>Treatment cannot be deleted</source>
+        <target state="translated">El tractament no es pot eliminar</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/delete/delete.component.ts</context>
+          <context context-type="linenumber">83</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_search-placeholder" datatype="html" xml:space="preserve">
+        <source>Write a patient name</source>
+        <target state="translated">Escriu el nom del pacient</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/treatments.component.html</context>
+          <context context-type="linenumber">12,13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_view-treatment-menu-item-label" datatype="html" xml:space="preserve">
+        <source>View</source>
+        <target state="translated">Visualització</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/treatments.component.html</context>
+          <context context-type="linenumber">35,37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_do-again-treatment-menu-item-label" datatype="html" xml:space="preserve">
+        <source>Do it again</source>
+        <target state="translated">Fes-ho una altra vegada</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/treatments.component.html</context>
+          <context context-type="linenumber">38,40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_delete-treatment-menu-item-label" datatype="html" xml:space="preserve">
+        <source>Delete</source>
+        <target state="translated">Supressió</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/treatments.component.html</context>
+          <context context-type="linenumber">41,43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_new-treatment-for-patient-menu-item-label" datatype="html" xml:space="preserve">
+        <source>New treatment for patient</source>
+        <target state="translated">Nou tractament per al pacient</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/treatments.component.html</context>
+          <context context-type="linenumber">44,49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_code_page-title" datatype="html" xml:space="preserve">
+        <source>Treatments</source>
+        <target state="translated">Tractaments</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/treatments.component.ts</context>
+          <context context-type="linenumber">104</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_view_before-status-title" datatype="html" xml:space="preserve">
+        <source>Before status</source>
+        <target state="translated">Estat d'abans</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.html</context>
+          <context context-type="linenumber">23,24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_age-range-name-AGE_BETWEEN_50_AND_59" datatype="html" xml:space="preserve">
+        <source>50 - 59</source>
+        <target state="translated">50-59 anys</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/age-range-option-name.pipe.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_view_actions-title" datatype="html" xml:space="preserve">
+        <source>Actions</source>
+        <target state="translated">Accions</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.html</context>
+          <context context-type="linenumber">30,31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_view_actions-description" datatype="html" xml:space="preserve">
+        <source>The actions to do over the patient for this treatment</source>
+        <target state="translated">Les accions a realitzar sobre el pacient per a aquest tractament</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.html</context>
+          <context context-type="linenumber">32,34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_view_action-feedback-allow" datatype="html" xml:space="preserve">
+        <source>The NIT protocol allow to do this action.</source>
+        <target state="translated">El protocol NIT permet fer aquesta acció.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.html</context>
+          <context context-type="linenumber">48,52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_view_action-feedback-deny" datatype="html" xml:space="preserve">
+        <source>The NIT protocol does NOT allow to do this action.</source>
+        <target state="translated">El protocol NIT NO permet fer aquesta acció.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.html</context>
+          <context context-type="linenumber">62,66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_view_no-actions-message" datatype="html" xml:space="preserve">
+        <source>At the moment this treatment does not have any associated action.</source>
+        <target state="translated">De moment aquest tractament no té cap acció associada.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.html</context>
+          <context context-type="linenumber">89,92</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_view_expected-status-title" datatype="html" xml:space="preserve">
+        <source>Expected status</source>
+        <target state="translated">Estat previst</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.html</context>
+          <context context-type="linenumber">93,94</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_view_expected-status-description" datatype="html" xml:space="preserve">
+        <source>The expected patient status after apply this treatment</source>
+        <target state="translated">L'estat previst del pacient després d'aplicar aquest tractament</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.html</context>
+          <context context-type="linenumber">95,96</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_view_values-title" datatype="html" xml:space="preserve">
+        <source>Values</source>
+        <target state="translated">Valors</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.html</context>
+          <context context-type="linenumber">100,101</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_view_values-description" datatype="html" xml:space="preserve">
+        <source>The values to do over the patient for this treatment</source>
+        <target state="translated">Els valors a fer sobre el pacient per a aquest tractament</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.html</context>
+          <context context-type="linenumber">102,104</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_view_no-values-message" datatype="html" xml:space="preserve">
+        <source>At the moment this treatment does not have any associated value.</source>
+        <target state="translated">De moment aquest tractament no té cap valor associat.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.html</context>
+          <context context-type="linenumber">114,119</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_view_code_page-title" datatype="html" xml:space="preserve">
+        <source>View treatment information</source>
+        <target state="translated">Mostra la informació del tractament</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.ts</context>
+          <context context-type="linenumber">149</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_view_code_do-again-error" datatype="html" xml:space="preserve">
+        <source>Cannot do again this treatment.</source>
+        <target state="translated">No es pot tornar a fer aquest tractament.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.ts</context>
+          <context context-type="linenumber">227</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_patients-menu-item-label" datatype="html" xml:space="preserve">
+        <source>Patients</source>
+        <target state="translated">Pacients</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/main.component.html</context>
+          <context context-type="linenumber">12,14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_treatments-menu-item-label" datatype="html" xml:space="preserve">
+        <source>Treatments</source>
+        <target state="translated">Tractaments</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/main.component.html</context>
+          <context context-type="linenumber">15,18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_status-menu-item-label" datatype="html" xml:space="preserve">
+        <source>Status</source>
+        <target state="translated">Estat</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/main.component.html</context>
+          <context context-type="linenumber">19,21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_status_version-label" datatype="html" xml:space="preserve">
+        <source>Version:</source>
+        <target state="translated">Versió:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/status/status.component.html</context>
+          <context context-type="linenumber">7,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_status_profile-label" datatype="html" xml:space="preserve">
+        <source>Profile:</source>
+        <target state="translated">Perfil</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/status/status.component.html</context>
+          <context context-type="linenumber">13,16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_status_health-label" datatype="html" xml:space="preserve">
+        <source>Health:</source>
+        <target state="translated">Salut:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/status/status.component.html</context>
+          <context context-type="linenumber">19,21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_status_code_page-title" datatype="html" xml:space="preserve">
+        <source>Status</source>
+        <target state="translated">Estat</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/status/status.component.ts</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_age-range-name-AGE_BETWEEN_30_AND_39" datatype="html" xml:space="preserve">
+        <source>30 - 39</source>
+        <target state="translated">30-39 anys</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/age-range-option-name.pipe.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_age-range-name-AGE_BETWEEN_0_AND_19" datatype="html" xml:space="preserve">
+        <source>0 - 19</source>
+        <target state="translated">0 - 19 anys</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/age-range-option-name.pipe.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_age-range-name-AGE_BETWEEN_20_AND_29" datatype="html" xml:space="preserve">
+        <source>20 - 29</source>
+        <target state="translated">20-29 anys</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/age-range-option-name.pipe.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_age-range-name-AGE_BETWEEN_80_AND_89" datatype="html" xml:space="preserve">
+        <source>80 - 89</source>
+        <target state="translated">80-89 anys</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/age-range-option-name.pipe.ts</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_age-range-name-AGE_BETWEEN_90_AND_99" datatype="html" xml:space="preserve">
+        <source>90 - 99</source>
+        <target state="translated">90-99 anys</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/age-range-option-name.pipe.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_age-range-name-AGE_MORE_THAN_99" datatype="html" xml:space="preserve">
+        <source>+99</source>
+        <target state="translated">Més de 99 anys</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/age-range-option-name.pipe.ts</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_barthel-index-name-TOTAL" datatype="html" xml:space="preserve">
+        <source>0 - 20% Total</source>
+        <target state="translated">0 - 20% Total</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/barthel-index-name.pipe.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_barthel-index-name-SEVERE" datatype="html" xml:space="preserve">
+        <source>21 - 60% Severe</source>
+        <target state="translated">21 - 60% Greu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/barthel-index-name.pipe.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_barthel-index-name-MODERATE" datatype="html" xml:space="preserve">
+        <source>61 - 90% Moderate</source>
+        <target state="translated">61 - 90% Moderat</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/barthel-index-name.pipe.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_barthel-index-name-MILD" datatype="html" xml:space="preserve">
+        <source>91 - 99% Mild</source>
+        <target state="translated">91 - 99% Lleu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/barthel-index-name.pipe.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_barthel-index-name-INDEPENDENT" datatype="html" xml:space="preserve">
+        <source>100% Independent</source>
+        <target state="translated">100% independent</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/barthel-index-name.pipe.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_barthel-index-name-UNKNOWN" datatype="html" xml:space="preserve">
+        <source>Unknown</source>
+        <target state="translated">Desconegut</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/barthel-index-name.pipe.ts</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_clinical-risk-group-option-name-PROMOTION_AND_PREVENTION" datatype="html" xml:space="preserve">
+        <source>0 Promotion &amp; Prevention</source>
+        <target state="translated">0 Promoció i prevenció</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/clinical-risk-group-option-name.pipe.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_clinical-risk-group-option-name-SELF_MANAGEMENT_SUPPORT" datatype="html" xml:space="preserve">
+        <source>1 Self-management support</source>
+        <target state="translated">1 Suport a l'autogestió</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/clinical-risk-group-option-name.pipe.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_clinical-risk-group-option-name-ILLNESS_MANAGEMENT" datatype="html" xml:space="preserve">
+        <source>2 Illness management</source>
+        <target state="translated">2 Gestió de malalties</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/clinical-risk-group-option-name.pipe.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_clinical-risk-group-option-name-CASE_MANAGEMENT" datatype="html" xml:space="preserve">
+        <source>3 Case management</source>
+        <target state="translated">3 Gestió de casos</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/clinical-risk-group-option-name.pipe.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_clinical-risk-group-option-name-UNKNOWN" datatype="html" xml:space="preserve">
+        <source>Unknown</source>
+        <target state="translated">Desconegut</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/clinical-risk-group-option-name.pipe.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_cognitive-impairment-level-name-ABSENT" datatype="html" xml:space="preserve">
+        <source>Absent</source>
+        <target state="translated">Absent</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/cognitive-impairment-level-name.pipe.ts</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_cognitive-impairment-level-name-SEVERE" datatype="html" xml:space="preserve">
+        <source>Severe</source>
+        <target state="translated">Greu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/cognitive-impairment-level-name.pipe.ts</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_cognitive-impairment-level-name-UNKNOWN" datatype="html" xml:space="preserve">
+        <source>Unknown</source>
+        <target state="translated">Desconegut</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/cognitive-impairment-level-name.pipe.ts</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_disconfort-degree-name-LOW" datatype="html" xml:space="preserve">
+        <source>Low</source>
+        <target state="translated">Baix</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/discoonfort-degree-name.pipe.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_disconfort-degree-name-MEDIUM" datatype="html" xml:space="preserve">
+        <source>Medium</source>
+        <target state="translated">Mitjà</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/discoonfort-degree-name.pipe.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_disconfort-degree-name-HIGH" datatype="html" xml:space="preserve">
+        <source>High</source>
+        <target state="translated">Alt</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/discoonfort-degree-name.pipe.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_disconfort-degree-name-UNKNOWN" datatype="html" xml:space="preserve">
+        <source>Unknown</source>
+        <target state="translated">Desconegut</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/discoonfort-degree-name.pipe.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_lawton-index-name-ZERO" datatype="html" xml:space="preserve">
+        <source>0 points</source>
+        <target state="translated">0 punts</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/lawton-index-name.pipe.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_lawton-index-name-ONE" datatype="html" xml:space="preserve">
+        <source>1 point</source>
+        <target state="translated">1 punt</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/lawton-index-name.pipe.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_lawton-index-name-THREE" datatype="html" xml:space="preserve">
+        <source>3 points</source>
+        <target state="translated">3 punts</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/lawton-index-name.pipe.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_lawton-index-name-FOUR" datatype="html" xml:space="preserve">
+        <source>4 points</source>
+        <target state="translated">4 punts</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/lawton-index-name.pipe.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_lawton-index-name-SIX" datatype="html" xml:space="preserve">
+        <source>6 points</source>
+        <target state="translated">6 punts</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/lawton-index-name.pipe.ts</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_lawton-index-name-SEVEN" datatype="html" xml:space="preserve">
+        <source>7 points</source>
+        <target state="translated">7 punts</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/lawton-index-name.pipe.ts</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_lawton-index-name-EIGHT" datatype="html" xml:space="preserve">
+        <source>8 points</source>
+        <target state="translated">8 punts</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/lawton-index-name.pipe.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_lawton-index-name-UNKNOWN" datatype="html" xml:space="preserve">
+        <source>Unknown</source>
+        <target state="translated">Desconegut</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/lawton-index-name.pipe.ts</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_nit-level-name-ONE" datatype="html" xml:space="preserve">
+        <source>1 Treatment without limits</source>
+        <target state="translated">1 Tractament sense límits</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/nit-level-name.pipe.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_nit-level-name-TWO_A" datatype="html" xml:space="preserve">
+        <source>2A Intense treatment</source>
+        <target state="translated">2A Tractament intens</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/nit-level-name.pipe.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_nit-level-name-TWO_B" datatype="html" xml:space="preserve">
+        <source>2B Intense treatment</source>
+        <target state="translated">2B Tractament intens</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/nit-level-name.pipe.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_nit-level-name-THREE" datatype="html" xml:space="preserve">
+        <source>3 Treatment of intermediate intensity</source>
+        <target state="translated">3 Tractament d'intensitat intermèdia</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/nit-level-name.pipe.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_nit-level-name-FOUR" datatype="html" xml:space="preserve">
+        <source>4 Symptomatic conservative treatment</source>
+        <target state="translated">4 Tractament conservador simptomàtic</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/nit-level-name.pipe.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_nit-level-name-FIVE" datatype="html" xml:space="preserve">
+        <source>5 Exclusively comfort measures</source>
+        <target state="translated">5 Mesures de confort exclusives</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/nit-level-name.pipe.ts</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_spict-scale-name-LOW" datatype="html" xml:space="preserve">
+        <source>Low</source>
+        <target state="translated">Baixa</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/spict-scale-name.pipe.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_spict-scale-name-HIGH" datatype="html" xml:space="preserve">
+        <source>High</source>
+        <target state="translated">Alta</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/spict-scale-name.pipe.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_spict-scale-name-UNKNOWN" datatype="html" xml:space="preserve">
+        <source>Unknown</source>
+        <target state="translated">Desconeguda</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/spict-scale-name.pipe.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_survival-name-LESS_THAN_12_MONTHS" datatype="html" xml:space="preserve">
+        <source>&lt; 12 months</source>
+        <target state="translated">&lt; 12 mesos</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/survival-option-name.pipe.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_survival-name-MORE_THAN_12_MONTHS" datatype="html" xml:space="preserve">
+        <source>&gt; 12 months</source>
+        <target state="translated">&gt; 12 mesos</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/survival-option-name.pipe.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_survival-name-UNKNOWN" datatype="html" xml:space="preserve">
+        <source>Unknown</source>
+        <target state="translated">Desconeguda</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/survival-option-name.pipe.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_treatment-action-name_CPR" datatype="html" xml:space="preserve">
+        <source>Cardiopulmonary resuscitation (CPR)</source>
+        <target state="translated">Reanimació cardiopulmonar (RCP)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/treatment-action-name.pipe.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_treatment-action-name_TRANSPLANT" datatype="html" xml:space="preserve">
+        <source>Transplant</source>
+        <target state="translated">Trasplantament</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/treatment-action-name.pipe.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_treatment-action-name_ICU" datatype="html" xml:space="preserve">
+        <source>Intense care unit (ICU)</source>
+        <target state="translated">Unitat d'Atenció Intensa (UCI)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/treatment-action-name.pipe.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_treatment-action-name_NIMV" datatype="html" xml:space="preserve">
+        <source>Non-invasive mechanical ventilation (NIMV)</source>
+        <target state="translated">Ventilació mecànica no invasiva (NIMV)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/treatment-action-name.pipe.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_treatment-action-name_VASOACTIVE_DRUGS" datatype="html" xml:space="preserve">
+        <source>Vasoactive drugs</source>
+        <target state="translated">Medicaments vasoactius</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/treatment-action-name.pipe.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_treatment-action-name_DIALYSIS" datatype="html" xml:space="preserve">
+        <source>Dialysis</source>
+        <target state="translated">Diàlisi renal</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/treatment-action-name.pipe.ts</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_treatment-action-name_ADVANCED_CLINICAL_TRIAL" datatype="html" xml:space="preserve">
+        <source>Advanced clinical trials: MRI / Endoscopy / Parenteral nutrition</source>
+        <target state="translated">Assaigs clínics avançats: RMN / Endoscòpia /Nutrició parenteral</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/treatment-action-name.pipe.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_treatment-action-name_PALLIATIVE_SURGERY" datatype="html" xml:space="preserve">
+        <source>Palliative surgery</source>
+        <target state="translated">Cirurgia pal·liativa</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/treatment-action-name.pipe.ts</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_treatment-action-name_CURE_SURGERY" datatype="html" xml:space="preserve">
+        <source>Cure surgery</source>
+        <target state="translated">Cirurgia de curació</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/treatment-action-name.pipe.ts</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_treatment-value-name_beneficence" datatype="html" xml:space="preserve">
+        <source>Beneficence</source>
+        <target state="translated">Beneficència</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/treatment-value-name.pipe.ts</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_treatment-value-name_nonmaleficence" datatype="html" xml:space="preserve">
+        <source>Nonmaleficence</source>
+        <target state="translated">No maleficència</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/treatment-value-name.pipe.ts</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_treatment-value-name_autonomy" datatype="html" xml:space="preserve">
+        <source>Autonomy</source>
+        <target state="translated">Autonomia</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/treatment-value-name.pipe.ts</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_treatment-value-name_justice" datatype="html" xml:space="preserve">
+        <source>Justice</source>
+        <target state="translated">Justícia</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/treatment-value-name.pipe.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_yes-no-unknown-name-YES" datatype="html" xml:space="preserve">
+        <source>Yes</source>
+        <target state="translated">Sí</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/yes-no-unknown-option-name.pipe.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_yes-no-unknown-name-NO" datatype="html" xml:space="preserve">
+        <source>No</source>
+        <target state="translated">No</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/yes-no-unknown-option-name.pipe.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_yes-no-unknown-name-UNKNOWN" datatype="html" xml:space="preserve">
+        <source>Unknown</source>
+        <target state="translated">Desconegut</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/yes-no-unknown-option-name.pipe.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria-editor_age-range-question" datatype="html" xml:space="preserve">
+        <source>Patient age range</source>
+        <target state="translated">Interval d'edat del pacient</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">6,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria-editor_ccd-question" datatype="html" xml:space="preserve">
+        <source>Complex Cronic Disease (CCD)</source>
+        <target state="translated">Malaltia crònica complexa (CCD)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">24,27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria-editor_maca-question" datatype="html" xml:space="preserve">
+        <source>MACA patient (advance chronic disease and need for palliative care)</source>
+        <target state="translated">Pacient de MACA (malaltia crònica avançada i necessitat de cures pal·liatives)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">41,43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria-editor_maca-answer_explanation" datatype="html" xml:space="preserve">
+        <source>(Would you be surprised if the patient died in less than 12 months? If the answer is NO, the patient is MACA)</source>
+        <target state="translated">(Et sorprendria que el pacient morís en menys de 12 mesos? Si la resposta és NO, el pacient és MACA)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">61,66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria-editor_expected-survival-question" datatype="html" xml:space="preserve">
+        <source>Life expectancy / Expected survival (in months)</source>
+        <target state="translated">Esperança de vida/Supervivència esperada (en mesos)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">69,73</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria-editor_frail-vig-question" datatype="html" xml:space="preserve">
+        <source>Frail-VIG fragility index (Spict scale)</source>
+        <target state="translated">Índex de fragilitat Fragil-VIG (escala Spict)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">88,90</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria-editor_has-social-support-question" datatype="html" xml:space="preserve">
+        <source>Does the patient have social support?</source>
+        <target state="translated">Té el pacient suport social?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">137,141</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria-editor_independence-at-admission-question" datatype="html" xml:space="preserve">
+        <source>Barthel index</source>
+        <target state="translated">Índex de Barthel</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">156,158</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria-editor_independence-at-admission-question_explanation" datatype="html" xml:space="preserve">
+        <source>Functional independence for basic activities of daily living at admission.</source>
+        <target state="translated">Independència funcional per a les activitats bàsiques de la vida diària en l'ingrés.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">159,165</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria-editor_independence-instrumental-activities-question" datatype="html" xml:space="preserve">
+        <source>Lawton index</source>
+        <target state="translated">Índex Lawton</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">181,183</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria-editor_has-advance-directives-question" datatype="html" xml:space="preserve">
+        <source>Does the patient have advance directives?</source>
+        <target state="translated">El pacient té directrius anticipades?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">204,208</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria-editor_is-competent-question" datatype="html" xml:space="preserve">
+        <source>Is the patient competent to understand the instructions of health personnel?</source>
+        <target state="translated">És el pacient competent per entendre les instruccions del personal sanitari?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">222,227</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria-editor_has-been-informed-question" datatype="html" xml:space="preserve">
+        <source>To the patient or his/her referent authorized has been informed of possible treatments and the consequences of receiving it or No?</source>
+        <target state="translated">Al pacient o al seu referent autoritzat se li ha informat dels possibles tractaments i de les conseqüències de rebre'ls o No?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">241,246</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria-editor_is-coerced-question" datatype="html" xml:space="preserve">
+        <source>Is it detected that the patient has seen coerced/pressured by third parties?</source>
+        <target state="translated">Es detecta que el pacient ha vist coaccionat/pressionat per tercers?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">260,265</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria-editor_has-cognitive-impairment-question" datatype="html" xml:space="preserve">
+        <source>Does the patient have cognitive impairment?</source>
+        <target state="translated">Té el pacient deteriorament cognitiu?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">279,283</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria-editor_emotional-state-question" datatype="html" xml:space="preserve">
+        <source>Emotional state. Does the patient have emotional discomfort?</source>
+        <target state="translated">Estat emocional. El pacient té molèsties emocionals?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">299,303</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria_main_nit-level-question" datatype="html" xml:space="preserve">
+        <source>NIT Level</source>
+        <target state="translated">Nivell NIT</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">336,340</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_delete_code_error-msg" datatype="html" xml:space="preserve">
+        <source>Patient cannot be deleted</source>
+        <target state="translated">No es pot eliminar el pacient</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/delete/delete.component.ts</context>
+          <context context-type="linenumber">83</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_patient-treatment-menu-item-label" datatype="html" xml:space="preserve">
+        <source>Add treatment</source>
+        <target state="translated">Afegeix un tractament</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/patients.component.html</context>
+          <context context-type="linenumber">51,56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_treatment_step1-label" datatype="html" xml:space="preserve">
+        <source>Current staus of <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;font-bold&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{patient.name}}"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <target state="translated">L'estat actual del pacient <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;font-bold&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{patient.name}}"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_treatment_step3-instructions" datatype="html" xml:space="preserve">
+        <source>After selecting the treatment action to be performed on the patient, you must define the expected status for the patient after these actions have been applied. To this end, you must fill in the following form. In this form, you can only edit the criteria that can be changed by the treatment actions.</source>
+        <target state="translated">Després de seleccionar l'acció de tractament que s'ha de dur a terme al pacient, cal definir l'estat esperat del pacient després d'haver aplicat aquestes accions. Per a això, heu d'omplir el següent formulari. En aquest formulari, només podeu editar els criteris que es poden modificar mitjançant les accions de tractament.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">61,67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_treatment_step4-instructions" datatype="html" xml:space="preserve">
+        <source>Once you've defined the patient's current status, the planned treatment actions, and the expected outcome, you can add the treatment plan to the patient's record. This allows for obtaining feedback on the treatment's effectiveness, especially if the actions comply with the NIT protocol and the treatment aligns with the patient's values.</source>
+        <target state="translated">Un cop hàgiu definit l'estat actual del pacient, les accions de tractament previstes i el resultat esperat, podeu afegir el pla de tractament al registre del pacient. Això permet obtenir feedback sobre l'eficàcia del tractament, sobretot si les accions compleixen el protocol NIT i el tractament s'alinea amb els valors del pacient.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">84,92</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_patients_treatment_add-label" datatype="html" xml:space="preserve">
+        <source>Add treatment to <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;font-bold&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{patient.name}}"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <target state="translated">Afegir tractament al pacient <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;font-bold&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{patient.name}}"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/patients/treatment/treatment.component.html</context>
+          <context context-type="linenumber">96,98</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_code_do-again-error" datatype="html" xml:space="preserve">
+        <source>Cannot do again the treatment for the patient.</source>
+        <target state="translated">No es pot tornar a fer el tractament per al pacient.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/treatments.component.ts</context>
+          <context context-type="linenumber">207</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_view_header-title" datatype="html" xml:space="preserve">
+        <source>Treatment for patient <x id="START_LINK" ctype="x-a" equiv-text="&lt;a class=&quot;underline text-blue-800&quot;     [routerLink]=&quot;['/main/doctor/patients',treatment.patient?.id,'view']&quot;&gt;"/> <x id="INTERPOLATION" equiv-text="{{treatment.patient?.name}}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
+        <target state="translated">Tractament pe al pacient <x id="START_LINK" ctype="x-a" equiv-text="&lt;a class=&quot;underline text-blue-800&quot;     [routerLink]=&quot;['/main/doctor/patients',treatment.patient?.id,'view']&quot;&gt;"/> <x id="INTERPOLATION" equiv-text="{{treatment.patient?.name}}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.html</context>
+          <context context-type="linenumber">6,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_view_before-status-description" datatype="html" xml:space="preserve">
+        <source>The patient status before to apply the treatment</source>
+        <target state="translated">L'estat del pacient abans d'aplicar el tractament</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.html</context>
+          <context context-type="linenumber">25,26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="main_doctor_treatments_view_action-feedback-unknown" datatype="html" xml:space="preserve">
+        <source>I don't have enough information to know if the action is aligned with the protocol.</source>
+        <target state="translated">No tinc prou informació per saber si l'acció està alineada amb el protocol.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.html</context>
+          <context context-type="linenumber">74,79</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_age-range-name-AGE_BETWEEN_40_AND_49" datatype="html" xml:space="preserve">
+        <source>40 - 49</source>
+        <target state="translated">40-49 anys</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/age-range-option-name.pipe.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_cognitive-impairment-level-name-MILD_MODERATE" datatype="html" xml:space="preserve">
+        <source>Mild moderate</source>
+        <target state="translated">Moderat lleu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/cognitive-impairment-level-name.pipe.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_treatment-action-name_MEDIUM_CLINICAL_TRIAL" datatype="html" xml:space="preserve">
+        <source>Medium clinical trials: Computed tomography / Transfusion / Peripherally placed central catheter / Enteral administration</source>
+        <target state="translated">Assaigs clínics mitjans: Tomografia computada / Transfusió / Cateter central col·locat perifèricament /Administració enteral</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/treatment-action-name.pipe.ts</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_age-range-name-AGE_BETWEEN_60_AND_69" datatype="html" xml:space="preserve">
+        <source>60 - 69</source>
+        <target state="translated">60-69 anys</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/age-range-option-name.pipe.ts</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_lawton-index-name-TWO" datatype="html" xml:space="preserve">
+        <source>2 points</source>
+        <target state="translated">2 punts</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/lawton-index-name.pipe.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_spict-scale-name-MODERATE" datatype="html" xml:space="preserve">
+        <source>Moderate</source>
+        <target state="translated">Moderada</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/spict-scale-name.pipe.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria-editor_frail-vig-question_explanation" datatype="html" xml:space="preserve">
+        <source>It helps identify the most fragile people who have one or more health problems. It is based on the comprehensive geriatric assessment (applicable to non-geriatric patients) that evaluates areas such as functional independence, nutritional status, cognitive, emotional, social, geriatric syndromes (confusion syndrome, falls, ulcers, polypharmacy, dysphagia), symptoms (pain or dyspnea) and diseases oncological, respiratory, cardiac, neurological, digestive or renal).</source>
+        <target state="translated">Ajuda a identificar les persones més fràgils que tenen un o més problemes de salut. Es basa en l'avaluació geriàtrica integral (aplicable a pacients no geriàtrics) que avalua àrees com la independència funcional, l'estat nutricional, les síndromes cognitives, emocionals, socials, geriàtriques (síndrome de confusió, caigudes, úlceres, polifarmàcia, disfàgia), símptomes ( dolor o dispnea) i malalties oncològiques, respiratòries, cardíaques, neurològiques, digestives o renals).</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">91,103</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_age-range-name-AGE_BETWEEN_70_AND_79" datatype="html" xml:space="preserve">
+        <source>70 - 79</source>
+        <target state="translated">70-79 anys</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/age-range-option-name.pipe.ts</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_lawton-index-name-FIVE" datatype="html" xml:space="preserve">
+        <source>5 points</source>
+        <target state="translated">5 punts</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/lawton-index-name.pipe.ts</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_treatment-action-name_SIMPLE_CLINICAL_TRIAL" datatype="html" xml:space="preserve">
+        <source>Simple clinical trials: X-rays / Analytics / Cultures / Antibodies</source>
+        <target state="translated">Assaigs clínics senzills: radiografies / anàlisis / cultius / anticossos</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/api/treatment-action-name.pipe.ts</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria-editor_maca-question_explanation" datatype="html" xml:space="preserve">
+        <source>This is a classification of patients with a clinical profile similar to PCC but of greater severity and with a life prognosis of less than 12 months. Patients classified as MACA = patients whose The answer to the next question is NO: do you It would be surprising if this patient died in less than 12 months?</source>
+        <target state="translated">Es tracta d'una classificació de pacients amb un perfil clínic similar al PCC però de major gravetat i amb un pronòstic de vida inferior als 12 mesos. Pacients classificats com a MACA = pacients dels quals La resposta a la següent pregunta és NO: et sorprendria que aquest pacient morís en menys de 12 mesos?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">44,52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria-editor_clinical-risk-group-question" datatype="html" xml:space="preserve">
+        <source>Clinical Risk Group</source>
+        <target state="translated">Grup de risc clínic</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">117,121</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria-editor_independence-instrumental-activities-question_explanation" datatype="html" xml:space="preserve">
+        <source>Independence instrumental activities.</source>
+        <target state="translated">Activitats instrumentals independentistes.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">184,189</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="shared_patient-status-criteria-editor_disconfort-degree-question" datatype="html" xml:space="preserve">
+        <source>Degree of discomfort/discomfort of the patient before applying any action.</source>
+        <target state="translated">Grau de malestar/incomoditat del pacient abans d'aplicar qualsevol acció.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/patient-status-criteria-editor/patient-status-criteria-editor.component.html</context>
+          <context context-type="linenumber">317,322</context>
+        </context-group>
+      </trans-unit>
     </body>
   </file>
 </xliff>
