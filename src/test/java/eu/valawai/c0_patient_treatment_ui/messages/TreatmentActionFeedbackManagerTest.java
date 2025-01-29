@@ -185,7 +185,7 @@ public class TreatmentActionFeedbackManagerTest {
 		}, payload -> {
 
 			this.logAsserts
-					.waitUntiLogMatch(LogAsserts.withLogLevel(LogLevel.INFO).and(LogAsserts.withLogPayload(payload)));
+					.waitUntiLogMatch(LogAsserts.withLogLevel(LogLevel.DEBUG).and(LogAsserts.withLogPayload(payload)));
 
 		});
 

@@ -274,6 +274,7 @@ public class TreatmentEntity extends PanacheEntity {
 
 		final var model = new MinTreatment();
 		model.id = this.id;
+		model.createdTime = this.createdTime;
 		if (this.patient != null) {
 
 			model.patient = this.patient.toMinPatient();

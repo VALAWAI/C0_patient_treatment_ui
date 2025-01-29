@@ -514,7 +514,7 @@ public class TreatmentsResourceTest {
 				}
 				return cmp;
 
-			}).map(t -> t.toMinTreatment()).collect(Collectors.toList());
+			}).limit(10).map(t -> t.toMinTreatment()).collect(Collectors.toList());
 			assertEquals(expected, page);
 			asserter.putData("TREATMENTS", treatments);
 

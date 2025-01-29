@@ -8,6 +8,7 @@
 
 package eu.valawai.c0_patient_treatment_ui.api.v1.treatments;
 
+import eu.valawai.c0_patient_treatment_ui.TimeManager;
 import eu.valawai.c0_patient_treatment_ui.ValueGenerator;
 import eu.valawai.c0_patient_treatment_ui.api.v1.patients.MinPatientTest;
 import eu.valawai.c0_patient_treatment_ui.models.ReflectionModelTestCase;
@@ -30,6 +31,7 @@ public abstract class MinTreatmentTestCase<T extends MinTreatment> extends Refle
 	public void fillIn(T model) {
 
 		model.id = ValueGenerator.rnd().nextLong();
+		model.createdTime = ValueGenerator.rnd().nextLong(0, TimeManager.now() - 360000);
 		model.patient = new MinPatientTest().nextModel();
 
 	}
