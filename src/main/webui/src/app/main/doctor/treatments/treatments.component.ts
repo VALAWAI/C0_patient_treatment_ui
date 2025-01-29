@@ -7,16 +7,19 @@
 */
 
 import { NgFor, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { TitleService } from '@app/shared';
-import { ApiService, MinPatientPage, MinTreatmentPage } from '@app/shared/api';
+import { ApiService, MinTreatment, MinTreatmentPage } from '@app/shared/api';
 import { Subscription } from 'rxjs';
+import { AvvvatarsComponent } from '@ngxpert/avvvatars';
+import { MessagesService } from '@app/shared/messages';
+
 
 @Component({
 	standalone: true,
@@ -30,7 +33,8 @@ import { Subscription } from 'rxjs';
 		RouterLink,
 		MatProgressBarModule,
 		NgIf,
-		NgFor
+		NgFor,
+		AvvvatarsComponent
 	],
 	templateUrl: './treatments.component.html',
 	styleUrl: './treatments.component.css'
@@ -77,13 +81,16 @@ export class TreatmentsComponent implements OnInit {
 	 */
 	public page: MinTreatmentPage | null = null;
 
+
 	/**
 	 *  Create the component.
 	 */
 	constructor(
 		private title: TitleService,
 		private fb: FormBuilder,
-		private api: ApiService
+		private api: ApiService,
+		private router: Router,
+		private message: MessagesService
 	) {
 
 	}
@@ -146,7 +153,7 @@ export class TreatmentsComponent implements OnInit {
 
 			this.updating = true;
 			var offset = this.pageIndex * this.pageSize;
-			this.api.getTreatmentsPage(this.pattern, "+name", offset, this.pageSize).subscribe({
+			this.api.getTreatmentsPage(this.pattern, "+patient.name", offset, this.pageSize).subscribe({
 				next: page => {
 
 					this.page = page;
@@ -185,6 +192,22 @@ export class TreatmentsComponent implements OnInit {
 			this.updatePatients();
 		}
 
+	}
+
+	/**
+	 * Do again a treatment.
+	 */
+	public doAgain(treatment: MinTreatment) {
+
+		this.api.doAgainTreatment(treatment.id || 0).subscribe({
+
+			next: added => this.router.navigate(['/main/doctor/treatments', added.id, 'view']),
+			error: (err) => {
+
+				this.message.showError($localize`:The error message when can not do agin the treatments@@main_doctor_treatments_code_do-again-error:Cannot do again the treatment for the patient.`);
+				console.error(err);
+			}
+		});
 	}
 
 

@@ -6,6 +6,8 @@
   https://opensource.org/license/gpl-3-0/
 */
 
+import { MinPatient } from "./min-patient.model";
+
 /**
  * The minimal information of a treatment.
  *
@@ -19,9 +21,12 @@ export class MinTreatment {
 	public id: number | null = null;
 
 	/**
-	 * The name of the treatment.
+	 * The epoch time, in seconds, when the patient treatment is created.
 	 */
-	public name: string | null = null;
+	public createdTime: number | null = null;
 
-
+	/**
+	 * The patient over the treatment must be applied.
+	 */
+	public patient: MinPatient | null = null;
 }

@@ -8,7 +8,7 @@
 
 import { NgFor, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TitleService } from '@app/shared';
 import { ApiService, Treatment, TreatmentActionNamePipe, TreatmentValueNamePipe } from '@app/shared/api';
 import { Subscription } from 'rxjs';
@@ -17,6 +17,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIcon } from '@angular/material/icon';
 import { PatientStatusCriteriaEditorComponent } from '@app/shared/patient-status-criteria-editor';
 import { NgApexchartsModule, ApexAxisChartSeries, ApexChart, ApexXAxis, ApexPlotOptions, ApexYAxis } from 'ng-apexcharts';
+import { MessagesService } from '@app/shared/messages';
 
 @Component({
 	standalone: true,
@@ -33,7 +34,7 @@ import { NgApexchartsModule, ApexAxisChartSeries, ApexChart, ApexXAxis, ApexPlot
 		NgSwitchCase,
 		NgSwitchDefault,
 		MatProgressBarModule,
-		NgApexchartsModule
+		NgApexchartsModule,
 	],
 	providers: [
 		TreatmentValueNamePipe
@@ -131,7 +132,9 @@ export class ViewComponent implements OnInit, OnDestroy {
 		private title: TitleService,
 		private api: ApiService,
 		private route: ActivatedRoute,
-		private valueNamePipe: TreatmentValueNamePipe
+		private valueNamePipe: TreatmentValueNamePipe,
+		private router: Router,
+		private message: MessagesService
 	) {
 
 
@@ -209,5 +212,25 @@ export class ViewComponent implements OnInit, OnDestroy {
 		}
 
 	}
+
+	/**
+	 * Do again a treatment.
+	 */
+	public doItAgain() {
+
+		if (this.treatment) {
+			this.api.doAgainTreatment(this.treatment).subscribe({
+
+				next: added => this.router.navigate(['/main/doctor/treatments', added.id, 'view']),
+				error: (err) => {
+
+					this.message.showError($localize`:The error message when can not do agin the treatment@@main_doctor_treatments_view_code_do-again-error:Cannot do again this treatment.`);
+					console.error(err);
+				}
+			});
+		}
+	}
+
+
 }
 

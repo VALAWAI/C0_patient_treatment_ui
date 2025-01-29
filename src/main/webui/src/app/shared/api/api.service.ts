@@ -11,7 +11,7 @@ import { Info } from './info.model';
 import { HealthInfo } from './health-info.model';
 import { environment } from '@environments/environment';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { MinPatientPage } from "./min-patient-page.model";
 import { Patient } from "./patient.model";
 import { Treatment } from "./treatment.model";
@@ -214,21 +214,66 @@ export class ApiService {
 	/**
 	 * Get the information for some treatments 
 	 */
-	getTreatmentsPage(pattern: string = "*", order: string = "+name", offset: number = 0, limit: number = 10): Observable<MinTreatmentPage> {
+	getTreatmentsPage(pattern: string | number | null = null, order: string = "+name", offset: number = 0, limit: number = 10): Observable<MinTreatmentPage> {
 
 		var url = this.url('/v1/treatments');
-		return this.http.get<MinTreatmentPage>(
-			url,
-			this.optionsWithParams(
-				{
-					'name': pattern,
-					'order': order,
-					'offset': offset,
-					'limit': limit
-				}
-			)
-		);
+		var params: any = {
+			'order': order,
+			'offset': offset,
+			'limit': limit
+		};
+		if (typeof pattern == 'number') {
+
+			params['patientId'] = pattern;
+
+		} else if (typeof pattern == 'string') {
+
+			params['patientName'] = pattern;
+
+		}
+
+		return this.http.get<MinTreatmentPage>(url, this.optionsWithParams(params));
 
 	}
 
+	/**
+	 * Force to do again a treatment.
+	 */
+	doAgainTreatment(treatment: number | Treatment): Observable<Treatment> {
+
+		if (typeof treatment == 'number') {
+
+			return this.getTreatment(treatment).pipe(
+				switchMap(found => this.doAgainTreatment(found))
+			);
+
+		} else if (treatment.id) {
+
+			return this.deleteTreatment(treatment.id).pipe(
+				switchMap(() => {
+
+					treatment.id = null;
+					return this.doAgainTreatment(treatment);
+				})
+			);
+
+		} else {
+
+			var add = new TreatmentToAdd();
+			add.patientId = treatment.patient?.id || 0;
+			add.beforeStatus = treatment.beforeStatus;
+			add.expectedStatus = treatment.expectedStatus;
+			add.actions = [];
+			for (var value of treatment.actions) {
+
+				if (value.action) {
+
+					add.actions.push(value.action);
+				}
+			}
+			return this.addTreatment(add);
+
+		}
+
+	}
 }

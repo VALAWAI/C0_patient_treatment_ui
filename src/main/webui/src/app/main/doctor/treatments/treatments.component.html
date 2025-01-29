@@ -20,12 +20,10 @@
 			<li *ngFor="let treatment of page?.treatments"
 				class="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600">
 				<div class="flex items-center gap-4">
-					<!-- 
-					<avvvatars [value]="treatment.name||'no avatar'" [style]="'shape'"></avvvatars>
-					 -->
-					<div class="grow font-medium dark:text-white"
-						[routerLink]="['/main/doctor/treatments', treatment.id, 'view']">
-						<div>{{treatment.name}}</div>
+					<avvvatars [value]="treatment.patient?.name||'no avatar'"
+						[style]="'shape'"></avvvatars>
+					<div class="grow font-medium dark:text-white">
+						<div>{{treatment.patient?.name}}</div>
 					</div>
 					<button mat-icon-button class="grow-0"
 						[matMenuTriggerFor]="treatmentMenu">
@@ -36,8 +34,14 @@
 						i18n="Menu item to view treatement information@@main_doctor_treatments_view-treatment-menu-item-label"
 						[routerLink]="['/main/doctor/treatments', treatment.id, 'view']">View</button>
 					<button mat-menu-item
+						i18n="Menu item to do again a treatement@@main_doctor_treatments_do-again-treatment-menu-item-label"
+						(click)="doAgain(treatment)">Do it again</button>
+					<button mat-menu-item
 						i18n="Menu item to delete a treatment@@main_doctor_treatments_delete-treatment-menu-item-label"
 						[routerLink]="['/main/doctor/treatments', treatment.id, 'delete']">Delete</button>
+					<button mat-menu-item
+						i18n="Menu item to add a new treatment for teh patient@@main_doctor_treatments_new-treatment-for-patient-menu-item-label"
+						[routerLink]="['/main/doctor/patients', treatment.patient?.id, 'treatment']">New treatment for patient</button>
 					</mat-menu>
 				</div>
 			</li>
