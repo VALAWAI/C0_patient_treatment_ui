@@ -122,18 +122,40 @@ public class PatientEntity extends PanacheEntity {
 	 */
 	public static Uni<Void> delete(long id) {
 
-		return PatientEntity.delete("id", id).onItem().transformToUni(updated -> {
+		return deleteTreatementsForPatient(id)
+				.chain(() -> PatientEntity.delete("id", id).onItem().transformToUni(updated -> {
 
-			if (Long.valueOf(1l).equals(updated)) {
+					if (Long.valueOf(1l).equals(updated)) {
 
-				return Uni.createFrom().nullItem();
+						return Uni.createFrom().nullItem();
+
+					} else {
+
+						return Uni.createFrom()
+								.failure(() -> new IllegalArgumentException("Not found a patient with the id " + id));
+					}
+
+				}));
+	}
+
+	/**
+	 * Delete all the treatment of a patient.
+	 *
+	 * @param patientId identifier of the patient to delete its treatments.
+	 */
+	private static Uni<Void> deleteTreatementsForPatient(long patientId) {
+
+		final Uni<TreatmentEntity> find = TreatmentEntity.find("patient.id", patientId).firstResult();
+		return find.chain(treatment -> {
+
+			if (treatment != null) {
+
+				return TreatmentEntity.delete(treatment.id).chain(deleted -> deleteTreatementsForPatient(patientId));
 
 			} else {
 
-				return Uni.createFrom()
-						.failure(() -> new IllegalArgumentException("Not found a patient with the id " + id));
+				return Uni.createFrom().nullItem();
 			}
-
 		});
 	}
 

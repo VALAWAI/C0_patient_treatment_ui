@@ -127,19 +127,21 @@ public class TreatmentEntity extends PanacheEntity {
 	 */
 	public static Uni<Void> delete(long id) {
 
-		return TreatmentEntity.delete("id", id).onItem().transformToUni(updated -> {
+		return TreatmentValueFeedbackEntity.delete("treatment.id", id)
+				.chain(() -> TreatmentActionFeedbackEntity.delete("treatment.id", id))
+				.chain(() -> TreatmentEntity.delete("id", id)).onItem().transformToUni(updated -> {
 
-			if (Long.valueOf(1l).equals(updated)) {
+					if (Long.valueOf(1l).equals(updated)) {
 
-				return Uni.createFrom().nullItem();
+						return Uni.createFrom().nullItem();
 
-			} else {
+					} else {
 
-				return Uni.createFrom()
-						.failure(() -> new IllegalArgumentException("Not found a treatment with the id " + id));
-			}
+						return Uni.createFrom()
+								.failure(() -> new IllegalArgumentException("Not found a treatment with the id " + id));
+					}
 
-		});
+				});
 	}
 
 	/**
