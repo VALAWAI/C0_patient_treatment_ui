@@ -12,6 +12,7 @@ import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
 
 import io.quarkus.logging.Log;
+import io.smallrye.mutiny.Uni;
 import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonObject;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -51,18 +52,8 @@ public class TreatmentActionFeedbackService {
 	 */
 	public void send(JsonObject feedback) {
 
-		this.service.send(feedback).handle((success, error) -> {
-
-			if (error == null) {
-
-				Log.debugv("Sent {0}.", feedback);
-
-			} else {
-
-				Log.errorv(error, "Cannot send {0}.", feedback);
-			}
-			return null;
-		});
+		Uni.createFrom().completionStage(this.service.send(feedback)).subscribe().with(
+				any -> Log.debugv("Sent {0}.", feedback), error -> Log.errorv(error, "Cannot send {0}.", feedback));
 	}
 
 }

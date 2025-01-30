@@ -255,6 +255,7 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 					status.isCoerced = value.isCoerced || null;
 					status.isCompetent = value.isCompetent || null;
 					status.maca = value.maca || null;
+					status.nitLevel  = value.nitLevel|| null;
 					this.dataChanged.emit(status);
 				}
 			}

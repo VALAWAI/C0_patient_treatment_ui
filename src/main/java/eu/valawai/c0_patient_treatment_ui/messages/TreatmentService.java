@@ -12,6 +12,7 @@ import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
 
 import eu.valawai.c0_patient_treatment_ui.messages.mov.LogService;
+import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
@@ -43,18 +44,9 @@ public class TreatmentService {
 	 */
 	public void send(TreatmentPayload treatment) {
 
-		this.service.send(treatment).handle((success, error) -> {
-
-			if (error == null) {
-
-				this.log.debugWithPayload(treatment, "Publish treatment.");
-
-			} else {
-
-				this.log.errorWithPayload(treatment, "Cannot publish treatment.");
-			}
-			return null;
-		});
+		Uni.createFrom().completionStage(this.service.send(treatment)).subscribe().with(
+				any -> this.log.debugWithPayload(treatment, "Publish treatment."),
+				error -> this.log.errorWithPayload(treatment, "Cannot publish treatment."));
 	}
 
 }

@@ -16,6 +16,7 @@ import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 
 import io.quarkus.logging.Log;
+import io.smallrye.mutiny.Uni;
 import io.vertx.core.json.JsonObject;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -61,18 +62,14 @@ public class MOVComponentQueryService {
 		this.queryId = query.id;
 		final var semaphore = new Semaphore(0);
 		this.component = null;
-		this.query.send(query).handle((success, error) -> {
+		Uni.createFrom().completionStage(this.query.send(query)).subscribe().with(any -> {
 
-			if (error == null) {
+			Log.infov("Sent query {0}.", query);
+			this.semaphore.release();
+		}, error -> {
 
-				Log.infov("Sent query {0}.", query);
-
-			} else {
-
-				Log.errorv(error, "Cannot send query.");
-			}
-			semaphore.release();
-			return null;
+			Log.errorv(error, "Cannot send query.");
+			this.semaphore.release();
 		});
 
 		try {
