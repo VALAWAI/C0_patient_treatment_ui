@@ -34,8 +34,8 @@
 			*ngIf="treatment.actions != null && treatment.actions.length > 0;else noActions">
 			<div *ngFor="let action of treatment.actions"
 				class="flex flex-row gap-3">
-				<div class="font-bold my-auto">{{action.action|treatmentActionName}}</div>
-				<div [ngSwitch]="action.feedback" class="flex-grow my-auto">
+				<div class="basis-1/2 font-bold my-auto">{{action.action|treatmentActionName}}</div>
+				<div [ngSwitch]="action.feedback" class="basis-1/2 my-auto">
 					<div *ngSwitchCase="'ALLOW'"
 						class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
 						role="alert">

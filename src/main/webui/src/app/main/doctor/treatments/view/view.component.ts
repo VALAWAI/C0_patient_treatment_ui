@@ -183,8 +183,11 @@ export class ViewComponent implements OnInit, OnDestroy {
 			{
 				next: (treatment) => {
 
-					this.treatment = treatment;
-					this.treatmentUpdated();
+					if (JSON.stringify(this.treatment) !== JSON.stringify(treatment)) {
+
+						this.treatment = treatment;
+						this.treatmentUpdated();
+					}
 					this.timerId = setTimeout(() => this.updateTreatment(), 1500);
 				}
 			}
