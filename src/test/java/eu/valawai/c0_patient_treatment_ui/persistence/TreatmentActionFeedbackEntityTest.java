@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Test;
 
 import eu.valawai.c0_patient_treatment_ui.TimeManager;
+import eu.valawai.c0_patient_treatment_ui.ValueGenerator;
 import eu.valawai.c0_patient_treatment_ui.messages.TreatmentActionFeedbackPayload;
 import eu.valawai.c0_patient_treatment_ui.messages.TreatmentActionFeedbackPayloadTest;
 import eu.valawai.c0_patient_treatment_ui.models.TreatmentAction;
@@ -112,6 +113,7 @@ public class TreatmentActionFeedbackEntityTest {
 			final TreatmentEntity last = (TreatmentEntity) asserter.getData("LAST");
 			final var payload = new TreatmentActionFeedbackPayloadTest().nextModel();
 			payload.treatment_id = String.valueOf(last.id);
+			payload.action = ValueGenerator.next(last.treatmentActions);
 			asserter.putData("PAYLOAD", payload);
 			asserter.putData("NOW", TimeManager.now());
 			return TreatmentActionFeedbackEntity.store(payload);
