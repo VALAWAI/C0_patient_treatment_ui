@@ -222,7 +222,7 @@ MQ_USERNAME=c0_patient_treatment_ui
 MQ_PASSWORD=lkjagb_ro82t¿134
 ```
 
-he following environment variables are supported:
+The following environment variables are supported:
 
 * **`C0_PATIENT_TREATMENT_UI_TAG`:** Tag for the C0 Patient Treatment UI Docker image. Default: `latest`
 * **`MQ_HOST`:** Hostname of the message queue broker. Default: `mq`
@@ -247,14 +247,21 @@ he following environment variables are supported:
 * **`PG_USER_NAME`:** Username used by the UI to access the PostgreSQL database. Default: `c0_patient_treatment_ui`
 * **`POSTGRES_PASSWORD`:** Password used by the UI to access the PostgreSQL database. Default: `password`
 
-### Database Reset
+### Database Considerations
 
-To stop all running containers, use the following command:
+The databases are created only during the initial deployment. If you modify 
+any database parameters, you must recreate the databases. To do this, remove 
+the directories specified by the `MONGO_LOCAL_DATA` and `PG_LOCAL_DATA` environment variables and 
+restart the Docker Compose deployment.
 
+### Stopping the Deployment
+
+To stop all started containers, use the following command:
+
+```bash
+COMPOSE_PROFILES=mov docker-compose down
 ```
-COMPOSE_PROFILES=mov docker compose down
-```
-  
+
 ## Development Environment
 
 This section details how to set up and interact with the development environment
