@@ -93,7 +93,7 @@
       </trans-unit>
       <trans-unit id="main_doctor_patients_add_code_add-error" datatype="html" xml:space="preserve">
         <source>Patient not add the patient</source>
-        <target state="needs-translation">No se puede añadir el paciente</target>
+        <target state="translated">No se puede añadir el paciente</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/doctor/patients/add/add.component.ts</context>
           <context context-type="linenumber">117</context>
