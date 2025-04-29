@@ -9,9 +9,9 @@
 import { NgFor, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { TitleService } from '@app/shared';
+import { pullingTime, TitleService } from '@app/shared';
 import { ApiService, Treatment, TreatmentActionNamePipe, TreatmentValueNamePipe } from '@app/shared/api';
-import { Subscription } from 'rxjs';
+import { retry, Subscription, switchMap, timer } from 'rxjs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIcon } from '@angular/material/icon';
@@ -60,9 +60,9 @@ export class ViewComponent implements OnInit, OnDestroy {
 	public treatment: Treatment | null = null;
 
 	/**
-	 * The identifier of the timeout timer.
+	 * The subscription to the changes on the treatement.
 	 */
-	private timerId: any | null = null;
+	private treatementSubscription: Subscription | null = null;
 
 	/**
 	 * The treatement value chart series. 
@@ -144,14 +144,32 @@ export class ViewComponent implements OnInit, OnDestroy {
 	/**
 	 * Initialize the component.
 	 */
-	ngOnInit(): void {
+	public ngOnInit(): void {
 
 		this.title.changeHeaderTitle($localize`:The header title when view a treatement@@main_doctor_treatments_view_code_page-title:View treatment information`);
 		this.treatementIdSubscription = this.route.paramMap.subscribe(
 			{
 				next: (params) => {
 					this.treatmentId = Number(params.get('treatmentId'));
-					this.updateTreatment();
+					if (this.treatementSubscription != null) {
+
+						this.treatementSubscription.unsubscribe();
+					}
+					this.treatementSubscription = timer(0, pullingTime()).pipe(
+						switchMap(() => this.api.getTreatment(this.treatmentId || 0)),
+						retry()
+					).subscribe(
+						{
+							next: (treatment) => {
+
+								if (JSON.stringify(this.treatment) !== JSON.stringify(treatment)) {
+
+									this.treatment = treatment;
+									this.treatmentUpdated();
+								}
+							}
+						}
+					);
 				}
 			}
 		);
@@ -160,40 +178,20 @@ export class ViewComponent implements OnInit, OnDestroy {
 	/**
 	 * Unsubscribe
 	 */
-	ngOnDestroy(): void {
+	public ngOnDestroy(): void {
 
 		if (this.treatementIdSubscription != null) {
 
 			this.treatementIdSubscription.unsubscribe();
 			this.treatementIdSubscription = null;
 		}
-		if (this.timerId != null) {
+		if (this.treatementSubscription != null) {
 
-			clearTimeout(this.timerId);
-			this.timerId = null;
+			this.treatementSubscription.unsubscribe();
+			this.treatementSubscription = null;
 		}
 	}
 
-	/**
-	 * Update the treatement.
-	 */
-	private updateTreatment() {
-
-		this.api.getTreatment(this.treatmentId || 0).subscribe(
-			{
-				next: (treatment) => {
-
-					if (JSON.stringify(this.treatment) !== JSON.stringify(treatment)) {
-
-						this.treatment = treatment;
-						this.treatmentUpdated();
-					}
-					this.timerId = setTimeout(() => this.updateTreatment(), 1500);
-				}
-			}
-		);
-
-	}
 
 	/**
 	 * Called when the treatement has been updated. 
@@ -225,14 +223,7 @@ export class ViewComponent implements OnInit, OnDestroy {
 
 			this.api.doAgainTreatment(this.treatment).subscribe({
 
-				next: added => {
-					if (this.timerId != null) {
-
-						clearTimeout(this.timerId);
-						this.timerId = null;
-					}
-					this.router.navigate(['/main/doctor/treatments', added.id, 'view']);
-				},
+				next: added => this.router.navigate(['/main/doctor/treatments', added.id, 'view']),
 				error: (err) => {
 
 					this.message.showError($localize`:The error message when can not do agin the treatment@@main_doctor_treatments_view_code_do-again-error:Cannot do again this treatment.`);

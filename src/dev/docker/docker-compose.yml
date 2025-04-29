@@ -24,7 +24,7 @@ services:
     image: mongo:${MONGO_TAG:-latest}
     container_name: mov_db_dev
     restart: unless-stopped
-	pull_policy: daily
+    pull_policy: daily
     ports:
       - ${MONGO_PORT:-27017}:27017
     networks:
@@ -51,7 +51,7 @@ services:
     image: mongo-express:${MONGO_EXPRESS_TAG:-latest}
     container_name: mov_db_ui_dev
     restart: unless-stopped
-	pull_policy: daily
+    pull_policy: daily
     depends_on:
       mongo:
         condition: service_healthy
@@ -71,8 +71,8 @@ services:
   pg:
     image: postgres:${POSTGRES_TAG:-17}
     container_name: pg_dev
-	restart: unless-stopped
-	pull_policy: daily
+    restart: unless-stopped
+    pull_policy: daily
     ports:
       - ${PG_PORT:-5432}:5432
     networks:
@@ -94,8 +94,8 @@ services:
   pg_admin:
     image: dpage/pgadmin4:${MONGO_EXPRESS_TAG:-latest}
     container_name: pg_db_ui_dev
-	restart: unless-stopped
-	pull_policy: daily
+    restart: unless-stopped
+    pull_policy: daily
     depends_on:
       pg:
         condition: service_healthy
