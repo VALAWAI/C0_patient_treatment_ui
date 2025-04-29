@@ -28,15 +28,13 @@ else
       esac
     done
 
-	FILE_DATE=$(date -r src/dev/docker/Dockerfile +%s)
-	IMAGE_DATE=$(docker inspect --format='{{.Created}}' valawai/c0_patient_treatment_ui:dev 2>/dev/null)
+	FILE_DATE=$(date -r src/dev/docker/Dockerfile +%Y-%m-%dT%H:%M:%SZ)
+	IMAGE_DATE=$(docker inspect --format='{{.Created}}' valawai/c0_patient_treatment_ui:dev)
 	if [ $? -ne 0 ]; then
 		IMAGE_DATE=0
-	else
-		IMAGE_DATE=$(echo $IMAGE_DATE|date +%s)
 	fi
-	if [ $FILE_DATE -ge $IMAGE_DATE ]; then
-		DOCKER_BUILDKIT=1 docker build -f src/dev/docker/Dockerfile -t valawai/c0_patient_treatment_ui:dev .
+	if [[ "$IMAGE_DATE" < "$FILE_DATE" ]]; then
+		DOCKER_BUILDKIT=1 docker build --pull -f src/dev/docker/Dockerfile -t valawai/c0_patient_treatment_ui:dev .
 	fi
 
     DOCKER_ARGS="$DOCKER_ARGS --rm --name mov_build_docker_image --add-host=host.docker.internal:host-gateway -v /var/run/docker.sock:/var/run/docker.sock"

@@ -1,7 +1,7 @@
 asyncapi: '2.6.0'
 info:
  title: C0 Patient treatment UI API
- version: '1.0.0'
+ version: '1.0.1'
  description: |
   This VALAWAI component provide an user interface that any doctor can use to define a treatment
   for a patient and receive feedback about it.
@@ -426,7 +426,7 @@ components:
           minimum: 0
           maximum: 8
           nullable: true
-        has_advance_Directives:
+        has_advance_directives:
           type: boolean
           nullable: true
           description:  >
@@ -499,14 +499,14 @@ components:
         value_name:
           type: string
           description: The name of the value that the treatment is aligned.
-          example:
+          examples:
             - "Autonomy"
         alignment:
           type: number
           description: The alignment of the value with the the treatment.
           maximum: 1
           minimum: -1
-          Example:
+          examples:
             - 0.81675
 
     treatment_action_feedback_payload:
