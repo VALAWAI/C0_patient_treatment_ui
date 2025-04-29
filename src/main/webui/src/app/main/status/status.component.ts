@@ -50,7 +50,7 @@ export class StatusComponent implements OnInit,OnDestroy {
 	/**
 	 * Initialize the component.
 	 */
-	public ngOnInit(): void {
+	ngOnInit(): void {
 
 		this.title.changeHeaderTitle($localize`:The header title for the status@@main_status_code_page-title:Status`);
 		this.api.getHelp().subscribe(
@@ -84,7 +84,7 @@ export class StatusComponent implements OnInit,OnDestroy {
 	/**
 	 * Finalizes the component.
 	 */
-	public ngOnDestroy(): void {
+	ngOnDestroy(): void {
 
 		if (this.timeoutID != null) {
 
