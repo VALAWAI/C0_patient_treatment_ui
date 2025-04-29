@@ -162,7 +162,7 @@
         <source>Write a patient name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/doctor/patients/patients.component.html</context>
-          <context context-type="linenumber">13,14</context>
+          <context context-type="linenumber">11,12</context>
         </context-group>
         <note priority="1" from="description">Help to show when search for a patienth</note>
       </trans-unit>
@@ -170,7 +170,7 @@
         <source>Add</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/doctor/patients/patients.component.html</context>
-          <context context-type="linenumber">20,25</context>
+          <context context-type="linenumber">18,23</context>
         </context-group>
         <note priority="1" from="description">Label of the button to add a new patienth</note>
       </trans-unit>
@@ -178,7 +178,7 @@
         <source>View</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/doctor/patients/patients.component.html</context>
-          <context context-type="linenumber">41,43</context>
+          <context context-type="linenumber">39,41</context>
         </context-group>
         <note priority="1" from="description">Menu item to view patient information</note>
       </trans-unit>
@@ -186,7 +186,7 @@
         <source>Edit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/doctor/patients/patients.component.html</context>
-          <context context-type="linenumber">44,46</context>
+          <context context-type="linenumber">42,44</context>
         </context-group>
         <note priority="1" from="description">Menu item to edit patient information</note>
       </trans-unit>
@@ -194,7 +194,7 @@
         <source>Delete</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/doctor/patients/patients.component.html</context>
-          <context context-type="linenumber">47,49</context>
+          <context context-type="linenumber">45,47</context>
         </context-group>
         <note priority="1" from="description">Menu item to delete a patient</note>
       </trans-unit>
@@ -202,7 +202,7 @@
         <source>Add treatment</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/doctor/patients/patients.component.html</context>
-          <context context-type="linenumber">51,56</context>
+          <context context-type="linenumber">49,54</context>
         </context-group>
         <note priority="1" from="description">Menu item to define a treatment for a patient</note>
       </trans-unit>
@@ -589,7 +589,7 @@
         <source>Cannot do again this treatment.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main/doctor/treatments/view/view.component.ts</context>
-          <context context-type="linenumber">238</context>
+          <context context-type="linenumber">229</context>
         </context-group>
         <note priority="1" from="description">The error message when can not do agin the treatment</note>
       </trans-unit>
