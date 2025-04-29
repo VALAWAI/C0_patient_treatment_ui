@@ -52,7 +52,7 @@ export class PatientsComponent implements OnInit, OnDestroy {
 	public nameChanged: Subscription | null = null;
 
 	/**
-	 * T is {@code true} if it is updating.
+	 * This {@code true} if it is updating.
 	 */
 	public updating: boolean = false;
 

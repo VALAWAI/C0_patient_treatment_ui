@@ -1,8 +1,6 @@
 
 <div class="max-w-md mx-auto flex flex-col gap-3">
 	<div>
-		<div for="default-search"
-			class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</div>
 		<div class="relative">
 			<div
 				class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -20,7 +18,7 @@
 				[queryParams]="{name: name.value||''}">Add</button>
 		</div>
 	</div>
-	<div *ngIf="!updating; else showLpdating">
+	<div *ngIf="!updating; else showLoading">
 		<ul
 			class="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
 			<li *ngFor="let patient of page?.patients"
@@ -62,7 +60,7 @@
 			</li>
 		</ul>
 	</div>
-	<ng-template #showLpdating>
+	<ng-template #showLoading>
 	<div class="max-w-md mx-auto h-4 w-full">
 		<mat-progress-bar mode="indeterminate"></mat-progress-bar>
 	</div>

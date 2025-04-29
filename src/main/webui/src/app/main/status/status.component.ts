@@ -5,7 +5,7 @@
   license that can be found in the LICENSE file or at
   https://opensource.org/license/gpl-3-0/
 */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { Info, HealthInfo, ApiService } from '@app/shared/api';
 import { TitleService } from '@app/shared';
 import { HealthStatusComponent } from './health-status.component';
@@ -20,7 +20,7 @@ import { NgFor } from '@angular/common';
     templateUrl: './status.component.html',
     styleUrl: './status.component.css'
 })
-export class StatusComponent implements OnInit {
+export class StatusComponent implements OnInit,OnDestroy {
 
 	/**
 	 * The informaiton of the started MOV.
@@ -50,7 +50,7 @@ export class StatusComponent implements OnInit {
 	/**
 	 * Initialize the component.
 	 */
-	ngOnInit(): void {
+	public ngOnInit(): void {
 
 		this.title.changeHeaderTitle($localize`:The header title for the status@@main_status_code_page-title:Status`);
 		this.api.getHelp().subscribe(
@@ -84,7 +84,7 @@ export class StatusComponent implements OnInit {
 	/**
 	 * Finalizes the component.
 	 */
-	ngOnDestroy(): void {
+	public ngOnDestroy(): void {
 
 		if (this.timeoutID != null) {
 
