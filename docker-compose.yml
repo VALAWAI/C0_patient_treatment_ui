@@ -133,7 +133,7 @@ services:
 
 networks:
   patient_treatment_ui_net:
-	
+
 configs:
   init-mongo.js:
     content: |
