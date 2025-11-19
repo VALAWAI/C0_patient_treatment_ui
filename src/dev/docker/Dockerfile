@@ -1,18 +1,22 @@
-# syntax=docker/dockerfile:experimental
-FROM openjdk:21-jdk-slim-bookworm
-
-USER root
-ENV JAVA_HOME="/usr/local/openjdk-21"
+FROM amazoncorretto:25-alpine-jdk
+RUN apk add --no-cache \
+    bash \
+    curl \
+    git \
+    build-base \
+    nodejs \
+    unzip \
+    zip \
+    docker \
+    npm \
+	&& rm -rf /var/cache/apk/*
 SHELL ["/bin/bash", "-c"]
-RUN apt-get update && \
-    apt-get -qy full-upgrade && \
-    apt-get install -qy curl unzip zip sed nano npm && \
-    curl -sSL https://get.docker.com/ | sh && \
-	curl -s "https://get.sdkman.io" | bash && \
-	/bin/bash -c "source \"$HOME/.sdkman/bin/sdkman-init.sh\" && sdk install quarkus"
 
-RUN npm install -g npm @angular/cli
-	
+RUN curl -s "https://get.sdkman.io" | bash 
+RUN source "/root/.sdkman/bin/sdkman-init.sh"  && sdk selfupdate force && sdk install quarkus
+
+RUN npm install -g @angular/cli@latest
+
 WORKDIR /root/.redhat
 
 RUN echo "{\"disabled\":true}" > /root/.redhat/io.quarkus.analytics.localconfig
