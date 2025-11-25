@@ -6,7 +6,7 @@
   https://opensource.org/license/gpl-3-0/
 */
 
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,RouterLink } from '@angular/router';
 import { TitleService } from '@app/shared';
@@ -20,13 +20,12 @@ import { MatIcon } from '@angular/material/icon';
 	standalone: true,
     selector: 'app-doctor-patient-view',
     imports: [
-        AsyncPipe,
-        NgIf,
-        AvvvatarsComponent,
-        PatientStatusCriteriaEditorComponent,
-        MatIcon,
-        RouterLink
-    ],
+    AsyncPipe,
+    AvvvatarsComponent,
+    PatientStatusCriteriaEditorComponent,
+    MatIcon,
+    RouterLink
+],
     templateUrl: './view.component.html',
     styleUrl: './view.component.css'
 })

@@ -6,7 +6,7 @@
   https://opensource.org/license/gpl-3-0/
 */
 
-import { AsyncPipe, NgClass, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TitleService } from '@app/shared';
@@ -43,17 +43,15 @@ export const AtLeastOneActionValidator: ValidatorFn = (control: AbstractControl)
 	standalone: true,
 	selector: 'app-doctor-patient-edit',
 	imports: [
-		AsyncPipe,
-		NgIf,
-		MatStepperModule,
-		PatientStatusCriteriaEditorComponent,
-		ReactiveFormsModule,
-		NgFor,
-		MatSlideToggle,
-		TreatmentActionNamePipe,
-		NgClass,
-		MatButtonModule
-	],
+    AsyncPipe,
+    MatStepperModule,
+    PatientStatusCriteriaEditorComponent,
+    ReactiveFormsModule,
+    MatSlideToggle,
+    TreatmentActionNamePipe,
+    NgClass,
+    MatButtonModule
+],
 	templateUrl: './treatment.component.html',
 	styleUrl: './treatment.component.css',
 	providers: [

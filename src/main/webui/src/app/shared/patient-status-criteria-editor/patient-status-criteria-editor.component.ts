@@ -43,27 +43,25 @@ import {
 import { MatRadioModule } from '@angular/material/radio';
 import { Subscription } from 'rxjs';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
-import { NgFor, NgIf } from '@angular/common';
+
 
 @Component({
 	standalone: true,
 	selector: 'app-patient-status-criteria-editor',
 	imports: [
-		ReactiveFormsModule,
-		MatRadioModule,
-		NgIf,
-		NgFor,
-		AgeRangeOptionNamePipe,
-		YesNoUnknownOptionNamePipe,
-		SurvivalOptionNamePipe,
-		SPICT_ScaleNamePipe,
-		ClinicalRiskGroupOptionNamePipe,
-		BarthelIndexNamePipe,
-		LawtonIndexNamePipe,
-		CognitiveImpairmentLevelNamePipe,
-		DiscomfortDegreeNamePipe,
-		NITLevelNamePipe
-	],
+    ReactiveFormsModule,
+    MatRadioModule,
+    AgeRangeOptionNamePipe,
+    YesNoUnknownOptionNamePipe,
+    SurvivalOptionNamePipe,
+    SPICT_ScaleNamePipe,
+    ClinicalRiskGroupOptionNamePipe,
+    BarthelIndexNamePipe,
+    LawtonIndexNamePipe,
+    CognitiveImpairmentLevelNamePipe,
+    DiscomfortDegreeNamePipe,
+    NITLevelNamePipe
+],
 	templateUrl: './patient-status-criteria-editor.component.html',
 	styleUrls: ['./patient-status-criteria-editor.component.css']
 })

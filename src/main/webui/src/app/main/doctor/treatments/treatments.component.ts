@@ -6,7 +6,7 @@
   https://opensource.org/license/gpl-3-0/
 */
 
-import { NgFor, NgIf } from '@angular/common';
+
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
@@ -25,17 +25,15 @@ import { MessagesService } from '@app/shared/messages';
 	standalone: true,
 	selector: 'app-treatments',
 	imports: [
-		ReactiveFormsModule,
-		MatPaginatorModule,
-		MatPaginatorModule,
-		MatMenuModule,
-		MatIconModule,
-		RouterLink,
-		MatProgressBarModule,
-		NgIf,
-		NgFor,
-		AvvvatarsComponent
-	],
+    ReactiveFormsModule,
+    MatPaginatorModule,
+    MatPaginatorModule,
+    MatMenuModule,
+    MatIconModule,
+    RouterLink,
+    MatProgressBarModule,
+    AvvvatarsComponent
+],
 	templateUrl: './treatments.component.html',
 	styleUrl: './treatments.component.css'
 })

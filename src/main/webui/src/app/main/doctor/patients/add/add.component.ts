@@ -6,7 +6,7 @@
   https://opensource.org/license/gpl-3-0/
 */
 
-import { NgIf } from '@angular/common';
+
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TitleService } from '@app/shared';
@@ -23,14 +23,12 @@ import { MessagesService } from '@app/shared/messages';
 	standalone: true,
 	selector: 'app-doctor-patient-add',
 	imports: [
-		NgIf,
-		AvvvatarsComponent,
-		PatientStatusCriteriaEditorComponent,
-		MatButton,
-		MatInputModule,
-		ReactiveFormsModule,
-		NgIf
-	],
+    AvvvatarsComponent,
+    PatientStatusCriteriaEditorComponent,
+    MatButton,
+    MatInputModule,
+    ReactiveFormsModule
+],
 	templateUrl: './add.component.html',
 	styleUrl: './add.component.css'
 })

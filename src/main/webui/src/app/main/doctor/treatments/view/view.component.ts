@@ -6,7 +6,7 @@
   https://opensource.org/license/gpl-3-0/
 */
 
-import { NgFor, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
+
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { pullingTime, TitleService } from '@app/shared';
@@ -23,19 +23,14 @@ import { MessagesService } from '@app/shared/messages';
 	standalone: true,
 	selector: 'app-doctor-treatment-view',
 	imports: [
-		NgIf,
-		MatIcon,
-		RouterLink,
-		MatExpansionModule,
-		PatientStatusCriteriaEditorComponent,
-		NgFor,
-		TreatmentActionNamePipe,
-		NgSwitch,
-		NgSwitchCase,
-		NgSwitchDefault,
-		MatProgressBarModule,
-		NgApexchartsModule,
-	],
+    MatIcon,
+    RouterLink,
+    MatExpansionModule,
+    PatientStatusCriteriaEditorComponent,
+    TreatmentActionNamePipe,
+    MatProgressBarModule,
+    NgApexchartsModule
+],
 	providers: [
 		TreatmentValueNamePipe
 	],

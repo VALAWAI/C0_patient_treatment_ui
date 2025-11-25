@@ -6,7 +6,7 @@
   https://opensource.org/license/gpl-3-0/
 */
 
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TitleService } from '@app/shared';
@@ -23,15 +23,13 @@ import { MessagesService } from '@app/shared/messages';
 	standalone: true,
     selector: 'app-doctor-patient-edit',
     imports: [
-        AsyncPipe,
-        NgIf,
-        AvvvatarsComponent,
-        PatientStatusCriteriaEditorComponent,
-        MatButton,
-        MatInputModule,
-        ReactiveFormsModule,
-        NgIf
-    ],
+    AsyncPipe,
+    AvvvatarsComponent,
+    PatientStatusCriteriaEditorComponent,
+    MatButton,
+    MatInputModule,
+    ReactiveFormsModule
+],
     templateUrl: './edit.component.html',
     styleUrl: './edit.component.css'
 })

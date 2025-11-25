@@ -6,7 +6,7 @@
   https://opensource.org/license/gpl-3-0/
 */
 
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TitleService } from '@app/shared';
@@ -18,10 +18,9 @@ import { Observable, switchMap, tap } from 'rxjs';
 	standalone: true,
 	selector: 'app-doctor-treatment-delete',
 	imports: [
-		AsyncPipe,
-		RouterLink,
-		NgIf
-	],
+    AsyncPipe,
+    RouterLink
+],
 	templateUrl: './delete.component.html',
 	styleUrl: './delete.component.css'
 })

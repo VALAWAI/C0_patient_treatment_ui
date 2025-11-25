@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 import { ReactiveFormsModule, FormControl, FormBuilder } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { NgIf, NgFor } from '@angular/common';
+
 import { AvvvatarsComponent } from '@ngxpert/avvvatars';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatMenuItem, MatMenuTrigger, MatMenu } from '@angular/material/menu';
@@ -23,19 +23,17 @@ import { RouterLink } from '@angular/router';
 	standalone: true,
     selector: 'app-patients',
     imports: [
-        MatIcon,
-        ReactiveFormsModule,
-        MatPaginatorModule,
-        NgIf,
-        NgFor,
-        AvvvatarsComponent,
-        MatProgressBarModule,
-        MatMenuItem,
-        MatIcon,
-        MatMenuTrigger,
-        RouterLink,
-        MatMenu
-    ],
+    MatIcon,
+    ReactiveFormsModule,
+    MatPaginatorModule,
+    AvvvatarsComponent,
+    MatProgressBarModule,
+    MatMenuItem,
+    MatIcon,
+    MatMenuTrigger,
+    RouterLink,
+    MatMenu
+],
     templateUrl: './patients.component.html',
     styleUrl: './patients.component.css'
 })
