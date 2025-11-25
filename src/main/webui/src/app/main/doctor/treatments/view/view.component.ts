@@ -23,14 +23,14 @@ import { MessagesService } from '@app/shared/messages';
 	standalone: true,
 	selector: 'app-doctor-treatment-view',
 	imports: [
-    MatIcon,
-    RouterLink,
-    MatExpansionModule,
-    PatientStatusCriteriaEditorComponent,
-    TreatmentActionNamePipe,
-    MatProgressBarModule,
-    NgApexchartsModule
-],
+		MatIcon,
+		RouterLink,
+		MatExpansionModule,
+		PatientStatusCriteriaEditorComponent,
+		TreatmentActionNamePipe,
+		MatProgressBarModule,
+		NgApexchartsModule
+	],
 	providers: [
 		TreatmentValueNamePipe
 	],
