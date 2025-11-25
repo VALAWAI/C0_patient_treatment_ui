@@ -16,7 +16,7 @@ services:
       RABBITMQ_PORT: ${MQ_PORT:-5672}
       RABBITMQ_USERNAME: ${MQ_USER:-mov}
       RABBITMQ_PASSWORD: ${MQ_PASSWORD:-password}
-      C0_PATIENT_TREATMENT_UI_URL: http://localhost:${C0_PATIENT_TREATMENT_UI_PORT:-8080}
+      C0_PATIENT_TREATMENT_UI_URL: http://0.0.0.0:${C0_PATIENT_TREATMENT_UI_PORT:-8080}
     healthcheck:
       test: ["CMD-SHELL", "curl -s http://localhost:8080/q/health | grep -m 1 -P \"^[\\s|\\{|\\\"]+status[\\s|\\:|\\\"]+.+\\\"\" |grep -q \"\\\"UP\\\"\""]
       interval: 1m
@@ -122,7 +122,7 @@ services:
       QUARKUS_MONGODB_CREDENTIALS_USERNAME: ${MOV_DB_USER_NAME:-mov}
       QUARKUS_MONGODB_CREDENTIALS_PASSWORD: ${MOV_DB_USER_PASSWORD:-password}
       QUARKUS_MONGODB_HOSTS: ${DB_HOST:-mongo}:${MONGO_PORT:-27017}
-      MOV_URL: http://localhost:${MOV_UI_PORT:-8081}
+      MOV_URL: http://0.0.0.0:${MOV_UI_PORT:-8081}
     healthcheck:
       test: ["CMD-SHELL", "curl -s http://localhost:8080/q/health | grep -m 1 -P \"^[\\s|\\{|\\\"]+status[\\s|\\:|\\\"]+.+\\\"\" |grep -q \"\\\"UP\\\"\""]
       interval: 1m

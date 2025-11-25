@@ -303,7 +303,7 @@ mvn test
 * **Run tests with debugging enabled:**
 
 ```bash
-vnd tes
+vnd test
 ```
 
 * **Run tests using the existing Master of VALAWAI (MOV) instance:**
