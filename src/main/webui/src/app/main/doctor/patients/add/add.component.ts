@@ -7,7 +7,7 @@
 */
 
 
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TitleService } from '@app/shared';
 import { ApiService, Patient, PatientStatusCriteria } from '@app/shared/api';
@@ -23,16 +23,46 @@ import { MessagesService } from '@app/shared/messages';
 	standalone: true,
 	selector: 'app-doctor-patient-add',
 	imports: [
-    AvvvatarsComponent,
-    PatientStatusCriteriaEditorComponent,
-    MatButton,
-    MatInputModule,
-    ReactiveFormsModule
-],
+		AvvvatarsComponent,
+		PatientStatusCriteriaEditorComponent,
+		MatButton,
+		MatInputModule,
+		ReactiveFormsModule
+	],
 	templateUrl: './add.component.html',
 	styleUrl: './add.component.css'
 })
 export class AddComponent implements OnInit, OnDestroy {
+
+	/**
+	 * The service to change the title.
+	 */
+	private readonly title = inject(TitleService);
+
+	/**
+	 * The API service.
+	 */
+	private readonly api = inject(ApiService);
+
+	/**
+	 * The route of the page.
+	 */
+	private readonly route = inject(ActivatedRoute);
+
+	/**
+	 * The sercvice to change the route.
+	 */
+	private readonly router = inject(Router);
+
+	/**
+	 * The form builder service.
+	 */
+	private readonly fb = inject(FormBuilder);
+
+	/**
+	 * The service to notify the user by messages.
+	 */
+	private readonly notifier = inject(MessagesService);
 
 	/**
 	 * The patient to add.
@@ -48,21 +78,6 @@ export class AddComponent implements OnInit, OnDestroy {
 	 * The control to add the patient name.
 	 */
 	public name: FormControl<string | null> = this.fb.control<string | null>(null, [Validators.required, Validators.max(1024)]);
-
-	/**
-	 *  Create the component.
-	 */
-	constructor(
-		private title: TitleService,
-		private api: ApiService,
-		private route: ActivatedRoute,
-		private fb: FormBuilder,
-		private notifier: MessagesService,
-		private router: Router
-	) {
-
-	}
-
 
 	/**
 	 * Initialize the component.

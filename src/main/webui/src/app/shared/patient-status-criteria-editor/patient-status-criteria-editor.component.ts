@@ -6,7 +6,7 @@
   https://opensource.org/license/gpl-3-0/
 */
 
-import { Component, Output, EventEmitter, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnInit, OnDestroy, inject } from '@angular/core';
 import {
 	PatientStatusCriteria,
 	AgeRangeOption,
@@ -49,19 +49,19 @@ import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 	standalone: true,
 	selector: 'app-patient-status-criteria-editor',
 	imports: [
-    ReactiveFormsModule,
-    MatRadioModule,
-    AgeRangeOptionNamePipe,
-    YesNoUnknownOptionNamePipe,
-    SurvivalOptionNamePipe,
-    SPICT_ScaleNamePipe,
-    ClinicalRiskGroupOptionNamePipe,
-    BarthelIndexNamePipe,
-    LawtonIndexNamePipe,
-    CognitiveImpairmentLevelNamePipe,
-    DiscomfortDegreeNamePipe,
-    NITLevelNamePipe
-],
+		ReactiveFormsModule,
+		MatRadioModule,
+		AgeRangeOptionNamePipe,
+		YesNoUnknownOptionNamePipe,
+		SurvivalOptionNamePipe,
+		SPICT_ScaleNamePipe,
+		ClinicalRiskGroupOptionNamePipe,
+		BarthelIndexNamePipe,
+		LawtonIndexNamePipe,
+		CognitiveImpairmentLevelNamePipe,
+		DiscomfortDegreeNamePipe,
+		NITLevelNamePipe
+	],
 	templateUrl: './patient-status-criteria-editor.component.html',
 	styleUrls: ['./patient-status-criteria-editor.component.css']
 })
@@ -124,6 +124,11 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 	public dataChanged = new EventEmitter<PatientStatusCriteria>();
 
 	/**
+	 * Form builder service.
+	 */
+	private readonly fb = inject(FormBuilder);
+
+	/**
 	 * The form control to edit the name.
 	 */
 	public form = this.fb.group({
@@ -150,15 +155,6 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 	 * Change name subscription.
 	 */
 	private formChanged: Subscription | null = null;
-
-	/**
-	 * Create the component.
-	 */
-	constructor(
-		private fb: FormBuilder
-	) {
-
-	}
 
 	/**
 	 * Initialize the component.
@@ -253,7 +249,7 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 					status.isCoerced = value.isCoerced || null;
 					status.isCompetent = value.isCompetent || null;
 					status.maca = value.maca || null;
-					status.nitLevel  = value.nitLevel|| null;
+					status.nitLevel = value.nitLevel || null;
 					this.dataChanged.emit(status);
 				}
 			}

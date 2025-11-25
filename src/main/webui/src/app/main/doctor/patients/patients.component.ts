@@ -6,7 +6,7 @@
   https://opensource.org/license/gpl-3-0/
 */
 
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ApiService, MinPatientPage } from '@app/shared/api';
 import { Subscription } from 'rxjs';
 import { ReactiveFormsModule, FormControl, FormBuilder } from '@angular/forms';
@@ -21,23 +21,39 @@ import { RouterLink } from '@angular/router';
 
 @Component({
 	standalone: true,
-    selector: 'app-patients',
-    imports: [
-    MatIcon,
-    ReactiveFormsModule,
-    MatPaginatorModule,
-    AvvvatarsComponent,
-    MatProgressBarModule,
-    MatMenuItem,
-    MatIcon,
-    MatMenuTrigger,
-    RouterLink,
-    MatMenu
-],
-    templateUrl: './patients.component.html',
-    styleUrl: './patients.component.css'
+	selector: 'app-patients',
+	imports: [
+		MatIcon,
+		ReactiveFormsModule,
+		MatPaginatorModule,
+		AvvvatarsComponent,
+		MatProgressBarModule,
+		MatMenuItem,
+		MatIcon,
+		MatMenuTrigger,
+		RouterLink,
+		MatMenu
+	],
+	templateUrl: './patients.component.html',
+	styleUrl: './patients.component.css'
 })
 export class PatientsComponent implements OnInit, OnDestroy {
+
+	/**
+	 * The service to change the title.
+	 */
+	private readonly title = inject(TitleService);
+
+	/**
+	 * The API service.
+	 */
+	private readonly api = inject(ApiService);
+
+	/**
+	 * The form builder service.
+	 */
+	private readonly fb = inject(FormBuilder);
+
 
 	/**
 	 * The form control to edit the name.
@@ -78,18 +94,6 @@ export class PatientsComponent implements OnInit, OnDestroy {
 	 * The page with the found patients.
 	 */
 	public page: MinPatientPage | null = null;
-
-	/**
-	 *  Create the component.
-	 */
-	constructor(
-		private title: TitleService,
-		private api: ApiService,
-		private fb: FormBuilder
-	) {
-
-	}
-
 
 	/**
 	 * Initialize the component.
