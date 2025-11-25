@@ -444,7 +444,7 @@
           <context context-type="sourcefile">src/app/main/doctor/treatments/treatments.component.html</context>
           <context context-type="linenumber">44,49</context>
         </context-group>
-        <note priority="1" from="description">Menu item to add a new treatment for teh patient</note>
+        <note priority="1" from="description">Menu item to add a new treatment for the patient</note>
       </trans-unit>
       <trans-unit id="main_doctor_treatments_code_page-title" datatype="html">
         <source>Treatments</source>
