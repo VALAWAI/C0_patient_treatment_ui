@@ -205,7 +205,8 @@ export class ViewComponent implements OnInit, OnDestroy {
 			for (var value of this.treatment.values) {
 
 				categories.push(this.valueNamePipe.transform(value));
-				data.push(value.alignment);
+				var alignemnt = Math.round(value.alignment * 100) / 100;
+				data.push(alignemnt);
 			}
 			this.valuesChartSeries[0].data = data;
 			this.valuesChartXaxis.categories = categories;
