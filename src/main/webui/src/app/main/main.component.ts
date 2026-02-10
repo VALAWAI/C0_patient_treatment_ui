@@ -21,15 +21,15 @@ import { LOCALE_ID, Inject } from '@angular/core';
 	standalone: true,
 	selector: 'app-main',
 	imports: [
-    RouterOutlet,
-    MatIcon,
-    MatMenu,
-    MatMenuTrigger,
-    MatMenuItem,
-    MatDivider,
-    RouterLink,
-    AsyncPipe
-],
+		RouterOutlet,
+		MatIcon,
+		MatMenu,
+		MatMenuTrigger,
+		MatMenuItem,
+		MatDivider,
+		RouterLink,
+		AsyncPipe
+	],
 	templateUrl: './main.component.html',
 	styleUrl: './main.component.css'
 })
