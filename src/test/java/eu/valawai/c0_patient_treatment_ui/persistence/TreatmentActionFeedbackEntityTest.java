@@ -8,9 +8,9 @@
 
 package eu.valawai.c0_patient_treatment_ui.persistence;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -152,14 +152,14 @@ public class TreatmentActionFeedbackEntityTest {
 					final TreatmentActionFeedbackPayload payload = (TreatmentActionFeedbackPayload) asserter
 							.getData("PAYLOAD");
 					final long now = (Long) asserter.getData("NOW");
-					assertTrue("Unexpected reported feedback time", now <= feedback.createdTime);
+					assertTrue(now <= feedback.createdTime, "Unexpected reported feedback time");
 					assertEquals(payload.action, feedback.action);
 					assertEquals(payload.feedback, feedback.feedback);
 					break;
 				}
 			}
 
-			assertTrue("Not found stored action in the treatment", found);
+			assertTrue(found, "Not found stored action in the treatment");
 		});
 	}
 

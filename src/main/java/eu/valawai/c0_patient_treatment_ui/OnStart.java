@@ -30,7 +30,7 @@ public class OnStart {
 	/**
 	 * The pattern to check the on page resource.
 	 */
-	private static final Pattern INDEX_PATTERN = Pattern.compile(".*(/[a-z]{2})(/.*)?");
+	private static final Pattern INDEX_PATTERN = Pattern.compile("(?:\\/|^)([a-z]{2})(?:[_\\/-]|$)");
 
 	/**
 	 * The name of the context variable that is used to mark that the request is

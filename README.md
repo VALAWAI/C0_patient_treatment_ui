@@ -1,31 +1,40 @@
 # C0_patient_treatment_ui
 
-The C0 Patient Treatment UI is a web-based component within a larger demonstration. 
-This tool showcases functionalities that would be beneficial in a real-world patient
-care setting, including:
-
- - **Patient data management**: Efficient storage and access to patient information.
- - **Personalized treatment plan creation**: Tailoring treatments to individual patient needs.
- - **Display of NIT protocol verification results**: Presentation of the results of NIT protocol
-  verification.
- - **Treatment value visualization**: Clear and concise display of the specific values associated
-  with treatment options.
-
-This component aims to demonstrate the potential value of a user interface that could assist doctors
-in improving patient care by streamlining access to patient information, facilitating personalized
-treatment plans, and providing clear and concise presentation of critical information related to patient care.
-
+The Patient Treatment UI (C0) is a web-based interface that simulates doctor-hospital interactions, enabling medical professionals to manage patient records and define treatment plans. It serves as a combined sensor and actuator that receives real-time feedback on NIT protocol adherence (status: ALLOW, DENY, or UNKNOWN) and displays treatment alignment with core values such as autonomy, beneficence, justice, and non-maleficence. This integrated feedback loop allows doctors to monitor clinical compliance and ethical trade-offs directly within the simulated environment.
 
 ## Summary
 
- - Type: C0
- - Name: Patient treatment UI
- - Version: 1.1.0 (April 30,2025)
- - API: [1.0.1 (April 30,2025)](https://raw.githubusercontent.com/VALAWAI/C0_patient_treatment_ui/ASYNCAPI_1.0.1/asyncapi.yml)
- - VALAWAI API: [1.2.0 (March 9, 2024)](https://raw.githubusercontent.com/valawai/MOV/ASYNCAPI_1.2.0/asyncapi.yml)
- - Developed By: [IIIA-CSIC](https://www.iiia.csic.es)
- - License: [GPL 3](LICENSE)
- 
+- **Type**: [C0](https://valawai.github.io/docs/components/C0/)
+- **Name**: Patient treatment UI
+- **Documentation**: [https://valawai.github.io/docs/components/C0/patient_treatment_ui](https://valawai.github.io/docs/components/C0/patient_treatment_ui)
+- **Versions**:
+  - **Stable version**: [1.2.0 (February 10, 2026)](https://github.com/VALAWAI/C0_patient_treatment_ui/tree/1.2.0)
+  - **API**: [1.0.1 (April 30,2025)](https://raw.githubusercontent.com/VALAWAI/C0_patient_treatment_ui/ASYNCAPI_1.0.1/asyncapi.yml)
+  - **Required MOV API**: [1.2.0 (March 9, 2024)](https://raw.githubusercontent.com/valawai/MOV/ASYNCAPI_1.2.0/asyncapi.yml)
+- **Developed By**: [IIIA-CSIC](https://www.iiia.csic.es)
+- **License**: [GPL v3](LICENSE)
+- **Technology Readiness Level (TLR)**: [3](https://valawai.github.io/docs/components/C0/patient_treatment_ui/tlr)
+
+
+## Usage
+
+To use the Patient Treatment UI (C0) as a medical professional, 
+follow these steps to manage care and monitor ethical alignment:
+
+- **Patient Management**: Use the interface to register new patients, 
+search the database, or update medical histories and current conditions.
+- **Define Treatment**: Create a personalized treatment plan by selecting 
+specific medical actions (e.g., CPR, dialysis, or surgery) and documenting 
+the patient's status via a clinical questionnaire.
+- **Monitor NIT Protocol**: Review the real-time "Action Feedback" to verify 
+if your proposed treatment complies with medical standards. The system will 
+flag actions as ALLOW (compliant), DENY (prohibited), or UNKNOWN (insufficient
+data) based on the patient's assigned NIT (Therapeutic Intensity Level).
+- **Evaluate Ethical Values**: Check the "Value Feedback" section to see how 
+the treatment aligns with core principles like Autonomy, Beneficence, Justice, 
+and Non-maleficence. The UI displays alignment scores between -1 and 1 to help 
+you identify and balance potential ethical trade-offs.
+
  
 ## Generate Docker image
 
@@ -350,11 +359,13 @@ This development environment provides a pre-configured infrastructure for develo
 and debugging the C0 Patient Treatment UI component, streamlining the development process 
 and enabling efficient iteration.
 
-## Links
+## Helpful Links
 
- - [C0 Patient treatment UI](https://valawai.github.io/docs/components/C0/patient_treatment_ui)
- - [Master Of VALAWAI](https://valawai.github.io/docs/architecture/implementations/mov/)
- - [VALWAI documentation](https://valawai.github.io/docs/)
- - [VALAWAI project web site](https://valawai.eu/)
- - [Twitter](https://twitter.com/ValawaiEU)
- - [GitHub](https://github.com/VALAWAI)
+Here's a collection of useful links related to this component and the VALAWAI ecosystem:
+
+- **C0 Patient treatement UI Documentation**: [https://valawai.github.io/docs/components/C0/patient_treatment_ui](https://valawai.github.io/docs/components/C0/patient_treatment_ui)
+- **Master Of VALAWAI (MOV)**: [https://valawai.github.io/docs/architecture/implementations/mov/](https://valawai.github.io/docs/architecture/implementations/mov/)
+- **VALAWAI Main Documentation**: [https://valawai.github.io/docs/](https://valawai.github.io/docs/)
+- **VALAWAI on GitHub**: [https://github.com/VALAWAI](https://github.com/VALAWAI)
+- **VALAWAI Official Website**: [https://valawai.eu/](https://valawai.eu/)
+- **VALAWAI on X (formerly Twitter)**: [https://x.com/ValawaiEU](https://x.com/ValawaiEU)

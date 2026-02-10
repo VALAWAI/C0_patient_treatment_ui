@@ -1,6 +1,6 @@
 # C0_patient_treatment_ui
 
-## Version 1.2.0 (November 25, 2025)
+## Version 1.2.0 (February 10, 2026)
 
  - Fix development environment to use the new docker image,
   because openjdk is deprecated.

@@ -9,9 +9,9 @@
 package eu.valawai.c0_patient_treatment_ui.api.v1.treatments;
 
 import static io.restassured.RestAssured.given;
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -94,10 +94,10 @@ public class TreatmentsResourceTest {
 			final var copy = new ArrayList<>(entity.treatmentActions);
 			for (final var action : retrieved.actions) {
 
-				assertTrue("Undefined action", copy.remove(action.action));
+				assertTrue(copy.remove(action.action), "Undefined action");
 
 			}
-			assertTrue("Not obtained all the action", copy.isEmpty());
+			assertTrue(copy.isEmpty(), "Not obtained all the action");
 
 		});
 
@@ -334,10 +334,10 @@ public class TreatmentsResourceTest {
 			final var copy = new ArrayList<>(model.actions);
 			for (final var action : created.actions) {
 
-				assertTrue("Undefined action", copy.remove(action.action));
+				assertTrue(copy.remove(action.action), "Undefined action");
 
 			}
-			assertTrue("Not obtained all the action", copy.isEmpty());
+			assertTrue(copy.isEmpty(), "Not obtained all the action");
 			asserter.putData("TREATMENT_ID", created.id);
 			asserter.putData("PATIENT", patient);
 			asserter.putData("CREATED_TIME", created.createdTime);

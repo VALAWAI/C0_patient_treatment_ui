@@ -8,9 +8,9 @@
 
 package eu.valawai.c0_patient_treatment_ui.messages;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -208,7 +208,7 @@ public class TreatmentValueFeedbackManagerTest {
 				}
 			}
 
-			assertTrue("Not found stored action in the treatment", found);
+			assertTrue(found, "Not found stored action in the treatment");
 		});
 
 	}
