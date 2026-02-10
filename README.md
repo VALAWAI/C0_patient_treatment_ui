@@ -70,7 +70,8 @@ Here's how to quickly get it running:
 
     - **MOV:** [http://localhost:8081](http://localhost:8081)
     - **RabbitMQ UI:** [http://localhost:8082](http://localhost:8082) (credentials: `mov:password`)
-    - **Mail Catcher UI:** [http://localhost:8083](http://localhost/8083)
+    - **Mongo DB:** `localhost:27017` (credentials: `mov:password`)
+    - **PostgreSQL DB:** `localhost:5432` (credentials: `c0_patient_treatment_ui:password`)
 
     B. **As a Standalone Component (connecting to an existing MOV/RabbitMQ):**
     If you already have MOV running or want to connect to a remote RabbitMQ, you'll need a [`.env` file](https://docs.docker.com/compose/environment-variables/env-file/) with connection details. Create a `.env` file in the same directory as your `docker-compose.yml` like this:
