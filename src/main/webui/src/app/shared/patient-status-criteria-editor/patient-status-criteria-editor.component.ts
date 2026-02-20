@@ -6,7 +6,7 @@
   https://opensource.org/license/gpl-3-0/
 */
 
-import { Component, Output, EventEmitter, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnInit, OnDestroy, inject } from '@angular/core';
 import {
 	PatientStatusCriteria,
 	AgeRangeOption,
@@ -43,7 +43,7 @@ import {
 import { MatRadioModule } from '@angular/material/radio';
 import { Subscription } from 'rxjs';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
-import { NgFor, NgIf } from '@angular/common';
+
 
 @Component({
 	standalone: true,
@@ -51,8 +51,6 @@ import { NgFor, NgIf } from '@angular/common';
 	imports: [
 		ReactiveFormsModule,
 		MatRadioModule,
-		NgIf,
-		NgFor,
 		AgeRangeOptionNamePipe,
 		YesNoUnknownOptionNamePipe,
 		SurvivalOptionNamePipe,
@@ -126,6 +124,11 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 	public dataChanged = new EventEmitter<PatientStatusCriteria>();
 
 	/**
+	 * Form builder service.
+	 */
+	private readonly fb = inject(FormBuilder);
+
+	/**
 	 * The form control to edit the name.
 	 */
 	public form = this.fb.group({
@@ -152,15 +155,6 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 	 * Change name subscription.
 	 */
 	private formChanged: Subscription | null = null;
-
-	/**
-	 * Create the component.
-	 */
-	constructor(
-		private fb: FormBuilder
-	) {
-
-	}
 
 	/**
 	 * Initialize the component.
@@ -255,7 +249,7 @@ export class PatientStatusCriteriaEditorComponent implements OnInit, OnDestroy {
 					status.isCoerced = value.isCoerced || null;
 					status.isCompetent = value.isCompetent || null;
 					status.maca = value.maca || null;
-					status.nitLevel  = value.nitLevel|| null;
+					status.nitLevel = value.nitLevel || null;
 					this.dataChanged.emit(status);
 				}
 			}

@@ -13,7 +13,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuTrigger, MatMenuItem } from '@angular/material/menu';
 import { MatDivider } from '@angular/material/divider';
 import { TitleService } from '@app/shared/title.service';
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
 import { LOCALE_ID, Inject } from '@angular/core';
 
@@ -28,8 +28,7 @@ import { LOCALE_ID, Inject } from '@angular/core';
 		MatMenuItem,
 		MatDivider,
 		RouterLink,
-		AsyncPipe,
-		NgIf
+		AsyncPipe
 	],
 	templateUrl: './main.component.html',
 	styleUrl: './main.component.css'

@@ -6,8 +6,8 @@
   https://opensource.org/license/gpl-3-0/
 */
 
-import { AsyncPipe, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TitleService } from '@app/shared';
 import { ApiService, Patient, PatientStatusCriteria } from '@app/shared/api';
@@ -21,21 +21,44 @@ import { MessagesService } from '@app/shared/messages';
 
 @Component({
 	standalone: true,
-    selector: 'app-doctor-patient-edit',
-    imports: [
-        AsyncPipe,
-        NgIf,
-        AvvvatarsComponent,
-        PatientStatusCriteriaEditorComponent,
-        MatButton,
-        MatInputModule,
-        ReactiveFormsModule,
-        NgIf
-    ],
-    templateUrl: './edit.component.html',
-    styleUrl: './edit.component.css'
+	selector: 'app-doctor-patient-edit',
+	imports: [
+		AsyncPipe,
+		AvvvatarsComponent,
+		PatientStatusCriteriaEditorComponent,
+		MatButton,
+		MatInputModule,
+		ReactiveFormsModule
+	],
+	templateUrl: './edit.component.html',
+	styleUrl: './edit.component.css'
 })
 export class EditComponent implements OnInit {
+
+	/**
+	 * The service to change the title.
+	 */
+	private readonly title = inject(TitleService);
+
+	/**
+	 * The API service.
+	 */
+	private readonly api = inject(ApiService);
+
+	/**
+	 * The route of the page.
+	 */
+	private readonly route = inject(ActivatedRoute);
+
+	/**
+	 * The form builder service.
+	 */
+	private readonly fb = inject(FormBuilder);
+
+	/**
+	 * The service to notify the user by messages.
+	 */
+	private readonly notifier = inject(MessagesService);
 
 	/**
 	 * The patient to edit.
@@ -56,20 +79,6 @@ export class EditComponent implements OnInit {
 	 * The identifier of the patient that is editing.
 	 */
 	private patientId: number = 0;
-
-	/**
-	 *  Create the component.
-	 */
-	constructor(
-		private title: TitleService,
-		private api: ApiService,
-		private route: ActivatedRoute,
-		private fb: FormBuilder,
-		private notifier:MessagesService
-	) {
-
-	}
-
 
 	/**
 	 * Initialize the component.

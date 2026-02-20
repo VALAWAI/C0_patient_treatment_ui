@@ -37,7 +37,7 @@ else
 		DOCKER_BUILDKIT=1 docker build --pull -f src/dev/docker/Dockerfile -t valawai/c0_patient_treatment_ui:dev .
 	fi
 
-    DOCKER_ARGS="$DOCKER_ARGS --rm --name mov_build_docker_image --add-host=host.docker.internal:host-gateway -v /var/run/docker.sock:/var/run/docker.sock"
+    DOCKER_ARGS="$DOCKER_ARGS --rm --name c0_patient_treatment_ui_build_docker_image --add-host=host.docker.internal:host-gateway -v /var/run/docker.sock:/var/run/docker.sock"
 	docker run $DOCKER_ARGS -v "${HOME}/.m2":/root/.m2  -v "${PWD}":/app valawai/c0_patient_treatment_ui:dev ./mvnw clean package -DskipTests -Dquarkus.container-image.tag=$TAG
 	if [ $? -ne 0 ]; then
 		echo "Cannot build docker image"

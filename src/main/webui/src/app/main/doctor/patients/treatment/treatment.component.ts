@@ -6,8 +6,8 @@
   https://opensource.org/license/gpl-3-0/
 */
 
-import { AsyncPipe, NgClass, NgFor, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { AsyncPipe, NgClass } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TitleService } from '@app/shared';
 import { ApiService, TreatmentToAdd, Patient, PatientStatusCriteria, TREATMENT_ACTION_NAMES, TreatmentActionNamePipe } from '@app/shared/api';
@@ -44,11 +44,9 @@ export const AtLeastOneActionValidator: ValidatorFn = (control: AbstractControl)
 	selector: 'app-doctor-patient-edit',
 	imports: [
 		AsyncPipe,
-		NgIf,
 		MatStepperModule,
 		PatientStatusCriteriaEditorComponent,
 		ReactiveFormsModule,
-		NgFor,
 		MatSlideToggle,
 		TreatmentActionNamePipe,
 		NgClass,
@@ -64,6 +62,36 @@ export const AtLeastOneActionValidator: ValidatorFn = (control: AbstractControl)
 	]
 })
 export class TreatmentComponent implements OnInit {
+
+	/**
+	 * The service to change the title.
+	 */
+	private readonly title = inject(TitleService);
+
+	/**
+	 * The API service.
+	 */
+	private readonly api = inject(ApiService);
+
+	/**
+	 * The route of the page.
+	 */
+	private readonly route = inject(ActivatedRoute);
+
+	/**
+	 * The sercvice to change the route.
+	 */
+	private readonly router = inject(Router);
+
+	/**
+	 * The form builder service.
+	 */
+	private readonly fb = inject(FormBuilder);
+
+	/**
+	 * The service to notify the user by messages.
+	 */
+	private readonly notifier = inject(MessagesService);
 
 	/**
 	 * The names for the treatment actions.
@@ -93,14 +121,7 @@ export class TreatmentComponent implements OnInit {
 	/**
 	 *  Create the component.
 	 */
-	constructor(
-		private title: TitleService,
-		private api: ApiService,
-		private route: ActivatedRoute,
-		private router: Router,
-		private fb: FormBuilder,
-		private notifier: MessagesService
-	) {
+	constructor() {
 
 		for (var name of TREATMENT_ACTION_NAMES) {
 

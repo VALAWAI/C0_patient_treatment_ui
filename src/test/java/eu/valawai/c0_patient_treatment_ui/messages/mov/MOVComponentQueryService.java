@@ -54,13 +54,12 @@ public class MOVComponentQueryService {
 	/**
 	 * Ask to the MOV about the information of the component.
 	 *
-	 * @return the information of the component or {2code null} if cannot obtain it.
+	 * @return the information of the component or {@code null} if cannot obtain it.
 	 */
 	public JsonObject queryComponentInformation() {
 
 		final var query = new QueryComponentsPayload();
 		this.queryId = query.id;
-		final var semaphore = new Semaphore(0);
 		this.component = null;
 		Uni.createFrom().completionStage(this.query.send(query)).subscribe().with(any -> {
 

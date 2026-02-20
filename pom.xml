@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>eu.valawai</groupId>
 	<artifactId>c0-patient-treatment-ui</artifactId>
-	<version>1.1.0</version>
+	<version>1.2.0</version>
 	<properties>
-		<compiler-plugin.version>3.13.0</compiler-plugin.version>
+		<clean-plugin.version>3.5.0</clean-plugin.version>
+		<compiler-plugin.version>3.14.0</compiler-plugin.version>
 		<maven.compiler.release>21</maven.compiler.release>
+		<maven.compiler.source>21</maven.compiler.source> 
+		<maven.compiler.target>21</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
 		<quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-		<quarkus.platform.version>3.21.4</quarkus.platform.version>
+		<quarkus.platform.version>3.31.1</quarkus.platform.version>
 		<skipITs>true</skipITs>
-		<surefire-plugin.version>3.5.0</surefire-plugin.version>
+		<surefire-plugin.version>3.5.4</surefire-plugin.version>
 		<resources-plugin.version>3.3.1</resources-plugin.version>
-		<jacoco.version>0.8.12</jacoco.version>
-		<quarkus.quinoa.version>2.5.4</quarkus.quinoa.version>
+		<jacoco.version>0.8.13</jacoco.version>
+		<quarkus.quinoa.version>2.7.1</quarkus.quinoa.version>
+		<quarkus-quickjs4j.version>0.0.3</quarkus-quickjs4j.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-	 			<groupId>${quarkus.platform.group-id}</groupId>
+				<groupId>${quarkus.platform.group-id}</groupId>
 				<artifactId>${quarkus.platform.artifact-id}</artifactId>
 				<version>${quarkus.platform.version}</version>
 				<type>pom</type>
@@ -82,13 +86,18 @@
 			<version>${quarkus.quinoa.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>io.quarkiverse.quickjs4j</groupId>
+			<artifactId>quarkus-quickjs4j</artifactId>
+			<version>${quarkus-quickjs4j.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-junit5</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.quarkus</groupId>
-			<artifactId>quarkus-junit5-mockito</artifactId>
+			<artifactId>quarkus-junit-mockito</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -137,6 +146,13 @@
 				</executions>
 			</plugin>
 			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${compiler-plugin.version}</version>
+				<configuration>
+					<parameters>true</parameters>
+				</configuration>
+			</plugin>
+			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>${resources-plugin.version}</version>
 				<executions>
@@ -161,24 +177,22 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${compiler-plugin.version}</version>
-				<configuration>
-					<parameters>true</parameters>
-				</configuration>
-			</plugin>
-			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>${surefire-plugin.version}</version>
 				<configuration>
+					<argLine>@{argLine} --add-opens java.base/java.lang=ALL-UNNAMED
+	                    --add-opens java.base/java.io=ALL-UNNAMED
+	                    --add-opens java.base/java.util=ALL-UNNAMED
+	                    --add-opens java.base/java.base=ALL-UNNAMED</argLine>
 					<systemPropertyVariables>
-						<java.util.logging.manager>
-							org.jboss.logmanager.LogManager</java.util.logging.manager>
+						<java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
 						<maven.home>${maven.home}</maven.home>
 					</systemPropertyVariables>
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
 				<version>${surefire-plugin.version}</version>
 				<executions>
@@ -191,12 +205,11 @@
 				</executions>
 				<configuration>
 					<systemPropertyVariables>
-						<native.image.path>
-							${project.build.directory}/${project.build.finalName}-runner</native.image.path>
-						<java.util.logging.manager>
-							org.jboss.logmanager.LogManager</java.util.logging.manager>
+						<native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
+						<java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
 						<maven.home>${maven.home}</maven.home>
 					</systemPropertyVariables>
+					<argLine>@{argLine}</argLine>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -211,8 +224,7 @@
 						</goals>
 						<configuration>
 							<exclClassLoaders>*QuarkusClassLoader</exclClassLoaders>
-							<destFile>
-								${project.build.directory}/jacoco-quarkus.exec</destFile>
+							<destFile>${project.build.directory}/jacoco-quarkus.exec</destFile>
 							<append>true</append>
 						</configuration>
 					</execution>
@@ -220,7 +232,6 @@
 			</plugin>
 		</plugins>
 	</build>
-
 	<profiles>
 		<profile>
 			<id>native</id>
@@ -230,6 +241,7 @@
 				</property>
 			</activation>
 			<properties>
+				<quarkus.package.jar.enabled>false</quarkus.package.jar.enabled>
 				<skipITs>false</skipITs>
 				<quarkus.native.enabled>true</quarkus.native.enabled>
 			</properties>

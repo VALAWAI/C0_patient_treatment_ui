@@ -10,6 +10,9 @@ package eu.valawai.c0_patient_treatment_ui;
 
 import java.util.regex.Pattern;
 
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+
+import io.quarkus.logging.Log;
 import io.vertx.mutiny.core.http.HttpHeaders;
 import io.vertx.mutiny.ext.web.Router;
 import io.vertx.mutiny.ext.web.RoutingContext;
@@ -27,13 +30,20 @@ public class OnStart {
 	/**
 	 * The pattern to check the on page resource.
 	 */
-	private static final Pattern INDEX_PATTERN = Pattern.compile(".*(/[a-z]{2})(/.*)?");
+	private static final Pattern INDEX_PATTERN = Pattern.compile("(?:\\/|^)([a-z]{2})(?:[_\\/-]|$)");
 
 	/**
 	 * The name of the context variable that is used to mark that the request is
 	 * re-routing.
 	 */
 	private static final String REROUTING_SOURCE = "re-routing-source";
+
+		/**
+	 * The UI root path.
+	 */
+	@ConfigProperty(name = "quarkus.http.root-path", defaultValue = "/")
+	String uiRootPath;
+
 
 	/**
 	 * Called when the application has been started.
@@ -42,7 +52,7 @@ public class OnStart {
 	 */
 	public void init(@Observes Router router) {
 
-		router.getWithRegex("/.*").last().handler(rc -> {
+		router.get().last().handler(rc -> {
 
 			final var path = rc.normalizedPath();
 			if (path.endsWith("env.js")) {
@@ -60,10 +70,12 @@ public class OnStart {
 				}
 				// Redirect for one Page Angular
 				rc.put(REROUTING_SOURCE, path);
-				rc.reroute("/" + lang + "/index.html");
+				Log.infov("Rerouting {0} to {1}{2}/index.html", path, this.uiRootPath, lang);
+				rc.reroute(this.uiRootPath + lang + "/index.html");
 
 			} else {
 				// Must be handled by another
+				Log.warnv("Unexpected routing to {0}", path);
 				rc.next();
 			}
 

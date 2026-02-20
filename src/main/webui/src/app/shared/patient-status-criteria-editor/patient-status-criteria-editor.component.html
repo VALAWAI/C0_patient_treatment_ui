@@ -1,93 +1,107 @@
 <form class="max-w-3xl w-full" [formGroup]="form" class="flex flex-col">
-	<div
-		class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
-		<div class="max-w-md text-wrap text-lg font-semibold"
-			i18n="The question to ask about the age range of a patient@@shared_patient-status-criteria-editor_age-range-question">Patient
+  <div
+    class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
+    <div class="max-w-md text-wrap text-lg font-semibold"
+      i18n="The question to ask about the age range of a patient@@shared_patient-status-criteria-editor_age-range-question">Patient
 			age range</div>
-		<div class="grow"></div>
-		<div class="max-w-xs">
-			<mat-radio-group
-				*ngIf="form.controls.ageRange.enabled; else noAgeRange"
-				aria-labelledby="example-radio-group-label"
-				formControlName="ageRange"
-				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button *ngFor="let name of AGE_RANGE_OPTION_NAMES"
-				[value]="name">{{name|ageRangeOptionName}}</mat-radio-button> </mat-radio-group>
-			<ng-template #noAgeRange>
-			{{form.controls.ageRange.value|ageRangeOptionName}} </ng-template>
-		</div>
-	</div>
-	<div
-		class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
-		<div class="max-w-md text-wrap text-lg font-semibold"
-			i18n="The question to ask about the CCD of a patient@@shared_patient-status-criteria-editor_ccd-question">
+    <div class="grow"></div>
+    <div class="max-w-xs">
+      @if (form.controls.ageRange.enabled) {
+        <mat-radio-group
+          aria-labelledby="example-radio-group-label"
+          formControlName="ageRange"
+          class="flex flex-row flex-wrap gap-2 place-content-center">
+          @for (name of AGE_RANGE_OPTION_NAMES; track name) {
+            <mat-radio-button
+            [value]="name">{{name|ageRangeOptionName}}</mat-radio-button>
+          } </mat-radio-group>
+        } @else {
+          {{form.controls.ageRange.value|ageRangeOptionName}}
+        }
+      </div>
+    </div>
+    <div
+      class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
+      <div class="max-w-md text-wrap text-lg font-semibold"
+        i18n="The question to ask about the CCD of a patient@@shared_patient-status-criteria-editor_ccd-question">
 			Complex Cronic Disease (CCD)</div>
-		<div class="grow"></div>
-		<div class="max-w-xs">
-			<mat-radio-group *ngIf="form.controls.ccd.enabled; else noCCD"
-				aria-labelledby="example-radio-group-label" formControlName="ccd"
-				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button *ngFor="let name of YES_NO_UNKNOWN_OPTION_NAMES"
-				[value]="name">{{name|yesNoUnknownOptionName}}</mat-radio-button> </mat-radio-group>
-			<ng-template #noCCD>
-			{{form.controls.ccd.value|yesNoUnknownOptionName}} </ng-template>
-		</div>
-	</div>
-	<div
-		class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
-		<div class="max-w-md">
-			<div class="text-wrap text-lg font-semibold"
-				i18n="The question to ask about the age range of a patient@@shared_patient-status-criteria-editor_maca-question">
+      <div class="grow"></div>
+      <div class="max-w-xs">
+        @if (form.controls.ccd.enabled) {
+          <mat-radio-group
+            aria-labelledby="example-radio-group-label" formControlName="ccd"
+            class="flex flex-row flex-wrap gap-2 place-content-center">
+            @for (name of YES_NO_UNKNOWN_OPTION_NAMES; track name) {
+              <mat-radio-button
+              [value]="name">{{name|yesNoUnknownOptionName}}</mat-radio-button>
+            } </mat-radio-group>
+          } @else {
+            {{form.controls.ccd.value|yesNoUnknownOptionName}}
+          }
+        </div>
+      </div>
+      <div
+        class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
+        <div class="max-w-md">
+          <div class="text-wrap text-lg font-semibold"
+            i18n="The question to ask about the age range of a patient@@shared_patient-status-criteria-editor_maca-question">
 				MACA patient (advance chronic disease and need for palliative care)</div>
-			<div class="text-wrap font-light"
-				i18n="The explanation to ask about the MACA of a patient@@shared_patient-status-criteria-editor_maca-question_explanation">
+          <div class="text-wrap font-light"
+            i18n="The explanation to ask about the MACA of a patient@@shared_patient-status-criteria-editor_maca-question_explanation">
 				This is a classification of patients with a clinical profile similar
 				to PCC but of greater severity and with a life prognosis of less
 				than 12 months. Patients classified as MACA = patients whose The
 				answer to the next question is NO: do you It would be surprising if
 				this patient died in less than 12 months?</div>
-		</div>
-		<div class="grow"></div>
-		<div class="max-w-xs flex flex-col items-end">
-			<mat-radio-group *ngIf="form.controls.maca.enabled; else noMACA"
-				aria-labelledby="example-radio-group-label" formControlName="maca"
-				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button *ngFor="let name of YES_NO_UNKNOWN_OPTION_NAMES"
-				[value]="name">{{name|yesNoUnknownOptionName}}</mat-radio-button> </mat-radio-group>
-			<ng-template #noMACA>
-			{{form.controls.maca.value|yesNoUnknownOptionName}} </ng-template>
-			<div class="text-wrap text-center font-light"
-				i18n="The explanation to MACA answer of a patient@@shared_patient-status-criteria-editor_maca-answer_explanation">
+        </div>
+        <div class="grow"></div>
+        <div class="max-w-xs flex flex-col items-end">
+          @if (form.controls.maca.enabled) {
+            <mat-radio-group
+              aria-labelledby="example-radio-group-label" formControlName="maca"
+              class="flex flex-row flex-wrap gap-2 place-content-center">
+              @for (name of YES_NO_UNKNOWN_OPTION_NAMES; track name) {
+                <mat-radio-button
+                [value]="name">{{name|yesNoUnknownOptionName}}</mat-radio-button>
+              } </mat-radio-group>
+            } @else {
+              {{form.controls.maca.value|yesNoUnknownOptionName}}
+            }
+            <div class="text-wrap text-center font-light"
+              i18n="The explanation to MACA answer of a patient@@shared_patient-status-criteria-editor_maca-answer_explanation">
 				(Would you be surprised if the patient died in less than 12 months?
 				If the answer is NO, the patient is MACA)</div>
-		</div>
-	</div>
-	<div
-		class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
-		<div class="max-w-md text-wrap text-lg font-semibold"
-			i18n="The question to ask about the expected-survival of a patient@@shared_patient-status-criteria-editor_expected-survival-question">
+          </div>
+        </div>
+        <div
+          class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
+          <div class="max-w-md text-wrap text-lg font-semibold"
+            i18n="The question to ask about the expected-survival of a patient@@shared_patient-status-criteria-editor_expected-survival-question">
 			Life expectancy / Expected survival (in months)</div>
-		<div class="grow"></div>
-		<div class="max-w-xs">
-			<mat-radio-group
-				*ngIf="form.controls.expectedSurvival.enabled; else noExpectedSurvival"
-				aria-labelledby="example-radio-group-label"
-				formControlName="expectedSurvival"
-				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button *ngFor="let name of SURVIVAL_OPTION_NAMES"
-				[value]="name">{{name|survivalOptionName}}</mat-radio-button> </mat-radio-group>
-			<ng-template #noExpectedSurvival>
-			{{form.controls.expectedSurvival.value|survivalOptionName}} </ng-template>
-		</div>
-	</div>
-	<div
-		class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
-		<div class="max-w-md">
-			<div class="text-wrap text-lg font-semibold"
-				i18n="The question to ask about the frailVIG of a patient@@shared_patient-status-criteria-editor_frail-vig-question">
+          <div class="grow"></div>
+          <div class="max-w-xs">
+            @if (form.controls.expectedSurvival.enabled) {
+              <mat-radio-group
+                aria-labelledby="example-radio-group-label"
+                formControlName="expectedSurvival"
+                class="flex flex-row flex-wrap gap-2 place-content-center">
+                @for (name of SURVIVAL_OPTION_NAMES; track name) {
+                  <mat-radio-button
+                  [value]="name">{{name|survivalOptionName}}</mat-radio-button>
+                } </mat-radio-group>
+              } @else {
+                {{form.controls.expectedSurvival.value|survivalOptionName}}
+              }
+            </div>
+          </div>
+          <div
+            class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
+            <div class="max-w-md">
+              <div class="text-wrap text-lg font-semibold"
+                i18n="The question to ask about the frailVIG of a patient@@shared_patient-status-criteria-editor_frail-vig-question">
 				Frail-VIG fragility index (Spict scale)</div>
-			<div class="text-wrap font-light"
-				i18n="The explanation to ask about the MACA of a patient@@shared_patient-status-criteria-editor_frail-vig-question_explanation">
+              <div class="text-wrap font-light"
+                i18n="The explanation to ask about the MACA of a patient@@shared_patient-status-criteria-editor_frail-vig-question_explanation">
 				It helps identify the most fragile people who have one or more
 				health problems. It is based on the comprehensive geriatric
 				assessment (applicable to non-geriatric patients) that evaluates
@@ -96,255 +110,291 @@
 				syndrome, falls, ulcers, polypharmacy, dysphagia), symptoms (pain or
 				dyspnea) and diseases oncological, respiratory, cardiac,
 				neurological, digestive or renal).</div>
-		</div>
-		<div class="grow"></div>
-		<div class="max-w-xs">
-			<mat-radio-group
-				*ngIf="form.controls.frailVIG.enabled; else noFrailVIG"
-				aria-labelledby="example-radio-group-label"
-				formControlName="frailVIG"
-				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button *ngFor="let name of SPICT_SCALE_NAMES"
-				[value]="name">{{name|spictScaleName}}</mat-radio-button> </mat-radio-group>
-			<ng-template #noFrailVIG>
-			{{form.controls.frailVIG.value|spictScaleName}} </ng-template>
-		</div>
-	</div>
-	<div
-		class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
-		<div class="max-w-md text-wrap text-lg font-semibold"
-			i18n="The question to ask about the clinical-risk-group of a patient@@shared_patient-status-criteria-editor_clinical-risk-group-question">
+            </div>
+            <div class="grow"></div>
+            <div class="max-w-xs">
+              @if (form.controls.frailVIG.enabled) {
+                <mat-radio-group
+                  aria-labelledby="example-radio-group-label"
+                  formControlName="frailVIG"
+                  class="flex flex-row flex-wrap gap-2 place-content-center">
+                  @for (name of SPICT_SCALE_NAMES; track name) {
+                    <mat-radio-button
+                    [value]="name">{{name|spictScaleName}}</mat-radio-button>
+                  } </mat-radio-group>
+                } @else {
+                  {{form.controls.frailVIG.value|spictScaleName}}
+                }
+              </div>
+            </div>
+            <div
+              class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
+              <div class="max-w-md text-wrap text-lg font-semibold"
+                i18n="The question to ask about the clinical-risk-group of a patient@@shared_patient-status-criteria-editor_clinical-risk-group-question">
 			Clinical Risk Group</div>
-		<div class="grow"></div>
-		<div class="max-w-xs">
-			<mat-radio-group
-				*ngIf="form.controls.clinicalRiskGroup.enabled; else noClinicalRiskGroup"
-				aria-labelledby="example-radio-group-label"
-				formControlName="clinicalRiskGroup"
-				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button
-				*ngFor="let name of CLINICAL_RISK_GROUP_OPTION_NAMES" [value]="name">{{name|clinicalRiskGroupOptionName}}</mat-radio-button>
-			</mat-radio-group>
-			<ng-template #noClinicalRiskGroup>
-			{{form.controls.clinicalRiskGroup.value|clinicalRiskGroupOptionName}}
-			</ng-template>
-		</div>
-	</div>
-	<div
-		class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
-		<div class="max-w-md text-wrap text-lg font-semibold"
-			i18n="The question to ask about the Has social support of a patient@@shared_patient-status-criteria-editor_has-social-support-question">
+              <div class="grow"></div>
+              <div class="max-w-xs">
+                @if (form.controls.clinicalRiskGroup.enabled) {
+                  <mat-radio-group
+                    aria-labelledby="example-radio-group-label"
+                    formControlName="clinicalRiskGroup"
+                    class="flex flex-row flex-wrap gap-2 place-content-center">
+                    @for (name of CLINICAL_RISK_GROUP_OPTION_NAMES; track name) {
+                      <mat-radio-button
+                      [value]="name">{{name|clinicalRiskGroupOptionName}}</mat-radio-button>
+                    }
+                  </mat-radio-group>
+                } @else {
+                  {{form.controls.clinicalRiskGroup.value|clinicalRiskGroupOptionName}}
+                }
+              </div>
+            </div>
+            <div
+              class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
+              <div class="max-w-md text-wrap text-lg font-semibold"
+                i18n="The question to ask about the Has social support of a patient@@shared_patient-status-criteria-editor_has-social-support-question">
 			Does the patient have social support?</div>
-		<div class="grow"></div>
-		<div class="max-w-xs">
-			<mat-radio-group
-				*ngIf="form.controls.hasSocialSupport.enabled; else noHasSocialSupport"
-				aria-labelledby="example-radio-group-label"
-				formControlName="hasSocialSupport"
-				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button *ngFor="let name of YES_NO_UNKNOWN_OPTION_NAMES"
-				[value]="name">{{name|yesNoUnknownOptionName}}</mat-radio-button> </mat-radio-group>
-			<ng-template #noHasSocialSupport>
-			{{form.controls.hasSocialSupport.value|yesNoUnknownOptionName}} </ng-template>
-		</div>
-	</div>
-	<div
-		class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
-		<div class="max-w-md">
-			<div class="text-wrap text-lg font-semibold"
-				i18n="The question to ask about the frailVIG of a patient@@shared_patient-status-criteria-editor_independence-at-admission-question">
+              <div class="grow"></div>
+              <div class="max-w-xs">
+                @if (form.controls.hasSocialSupport.enabled) {
+                  <mat-radio-group
+                    aria-labelledby="example-radio-group-label"
+                    formControlName="hasSocialSupport"
+                    class="flex flex-row flex-wrap gap-2 place-content-center">
+                    @for (name of YES_NO_UNKNOWN_OPTION_NAMES; track name) {
+                      <mat-radio-button
+                      [value]="name">{{name|yesNoUnknownOptionName}}</mat-radio-button>
+                    } </mat-radio-group>
+                  } @else {
+                    {{form.controls.hasSocialSupport.value|yesNoUnknownOptionName}}
+                  }
+                </div>
+              </div>
+              <div
+                class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
+                <div class="max-w-md">
+                  <div class="text-wrap text-lg font-semibold"
+                    i18n="The question to ask about the frailVIG of a patient@@shared_patient-status-criteria-editor_independence-at-admission-question">
 				Barthel index</div>
-			<div class="text-wrap font-light"
-				i18n="The explanation to ask about the MACA of a patient@@shared_patient-status-criteria-editor_independence-at-admission-question_explanation">
+                  <div class="text-wrap font-light"
+                    i18n="The explanation to ask about the MACA of a patient@@shared_patient-status-criteria-editor_independence-at-admission-question_explanation">
 				Functional independence for basic activities of daily living at
 				admission.</div>
-		</div>
-		<div class="grow"></div>
-		<div class="max-w-xs">
-			<mat-radio-group
-				*ngIf="form.controls.independenceAtAdmission.enabled; else noIndependenceAtAdmission"
-				aria-labelledby="example-radio-group-label"
-				formControlName="independenceAtAdmission"
-				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button *ngFor="let name of BARTHEL_INDEX_NAMES"
-				[value]="name">{{name|barthelIndexName}}</mat-radio-button> </mat-radio-group>
-			<ng-template #noIndependenceAtAdmission>
-			{{form.controls.independenceAtAdmission.value|barthelIndexName}} </ng-template>
-		</div>
-	</div>
+                </div>
+                <div class="grow"></div>
+                <div class="max-w-xs">
+                  @if (form.controls.independenceAtAdmission.enabled) {
+                    <mat-radio-group
+                      aria-labelledby="example-radio-group-label"
+                      formControlName="independenceAtAdmission"
+                      class="flex flex-row flex-wrap gap-2 place-content-center">
+                      @for (name of BARTHEL_INDEX_NAMES; track name) {
+                        <mat-radio-button
+                        [value]="name">{{name|barthelIndexName}}</mat-radio-button>
+                      } </mat-radio-group>
+                    } @else {
+                      {{form.controls.independenceAtAdmission.value|barthelIndexName}}
+                    }
+                  </div>
+                </div>
 
-	<div
-		class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
-		<div class="max-w-md">
-			<div class="text-wrap text-lg font-semibold"
-				i18n="The question to ask about the frailVIG of a patient@@shared_patient-status-criteria-editor_independence-instrumental-activities-question">
+                <div
+                  class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
+                  <div class="max-w-md">
+                    <div class="text-wrap text-lg font-semibold"
+                      i18n="The question to ask about the frailVIG of a patient@@shared_patient-status-criteria-editor_independence-instrumental-activities-question">
 				Lawton index</div>
-			<div class="text-wrap font-light"
-				i18n="The explanation to ask about the MACA of a patient@@shared_patient-status-criteria-editor_independence-instrumental-activities-question_explanation">
+                    <div class="text-wrap font-light"
+                      i18n="The explanation to ask about the MACA of a patient@@shared_patient-status-criteria-editor_independence-instrumental-activities-question_explanation">
 				Independence instrumental activities.</div>
-		</div>
-		<div class="grow"></div>
-		<div class="max-w-xs">
-			<mat-radio-group
-				*ngIf="form.controls.independenceInstrumentalActivities.enabled; else noIndependenceInstrumentalActivities"
-				aria-labelledby="example-radio-group-label"
-				formControlName="independenceInstrumentalActivities"
-				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button *ngFor="let name of LAWTON_INDEX_NAMES"
-				[value]="name">{{name|lawtonIndexName}}</mat-radio-button> </mat-radio-group>
-			<ng-template #noIndependenceInstrumentalActivities>
-			{{form.controls.independenceInstrumentalActivities.value|lawtonIndexName}}
-			</ng-template>
-		</div>
-	</div>
-	<div
-		class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
-		<div class="max-w-md text-wrap text-lg font-semibold"
-			i18n="The question to ask about the has advance directives of a patient@@shared_patient-status-criteria-editor_has-advance-directives-question">
+                  </div>
+                  <div class="grow"></div>
+                  <div class="max-w-xs">
+                    @if (form.controls.independenceInstrumentalActivities.enabled) {
+                      <mat-radio-group
+                        aria-labelledby="example-radio-group-label"
+                        formControlName="independenceInstrumentalActivities"
+                        class="flex flex-row flex-wrap gap-2 place-content-center">
+                        @for (name of LAWTON_INDEX_NAMES; track name) {
+                          <mat-radio-button
+                          [value]="name">{{name|lawtonIndexName}}</mat-radio-button>
+                        } </mat-radio-group>
+                      } @else {
+                        {{form.controls.independenceInstrumentalActivities.value|lawtonIndexName}}
+                      }
+                    </div>
+                  </div>
+                  <div
+                    class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
+                    <div class="max-w-md text-wrap text-lg font-semibold"
+                      i18n="The question to ask about the has advance directives of a patient@@shared_patient-status-criteria-editor_has-advance-directives-question">
 			Does the patient have advance directives?</div>
-		<div class="grow"></div>
-		<div class="max-w-xs">
-			<mat-radio-group
-				*ngIf="form.controls.hasAdvanceDirectives.enabled; else noHasAdvanceDirectives"
-				aria-labelledby="example-radio-group-label"
-				formControlName="hasAdvanceDirectives"
-				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button *ngFor="let name of YES_NO_UNKNOWN_OPTION_NAMES"
-				[value]="name">{{name|yesNoUnknownOptionName}}</mat-radio-button> </mat-radio-group>
-			<ng-template #noHasAdvanceDirectives>
-			{{form.controls.hasAdvanceDirectives.value|yesNoUnknownOptionName}} </ng-template>
-		</div>
-	</div>
-	<div
-		class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
-		<div class="max-w-md text-wrap text-lg font-semibold"
-			i18n="The question to ask about the is competent of a patient@@shared_patient-status-criteria-editor_is-competent-question">
+                    <div class="grow"></div>
+                    <div class="max-w-xs">
+                      @if (form.controls.hasAdvanceDirectives.enabled) {
+                        <mat-radio-group
+                          aria-labelledby="example-radio-group-label"
+                          formControlName="hasAdvanceDirectives"
+                          class="flex flex-row flex-wrap gap-2 place-content-center">
+                          @for (name of YES_NO_UNKNOWN_OPTION_NAMES; track name) {
+                            <mat-radio-button
+                            [value]="name">{{name|yesNoUnknownOptionName}}</mat-radio-button>
+                          } </mat-radio-group>
+                        } @else {
+                          {{form.controls.hasAdvanceDirectives.value|yesNoUnknownOptionName}}
+                        }
+                      </div>
+                    </div>
+                    <div
+                      class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
+                      <div class="max-w-md text-wrap text-lg font-semibold"
+                        i18n="The question to ask about the is competent of a patient@@shared_patient-status-criteria-editor_is-competent-question">
 			Is the patient competent to understand the instructions of health
 			personnel?</div>
-		<div class="grow"></div>
-		<div class="max-w-xs">
-			<mat-radio-group
-				*ngIf="form.controls.isCompetent.enabled; else noIsCompetent"
-				aria-labelledby="example-radio-group-label"
-				formControlName="isCompetent"
-				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button *ngFor="let name of YES_NO_UNKNOWN_OPTION_NAMES"
-				[value]="name">{{name|yesNoUnknownOptionName}}</mat-radio-button> </mat-radio-group>
-			<ng-template #noIsCompetent>
-			{{form.controls.isCompetent.value|yesNoUnknownOptionName}} </ng-template>
-		</div>
-	</div>
-	<div
-		class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
-		<div class="max-w-md text-wrap text-lg font-semibold"
-			i18n="The question to ask about the has been informed of a patient@@shared_patient-status-criteria-editor_has-been-informed-question">
+                      <div class="grow"></div>
+                      <div class="max-w-xs">
+                        @if (form.controls.isCompetent.enabled) {
+                          <mat-radio-group
+                            aria-labelledby="example-radio-group-label"
+                            formControlName="isCompetent"
+                            class="flex flex-row flex-wrap gap-2 place-content-center">
+                            @for (name of YES_NO_UNKNOWN_OPTION_NAMES; track name) {
+                              <mat-radio-button
+                              [value]="name">{{name|yesNoUnknownOptionName}}</mat-radio-button>
+                            } </mat-radio-group>
+                          } @else {
+                            {{form.controls.isCompetent.value|yesNoUnknownOptionName}}
+                          }
+                        </div>
+                      </div>
+                      <div
+                        class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
+                        <div class="max-w-md text-wrap text-lg font-semibold"
+                          i18n="The question to ask about the has been informed of a patient@@shared_patient-status-criteria-editor_has-been-informed-question">
 			To the patient or his/her referent authorized has been informed of
 			possible treatments and the consequences of receiving it or No?</div>
-		<div class="grow"></div>
-		<div class="max-w-xs">
-			<mat-radio-group
-				*ngIf="form.controls.hasBeenInformed.enabled; else noHasBeenInformed"
-				aria-labelledby="example-radio-group-label"
-				formControlName="hasBeenInformed"
-				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button *ngFor="let name of YES_NO_UNKNOWN_OPTION_NAMES"
-				[value]="name">{{name|yesNoUnknownOptionName}}</mat-radio-button> </mat-radio-group>
-			<ng-template #noHasBeenInformed>
-			{{form.controls.hasBeenInformed.value|yesNoUnknownOptionName}} </ng-template>
-		</div>
-	</div>
-	<div
-		class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
-		<div class="max-w-md text-wrap text-lg font-semibold"
-			i18n="The question to ask about the is coerced of a patient@@shared_patient-status-criteria-editor_is-coerced-question">
+                        <div class="grow"></div>
+                        <div class="max-w-xs">
+                          @if (form.controls.hasBeenInformed.enabled) {
+                            <mat-radio-group
+                              aria-labelledby="example-radio-group-label"
+                              formControlName="hasBeenInformed"
+                              class="flex flex-row flex-wrap gap-2 place-content-center">
+                              @for (name of YES_NO_UNKNOWN_OPTION_NAMES; track name) {
+                                <mat-radio-button
+                                [value]="name">{{name|yesNoUnknownOptionName}}</mat-radio-button>
+                              } </mat-radio-group>
+                            } @else {
+                              {{form.controls.hasBeenInformed.value|yesNoUnknownOptionName}}
+                            }
+                          </div>
+                        </div>
+                        <div
+                          class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
+                          <div class="max-w-md text-wrap text-lg font-semibold"
+                            i18n="The question to ask about the is coerced of a patient@@shared_patient-status-criteria-editor_is-coerced-question">
 			Is it detected that the patient has seen coerced/pressured by third
 			parties?</div>
-		<div class="grow"></div>
-		<div class="max-w-xs">
-			<mat-radio-group
-				*ngIf="form.controls.isCoerced.enabled; else noIsCoerced"
-				aria-labelledby="example-radio-group-label"
-				formControlName="isCoerced"
-				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button *ngFor="let name of YES_NO_UNKNOWN_OPTION_NAMES"
-				[value]="name">{{name|yesNoUnknownOptionName}}</mat-radio-button> </mat-radio-group>
-			<ng-template #noIsCoerced>
-			{{form.controls.isCoerced.value|yesNoUnknownOptionName}} </ng-template>
-		</div>
-	</div>
-	<div
-		class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
-		<div class="max-w-md text-wrap text-lg font-semibold"
-			i18n="The question to ask about the has cognitive impairment of a patient@@shared_patient-status-criteria-editor_has-cognitive-impairment-question">
+                          <div class="grow"></div>
+                          <div class="max-w-xs">
+                            @if (form.controls.isCoerced.enabled) {
+                              <mat-radio-group
+                                aria-labelledby="example-radio-group-label"
+                                formControlName="isCoerced"
+                                class="flex flex-row flex-wrap gap-2 place-content-center">
+                                @for (name of YES_NO_UNKNOWN_OPTION_NAMES; track name) {
+                                  <mat-radio-button
+                                  [value]="name">{{name|yesNoUnknownOptionName}}</mat-radio-button>
+                                } </mat-radio-group>
+                              } @else {
+                                {{form.controls.isCoerced.value|yesNoUnknownOptionName}}
+                              }
+                            </div>
+                          </div>
+                          <div
+                            class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
+                            <div class="max-w-md text-wrap text-lg font-semibold"
+                              i18n="The question to ask about the has cognitive impairment of a patient@@shared_patient-status-criteria-editor_has-cognitive-impairment-question">
 			Does the patient have cognitive impairment?</div>
-		<div class="grow"></div>
-		<div class="max-w-xs">
-			<mat-radio-group
-				*ngIf="form.controls.hasCognitiveImpairment.enabled; else noHasCognitiveImpairment"
-				aria-labelledby="example-radio-group-label"
-				formControlName="hasCognitiveImpairment"
-				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button
-				*ngFor="let name of COGNITIVE_IMPAIRMENT_LEVEL_NAMES" [value]="name">{{name|cognitiveImpairmentLevelName}}</mat-radio-button>
-			</mat-radio-group>
-			<ng-template #noHasCognitiveImpairment>
-			{{form.controls.hasCognitiveImpairment.value|cognitiveImpairmentLevelName}}
-			</ng-template>
-		</div>
-	</div>
-	<div
-		class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
-		<div class="max-w-md text-wrap text-lg font-semibold"
-			i18n="The question to ask about the emotinal state of a patient@@shared_patient-status-criteria-editor_emotional-state-question">
+                            <div class="grow"></div>
+                            <div class="max-w-xs">
+                              @if (form.controls.hasCognitiveImpairment.enabled) {
+                                <mat-radio-group
+                                  aria-labelledby="example-radio-group-label"
+                                  formControlName="hasCognitiveImpairment"
+                                  class="flex flex-row flex-wrap gap-2 place-content-center">
+                                  @for (name of COGNITIVE_IMPAIRMENT_LEVEL_NAMES; track name) {
+                                    <mat-radio-button
+                                    [value]="name">{{name|cognitiveImpairmentLevelName}}</mat-radio-button>
+                                  }
+                                </mat-radio-group>
+                              } @else {
+                                {{form.controls.hasCognitiveImpairment.value|cognitiveImpairmentLevelName}}
+                              }
+                            </div>
+                          </div>
+                          <div
+                            class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
+                            <div class="max-w-md text-wrap text-lg font-semibold"
+                              i18n="The question to ask about the emotinal state of a patient@@shared_patient-status-criteria-editor_emotional-state-question">
 			Emotional state. Does the patient have emotional discomfort?</div>
-		<div class="grow"></div>
-		<div class="max-w-xs">
-			<mat-radio-group
-				*ngIf="form.controls.hasEmocionalPain.enabled; else noHasEmocionalPain"
-				aria-labelledby="example-radio-group-label"
-				formControlName="hasEmocionalPain"
-				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button *ngFor="let name of YES_NO_UNKNOWN_OPTION_NAMES"
-				[value]="name">{{name|yesNoUnknownOptionName}}</mat-radio-button> </mat-radio-group>
-			<ng-template #noHasEmocionalPain>
-			{{form.controls.hasEmocionalPain.value|yesNoUnknownOptionName}} </ng-template>
-		</div>
-	</div>
-	<div
-		class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
-		<div class="max-w-md text-wrap text-lg font-semibold"
-			i18n="The question to ask about the disconfort degree of a patient@@shared_patient-status-criteria-editor_disconfort-degree-question">
+                            <div class="grow"></div>
+                            <div class="max-w-xs">
+                              @if (form.controls.hasEmocionalPain.enabled) {
+                                <mat-radio-group
+                                  aria-labelledby="example-radio-group-label"
+                                  formControlName="hasEmocionalPain"
+                                  class="flex flex-row flex-wrap gap-2 place-content-center">
+                                  @for (name of YES_NO_UNKNOWN_OPTION_NAMES; track name) {
+                                    <mat-radio-button
+                                    [value]="name">{{name|yesNoUnknownOptionName}}</mat-radio-button>
+                                  } </mat-radio-group>
+                                } @else {
+                                  {{form.controls.hasEmocionalPain.value|yesNoUnknownOptionName}}
+                                }
+                              </div>
+                            </div>
+                            <div
+                              class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
+                              <div class="max-w-md text-wrap text-lg font-semibold"
+                                i18n="The question to ask about the disconfort degree of a patient@@shared_patient-status-criteria-editor_disconfort-degree-question">
 			Degree of discomfort/discomfort of the patient before applying any
 			action.</div>
-		<div class="grow"></div>
-		<div class="max-w-xs">
-			<mat-radio-group
-				*ngIf="form.controls.discomfortDegree.enabled; else noDiscomfortDegree"
-				aria-labelledby="example-radio-group-label"
-				formControlName="discomfortDegree"
-				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button *ngFor="let name of DISCOMFORT_DEGREE_NAMES"
-				[value]="name">{{name|discomfortDegreeName}}</mat-radio-button> </mat-radio-group>
-			<ng-template #noDiscomfortDegree>
-			{{form.controls.discomfortDegree.value|discomfortDegreeName}} </ng-template>
-		</div>
-	</div>
-	<div
-		class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
-		<div class="max-w-md text-wrap text-lg font-semibold"
-			i18n="The question to ask about the patient NIT level@@shared_patient-status-criteria_main_nit-level-question">
+                              <div class="grow"></div>
+                              <div class="max-w-xs">
+                                @if (form.controls.discomfortDegree.enabled) {
+                                  <mat-radio-group
+                                    aria-labelledby="example-radio-group-label"
+                                    formControlName="discomfortDegree"
+                                    class="flex flex-row flex-wrap gap-2 place-content-center">
+                                    @for (name of DISCOMFORT_DEGREE_NAMES; track name) {
+                                      <mat-radio-button
+                                      [value]="name">{{name|discomfortDegreeName}}</mat-radio-button>
+                                    } </mat-radio-group>
+                                  } @else {
+                                    {{form.controls.discomfortDegree.value|discomfortDegreeName}}
+                                  }
+                                </div>
+                              </div>
+                              <div
+                                class="flex flex-row flex-wrap items-start gap-2 p-3 odd:bg-white even:bg-slate-50">
+                                <div class="max-w-md text-wrap text-lg font-semibold"
+                                  i18n="The question to ask about the patient NIT level@@shared_patient-status-criteria_main_nit-level-question">
 			NIT Level</div>
-		<div class="grow"></div>
-		<div class="max-w-xs">
-			<mat-radio-group
-				*ngIf="form.controls.nitLevel.enabled; else noNitLevel"
-				aria-labelledby="example-radio-group-label"
-				formControlName="nitLevel"
-				class="flex flex-row flex-wrap gap-2 place-content-center">
-			<mat-radio-button *ngFor="let name of NIT_LEVEL_NAMES" [value]="name">{{name|nitLevelName}}</mat-radio-button>
-			</mat-radio-group>
-			<ng-template #noNitLevel>
-			{{form.controls.nitLevel.value|nitLevelName}} </ng-template>
-		</div>
-	</div>
-</form>
+                                <div class="grow"></div>
+                                <div class="max-w-xs">
+                                  @if (form.controls.nitLevel.enabled) {
+                                    <mat-radio-group
+                                      aria-labelledby="example-radio-group-label"
+                                      formControlName="nitLevel"
+                                      class="flex flex-row flex-wrap gap-2 place-content-center">
+                                      @for (name of NIT_LEVEL_NAMES; track name) {
+                                        <mat-radio-button [value]="name">{{name|nitLevelName}}</mat-radio-button>
+                                      }
+                                    </mat-radio-group>
+                                  } @else {
+                                    {{form.controls.nitLevel.value|nitLevelName}}
+                                  }
+                                </div>
+                              </div>
+                            </form>

@@ -8,7 +8,6 @@
 
 import { Pipe, PipeTransform } from '@angular/core';
 import { CognitiveImpairmentLevel } from './cognitive-impairment-level.model';
-export { CognitiveImpairmentLevel } from './cognitive-impairment-level.model';
 
 @Pipe({
 	name: 'cognitiveImpairmentLevelName',

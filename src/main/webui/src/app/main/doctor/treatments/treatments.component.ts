@@ -6,7 +6,7 @@
   https://opensource.org/license/gpl-3-0/
 */
 
-import { NgFor, NgIf } from '@angular/common';
+
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
@@ -32,14 +32,38 @@ import { MessagesService } from '@app/shared/messages';
 		MatIconModule,
 		RouterLink,
 		MatProgressBarModule,
-		NgIf,
-		NgFor,
 		AvvvatarsComponent
 	],
 	templateUrl: './treatments.component.html',
 	styleUrl: './treatments.component.css'
 })
 export class TreatmentsComponent implements OnInit {
+
+	/**
+	 * The service to change the title.
+	 */
+	private readonly title = inject(TitleService);
+
+	/**
+	 * The API service.
+	 */
+	private readonly api = inject(ApiService);
+
+
+	/**
+	 * The sercvice to change the route.
+	 */
+	private readonly router = inject(Router);
+
+	/**
+	 * The form builder service.
+	 */
+	private readonly fb = inject(FormBuilder);
+
+	/**
+	 * The service to notify the user by messages.
+	 */
+	private readonly message = inject(MessagesService);
 
 	/**
 	 * The form control to edit the name.
@@ -80,21 +104,6 @@ export class TreatmentsComponent implements OnInit {
 	 * The page with the found treatments.
 	 */
 	public page: MinTreatmentPage | null = null;
-
-
-	/**
-	 *  Create the component.
-	 */
-	constructor(
-		private title: TitleService,
-		private fb: FormBuilder,
-		private api: ApiService,
-		private router: Router,
-		private message: MessagesService
-	) {
-
-	}
-
 
 	/**
 	 * Initialize the component.

@@ -32,9 +32,7 @@ public class IsAlignValueValidator implements ConstraintValidator<IsAlignValue, 
 
 		} else {
 
-			return Double.compare(-1.0d, value.doubleValue()) <= 0
-
-					&& Double.compare(value.doubleValue(), 1.0d) <= 0;
+			return Double.compare(-1.0d, value.doubleValue()) <= 0 && Double.compare(value.doubleValue(), 1.0d) <= 0;
 		}
 	}
 

@@ -6,7 +6,7 @@
   https://opensource.org/license/gpl-3-0/
 */
 
-import { NgFor, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
+
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { pullingTime, TitleService } from '@app/shared';
@@ -23,18 +23,13 @@ import { MessagesService } from '@app/shared/messages';
 	standalone: true,
 	selector: 'app-doctor-treatment-view',
 	imports: [
-		NgIf,
 		MatIcon,
 		RouterLink,
 		MatExpansionModule,
 		PatientStatusCriteriaEditorComponent,
-		NgFor,
 		TreatmentActionNamePipe,
-		NgSwitch,
-		NgSwitchCase,
-		NgSwitchDefault,
 		MatProgressBarModule,
-		NgApexchartsModule,
+		NgApexchartsModule
 	],
 	providers: [
 		TreatmentValueNamePipe
@@ -205,7 +200,8 @@ export class ViewComponent implements OnInit, OnDestroy {
 			for (var value of this.treatment.values) {
 
 				categories.push(this.valueNamePipe.transform(value));
-				data.push(value.alignment);
+				var alignemnt = Math.round(value.alignment * 100) / 100;
+				data.push(alignemnt);
 			}
 			this.valuesChartSeries[0].data = data;
 			this.valuesChartXaxis.categories = categories;

@@ -9,14 +9,13 @@ import { Component, OnInit,OnDestroy } from '@angular/core';
 import { Info, HealthInfo, ApiService } from '@app/shared/api';
 import { TitleService } from '@app/shared';
 import { HealthStatusComponent } from './health-status.component';
-import { NgFor } from '@angular/common';
+
 
 @Component({
     selector: 'app-status',
     imports: [
-        HealthStatusComponent,
-        NgFor
-    ],
+    HealthStatusComponent
+],
     templateUrl: './status.component.html',
     styleUrl: './status.component.css'
 })
